@@ -204,8 +204,8 @@ export default class WindowSearchUser {
         let usersByLastname = await this.bx.callMethod("user.search", {                             // получение списка пользователей подразделения из Битрикс
             "FILTER": {"LAST_NAME": `${name}%`, "ACTIVE": true}
         });
-        users = users.result;
-        usersByLastname = usersByLastname.result;
+        // users = users.result;
+        // usersByLastname = usersByLastname.result;
         users.concat(usersByLastname);
         for (let user of users) {
             contentHTML += templateUserBoxForSearch(user.ID, user.LAST_NAME, user.NAME, user.WORK_POSITION, user.USER_TYPE, user.PERSONAL_PHOTO);
@@ -220,7 +220,8 @@ export default class WindowSearchUser {
             "ACTIVE": true, "UF_DEPARTMENT": departId, "ADMIN_MODE": true
         });
 
-        for (let user of users.result) {
+        // for (let user of users.result) {
+        for (let user of users) {
             contentHTML += templateUserBoxForSearch(user.ID, user.LAST_NAME, user.NAME, user.WORK_POSITION, user.USER_TYPE, user.PERSONAL_PHOTO);
         }
         box.insertAdjacentHTML('beforeend', contentHTML);
@@ -229,7 +230,8 @@ export default class WindowSearchUser {
     // получение списка подразделений компаниии
     async getDepartments() {
         let response = await this.bx.callMethod("department.get");          // получение списка подразделений из Битрикс
-        this.departments = response.result;                                 // получение списка подразделений из Битрикс
+        // this.departments = response.result;                                 // получение списка подразделений из Битрикс
+        this.departments = response;                                 // получение списка подразделений из Битрикс
         this.companyStructure = this.getTreeDepartments();                      // структура кмпании
     }
 
