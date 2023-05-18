@@ -259,7 +259,7 @@ export default class InterfaceBlockThree {
             reqPackage[user_id] = ["user.get", {"ID": user_id}];
             // batch[user_id] = ['user.get', {"ID": user_id}];
         }
-        let userData = await this.bx24.batchMethod(batch);
+        let userData = await this.bx24.batchMethod(reqPackage);
         // return userData.result.result;
         console.log("userData = ", userData);
         return userData.result;
