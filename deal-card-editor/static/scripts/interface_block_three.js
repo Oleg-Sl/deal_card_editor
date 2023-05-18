@@ -262,7 +262,7 @@ export default class InterfaceBlockThree {
         let userData = await this.bx24.batchMethod(reqPackage);
         // return userData.result.result;
         console.log("userData = ", userData);
-        return userData.result;
+        return userData;
     }
 
     async render(fields, data) {
