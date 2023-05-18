@@ -43,7 +43,7 @@ class UserSingle {
                 let userId = e.target.dataset.userId; 
                 let path = `/company/personal/user/${userId}/`;
                 console.log(path);
-                // await this.bx24.openPath(path);
+                await this.bx24.openPath(path);
             }     
         })
     }
@@ -150,7 +150,7 @@ class UserMultiple {
                 let userId = e.target.dataset.userId; 
                 let path = `/company/personal/user/${userId}/`;
                 console.log(path);
-                // await this.bx24.openPath(path);
+                await this.bx24.openPath(path);
             }     
         })
         // Добавление сотрудника
@@ -249,9 +249,14 @@ export default class InterfaceBlockThree {
     }
 
     async getDataUserById(users_ids) {
-        let batch = {};
+        // let batch = {};
+        // for (let user_id of users_ids) {
+        //     batch[user_id] = `user.get?ID=${user_id}`;
+        //     // batch[user_id] = ['user.get', {"ID": user_id}];
+        // }
+        let reqPackage = {};
         for (let user_id of users_ids) {
-            batch[user_id] = `user.get?ID=${user_id}`;
+            reqPackage[user_id] = ["user.get", {"ID": user_id}];
             // batch[user_id] = ['user.get', {"ID": user_id}];
         }
         let userData = await this.bx24.batchMethod(batch);
@@ -268,9 +273,9 @@ export default class InterfaceBlockThree {
         let idResponsibleMOS = data[RESPONSIBLE_MOS];
         let idsObservers = data[OBSERVER] || [];
         // let idsObservers = [241, 1];
-        console.log("idResponsibleMOP = ", idResponsibleMOP);
-        console.log("idResponsibleMOS = ", idResponsibleMOS);
-        console.log("idsObservers = ", idsObservers);
+        // console.log("idResponsibleMOP = ", idResponsibleMOP);
+        // console.log("idResponsibleMOS = ", idResponsibleMOS);
+        // console.log("idsObservers = ", idsObservers);
 
         let usersData = await this.getDataUserById([idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         let contentHTML = `

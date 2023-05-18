@@ -195,50 +195,50 @@ class App {
     }
 
     async saveSmartProcessToBx24(data) {
-        let cmd = {};
-        for (let item of data) {
-            let idSmartProcess = item.id;
-            // delete item.id;
-            let request = `crm.item.update?entityTypeId=${this.smartNumber}&id=${idSmartProcess}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
-            for (let i in item.ufCrm19_1684142357) {
-                request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
-            }
-            cmd[idSmartProcess] = request;
-        }
-        let response = await this.bx24.batchMethod(cmd);
-        // let reqPackage = {};
+        // let cmd = {};
         // for (let item of data) {
         //     let idSmartProcess = item.id;
-        //     reqPackage[idSmartProcess] = ["crm.item.update", {
-        //         entityTypeId: this.smartNumber, id: idSmartProcess, fields: item
-        //     }];
+        //     // delete item.id;
+        //     let request = `crm.item.update?entityTypeId=${this.smartNumber}&id=${idSmartProcess}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
+        //     for (let i in item.ufCrm19_1684142357) {
+        //         request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
+        //     }
+        //     cmd[idSmartProcess] = request;
         // }
-        // let response = await this.bx24.batchMethod(reqPackage);
-        // console.log(response);
+        // let response = await this.bx24.batchMethod(cmd);
+        let reqPackage = {};
+        for (let item of data) {
+            let idSmartProcess = item.id;
+            reqPackage[idSmartProcess] = ["crm.item.update", {
+                entityTypeId: this.smartNumber, id: idSmartProcess, fields: item
+            }];
+        }
+        let response = await this.bx24.batchMethod(reqPackage);
+        console.log(response);
         return response;
     }
     
     
     async addSmartProcessToBx24(data) {
-        let cmd = {};
-        for (let item of data) {
-            let idSmartProcess = item.id;
-            let request = `crm.item.add?entityTypeId=${this.smartNumber}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
-            for (let i in item.ufCrm19_1684142357) {
-                request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
-            }
-            cmd[idSmartProcess] = request;
-        }
-        let response = await this.bx24.batchMethod(cmd);
-        // let reqPackage = {};
+        // let cmd = {};
         // for (let item of data) {
         //     let idSmartProcess = item.id;
-        //     reqPackage[idSmartProcess] = ["crm.item.update", {
-        //         entityTypeId: this.smartNumber, fields: item
-        //     }];
+        //     let request = `crm.item.add?entityTypeId=${this.smartNumber}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
+        //     for (let i in item.ufCrm19_1684142357) {
+        //         request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
+        //     }
+        //     cmd[idSmartProcess] = request;
         // }
-        // let response = await this.bx24.batchMethod(reqPackage);
-        // console.log(response);
+        // let response = await this.bx24.batchMethod(cmd);
+        let reqPackage = {};
+        for (let item of data) {
+            let idSmartProcess = item.id;
+            reqPackage[idSmartProcess] = ["crm.item.update", {
+                entityTypeId: this.smartNumber, fields: item
+            }];
+        }
+        let response = await this.bx24.batchMethod(reqPackage);
+        console.log(response);
         return response;
     }
 }
