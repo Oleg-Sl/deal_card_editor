@@ -155,15 +155,17 @@ class App {
                 "select": ["*", "UF_*",]
             }
         );
-        console.log("crm.deal.list = ", data);
-        return data.result[0];
+        // console.log("crm.deal.list = ", data);
+        // return data.result[0];
+        return data[0];
     }
 
     async getDealFieldsFromBx24() {
         let data = await this.bx24.callMethod("crm.deal.fields", {});
         console.log("crm.deal.fields = ", data);
         
-        return data.result;
+        // return data.result;
+        return data;
     }
 
     async saveDealToBx24(data) {
