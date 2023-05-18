@@ -5,7 +5,7 @@ import InterfaceBlockFour from './interface_block_four.js'
 import InterfaceBlockFive from './interface_block_five.js'
 
 // import Bitrix24 from './bx24/requests_webhook.js'
-import Bitrix24 from '../bx24/requests.js'
+import Bitrix24 from './bx24/requests.js'
 import YandexDisk from './yandex_disk/requests.js'
 
 
