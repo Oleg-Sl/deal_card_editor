@@ -1,0 +1,63 @@
+// // Импорт стилей
+@import search_user
+
+
+.taskeditor__box
+    margin: 10px
+    padding: 10px
+    border: 1px solid #525c691a
+    border-radius: 5px
+    background-color: #fff
+
+
+.sceditor-container
+    width: 100% !important
+    min-height: 150px !important
+
+.sceditor-container
+    line-height: 1.0
+
+// Подтверждение сохранения - прижатие к низу страницы
+.question-save-data-top, .question-save-data-bottom
+    display: flex
+    justify-content: center
+    // position: fixed
+    position: sticky
+    // top: 0
+    bottom: 0
+    width: 100%
+    background: #ffffff
+    margin: auto
+    padding: 2px 0
+    box-shadow: 0 -2px 4px 0 #c6c9cb
+    z-index: 99
+    .question-save-data-btn-save
+        background: #b2e232
+        border-color: #c7e07c
+        color: #535c69
+        margin: 0 5px
+        &:hover 
+            background: #d6ff5d
+            border-color: #c7e07c
+            color: #535c69
+    .question-rewrite-data-btn-save
+        background: #ffee00
+        color: #535c69
+        border-color: #fde69e
+        margin: 0 5px
+        &:hover 
+            background: #f8ff00
+            border-color: #c7e07c
+            color: #535c69
+    .question-save-data-btn-cancel
+        background: #ef4040
+        border-color: #ca3b3b
+        color: #535c69
+        margin: 0 5px
+        &:hover 
+            background: #e01010
+            border-color: #ca3b3b
+            color: #535c69
+
+.question-save-data-top
+    top: 0
