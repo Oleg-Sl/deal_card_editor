@@ -255,7 +255,9 @@ export default class InterfaceBlockThree {
             // batch[user_id] = ['user.get', {"ID": user_id}];
         }
         let userData = await this.bx24.batchMethod(batch);
-        return userData.result.result;
+        // return userData.result.result;
+        console.log(userData);
+        return userData.result;
     }
 
     async render(fields, data) {
