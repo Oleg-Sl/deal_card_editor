@@ -95,7 +95,7 @@ class App {
         })
         // 
         $(document.body).bind("DOMSubtreeModified", (e) => {
-            // BX24.fitWindow();
+            BX24.fitWindow();
         })
         
     }
