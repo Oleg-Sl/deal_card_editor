@@ -6,6 +6,7 @@
 export default class YandexDisk {
     constructor(secretKey) {
         this.secretKey = secretKey;
+        console.log(this.secretKey);
         this.url = "https://cloud-api.yandex.net/v1/disk/resources";
     }
 

@@ -584,7 +584,8 @@ export default class InterfaceBlockfour {
                 ]
             }
         );
-        return data.result.items;
+        // return data.result.items;
+        return data.items;
     }
 
     async render(fields, data) {
