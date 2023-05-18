@@ -208,9 +208,11 @@ class App {
         // let response = await this.bx24.batchMethod(cmd);
         let reqPackage = {};
         for (let item of data) {
+            let tmp = {...item};
+            delete tmp.id;
             let idSmartProcess = item.id;
             reqPackage[idSmartProcess] = ["crm.item.update", {
-                entityTypeId: this.smartNumber, id: idSmartProcess, fields: item
+                entityTypeId: this.smartNumber, id: idSmartProcess, fields: tmp
             }];
         }
         let response = await this.bx24.batchMethod(reqPackage);
