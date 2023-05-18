@@ -256,17 +256,21 @@ export default class InterfaceBlockThree {
         }
         let userData = await this.bx24.batchMethod(batch);
         // return userData.result.result;
-        console.log(userData);
+        console.log("userData = ", userData);
         return userData.result;
     }
 
     async render(fields, data) {
+        console.log("USERS!!!");
         // console.log(data);
         // console.log(data[OBSERVER]);
         let idResponsibleMOP = data[RESPONSIBLE_MOP];
         let idResponsibleMOS = data[RESPONSIBLE_MOS];
         let idsObservers = data[OBSERVER] || [];
         // let idsObservers = [241, 1];
+        console.log("idResponsibleMOP = ", idResponsibleMOP);
+        console.log("idResponsibleMOS = ", idResponsibleMOS);
+        console.log("idsObservers = ", idsObservers);
 
         let usersData = await this.getDataUserById([idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         let contentHTML = `
