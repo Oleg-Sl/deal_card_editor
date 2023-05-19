@@ -177,8 +177,8 @@ class ProductRow {
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
                 <div class="col-2 m-0 p-1">
-                    <table class="table table-borderless table-sm m-0 p-0" style="font-size: 14px;">
-                        <tbody class="${PRODUCTS_FILES_CLIENT}" >
+                    <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
+                        <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
                 
                         </tbody>
                     </table>
@@ -266,11 +266,11 @@ class ProductRow {
 
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <tr class="row m-0 p-0" style="width: 100%;">
-                <td scope="row" class="col-1 text-secondary m-0 p-0 product-number-file">${number}</td>
-                <td class="col-8 m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></td>
-                <td class="col-2 text-secondary m-0 p-0">${fileSize}</td>
-                <td class="col-1 m-0 p-0"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></td>
+            <tr class="m-0 p-0" style="width: 100%;">
+                <td class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</td>
+                <td class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></td>
+                <td class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</td>
+                <td class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></td>
             </tr>
         `;
         return contentHTML;
