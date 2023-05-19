@@ -12,19 +12,19 @@ export default class InterfaceBlockOne {
         let numberOrder = data.UF_CRM_1633523035;
         let linkTender = data.UF_CRM_1620918041;
         let contentHTML = `
-            <div class="col-8">
+            <div class="col-6">
                 <label for="titleDeal">Название сделки</label>
                 <div id="titleDeal" class="alert alert-light" role="alert">
                     ${titleDeal}
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <label for="numberOrder">№ заказа (автоматически)</label>
                 <div id="numberOrder" class="alert alert-light" role="alert">
                     ${numberOrder}
                 </div>
             </div> 
-            <div class="col-2">
+            <div class="col-3">
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
                 <div id="linkTender" class="alert alert-light" role="alert">
                     <a class="link-opacity-100-hover" href="${linkTender}" target="_blank">${linkTender}</a>
