@@ -87,8 +87,11 @@ class ProductRow {
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
                 let rowFile = e.target.parentNode;
+                console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
+                console.log("containerFiles = ", containerFiles);
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
+                console.log("childIndex = ", childIndex);
                 // let elemTbody = e.target.closest("tbody");
                 // let elemTr = e.target.closest("tr");
                 // const childIndex = Array.prototype.indexOf.call(elemTbody.children, elemTr);
