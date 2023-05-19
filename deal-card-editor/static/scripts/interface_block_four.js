@@ -11,13 +11,10 @@ export default class InterfaceBlockFour {
     init() {
         // Создание экземпляра ResizeObserver
         let resizeObserver = new ResizeObserver(function(entries) {
-            for (var entry of entries) {
-                let target = entry.target;
-                let newHeight = target.clientHeight;
-                BX24.fitWindow(); 
-                // Ваш код для обработки изменения высоты блока
-                console.log("Высота блока изменилась:", newHeight);
-            }
+            // for (var entry of entries) {
+            //     BX24.fitWindow(); 
+            // }
+            BX24.fitWindow();
         });
         
         // Добавление блока для отслеживания изменения высоты
