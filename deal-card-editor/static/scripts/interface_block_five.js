@@ -86,7 +86,7 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
-                let rowFile = e.target.parentNode;
+                let rowFile = e.target.closest("file-row");
                 console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
                 console.log("containerFiles = ", containerFiles);
@@ -283,7 +283,7 @@ class ProductRow {
 
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <div class="m-0 p-0" style="display: flex; width: 100%;">
+            <div class="m-0 p-0 file-row" style="display: flex; width: 100%;">
                 <div class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</div>
                 <div class="m-0 p-0 text-truncate" style="width: 100%;"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
                 <div class="text-secondary m-0 p-0" style="width: 50px;">${fileSize}</div>
