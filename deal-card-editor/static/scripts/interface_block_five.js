@@ -86,7 +86,7 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
-                let rowFile = e.target.closest("file-row");
+                let rowFile = e.target.closest(".file-row");
                 console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
                 console.log("containerFiles = ", containerFiles);
