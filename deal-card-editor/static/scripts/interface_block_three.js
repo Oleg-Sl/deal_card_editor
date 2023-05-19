@@ -71,6 +71,7 @@ class UserSingle {
         this.userName = userData.NAME ? userData.NAME : "";
         this.userImgLink =  userData.PERSONAL_PHOTO ? userData.PERSONAL_PHOTO : "";
         this.renderUserHTML();
+        BX24.fitWindow();
     }
 
     renderUserHTML() {
@@ -186,6 +187,7 @@ class UserMultiple {
     render(usersData) {
         this.setData(usersData);
         this.containerCard.innerHTML = this.generateCardsUsersHTML();
+        BX24.fitWindow();
     }
 
     setData(usersData) {
