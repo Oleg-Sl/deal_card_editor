@@ -177,17 +177,11 @@ class ProductRow {
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
                 <div class="col-2 m-0 p-1">
-                    <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
-                        <colgroup>
-                            <col width="25px">
-                            <col >
-                            <col width="50px">
-                            <col width="25px">
-                        </colgroup>
-                        <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
+                    <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
+                        <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%;">
                 
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                     <div class="row m-0 p-0">
                         <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="col-10 m-0 p-0">
@@ -198,6 +192,17 @@ class ProductRow {
                 </div>
             </div>
         `;
+        // <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
+        //                 <colgroup>
+        //                     <col width="25px">
+        //                     <col >
+        //                     <col width="50px">
+        //                     <col width="25px">
+        //                 </colgroup>
+        //                 <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
+                
+        //                 </tbody>
+        //             </table>
         this.element.innerHTML = contentHTML;
         this.container.append(this.element);
         this.init();
@@ -272,13 +277,19 @@ class ProductRow {
 
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <tr class="m-0 p-0" style="width: 100%;">
-                <td class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</td>
-                <td class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></td>
-                <td class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</td>
-                <td class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></td>
-            </tr>
+            <div class="m-0 p-0" style="width: 100%;">
+                <div class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</div>
+                <div class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
+                <div class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</div>
+                <div class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></div>
+            </div>
         `;
+    //     <tr class="m-0 p-0" style="width: 100%;">
+    //     <td class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</td>
+    //     <td class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></td>
+    //     <td class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</td>
+    //     <td class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></td>
+    // </tr>
         return contentHTML;
     }
 
