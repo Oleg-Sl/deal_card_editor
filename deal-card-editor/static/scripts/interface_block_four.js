@@ -6,21 +6,36 @@ export default class InterfaceBlockFour {
         this.bx24 = bx24;
     }
 
-    init() {
-        this.container.addEventListener('resize', function() {
-            console.log("resize");
-            BX24.fitWindow();
-        });
-        this.container.addEventListener('input', function() {
-            console.log("input");
-            BX24.fitWindow();
-        });
-        $(document.body).bind("DOMSubtreeModified", (e) => {
-            console.log("DOMSubtreeModified");
-            BX24.fitWindow();
-            console.log("AFTER");
+    
 
-        })
+    init() {
+        // Создание экземпляра ResizeObserver
+        let resizeObserver = new ResizeObserver(function(entries) {
+            for (var entry of entries) {
+                let target = entry.target;
+                let newHeight = target.clientHeight;
+                BX24.fitWindow(); 
+                // Ваш код для обработки изменения высоты блока
+                console.log("Высота блока изменилась:", newHeight);
+            }
+        });
+        
+        // Добавление блока для отслеживания изменения высоты
+        resizeObserver.observe(this.container);
+  
+        // this.container.addEventListener('resize', function() {
+        //     console.log("resize");
+        //     BX24.fitWindow();
+        // });
+        // this.container.addEventListener('input', function() {
+        //     console.log("input");
+        //     BX24.fitWindow();
+        // });
+        // $(document.body).bind("DOMSubtreeModified", (e) => {
+        //     console.log("DOMSubtreeModified");
+        //     BX24.fitWindow();
+        //     console.log("AFTER");
+        // })
     }
 
     getData() {
