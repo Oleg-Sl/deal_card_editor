@@ -279,8 +279,8 @@ class ProductRow {
         let contentHTML = `
             <div class="m-0 p-0" style="display: flex; width: 100%;">
                 <div class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</div>
-                <div class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
-                <div class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</div>
+                <div class="m-0 p-0 text-truncate" style="width: 100%;"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
+                <div class="text-secondary m-0 p-0" style="width: 50px;">${fileSize}</div>
                 <div class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></div>
             </div>
         `;
