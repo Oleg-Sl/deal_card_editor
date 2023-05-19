@@ -178,6 +178,12 @@ class ProductRow {
                 </div>
                 <div class="col-2 m-0 p-1">
                     <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
+                        <colgroup>
+                            <col width="25px">
+                            <col >
+                            <col width="50px">
+                            <col width="25px">
+                        </colgroup>
                         <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
                 
                         </tbody>
