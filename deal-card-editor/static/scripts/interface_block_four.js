@@ -7,8 +7,7 @@ export default class InterfaceBlockFour {
     }
 
     init() {
-        // this.container.addEventListener('resize', function() {
-        this.container.on("input", function() {
+        this.container.addEventListener('input', function() {
             BX24.fitWindow();
         });
     }
