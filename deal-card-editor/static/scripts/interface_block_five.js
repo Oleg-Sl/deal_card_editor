@@ -86,9 +86,12 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
-                let elemTbody = e.target.closest("tbody");
-                let elemTr = e.target.closest("tr");
-                const childIndex = Array.prototype.indexOf.call(elemTbody.children, elemTr);
+                let rowFile = e.target.parentNode;
+                let containerFiles = rowFile.parentNode;
+                const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
+                // let elemTbody = e.target.closest("tbody");
+                // let elemTr = e.target.closest("tr");
+                // const childIndex = Array.prototype.indexOf.call(elemTbody.children, elemTr);
                 this.files.splice(childIndex, 1);
                 this.renderTableFilesHTML();
                 console.log(this.files);
