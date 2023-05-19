@@ -7,7 +7,9 @@ export default class InterfaceBlockFour {
     }
 
     init() {
-
+        this.container.addEventListener('resize', function() {
+            BX24.fitWindow();
+        });
     }
 
     getData() {
