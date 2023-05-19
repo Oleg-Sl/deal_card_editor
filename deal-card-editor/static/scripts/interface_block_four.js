@@ -18,6 +18,8 @@ export default class InterfaceBlockFour {
         $(document.body).bind("DOMSubtreeModified", (e) => {
             console.log("DOMSubtreeModified");
             BX24.fitWindow();
+            console.log("AFTER");
+
         })
     }
 
