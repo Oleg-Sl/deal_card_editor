@@ -142,6 +142,7 @@ class UserMultiple {
                 let userId = boxCardUser.dataset.userId;
                 boxCardUser.remove();
                 delete this.selectedUser[userId];
+                BX24.fitWindow();
             }
         })
         // событие "открытие страницы с информацией о сотруднике"
@@ -179,6 +180,7 @@ class UserMultiple {
         let cardUserHTML = this.generateCardUserHTML(userId, lastname, name, userPhoto);
         this.containerCard.insertAdjacentHTML('beforeend', cardUserHTML);
         this.selectedUser[userId] = user;
+        BX24.fitWindow();
     }
 
     render(usersData) {

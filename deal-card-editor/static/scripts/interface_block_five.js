@@ -80,6 +80,7 @@ class ProductRow {
                     "size": this.formatFileSize(file.size)
                 });
                 this.renderTableFilesHTML();
+                BX24.fitWindow();
             }
         });
         // Событие удаления файла
@@ -91,6 +92,7 @@ class ProductRow {
                 this.files.splice(childIndex, 1);
                 this.renderTableFilesHTML();
                 console.log(this.files);
+                BX24.fitWindow();
             }
         })
         // Событие изменения поля "м. пог"
@@ -104,7 +106,7 @@ class ProductRow {
                 }
             }
         })
-        // Событие удаления файла
+        // Событие изменения поля "м2"
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(PRODUCTS_AREA_SQUARE_METERS)) {
                 let idWidth = this.getProductFilmWidth();
@@ -198,6 +200,7 @@ class ProductRow {
             this.updateDate();
             await this.addSmartProcessToBx24();
         }
+        BX24.fitWindow();
     }
 
     getData() {

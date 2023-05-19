@@ -94,9 +94,9 @@ class App {
             this.yaDisk.updateSecretKey(seretKeyYandex);
         })
         // 
-        $(document.body).bind("DOMSubtreeModified", (e) => {
-            BX24.fitWindow();
-        })
+        // $(document.body).bind("DOMSubtreeModified", (e) => {
+        //     BX24.fitWindow();
+        // })
         
     }
 
