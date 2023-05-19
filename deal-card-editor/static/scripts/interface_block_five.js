@@ -277,7 +277,7 @@ class ProductRow {
 
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <div class="m-0 p-0" style="style="display: flex; width: 100%;">
+            <div class="m-0 p-0" style="display: flex; width: 100%;">
                 <div class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</div>
                 <div class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
                 <div class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</div>
