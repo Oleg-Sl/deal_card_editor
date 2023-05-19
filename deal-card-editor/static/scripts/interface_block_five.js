@@ -200,13 +200,13 @@ class ProductRow {
         //                     <col width="25px">
         //                 </colgroup>
         //                 <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
-                
         //                 </tbody>
         //             </table>
         this.element.innerHTML = contentHTML;
         this.container.append(this.element);
         this.init();
         this.renderTableFilesHTML();
+        BX24.fitWindow();
         if (!this.smartProcessId) {
             this.updateDate();
             await this.addSmartProcessToBx24();
