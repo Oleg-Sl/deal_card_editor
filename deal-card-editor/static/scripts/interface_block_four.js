@@ -18,7 +18,7 @@ export default class InterfaceBlockFour {
         });
         
         // Добавление блока для отслеживания изменения высоты
-        resizeObserver.observe(this.container);
+        // resizeObserver.observe(this.container);
   
         // this.container.addEventListener('resize', function() {
         //     console.log("resize");
