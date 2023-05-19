@@ -7,9 +7,18 @@ export default class InterfaceBlockFour {
     }
 
     init() {
-        this.container.addEventListener('input', function() {
+        this.container.addEventListener('resize', function() {
+            console.log("resize");
             BX24.fitWindow();
         });
+        this.container.addEventListener('input', function() {
+            console.log("input");
+            BX24.fitWindow();
+        });
+        $(this.container).bind("DOMSubtreeModified", (e) => {
+            console.log("DOMSubtreeModified");
+            BX24.fitWindow();
+        })
     }
 
     getData() {
