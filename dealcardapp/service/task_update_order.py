@@ -5,9 +5,7 @@ from .bitrix24 import bitrix as bx24
 SMART_PROCESS_ID = 184
 
 
-def update(task_id, deal_id):
-    # "task": f"tasks.task.get?taskId={task_id}",
-
+def run(task_id, deal_id):
     cmd = {
         "deal": f"crm.deal.list?filter[ID]={deal_id}&select[]=*&select[]=UF_*",
         "fields": f"crm.deal.fields"

@@ -72,34 +72,38 @@ class App {
     initHandler() {
         // Сохранение изменений в сделку и БП
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
-            this.saveData();
+            let dataDeal = this.getDataDeal();
+            await this.saveDealToBx24(dataDeal);
+            let dataSmartProcess = this.getDataSmartProcess();
+            await this.saveSmartProcessToBx24(dataSmartProcess);
+            // await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
         })
+
         // Сохранение изменений в сделку и БП, также изменение данных в задаче
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
-            console.log("elemBtnRewriteBottom");
-            this.updateTask();
+            let dataDeal = this.getDataDeal();
+            await this.saveDealToBx24(dataDeal);
+            let dataSmartProcess = this.getDataSmartProcess();
+            await this.saveSmartProcessToBx24(dataSmartProcess);
+            await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
         })
+
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
-            console.log("elemBtnCancelBottom");
-            this.cancelChanging();
+            BX24.reloadWindow();
         })
+
         // Открыть модальное окно с настройками
         this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
             this.modalSettings.show();
         })
+
         // Сохранить настройки
         this.elemBtnSaveSettingsButton.addEventListener("click", async (e) => {
             let seretKeyYandex = this.modalFieldSecretKeyYandex.value;
-            // console.log(seretKeyYandex);
             BX24.appOption.set(SETTINGS__SECRETS_KEY, seretKeyYandex);
             this.yaDisk.updateSecretKey(seretKeyYandex);
         })
-        // 
-        // $(document.body).bind("DOMSubtreeModified", (e) => {
-        //     BX24.fitWindow();
-        // })
-        
     }
 
     render() {
@@ -119,32 +123,7 @@ class App {
 
     getDataSmartProcess() {
         let products = this.interfaceBlockFive.getData();
-        // let productsOld = this.interfaceBlockFive.getDataOld();
-        // let productsNew = this.interfaceBlockFive.getDataNew();
-        // return {
-        //     dataSmartProcessOld: productsOld,
-        //     dataSmartProcessNew: productsNew
-        // };
         return products;
-    }
-
-    async saveData() {
-        let dataDeal = this.getDataDeal();
-        await this.saveDealToBx24(dataDeal);
-        let dataSmartProcess = this.getDataSmartProcess();
-        await this.saveSmartProcessToBx24(dataSmartProcess);
-        await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
-    }
-
-    updateTask() {
-        let dataDeal = this.getDataDeal();
-        this.saveDealToBx24(dataDeal);
-        let dataSmartProcess = this.getDataSmartProcess();
-        this.saveSmartProcessToBx24(dataSmartProcess);
-    }
-
-    cancelChanging() {
-        BX24.reloadWindow();
     }
 
     async getDealDataFromBx24(dealId) {
@@ -155,30 +134,15 @@ class App {
                 "select": ["*", "UF_*",]
             }
         );
-        // console.log("crm.deal.list = ", data);
-        // return data.result[0];
         return data[0];
     }
 
     async getDealFieldsFromBx24() {
         let data = await this.bx24.callMethod("crm.deal.fields", {});
-        console.log("crm.deal.fields = ", data);
-        
-        // return data.result;
         return data;
     }
 
     async saveDealToBx24(data) {
-        // let cmd = {};
-        // for (let item of data) {
-        //     let idSmartProcess = item.id;
-        //     // delete item.id;
-        //     let request = `crm.item.update?entityTypeId=${this.smartNumber}&id=${idSmartProcess}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
-        //     for (let i in item.ufCrm19_1684142357) {
-        //         request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
-        //     }
-        //     cmd[idSmartProcess] = request;
-        // }
         let response = await this.bx24.callMethod(
             "crm.deal.update",
             {
@@ -186,26 +150,9 @@ class App {
                 "fields": data
             }
         );
-        // console.log({
-        //     "id": this.dealId,
-        //     "fields": data
-        // });
-        
-        console.log(response);
     }
 
     async saveSmartProcessToBx24(data) {
-        // let cmd = {};
-        // for (let item of data) {
-        //     let idSmartProcess = item.id;
-        //     // delete item.id;
-        //     let request = `crm.item.update?entityTypeId=${this.smartNumber}&id=${idSmartProcess}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
-        //     for (let i in item.ufCrm19_1684142357) {
-        //         request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
-        //     }
-        //     cmd[idSmartProcess] = request;
-        // }
-        // let response = await this.bx24.batchMethod(cmd);
         let reqPackage = {};
         for (let item of data) {
             let tmp = {...item};
@@ -216,22 +163,10 @@ class App {
             }];
         }
         let response = await this.bx24.batchMethod(reqPackage);
-        console.log(response);
         return response;
     }
     
-    
     async addSmartProcessToBx24(data) {
-        // let cmd = {};
-        // for (let item of data) {
-        //     let idSmartProcess = item.id;
-        //     let request = `crm.item.add?entityTypeId=${this.smartNumber}&fields[ufCrm19_1684137706]=${item.ufCrm19_1684137706}&fields[ufCrm19_1684137811]=${item.ufCrm19_1684137811}&fields[ufCrm19_1684137822]=${item.ufCrm19_1684137822}&fields[ufCrm19_1684137877]=${item.ufCrm19_1684137877}&fields[ufCrm19_1684137925]=${item.ufCrm19_1684137925}&fields[ufCrm19_1684137950]=${item.ufCrm19_1684137950}&fields[ufCrm19_1684138153]=${item.ufCrm19_1684138153}`;
-        //     for (let i in item.ufCrm19_1684142357) {
-        //         request += `&fields[ufCrm19_1684142357][${i}]=${encodeURIComponent(item.ufCrm19_1684142357[i])}`
-        //     }
-        //     cmd[idSmartProcess] = request;
-        // }
-        // let response = await this.bx24.batchMethod(cmd);
         let reqPackage = {};
         for (let item of data) {
             let idSmartProcess = item.id;
@@ -240,24 +175,19 @@ class App {
             }];
         }
         let response = await this.bx24.batchMethod(reqPackage);
-        console.log(response);
         return response;
     }
-
-
 }
 
 
 async function main() {
     console.log("Ready!!!");
-        let seretKeyYandex = await BX24.appOption.get(SETTINGS__SECRETS_KEY);
-        let bx24 = new Bitrix24();
-        let yaDisk = new YandexDisk(seretKeyYandex);
-        // let dealId = 10133;
-        let app = new App(dealId, bx24, yaDisk);
-        
-        await app.init();
-        await app.render();
+    let seretKeyYandex = await BX24.appOption.get(SETTINGS__SECRETS_KEY);
+    let bx24 = new Bitrix24();
+    let yaDisk = new YandexDisk(seretKeyYandex);
+    let app = new App(dealId, bx24, yaDisk);
+    await app.init();
+    await app.render();
 }
 
 $(document).ready(function() {

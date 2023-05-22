@@ -3,15 +3,17 @@ import Bitrix24 from '../bx24/requests.js'
 
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
     // console.log(">>>>> update");
+    let taskId = dataDealOld.UF_CRM_1661089895;
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
-    console.log("desc = ", desc);
+    // console.log("desc = ", desc);
     let data = {
         RESPONSIBLE_ID: dataDealOld.UF_CRM_1619700503,     // Исполнитель МОС
         AUDITORS: dataDealOld.UF_CRM_1619700503,           // Наблюдатели
         DESCRIPTION: desc,
     }
-    console.log(data);
-    await updateTaskOrderToBx24(50741, data);
+    console.log("taskId = ", taskId);
+    console.log("taskData =", data);
+    await updateTaskOrderToBx24(taskId, data);
 }
 
 
@@ -46,7 +48,7 @@ ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_16727
 
 function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
     // console.log("products", products);
-    let tbody = "[TR][TD]Описание[/TD][TD]Количество[/TD][TD]Технология изготовления[/TD][TD]Ширина пленки[/TD][TD]Площадь м.пог.[/TD][TD]Площадь м2[/TD][TD]Ссылка на источник клиента[/TD][TD]Файлы клиента[/TD][/TR]"
+    let tbody = "[TR][TD][B]Описание[/B][/TD][TD][B]Количество[/B][/TD][TD][B]Технология изготовления[/B][/TD][TD][B]Ширина пленки[/B][/TD][TD][B]Площадь м.пог.[/B][/TD][TD][B]Площадь м2[/B][/TD][TD][B]Ссылка на источник клиента[/B][/TD][TD][B]Файлы клиента[/B][/TD][/TR]"
     for (let product of products) {
         tbody += `[TR][TD]${product.ufCrm19_1684137706}[/TD][TD]${product.ufCrm19_1684137811}[/TD][TD]${getValueByKey(itemsdManufactTechn, product.ufCrm19_1684137822)}[/TD]
 [TD]${getValueByKey(itemsFilmWidth, product.ufCrm19_1684137877)}[/TD][TD]${product.ufCrm19_1684137925}[/TD][TD]${product.ufCrm19_1684137950}[/TD]
@@ -118,9 +120,9 @@ async function getDataFromBx24(contactId, companyId, contactMasurementId) {
         company: ["crm.company.list", {filter: {ID: companyId}, select: ["TITLE", "PHONE"]}],
         contact_measurement: ["crm.contact.list", {filter: {ID: contactMasurementId}, select: ["PHONE"]}],
     };
-    console.log(reqPackage);
+    // console.log(reqPackage);
     let response = await bx24.batchMethod(reqPackage);
-    console.log(response);
+    // console.log(response);
     return response;
 }
 
@@ -134,7 +136,7 @@ async function updateTaskOrderToBx24(taskId, data) {
             "fields": data
         }
     );
-    console.log(response);
+    // console.log(response);
     return response;
 }
 
