@@ -105,9 +105,9 @@ async function getDataFromBx24(contactId, companyId, contactMasurementId) {
     //     contact_measurement: `crm.contact.list?filter[ID]=${contactMasurementId}&select[]=PHONE`,
     // };
     let reqPackage = {
-        contact: ["crm.contact.list", {filter: {ID: contactId}}, select["NAME", "LAST_NAME","SECOND_NAME"]],
-        company: ["crm.company.list", {filter: {ID: companyId}}, select["TITLE", "PHONE"]],
-        contact_measurement: ["crm.contact.list", {filter: {ID: contactMasurementId}}, select["PHONE"]],
+        contact: ["crm.contact.list", {filter: {ID: contactId}, select: ["NAME", "LAST_NAME","SECOND_NAME"]}],
+        company: ["crm.company.list", {filter: {ID: companyId}, select: ["TITLE", "PHONE"]}],
+        contact_measurement: ["crm.contact.list", {filter: {ID: contactMasurementId}, select: ["PHONE"]}],
     };
     console.log(reqPackage);
     let response = await bx24.batchMethod(reqPackage);
