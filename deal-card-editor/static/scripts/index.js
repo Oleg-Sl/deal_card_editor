@@ -72,29 +72,38 @@ class App {
     initHandler() {
         // Сохранение изменений в сделку и БП
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
+            let spinner = this.elemBtnSaveBottom.querySelector("span");
+            spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
             await this.saveDealToBx24(dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
             await this.saveSmartProcessToBx24(dataSmartProcess);
             // await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            spinner.classList.add("d-none");
         })
 
         // Сохранение изменений в сделку и БП, также изменение данных в задаче
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
+            let spinner = this.elemBtnSaveBottom.querySelector("span");
+            spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
             await this.saveDealToBx24(dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
             await this.saveSmartProcessToBx24(dataSmartProcess);
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            spinner.classList.add("d-none");
         })
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
             // BX24.reloadWindow();
+            let spinner = this.elemBtnSaveBottom.querySelector("span");
+            spinner.classList.remove("d-none");
             this.data = await this.getDealDataFromBx24(this.dealId);
             this.fields = await this.getDealFieldsFromBx24();
             this.interfaceBlockFive.init();
             this.render();
+            spinner.classList.add("d-none");
         })
 
         // Открыть модальное окно с настройками
