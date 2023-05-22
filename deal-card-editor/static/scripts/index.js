@@ -133,7 +133,7 @@ class App {
         await this.saveDealToBx24(dataDeal);
         let dataSmartProcess = this.getDataSmartProcess();
         await this.saveSmartProcessToBx24(dataSmartProcess);
-        await updateTaskOrder(dataDeal, this.data, this.fields, dataSmartProcess);
+        await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
     }
 
     updateTask() {
