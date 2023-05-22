@@ -6,19 +6,22 @@ SMART_PROCESS_ID = 184
 
 
 def update(task_id, deal_id):
+    # "task": f"tasks.task.get?taskId={task_id}",
+
     cmd = {
-        "task": f"tasks.task.get?taskId={task_id}",
-        "deal": f"crm.deal.list?filter[ID]={deal_id}&select[]=*&select[]=UF_*"
+        "deal": f"crm.deal.list?filter[ID]={deal_id}&select[]=*&select[]=UF_*",
+        "fields": f"crm.deal.fields"
     }
     response = bx24.requests_bath(cmd)
+    fields = response.get("result", {}).get("fields", {})
     deal = response.get("result", {}).get("deal", [])
     deal = deal[0] if deal else {}
-    task = response.get("result", {}).get("task", {}).get("task", {})
+    # task = response.get("result", {}).get("task", {}).get("task", {})
 
     task_data = {
         "RESPONSIBLE_ID": deal.get("UF_CRM_1619700503"),    # Исполнитель МОС
         "AUDITORS": deal.get("UF_CRM_1619700503"),          # Наблюдатели
-        "DESCRIPTION": get_description(deal),
+        "DESCRIPTION": get_description(deal, fields),
     }
     # pprint(task_data)
 
@@ -94,11 +97,22 @@ def get_url_files(files_data):
     return data
 
 
-def get_data_table(products):
+def get_value_by_key(items, item_key):
+    item_value = ""
+    for item in items:
+        if item.get("ID") == item_key:
+            item_value = item.get("VALUE")
+    return item_value;
+
+
+def get_data_table(products, items_manufact_techn, items_film_width):
     tbody = "[TR][TD]Описание[/TD][TD]Количество[/TD][TD]Технология изготовления[/TD][TD]Ширина пленки[/TD][TD]Площадь м.пог.[/TD][TD]Площадь м2[/TD][TD]Ссылка на источник клиента[/TD][TD]Файлы клиента[/TD][/TR]"
+
     for product in products:
-        tbody += f"[TR][TD]{product.get('ufCrm19_1684137706')}[/TD][TD]{product.get('ufCrm19_1684137811')}[/TD][TD]{product.get('ufCrm19_1684137822')}[/TD]" \
-                 f"[TD]{product.get('ufCrm19_1684137877')}[/TD][TD]{product.get('ufCrm19_1684137925')}[/TD][TD]{product.get('ufCrm19_1684137950')}[/TD]" \
+        manufact_techn = get_value_by_key(items_manufact_techn, product.get('ufCrm19_1684137822'))
+        film_width = get_value_by_key(items_film_width, product.get('ufCrm19_1684137877'))
+        tbody += f"[TR][TD]{product.get('ufCrm19_1684137706')}[/TD][TD]{product.get('ufCrm19_1684137811')}[/TD][TD]{manufact_techn}[/TD]" \
+                 f"[TD]{film_width}[/TD][TD]{product.get('ufCrm19_1684137925')}[/TD][TD]{product.get('ufCrm19_1684137950')}[/TD]" \
                  f"[TD]{product.get('ufCrm19_1684138153')}[/TD][TD]{get_url_files(product.get('ufCrm19_1684142357', []))}[/TD][/TR]"
     data = f"""
 [TABLE]
@@ -108,7 +122,9 @@ def get_data_table(products):
     return data
 
 
-def get_description(deal):
+def get_description(deal, fields):
+    # print("itemsdManufactTechn = ", fields.get("UF_CRM_1625666854", {}).get("items", {}))
+    # print("itemsFilmWidth = ", fields.get("UF_CRM_1672744985962", {}).get("items", {}))
     cmd = {
         "contact": f"crm.contact.list?filter[ID]={deal.get('CONTACT_ID')}&select[]=NAME&select[]=LAST_NAME&select[]=SECOND_NAME",
         "company": f"crm.company.list?filter[ID]={deal.get('COMPANY_ID')}&select[]=TITLE&select[]=PHONE",
@@ -142,13 +158,14 @@ ____________
 ____________
 Компания: [URL=https://007.bitrix24.ru/crm/company/details/{deal.get("COMPANY_ID")}/] {company.get("TITLE")} {get_text_phone(company.get("PHONE", []))}[/URL]
 
-{get_data_table(products)}
+{get_data_table(products, fields.get("UF_CRM_1625666854", {}).get("items", {}), fields.get("UF_CRM_1672744985962", {}).get("items", {}))}
 """
     print(desc)
     return desc
 
 
 # update(50741, 10133)
+
 
 # Поля сделки
 # UF_CRM_1668129559 - Командировка

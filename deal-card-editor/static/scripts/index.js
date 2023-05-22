@@ -169,7 +169,7 @@ class App {
     }
 
     async saveDealToBx24(data) {
-        let cmd = {};
+        // let cmd = {};
         // for (let item of data) {
         //     let idSmartProcess = item.id;
         //     // delete item.id;
