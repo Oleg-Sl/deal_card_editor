@@ -5,8 +5,8 @@ from rest_framework.response import Response
 import re
 from threading import Thread
 
-from service.bitrix24 import secrets
-from service import task_update_order
+from .service.bitrix24 import secrets
+from .service import task_update_order
 
 class InstallApiView(views.APIView):
     @xframe_options_exempt
