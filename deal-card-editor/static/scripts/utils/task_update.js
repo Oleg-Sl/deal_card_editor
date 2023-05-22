@@ -20,7 +20,7 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     console.log("response = ", response);
     let contact = Array.isArray(response.contact) ? response.contact[0] : undefined;
     let company = Array.isArray(response.company) ? response.company[0] : undefined;
-    let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : undefined;
+    let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = getValidPhone(contactMeasurement.PHONE);
     let desc = `
 ${dataDealNew.UF_CRM_1655918107 || ""}
