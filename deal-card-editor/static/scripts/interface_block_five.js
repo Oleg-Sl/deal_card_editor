@@ -320,7 +320,7 @@ class ProductRow {
         // console.log("response => ", response);
         this.data.id = response.item.id;
         this.smartProcessId = response.item.id;
-        return response.result.item;
+        return response.item;
     }
 
     getDesc() {
