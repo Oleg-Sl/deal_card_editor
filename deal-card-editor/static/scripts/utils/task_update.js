@@ -17,7 +17,6 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
 
 async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let response = await getDataFromBx24(dataDealOld.CONTACT_ID, dataDealOld.COMPANY_ID, dataDealNew.UF_CRM_1621943311);
-    // console.log("response = ", response);
     let contact = Array.isArray(response.contact) ? response.contact[0] : undefined;
     let company = Array.isArray(response.company) ? response.company[0] : undefined;
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
@@ -31,13 +30,13 @@ ____________
 ____________
 
 ____________
-Ссылки: ${Array.isArray(dataDealOld.UF_CRM_1625591420) ? dataDealOld.UF_CRM_1625591420.join() : ""}
+Ссылки: ${arrToSring(dataDealOld.UF_CRM_1625591420)}
 CRM / Тендер: ${dataDealOld.UF_CRM_1620918041}
 ____________
 Контакт: [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
 Написать в Whats App [URL=https://wa.me/${contactMeasurementText}/][/URL]
 ____________
-Компания: [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${Array.isArray(company.PHONE) ? company.PHONE.join() : ""}[/URL]
+Компания: [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
 
 ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_1672744985962.items)}
 `
@@ -46,6 +45,7 @@ ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_16727
 
 
 function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
+    // console.log("products", products);
     let tbody = "[TR][TD]Описание[/TD][TD]Количество[/TD][TD]Технология изготовления[/TD][TD]Ширина пленки[/TD][TD]Площадь м.пог.[/TD][TD]Площадь м2[/TD][TD]Ссылка на источник клиента[/TD][TD]Файлы клиента[/TD][/TR]"
     for (let product of products) {
         tbody += `[TR][TD]${product.ufCrm19_1684137706}[/TD][TD]${product.ufCrm19_1684137811}[/TD][TD]${getValueByKey(itemsdManufactTechn, product.ufCrm19_1684137822)}[/TD]
@@ -58,6 +58,14 @@ ${tbody}
 [/TABLE]
     `
     return data
+}
+
+
+function arrToSring(lst) {
+    if (Array.isArray()) {
+        return lst.join()
+    }
+    return ""
 }
 
 
@@ -90,8 +98,9 @@ function getValueByKey(items, itemKey) {
 function getUrlFiles(files_data) {
     let data = ""
     for (let file_data of files_data) {
-        let {name, size, url} = file_data.split(";")
-        data += `[URL=${url}]${name}[/URL] <br>`
+        let tmp_ = file_data.split(";")
+        // let {name, size, url} = file_data.split(";")
+        data += `[URL=${tmp_[2]}]${tmp_[0]}[/URL] <br>`
     }
     return data
 }
