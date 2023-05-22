@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 import re
 # from . import service, bitrix24
-from service.task_update_order import update
+from .service.task_update_order import update
 # from service.task_update_order import *
 
 
