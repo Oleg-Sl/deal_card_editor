@@ -128,12 +128,12 @@ class App {
         return products;
     }
 
-    saveData() {
+    async saveData() {
         let dataDeal = this.getDataDeal();
-        this.saveDealToBx24(dataDeal);
+        await this.saveDealToBx24(dataDeal);
         let dataSmartProcess = this.getDataSmartProcess();
-        this.saveSmartProcessToBx24(dataSmartProcess);
-        updateTaskOrder(dataDeal, this.data, this.fields, dataSmartProcess);
+        await this.saveSmartProcessToBx24(dataSmartProcess);
+        await updateTaskOrder(dataDeal, this.data, this.fields, dataSmartProcess);
     }
 
     updateTask() {
