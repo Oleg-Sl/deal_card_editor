@@ -52,7 +52,7 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
 [TD]${getValueByKey(itemsFilmWidth, product.ufCrm19_1684137877)}[/TD][TD]${product.ufCrm19_1684137925}[/TD][TD]${product.ufCrm19_1684137950}[/TD]
 [TD]${product.ufCrm19_1684138153}[/TD][TD]${getUrlFiles(product.ufCrm19_1684142357)}[/TD][/TR]`
     }
-    data = `
+    let data = `
 [TABLE]
 ${tbody}
 [/TABLE]
