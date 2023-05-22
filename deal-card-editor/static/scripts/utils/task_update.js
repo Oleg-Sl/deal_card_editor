@@ -2,7 +2,7 @@ import Bitrix24 from '../bx24/requests.js'
 
 
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
-    console.log(">>>>> update");
+    // console.log(">>>>> update");
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     console.log("desc = ", desc);
     let data = {
@@ -17,7 +17,7 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
 
 async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let response = await getDataFromBx24(dataDealOld.CONTACT_ID, dataDealOld.COMPANY_ID, dataDealNew.UF_CRM_1621943311);
-    console.log("response = ", response);
+    // console.log("response = ", response);
     let contact = Array.isArray(response.contact) ? response.contact[0] : undefined;
     let company = Array.isArray(response.company) ? response.company[0] : undefined;
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
@@ -88,8 +88,8 @@ function getValueByKey(items, itemKey) {
 
 
 function getUrlFiles(files_data) {
-    data = ""
-    for (file_data of files_data) {
+    let data = ""
+    for (let file_data of files_data) {
         let {name, size, url} = file_data.split(";")
         data += `[URL=${url}]${name}[/URL] <br>`
     }
