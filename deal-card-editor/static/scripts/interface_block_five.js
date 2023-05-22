@@ -616,11 +616,10 @@ export default class InterfaceBlockfour {
     }
 
     async render(fields, data) {
+        this.productsObj = [];
         this.itemsdManufactTechn = fields[MANUFACTURING_TECHNOLOGY].items;
         this.itemsFilmWidth = fields[FILM_WIDTH].items;
         this.dealId = data.ID;
-        // let productsList = await this.getProductsList(this.smartNumber, this.dealId);
-        // await this.render_(productsList);
         let productsList = await this.getProductsList(this.smartNumber, data.ID);
         for (let product of productsList) {
             let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId);

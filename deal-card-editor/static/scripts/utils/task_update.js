@@ -45,12 +45,11 @@ ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_16727
 
 
 function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
-    // console.log("products", products);
     let tbody = "[TR][TD][B]Описание[/B][/TD][TD][B]Количество[/B][/TD][TD][B]Технология изготовления[/B][/TD][TD][B]Ширина пленки[/B][/TD][TD][B]Площадь м.пог.[/B][/TD][TD][B]Площадь м2[/B][/TD][TD][B]Ссылка на источник клиента[/B][/TD][TD][B]Файлы клиента[/B][/TD][/TR]"
     for (let product of products) {
         tbody += `[TR][TD]${product.ufCrm19_1684137706}[/TD][TD]${product.ufCrm19_1684137811}[/TD][TD]${getValueByKey(itemsdManufactTechn, product.ufCrm19_1684137822)}[/TD]
 [TD]${getValueByKey(itemsFilmWidth, product.ufCrm19_1684137877)}[/TD][TD]${product.ufCrm19_1684137925}[/TD][TD]${product.ufCrm19_1684137950}[/TD]
-[TD]${product.ufCrm19_1684138153}[/TD][TD]${getUrlFiles(product.ufCrm19_1684142357)}[/TD][/TR]`
+[TD][URL=${product.ufCrm19_1684138153}]${product.ufCrm19_1684138153}[/URL][/TD][TD]${getUrlFiles(product.ufCrm19_1684142357)}[/TD][/TR]`
     }
     let data = `
 [TABLE]

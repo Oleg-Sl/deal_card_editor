@@ -90,7 +90,11 @@ class App {
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
-            BX24.reloadWindow();
+            // BX24.reloadWindow();
+            this.data = await this.getDealDataFromBx24(this.dealId);
+            this.fields = await this.getDealFieldsFromBx24();
+            this.interfaceBlockFive.init();
+            this.render();
         })
 
         // Открыть модальное окно с настройками
