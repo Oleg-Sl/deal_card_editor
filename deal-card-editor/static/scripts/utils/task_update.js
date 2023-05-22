@@ -1,7 +1,7 @@
 import Bitrix24 from '../bx24/requests.js'
 
 
-export default async function update(dataDealNew, dataDealOld, dataProducts, fields) {
+async function update(dataDealNew, dataDealOld, dataProducts, fields) {
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     let data = {
         RESPONSIBLE_ID: dataDeal.UF_CRM_1619700503,     // Исполнитель МОС
@@ -143,3 +143,6 @@ async function updateTaskOrderToBx24(taskId, data) {
 // ufCrm19_1684137950 - Площадь м2
 // ufCrm19_1684138153 - Ссылка на источник клиента
 // ufCrm19_1684142357 - Файлы клиента
+
+
+export {update};
