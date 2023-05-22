@@ -8,6 +8,8 @@ import InterfaceBlockFive from './interface_block_five.js'
 import Bitrix24 from './bx24/requests.js'
 import YandexDisk from './yandex_disk/requests.js'
 
+import {update as updateTaskOrder} from "./utils/task_update.js"
+
 
 const SETTINGS__SECRETS_KEY = "yandex_secret_key";
 
@@ -129,11 +131,9 @@ class App {
     saveData() {
         let dataDeal = this.getDataDeal();
         this.saveDealToBx24(dataDeal);
-        // let {dataSmartProcessOld, dataSmartProcessNew} = this.getDataSmartProcess();
         let dataSmartProcess = this.getDataSmartProcess();
         this.saveSmartProcessToBx24(dataSmartProcess);
-        // this.addSmartProcessToBx24(dataSmartProcessNew);
-        // this.interfaceBlockFive.update();
+        updateTaskOrder(dataDeal, this.data, this.fields, dataSmartProcess);
     }
 
     updateTask() {
@@ -243,6 +243,8 @@ class App {
         console.log(response);
         return response;
     }
+
+
 }
 
 

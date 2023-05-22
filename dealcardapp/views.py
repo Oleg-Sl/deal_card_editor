@@ -1,10 +1,12 @@
 from rest_framework import views, viewsets, filters, status
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import render
+from rest_framework.response import Response
+
 
 import re
 # from . import service, bitrix24
-
+from service.task_update_order import *
 
 
 class InstallApiView(views.APIView):
@@ -26,6 +28,23 @@ class IndexApiView(views.APIView):
     def get(self, request):
         data = {"id": 999}
         return render(request, 'index.html', context=data)
+
+
+class UpdateTaskOrderApiView(views.APIView):
+
+    def post(self, request):
+        task_id = request.query_params.get("task_id", None)
+        deal_id = request.query_params.get("deal_id", None)
+
+        if not task_id:
+            return Response("Not transferred ID task", status=status.HTTP_400_BAD_REQUEST)
+
+        if not deal_id:
+            return Response("Not transferred ID deal", status=status.HTTP_400_BAD_REQUEST)
+
+        # if not verification_app.verification(application_token):
+        #     return Response("Unverified event source", status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # [2022-03-10 04:17:53,659] I <QueryDict:
