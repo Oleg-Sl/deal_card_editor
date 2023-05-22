@@ -317,6 +317,7 @@ class ProductRow {
             entityTypeId: SMART_PROCESS_NUMBER,
             fields: data,
         });
+        console.log("response => ", response);
         this.data.id = response.result.item.id;
         this.smartProcessId = response.result.item.id;
         return response.result.item;
