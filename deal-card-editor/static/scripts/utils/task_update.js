@@ -117,7 +117,8 @@ async function getDataFromBx24(contactId, companyId, contactMasurementId) {
 
 
 async function updateTaskOrderToBx24(taskId, data) {
-    let response = await this.bx24.callMethod(
+    let bx24 = new Bitrix24();
+    let response = await bx24.callMethod(
         "tasks.task.update",
         {
             "taskId": taskId,
