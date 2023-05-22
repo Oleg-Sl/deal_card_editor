@@ -84,7 +84,7 @@ class App {
 
         // Сохранение изменений в сделку и БП, также изменение данных в задаче
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
-            let spinner = this.elemBtnSaveBottom.querySelector("span");
+            let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
             await this.saveDealToBx24(dataDeal);
@@ -97,7 +97,7 @@ class App {
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
             // BX24.reloadWindow();
-            let spinner = this.elemBtnSaveBottom.querySelector("span");
+            let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
             this.data = await this.getDealDataFromBx24(this.dealId);
             this.fields = await this.getDealFieldsFromBx24();
