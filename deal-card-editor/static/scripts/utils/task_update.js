@@ -6,8 +6,8 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     console.log("desc = ", desc);
     let data = {
-        RESPONSIBLE_ID: dataDeal.UF_CRM_1619700503,     // Исполнитель МОС
-        AUDITORS: dataDeal.UF_CRM_1619700503,           // Наблюдатели
+        RESPONSIBLE_ID: dataDealOld.UF_CRM_1619700503,     // Исполнитель МОС
+        AUDITORS: dataDealOld.UF_CRM_1619700503,           // Наблюдатели
         DESCRIPTION: desc,
     }
     console.log(data);
