@@ -1,5 +1,5 @@
 from pprint import pprint
-from bitrix24 import bitrix as bx24
+from .bitrix24 import bitrix as bx24
 
 
 SMART_PROCESS_ID = 184
