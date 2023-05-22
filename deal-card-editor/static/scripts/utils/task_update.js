@@ -2,17 +2,15 @@ import Bitrix24 from '../bx24/requests.js'
 
 
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
-    // console.log(">>>>> update");
     let taskId = dataDealOld.UF_CRM_1661089895;
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
-    // console.log("desc = ", desc);
     let data = {
-        RESPONSIBLE_ID: dataDealOld.UF_CRM_1619700503,     // Исполнитель МОС
-        AUDITORS: dataDealOld.UF_CRM_1619700503,           // Наблюдатели
+        RESPONSIBLE_ID: dataDealNew.UF_CRM_1619700503,     // Исполнитель МОС
+        AUDITORS: dataDealNew.UF_CRM_1684305731,           // Наблюдатели
         DESCRIPTION: desc,
     }
-    console.log("taskId = ", taskId);
-    console.log("taskData =", data);
+    // console.log("taskId = ", taskId);
+    // console.log("taskData =", data);
     await updateTaskOrderToBx24(taskId, data);
 }
 
