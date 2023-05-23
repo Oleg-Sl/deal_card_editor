@@ -44,10 +44,11 @@ export default class InterfaceBlockFour {
     }
 
     truncateStr(str) {
-        if (str.endsWith("<p><br></p>")) {
-            return str.slice(0, str.length - "<p><br></p>".length);
-        }
-        return str;
+        return str.replace(/(<p(?:\s[^>]*)?>\s*<br>\s*<\/p>)$/i, "");
+        // if (str.endsWith("<p><br></p>")) {
+        //     return str.slice(0, str.length - "<p><br></p>".length);
+        // }
+        // return str;
     }
 
     async render(fields, data) {
