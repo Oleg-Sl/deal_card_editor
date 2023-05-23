@@ -18,7 +18,7 @@ def run(task_id, deal_id):
 
     task_data = {
         "RESPONSIBLE_ID": deal.get("UF_CRM_1619700503"),    # Исполнитель МОС
-        "AUDITORS": deal.get("UF_CRM_1619700503"),          # Наблюдатели
+        "AUDITORS": deal.get("UF_CRM_1684305731"),          # Наблюдатели
         "DESCRIPTION": get_description(deal, fields),
     }
     # pprint(task_data)
