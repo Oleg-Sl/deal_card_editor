@@ -17,8 +17,8 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
 
 async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let response = await getDataFromBx24(dataDealOld.CONTACT_ID, dataDealOld.COMPANY_ID, dataDealNew.UF_CRM_1621943311);
-    let contact = Array.isArray(response.contact) ? response.contact[0] : undefined;
-    let company = Array.isArray(response.company) ? response.company[0] : undefined;
+    let contact = (Array.isArray(response.contact) ? response.contact[0] : {}) || {};
+    let company = (Array.isArray(response.company) ? response.company[0] : {}) || {};
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
     let desc = `
