@@ -313,6 +313,7 @@ class ProductRow {
 
     async addSmartProcessToBx24() {
         let data = this.getData();
+        data["parentId2"] = this.dealId;
         let response = await this.bx24.callMethod("crm.item.add", {
             entityTypeId: SMART_PROCESS_NUMBER,
             fields: data,
@@ -595,9 +596,7 @@ export default class InterfaceBlockfour {
             "crm.item.list",
             {
                 "entityTypeId": smartNumber,
-                "fields": {
-                    "filter": { "parentId2": dealId }
-                },
+                "filter": { "parentId2": dealId },
                 "select": [
                     "id",
                     FIELD_PRODUCTS_DESC,
