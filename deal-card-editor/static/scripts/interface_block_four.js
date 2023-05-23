@@ -39,8 +39,15 @@ export default class InterfaceBlockFour {
         let textarea = document.querySelector('#editor');
         let editor = sceditor.instance(textarea);
         let data = {};
-        data[DESC_ORDER] = editor.val();
+        data[DESC_ORDER] = this.truncateStr(editor.val());
         return data;
+    }
+
+    truncateStr(str) {
+        if (str.endsWith("<p><br></p>")) {
+            return str.slice(0, str.length - "<p><br></p>".length);
+        }
+        return str;
     }
 
     async render(fields, data) {
