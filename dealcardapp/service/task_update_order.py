@@ -127,7 +127,7 @@ def get_description(deal, fields):
         "contact": f"crm.contact.list?filter[ID]={deal.get('CONTACT_ID')}&select[]=NAME&select[]=LAST_NAME&select[]=SECOND_NAME",
         "company": f"crm.company.list?filter[ID]={deal.get('COMPANY_ID')}&select[]=TITLE&select[]=PHONE",
         "contact_measurement": f"crm.contact.list?filter[ID]={deal.get('UF_CRM_1621943311')}&select[]=PHONE",
-        "products": f"crm.item.list?entityTypeId=184&fields[filter][parentId2]={deal.get('ID')}&select[]=ufCrm19_1684137706&select[]=ufCrm19_1684137811&select[]=ufCrm19_1684137822&select[]=ufCrm19_1684137877&select[]=ufCrm19_1684137925&select[]=ufCrm19_1684137950&select[]=ufCrm19_1684138153&select[]=ufCrm19_1684142357"
+        "products": f"crm.item.list?entityTypeId=184&filter[parentId2]={deal.get('ID')}&select[]=ufCrm19_1684137706&select[]=ufCrm19_1684137811&select[]=ufCrm19_1684137822&select[]=ufCrm19_1684137877&select[]=ufCrm19_1684137925&select[]=ufCrm19_1684137950&select[]=ufCrm19_1684138153&select[]=ufCrm19_1684142357"
     }
     response = bx24.requests_bath(cmd)
 
