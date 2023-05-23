@@ -47,7 +47,7 @@ export default class InterfaceBlockFour {
         let descOrder = data[DESC_ORDER];
         let textarea = document.querySelector('#editor');
         let editor = sceditor.instance(textarea);
-        editor.insert(descOrder);
+        editor.insertText(descOrder);
         editor.updateOriginal();
 
     }
