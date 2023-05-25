@@ -87,10 +87,15 @@ class App {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
+            console.log("Обновление сделки");
             await this.saveDealToBx24(dataDeal);
+            console.log("Получение данных продуктов");
             let dataSmartProcess = this.getDataSmartProcess();
+            console.log("Список продуктов", dataSmartProcess);
             await this.saveSmartProcessToBx24(dataSmartProcess);
+            console.log("Продуты успешно сохранены");
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            console.log("Обновление задачи");
             spinner.classList.add("d-none");
         })
 
@@ -167,6 +172,9 @@ class App {
     }
 
     async saveSmartProcessToBx24(data) {
+        if (!data) {
+            return;
+        }
         let reqPackage = {};
         for (let item of data) {
             let tmp = {...item};
