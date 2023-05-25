@@ -172,7 +172,7 @@ class App {
     }
 
     async saveSmartProcessToBx24(data) {
-        if (!data) {
+        if (data.length == 0) {
             return;
         }
         let reqPackage = {};
