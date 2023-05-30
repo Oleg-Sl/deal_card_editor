@@ -100,7 +100,8 @@ export default class InterfaceBlockFour {
 
     getData() {
         // let contents = this.quill.getContents();
-        let contents = this.quill.getText();
+        // let contents = this.quill.getText();
+        let contents = this.quill.getHTML();
         console.log("getText = ", contents);
         console.log("getContents = ", this.quill.getContents());
 
