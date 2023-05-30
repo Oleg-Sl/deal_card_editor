@@ -91,9 +91,9 @@ export default class InterfaceBlockFour {
     init() {
         this.quill = new Quill('#editor', {
             theme: 'snow',
-            modules: {
-                clipboard: Quill.modules.clipboard
-            }
+            // modules: {
+            //     clipboard: Quill.modules.clipboard
+            // }
         });
 
         // Отслеживание изменения размера поля ввода
@@ -109,10 +109,11 @@ export default class InterfaceBlockFour {
 
     getData() {
         // let contents = this.quill.getContents();
-        // let contents = this.quill.getText();
-        let contents = this.quill.getHTML();
+        let contents = this.quill.getText();
+        // let contents = this.quill.getHTML();
+        console.log("this.quill = ", this.quill);
         console.log("getText = ", contents);
-        console.log("getContents = ", this.quill.getContents());
+        // console.log("getContents = ", this.quill.getContents());
 
         let data = {};
         data[DESC_ORDER] = contents;
