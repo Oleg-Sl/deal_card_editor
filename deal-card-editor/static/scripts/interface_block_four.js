@@ -90,8 +90,8 @@ export default class InterfaceBlockFour {
         // Отслеживание изменения размера поля ввода
         this.quill.on('editor-change', function(eventName) {
             if (eventName === 'text-change') {
-                var contentHeight = quill.root.offsetHeight;
-                console.log('Высота поля ввода:', contentHeight);
+                // var contentHeight = quill.root.offsetHeight;
+                // console.log('Высота поля ввода:', contentHeight);
                 // Здесь можно выполнить нужные действия в случае изменения размера поля ввода
                 BX24.fitWindow();
             }
