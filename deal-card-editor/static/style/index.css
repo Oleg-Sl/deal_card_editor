@@ -366,6 +366,7 @@
 
 body {
   background-color: #eef2f4 !important;
+  overflow-y: hidden;
 }
 
 .taskeditor__box {
