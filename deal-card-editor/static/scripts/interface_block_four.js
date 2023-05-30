@@ -85,7 +85,13 @@ export default class InterfaceBlockFour {
     }
 
     init() {
-        this.quill = new Quill('#editor', {theme: 'snow'});
+        this.quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                clipboard: Quill.modules.clipboard
+              }
+        }
+        );
 
         // Отслеживание изменения размера поля ввода
         this.quill.on('editor-change', function(eventName) {
