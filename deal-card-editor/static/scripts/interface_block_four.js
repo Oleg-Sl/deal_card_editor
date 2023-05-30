@@ -86,11 +86,22 @@ export default class InterfaceBlockFour {
 
     init() {
         this.quill = new Quill('#editor', {theme: 'snow'});
+
+        // Отслеживание изменения размера поля ввода
+        this.quill.on('editor-change', function(eventName) {
+            if (eventName === 'text-change') {
+                var contentHeight = quill.root.offsetHeight;
+                console.log('Высота поля ввода:', contentHeight);
+                // Здесь можно выполнить нужные действия в случае изменения размера поля ввода
+                BX24.fitWindow();
+            }
+        });
     }
 
     getData() {
         // let contents = this.quill.getContents();
         let contents = this.quill.getText();
+        let data = {};
         data[DESC_ORDER] = contents;
         return data;
     }
