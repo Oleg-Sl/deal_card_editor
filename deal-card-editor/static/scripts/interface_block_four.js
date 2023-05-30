@@ -72,6 +72,10 @@
 
 
 
+var Quill = window.Quill;
+var Clipboard = Quill.import('modules/clipboard');
+
+Quill.register('modules/clipboard', Clipboard);
 
 
 const DESC_ORDER = "UF_CRM_1655918107";
@@ -90,8 +94,7 @@ export default class InterfaceBlockFour {
             modules: {
                 clipboard: Quill.modules.clipboard
               }
-        }
-        );
+        });
 
         // Отслеживание изменения размера поля ввода
         this.quill.on('editor-change', function(eventName) {
