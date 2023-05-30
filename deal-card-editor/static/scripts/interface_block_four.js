@@ -101,6 +101,9 @@ export default class InterfaceBlockFour {
     getData() {
         // let contents = this.quill.getContents();
         let contents = this.quill.getText();
+        console.log("getText = ", contents);
+        console.log("getContents = ", this.quill.getContents());
+
         let data = {};
         data[DESC_ORDER] = contents;
         return data;
