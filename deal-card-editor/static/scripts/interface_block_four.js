@@ -72,10 +72,10 @@
 
 
 
-var Quill = window.Quill;
-var Clipboard = Quill.import('modules/clipboard');
+// var Quill = window.Quill;
+// var Clipboard = Quill.import('modules/clipboard');
 
-Quill.register('modules/clipboard', Clipboard);
+// Quill.register('modules/clipboard', Clipboard);
 
 
 const DESC_ORDER = "UF_CRM_1655918107";
