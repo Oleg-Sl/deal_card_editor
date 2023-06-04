@@ -125,6 +125,7 @@ export default class InterfaceBlockFour {
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
         console.log("descOrder = ", descOrder);
-        this.quill.setText(descOrder);
+        // this.quill.setText(descOrder);
+        this.quill.clipboard.dangerouslyPasteHTML(descOrder);
     }
 }
