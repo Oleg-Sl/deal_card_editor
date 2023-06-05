@@ -8,17 +8,17 @@ export default class InterfaceBlockOne {
     init() {}
 
     initHandler() {
-        btnTenderChange.addEventListener("click", async (e) => {
-            let value = tenderlink.innerHTML;
-            tenderInput.value = value;
-            wrapTenderLink.classList.add("d-none");
-            wrapTenderInput.classList.remove("d-none");
+        this.btnTenderChange.addEventListener("click", async (e) => {
+            let value = this.tenderlink.innerHTML;
+            this.tenderInput.value = value;
+            this.wrapTenderLink.classList.add("d-none");
+            this.wrapTenderInput.classList.remove("d-none");
         })
-        tenderInput.addEventListener("change", async (e) => {
-            let value = tenderInput.value;
-            tenderlink.innerHTML = value;
-            wrapTenderLink.classList.remove("d-none");
-            wrapTenderInput.classList.add("d-none");
+        this.tenderInput.addEventListener("change", async (e) => {
+            let value = this.tenderInput.value;
+            this.tenderlink.innerHTML = value;
+            this.wrapTenderLink.classList.remove("d-none");
+            this.wrapTenderInput.classList.add("d-none");
         })
     }
 
@@ -29,12 +29,12 @@ export default class InterfaceBlockOne {
         this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
         this.tenderInput = this.wrapTenderInput.querySelector("input");
         this.numberTaskInput = this.container.querySelector(".wrap-number-task");
-        console.log("this.wrapTenderLink = ", this.wrapTenderLink);
-        console.log("this.btnTenderChange = ", this.btnTenderChange);
-        console.log("this.tenderlink = ", this.tenderlink);
-        console.log("this.wrapTenderInput = ", this.wrapTenderInput);
-        console.log("this.tenderInput = ", this.tenderInput);
-        console.log("this.numberTaskInput = ", this.numberTaskInput);
+        // console.log("this.wrapTenderLink = ", this.wrapTenderLink);
+        // console.log("this.btnTenderChange = ", this.btnTenderChange);
+        // console.log("this.tenderlink = ", this.tenderlink);
+        // console.log("this.wrapTenderInput = ", this.wrapTenderInput);
+        // console.log("this.tenderInput = ", this.tenderInput);
+        // console.log("this.numberTaskInput = ", this.numberTaskInput);
         this.initHandler();
     }
 
