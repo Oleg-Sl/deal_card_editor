@@ -103,7 +103,7 @@ class App {
             console.log("Обновление задачи");
 
             console.log("Новые данные сделки: ", dataDeal);
-            let responsible = getResponsible();
+            let responsible = this.interfaceBlockThree.getResponsible();
             let msgToUser = `[USER=${responsible.id}]${responsible.lastname} ${responsible.name}[/USER], ВНИМАНИЕ! Задача изменена.`;
             await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);
             spinner.classList.add("d-none");
