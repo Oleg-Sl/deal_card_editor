@@ -28,8 +28,7 @@ export default class InterfaceBlockOne {
         this.tenderlink = this.wrapTenderLink.querySelector(".btn-tender-link");
         this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
         this.tenderInput = this.wrapTenderInput.querySelector("input");
-        this.numberTaskInput = this.container.querySelector(".wrap-number-task input");
-        
+        this.numberTaskInput = this.container.querySelector(".wrap-number-task");
     }
 
     getData() {
@@ -54,9 +53,7 @@ export default class InterfaceBlockOne {
             </div>
             <div class="col-3">
                 <label for="numberOrder">№ заказа (автоматически)</label>
-                <div id="numberOrder" class="alert alert-light wrap-number-task" role="alert">
-                    <input class="form-control form-control-lg" type="text" value="${numberOrder}" aria-label=".form-control-lg example">
-                </div>
+                <input class="form-control form-control-lg wrap-number-task" type="text" value="${numberOrder}" aria-label=".form-control-lg example">
             </div> 
             <div class="col-3">
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
