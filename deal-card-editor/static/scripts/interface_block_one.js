@@ -54,7 +54,7 @@ export default class InterfaceBlockOne {
         let contentHTML = `
             <div class="col-6">
                 <label for="titleDeal">Название сделки</label>
-                <div id="titleDeal" class="alert alert-light" role="alert">
+                <div id="titleDeal" class="alert alert-light p-2 m-0" role="alert" style="height: 48px;">
                     ${titleDeal}
                 </div>
             </div>
@@ -65,7 +65,7 @@ export default class InterfaceBlockOne {
             <div class="col-3">
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
                 <div class="row wrap-tender-link">
-                    <div id="linkTender" class="alert alert-light col-11" role="alert">
+                    <div id="linkTender" class="alert alert-light col-11 p-2 m-0" role="alert" style="height: 48px;">
                         <a class="link-opacity-100-hover btn-tender-link" href="${linkTender}" target="_blank">${linkTender}</a>
                     </div>
                     <div class="col-1 row align-items-center change-tender-url" style="margin-bottom: 16px;">
