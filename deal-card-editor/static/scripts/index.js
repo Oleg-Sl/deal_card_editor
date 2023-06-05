@@ -59,7 +59,7 @@ class App {
     }
 
     async init() {
-        let user = await getCurrentUserFromBx24();
+        let user = await this.getCurrentUserFromBx24();
         console.log("USER => ", user);
         this.data = await this.getDealDataFromBx24(this.dealId);
         this.fields = await this.getDealFieldsFromBx24();
