@@ -184,9 +184,7 @@ class ProductRow {
                 </div>
                 <div class="col-2 m-0 p-1">
                     <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
-                        <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;">
-                
-                        </div>
+                        <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;"></div>
                     </div>
                     <div class="row m-0 p-0">
                         <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>

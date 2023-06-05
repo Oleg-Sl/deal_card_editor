@@ -59,6 +59,8 @@ class App {
     }
 
     async init() {
+        let user = await getCurrentUserFromBx24();
+        console.log("USER => ", user);
         this.data = await this.getDealDataFromBx24(this.dealId);
         this.fields = await this.getDealFieldsFromBx24();
         this.interfaceBlockOne.init();
@@ -96,6 +98,8 @@ class App {
             console.log("Продуты успешно сохранены");
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
             console.log("Обновление задачи");
+            let msgToUser = `[USER=${255}]${255} ${255}[/USER], ВНИМАНИЕ! Задача изменена.`;
+            await this.sendMessageToResponsible(this.dealId, msgToUser, this.currentUserId);
             spinner.classList.add("d-none");
         })
 
@@ -133,16 +137,46 @@ class App {
     }
 
     getDataDeal() {
+        let deal_data = this.interfaceBlockOne.getData();
         let data = this.interfaceBlockTwo.getData();
         let users = this.interfaceBlockThree.getData();
         let desc = this.interfaceBlockFour.getData();
-        return {...data, ...users, ...desc};
+        return {...deal_data, ...data, ...users, ...desc};
     }
 
     getDataSmartProcess() {
         let products = this.interfaceBlockFive.getData();
         console.log("products = ", products);
         return products;
+    }
+
+    // BX24.callMethod(
+    //     '',
+    //     [13, {'POST_MESSAGE': 'HELLO'}],
+    //     function(result){
+    //       console.info(result.data());
+    //       console.log(result);
+    //     }
+    // );
+    // 
+    async sendMessageToResponsible(dealId, msg, authorId) {
+        let data = await this.bx24.callMethod(
+            "task.commentitem.add",
+            {
+                "taskId": dealId,
+                "fields": {
+                    "AUTHOR_ID": authorId,
+                    "POST_MESSAGE": msg
+                }
+            }
+        );
+        console.log("Отправлен комментарий, овет от Битрикс: ", data);
+        return data;
+    }
+
+    async getCurrentUserFromBx24() {
+        let data = await this.bx24.callMethod("user.current", {});
+        return data;
     }
 
     async getDealDataFromBx24(dealId) {
