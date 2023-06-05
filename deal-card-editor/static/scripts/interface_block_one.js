@@ -29,6 +29,7 @@ export default class InterfaceBlockOne {
         this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
         this.tenderInput = this.wrapTenderInput.querySelector("input");
         this.numberTaskInput = this.container.querySelector(".wrap-number-task");
+        this.initHandler();
     }
 
     getData() {
@@ -72,6 +73,5 @@ export default class InterfaceBlockOne {
         `;
         this.container.innerHTML = contentHTML;
         this.initPostRender();
-        this.initHandler();
     }
 }
