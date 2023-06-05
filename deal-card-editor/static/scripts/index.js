@@ -53,10 +53,11 @@ class App {
         this.elemBtnSaveSettingsButton = document.querySelector('#saveSettingsButton');
 
         // Кнопки
-        this.elemBtnSaveBottom = document.querySelector('#saveButtonBottom');
-        this.elemBtnRewriteBottom = document.querySelector('#rewriteButtonBottom');
-        this.elemBtnCancelBottom = document.querySelector('#cancelButtonBottom');
-        this.elemBtnSettingsBottom = document.querySelector('#settingsButtonBottom');
+        this.containerButtonsBottom = document.querySelector('#containerSaveChangesBottom');
+        this.elemBtnSaveBottom = this.containerButtonsBottom.querySelector('#saveButtonBottom');
+        this.elemBtnRewriteBottom = this.containerButtonsBottom.querySelector('#rewriteButtonBottom');
+        this.elemBtnCancelBottom = this.containerButtonsBottom.querySelector('#cancelButtonBottom');
+        // this.elemBtnSettingsBottom = this.containerButtonsBottom.querySelector('#settingsButtonBottom');
 
     }
 
@@ -107,7 +108,7 @@ class App {
             let msgToUser = `[USER=${responsible.id}]${responsible.lastname} ${responsible.name}[/USER], ВНИМАНИЕ! Задача изменена.`;
             await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);
             spinner.classList.add("d-none");
-        })
+        }) 
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
@@ -122,9 +123,11 @@ class App {
         })
 
         // Открыть модальное окно с настройками
-        this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
-            this.modalSettings.show();
-        })
+        if (this.currentUserId == 1) {
+            this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
+                this.modalSettings.show();
+            })
+        }
 
         // Сохранить настройки
         this.elemBtnSaveSettingsButton.addEventListener("click", async (e) => {
@@ -135,6 +138,9 @@ class App {
     }
 
     render() {
+        if (this.currentUserId == 1) {
+            this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
+        }
         this.interfaceBlockOne.render(this.fields, this.data);
         this.interfaceBlockTwo.render(this.fields, this.data);
         this.interfaceBlockThree.render(this.fields, this.data);
