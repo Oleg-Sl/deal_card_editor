@@ -19,6 +19,7 @@ class App {
         this.bx24 = bx24;
         this.yaDisk = yaDisk;
         this.dealId = dealId;
+        this.currentUserId = null;
 
         this.smartNumber = 184;
 
@@ -60,7 +61,7 @@ class App {
 
     async init() {
         let user = await this.getCurrentUserFromBx24();
-        console.log("USER => ", user);
+        this.currentUserId = user.ID;
         this.data = await this.getDealDataFromBx24(this.dealId);
         this.fields = await this.getDealFieldsFromBx24();
         this.interfaceBlockOne.init();

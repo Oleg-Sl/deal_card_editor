@@ -29,6 +29,12 @@ export default class InterfaceBlockOne {
         this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
         this.tenderInput = this.wrapTenderInput.querySelector("input");
         this.numberTaskInput = this.container.querySelector(".wrap-number-task");
+        console.log("this.wrapTenderLink = ", this.wrapTenderLink);
+        console.log("this.btnTenderChange = ", this.btnTenderChange);
+        console.log("this.tenderlink = ", this.tenderlink);
+        console.log("this.wrapTenderInput = ", this.wrapTenderInput);
+        console.log("this.tenderInput = ", this.tenderInput);
+        console.log("this.numberTaskInput = ", this.numberTaskInput);
         this.initHandler();
     }
 
