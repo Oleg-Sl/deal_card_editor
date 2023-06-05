@@ -20,6 +20,7 @@ class App {
         this.yaDisk = yaDisk;
         this.dealId = dealId;
         this.currentUserId = null;
+        this.taskId = null;
 
         this.smartNumber = 184;
 
@@ -61,9 +62,10 @@ class App {
 
     async init() {
         let user = await this.getCurrentUserFromBx24();
-        this.currentUserId = user.ID;
         this.data = await this.getDealDataFromBx24(this.dealId);
         this.fields = await this.getDealFieldsFromBx24();
+        this.currentUserId = user.ID;
+        this.taskId = this.data.UF_CRM_1661089895;
         this.interfaceBlockOne.init();
         this.interfaceBlockTwo.init();
         this.interfaceBlockThree.init();
@@ -99,8 +101,11 @@ class App {
             console.log("Продуты успешно сохранены");
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
             console.log("Обновление задачи");
-            let msgToUser = `[USER=${255}]${255} ${255}[/USER], ВНИМАНИЕ! Задача изменена.`;
-            await this.sendMessageToResponsible(this.dealId, msgToUser, this.currentUserId);
+
+            console.log("Новые данные сделки: ", dataDeal);
+            let responsible = getResponsible();
+            let msgToUser = `[USER=${responsible.id}]${responsible.lastname} ${responsible.name}[/USER], ВНИМАНИЕ! Задача изменена.`;
+            await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);
             spinner.classList.add("d-none");
         })
 
@@ -151,20 +156,11 @@ class App {
         return products;
     }
 
-    // BX24.callMethod(
-    //     '',
-    //     [13, {'POST_MESSAGE': 'HELLO'}],
-    //     function(result){
-    //       console.info(result.data());
-    //       console.log(result);
-    //     }
-    // );
-    // 
-    async sendMessageToResponsible(dealId, msg, authorId) {
+    async sendMessageToResponsible(taskId, msg, authorId) {
         let data = await this.bx24.callMethod(
             "task.commentitem.add",
             {
-                "taskId": dealId,
+                "taskId": taskId,
                 "fields": {
                     "AUTHOR_ID": authorId,
                     "POST_MESSAGE": msg

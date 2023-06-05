@@ -68,7 +68,7 @@ export default class InterfaceBlockOne {
                     <div id="linkTender" class="alert alert-light col-11 p-2 m-0" role="alert" style="height: 48px;">
                         <a class="link-opacity-100-hover btn-tender-link" href="${linkTender}" target="_blank">${linkTender}</a>
                     </div>
-                    <div class="col-1 row align-items-center change-tender-url" style="margin-bottom: 16px;">
+                    <div class="col-1 row align-items-center change-tender-url">
                         <i class="bi bi-pencil-square btn-tender-change"></i>
                     </div>
                 </div>

@@ -52,6 +52,14 @@ class UserSingle {
         return this.userId;
     }
 
+    getFullInfo() {
+        return {
+            "id": this.userId,
+            "lastname": this.userLastname,
+            "name": this.userName
+        }
+    }
+
     changeUser(userId, lastname, name, userPhoto) {
         this.userId = userId ? userId : "";
         this.userLastname = lastname ? lastname : "Нет";
@@ -250,6 +258,9 @@ export default class InterfaceBlockThree {
         data[RESPONSIBLE_MOS] = this.userMOS.getData();
         data[OBSERVER] = this.usersObserver.getData();
         return data;
+    }
+    getResponsible() {
+        return this.userMOS.getFullInfo();
     }
 
     async getDataUserById(users_ids) {
