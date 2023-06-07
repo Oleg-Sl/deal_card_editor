@@ -159,10 +159,10 @@ class ProductRow {
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
-                <div class="m-0 p-1">
+                <div class="m-0 p-1" style="flex-grow: 1;">
                     <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 100px;">
+                <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
@@ -176,7 +176,7 @@ class ProductRow {
                     </select>
                 </div>
                 <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content;">
-                    <div class="m-0 p-0" style="width: 100px;">
+                    <div class="m-0 p-0" style="width: 70px;">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
                     <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
@@ -184,7 +184,7 @@ class ProductRow {
                         onmouseover="this.style.color='black';" 
                         onmouseout="this.style.color='#6c757d';"></i>
                     </div>
-                    <div class="m-0 p-0" style="width: 100px;">
+                    <div class="m-0 p-0" style="width: 70px;">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
                     </div>
                 </div>
