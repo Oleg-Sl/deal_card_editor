@@ -1,17 +1,30 @@
 import Bitrix24 from '../bx24/requests.js'
 
 
+const RESPONSIBLE_MOS = "UF_CRM_1672839295";    //"UF_CRM_1619700503";
+const OBSERVER = "UF_CRM_1684305731";
+
+
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
     let taskId = dataDealOld.UF_CRM_1661089895;
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     let data = {
-        RESPONSIBLE_ID: dataDealNew.UF_CRM_1619700503,     // Исполнитель МОС
-        AUDITORS: dataDealNew.UF_CRM_1684305731,           // Наблюдатели
+        // RESPONSIBLE_ID: dataDealNew[RESPONSIBLE_MOS],     // Исполнитель МОС
+        AUDITORS: dataDealNew[OBSERVER],           // Наблюдатели
         DESCRIPTION: desc,
+    }
+    if (dataDealNew[RESPONSIBLE_MOS]) {
+        // Исполнитель МОС
+        data["RESPONSIBLE_ID"] = dataDealNew[RESPONSIBLE_MOS];
     }
     // console.log("taskId = ", taskId);
     // console.log("taskData =", data);
     await updateTaskOrderToBx24(taskId, data);
+}
+
+
+function getValidData(str) {
+    return str.replace(/<strong\b[^>]*>(.*?)<\/strong>/gi, "<b>$1</b>").replace(/<em\b[^>]*>(.*?)<\/em>/gi, "<i>$1</i>");
 }
 
 
@@ -22,7 +35,7 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
     let desc = `
-${dataDealNew.UF_CRM_1655918107 || ""}
+${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
 ____________
 Согласно ЦП:${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
 Нужен Замер: ${getValueByKey(fields.UF_CRM_1619441905773.items, dataDealNew.UF_CRM_1619441905773)}
@@ -148,7 +161,7 @@ async function updateTaskOrderToBx24(taskId, data) {
 // UF_CRM_1637326777 - Наши реквизиты
 // UF_CRM_1619441621 - Спопоб оплаты
 // UF_CRM_1619430831 - Ответственный МОП
-// UF_CRM_1619700503 - Ответственный МОС
+// UF_CRM_1672839295 - Ответственный МОС
 // UF_CRM_1684305731 - Наблюдатели
 // UF_CRM_1655918107 - Описание
 

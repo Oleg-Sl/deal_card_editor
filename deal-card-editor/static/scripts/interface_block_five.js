@@ -39,6 +39,7 @@ const FIELD_PRODUCTS_AREA_SQUARE_METERS = "ufCrm19_1684137950";
 const FIELD_PRODUCTS_LINK_SOURCES_CLIENT = "ufCrm19_1684138153";
 const FIELD_PRODUCTS_FILES_CLIENT = "ufCrm19_1684142357";
 
+
 class ProductRow {
     constructor(parentClass, container, bx24, yaDisk, itemsManufactTechn, itemsFilmWidth, dealId) {
         this.parentClass = parentClass;
@@ -47,7 +48,7 @@ class ProductRow {
         this.yaDisk = yaDisk;
         this.dealId = dealId;
 
-        this.isDownloadFile = false;
+        this.checkFileUploadCompletion = true;
 
         // Технология изготовления - список словарей [{ID: "1", VALUE: "abc"}, ...]
         this.itemsManufactTechn = itemsManufactTechn;
@@ -71,7 +72,7 @@ class ProductRow {
         // Событие добавления файла
         this.element.addEventListener('change', async (e) => {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
-                this.isDownloadFile = true;
+                this.checkFileUploadCompletion = false;
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
                 const file = e.target.files[0];
                 elemSpinner.classList.remove("d-none");
@@ -84,13 +85,13 @@ class ProductRow {
                 });
                 this.renderTableFilesHTML();
                 BX24.fitWindow();
-                this.isDownloadFile = false;
+                this.checkFileUploadCompletion = true;
             }
         });
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
-                this.isDownloadFile = true;
+                this.checkFileUploadCompletion = false;
                 let rowFile = e.target.closest(".file-row");
                 console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
@@ -104,7 +105,7 @@ class ProductRow {
                 this.renderTableFilesHTML();
                 console.log(this.files);
                 BX24.fitWindow();
-                this.isDownloadFile = false;
+                this.checkFileUploadCompletion = true;
             }
         })
         // Событие изменения поля "м. пог"
@@ -147,29 +148,6 @@ class ProductRow {
                 this.updateDate();
             }
         })
-        // // События изменения числа 
-        // input.addEventListener('input', function() {
-        //     var value = input.value;
-
-        //     // Удаляем все, кроме цифр и точки
-        //     value = value.replace(/[^0-9.]/g, '');
-
-        //     // Разделяем число на целую и десятичную части
-        //     var parts = value.split('.');
-        //     var integerPart = parts[0];
-        //     var decimalPart = parts[1];
-
-        //     // Ограничиваем десятичную часть до двух знаков после запятой
-        //     if (decimalPart && decimalPart.length > 2) {
-        //         decimalPart = decimalPart.slice(0, 2);
-        //     }
-
-        //     // Собираем число обратно
-        //     value = decimalPart ? integerPart + '.' + decimalPart : integerPart;
-
-        //     // Устанавливаем отформатированное значение обратно в поле ввода
-        //     input.value = value;
-        // });
     }
 
     async addRow(data={}) {
@@ -255,6 +233,10 @@ class ProductRow {
             this.data[FIELD_PRODUCTS_FILES_CLIENT].push(`${file.name};${file.size};${file.url}`);
         }
         return this.data;
+    }
+
+    readyState() {
+        return this.checkFileUploadCompletion;
     }
 
     updateDate() {
@@ -439,6 +421,7 @@ export default class InterfaceBlockfour {
         this.itemsdManufactTechn = null;
         this.itemsFilmWidth = null;
         this.elemAddProduct = null;
+
     }
 
     init() {
@@ -461,7 +444,6 @@ export default class InterfaceBlockfour {
     //     this.containerProductList = this.container.querySelector("#productsListBody");
     //     this.elemAddProduct = this.container.querySelector(`#${ID__ADD_PRODUCT}`);
     // }
-
     // async update() {
     //     for (let i = 0; i < objects.length; i++) {
     //         productsObj[i] = null;
@@ -663,6 +645,14 @@ export default class InterfaceBlockfour {
             this.productsObj.push(productObj);
         }
         this.setSummaryData();
+    }
+
+    readyState() {
+        let state = true;
+        for (let product of this.productsObj) {
+            state = state && !product.readyState();
+        }
+        return state;
     }
 
     // async render_(productsList) {
