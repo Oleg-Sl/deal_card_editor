@@ -557,13 +557,13 @@ export default class InterfaceBlockfour {
                     <label for="" class="form-label">Ширина пленки</label>
                 </div>
                 <div style="height: fit-content; width: fit-content;">
-                    <div class="row">
-                        <div style="width: 70px;">
+                    <div class="row m-0 p-0">
+                        <div class="row m-0 p-0" style="width: 70px;">
                             <label for="" class="form-label">м.пог</label>
                         </div>
-                        <div style="width: 30px;">
+                        <div class="row m-0 p-0" style="width: 30px;">
                         </div>
-                        <div style="width: 70px;">
+                        <div class="row m-0 p-0" style="width: 70px;">
                             <label for="" class="form-label">м2</label>
                         </div>
                     </div>
