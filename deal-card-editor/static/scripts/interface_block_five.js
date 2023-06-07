@@ -138,7 +138,7 @@ class ProductRow {
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(runningMeters) * parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaSquareMeters(area);
+                    this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
