@@ -159,23 +159,23 @@ class ProductRow {
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
-                <div class="m-0 p-1" style="flex: 1 0 auto;">
+                <div class="m-0 p-1" style="flex-grow: 1;">
                     <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 70px;">
+                <div class="m-0 p-1" style="width: 70px; flex-grow: 0; flex-shrink: 0;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px; flex-grow: 0; flex-shrink: 0;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
                         ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
                     </select>
                 </div>
-                <div class="m-0 p-1 products-film-width" style="width: 100px;">
+                <div class="m-0 p-1 products-film-width" style="width: 75px; flex-grow: 0; flex-shrink: 0;">
                     <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
                         ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
                     </select>
                 </div>
-                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
+                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content; flex-grow: 0; flex-shrink: 0;">
                     <div class="m-0 p-0" style="width: 70px;">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
@@ -188,10 +188,10 @@ class ProductRow {
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
                     </div>
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px;">
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px; flex-grow: 0; flex-shrink: 0;">
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 20%; min-width: 250px; max-width: 400px;">
+                <div class="m-0 p-1" style="width: 20%; min-width: 250px; max-width: 400px; flex-grow: 0; flex-shrink: 0;">
                     <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
                         <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;"></div>
                     </div>
