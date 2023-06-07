@@ -162,20 +162,20 @@ class ProductRow {
                 <div class="m-0 p-1" style="flex-grow: 1;">
                     <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 70px; flex-grow: 0; flex-shrink: 0;">
+                <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px; flex-grow: 0; flex-shrink: 0;">
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
                         ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
                     </select>
                 </div>
-                <div class="m-0 p-1 products-film-width" style="width: 75px; flex-grow: 0; flex-shrink: 0;">
+                <div class="m-0 p-1 products-film-width" style="width: 75px;">
                     <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
                         ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
                     </select>
                 </div>
-                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content; flex-grow: 0; flex-shrink: 0;">
+                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
                     <div class="m-0 p-0" style="width: 70px;">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
@@ -188,10 +188,10 @@ class ProductRow {
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
                     </div>
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px; flex-grow: 0; flex-shrink: 0;">
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px;">
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 20%; min-width: 250px; max-width: 400px; flex-grow: 0; flex-shrink: 0;">
+                <div class="m-0 p-1" style="width: 20%; min-width: 250px; max-width: 400px;">
                     <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
                         <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;"></div>
                     </div>
@@ -543,36 +543,36 @@ export default class InterfaceBlockfour {
 
     getHeaderHTML() {
         let contentHTML = `
-            <div class="row">
-                <div class="col-2">
+            <div class="" style="display: flex;">
+                <div style="flex-grow: 1;">
                     <label for="exampleFormControlInput1" class="form-label">Описание</label>
                 </div>
-                <div class="col-1">
+                <div style="width: 70px;">
                     <label for="exampleFormControlInput1" class="form-label">Кол-во</label>
                 </div>
-                <div class="col-2">
+                <div style="width: 15%; min-width: 200px; max-width: 30px;">
                     <label for="exampleFormControlInput1" class="form-label">Технология изготовления</label>
                 </div>
-                <div class="col-1">
+                <div style="width: 75px;">
                     <label for="" class="form-label">Ширина пленки</label>
                 </div>
-                <div class="col-2">
+                <div style="height: fit-content; width: fit-content;">
                     <div class="row">
-                        <div class="col-5">
+                        <div style="width: 70px;">
                             <label for="" class="form-label">м.пог</label>
                         </div>
-                        <div class="col-2">
+                        <div style="width: 30px;">
                         </div>
-                        <div class="col-5">
+                        <div style="width: 70px;">
                             <label for="" class="form-label">м2</label>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-2">
+                <div style="width: 15%; min-width: 200px; max-width: 300px;">
                     <label for="" class="form-label">Ссылка на исходники клиента</label>
                 </div>
-                <div class="col-2">
+                <div style="width: 20%; min-width: 250px; max-width: 400px;">
                     <label for="" class="form-label">Файлы клиента</label>
                 </div>
             </div>
@@ -582,8 +582,8 @@ export default class InterfaceBlockfour {
 
     getFooterHTML() {
         let contentHTML = `
-            <div class="row p-0 m-0 border-top border-bottom">
-                <div class="col-1">
+            <div class="p-0 m-0 border-top border-bottom" style="display: flex;">
+                <div style="flex-grow: 1;">
                     Итого:
                 </div>
                 <div class="d-flex justify-content-end col-1">
@@ -592,9 +592,8 @@ export default class InterfaceBlockfour {
                 <div class="d-flex justify-content-end col-1">
                     Кол-во: &nbsp;<span id="${ID__SUMMARY_COUNT_PRODUCTS}">&ndash;</span>
                 </div>
-                <div class="col-3">
-                </div>
-                <div class="col-2">
+                <div class="col-3"></div>
+                <div style="height: fit-content; width: fit-content;">
                     <div class="row">
                         <div class="d-flex justify-content-end col-5">
                             м.пог: &nbsp;<span id="${ID__SUMMARY_AREA_RUNNING_METERS}">&ndash;</span>
@@ -605,6 +604,9 @@ export default class InterfaceBlockfour {
                         </div>
                     </div>
                 </div>
+                                
+                <div style="width: 15%; min-width: 200px; max-width: 300px;"></div>
+                <div style="width: 20%; min-width: 250px; max-width: 400px;"></div>
             </div>
         `;
         return contentHTML;
