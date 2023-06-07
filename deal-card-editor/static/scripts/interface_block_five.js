@@ -47,6 +47,8 @@ class ProductRow {
         this.yaDisk = yaDisk;
         this.dealId = dealId;
 
+        this.isDownloadFile = false;
+
         // Технология изготовления - список словарей [{ID: "1", VALUE: "abc"}, ...]
         this.itemsManufactTechn = itemsManufactTechn;
         // Ширина пленки - список словарей [{ID: "1", VALUE: "2.5"}, ...]
@@ -69,6 +71,7 @@ class ProductRow {
         // Событие добавления файла
         this.element.addEventListener('change', async (e) => {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
+                this.isDownloadFile = true;
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
                 const file = e.target.files[0];
                 elemSpinner.classList.remove("d-none");
@@ -81,11 +84,13 @@ class ProductRow {
                 });
                 this.renderTableFilesHTML();
                 BX24.fitWindow();
+                this.isDownloadFile = false;
             }
         });
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
+                this.isDownloadFile = true;
                 let rowFile = e.target.closest(".file-row");
                 console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
@@ -99,6 +104,7 @@ class ProductRow {
                 this.renderTableFilesHTML();
                 console.log(this.files);
                 BX24.fitWindow();
+                this.isDownloadFile = false;
             }
         })
         // Событие изменения поля "м. пог"
@@ -108,7 +114,7 @@ class ProductRow {
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) * parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaSquareMeters(area);
+                    this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
@@ -119,7 +125,7 @@ class ProductRow {
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) / parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaRunningMeters(area);
+                    this.setProductAreaRunningMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
@@ -141,6 +147,29 @@ class ProductRow {
                 this.updateDate();
             }
         })
+        // // События изменения числа 
+        // input.addEventListener('input', function() {
+        //     var value = input.value;
+
+        //     // Удаляем все, кроме цифр и точки
+        //     value = value.replace(/[^0-9.]/g, '');
+
+        //     // Разделяем число на целую и десятичную части
+        //     var parts = value.split('.');
+        //     var integerPart = parts[0];
+        //     var decimalPart = parts[1];
+
+        //     // Ограничиваем десятичную часть до двух знаков после запятой
+        //     if (decimalPart && decimalPart.length > 2) {
+        //         decimalPart = decimalPart.slice(0, 2);
+        //     }
+
+        //     // Собираем число обратно
+        //     value = decimalPart ? integerPart + '.' + decimalPart : integerPart;
+
+        //     // Устанавливаем отформатированное значение обратно в поле ввода
+        //     input.value = value;
+        // });
     }
 
     async addRow(data={}) {
@@ -148,6 +177,8 @@ class ProductRow {
         this.element = document.createElement('div');
         this.data = data;
         this.smartProcessId = data.id;
+        let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
+        let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
                 <div class="col-2 m-0 p-1">
@@ -168,7 +199,7 @@ class ProductRow {
                 </div>
                 <div class="row col-2 m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content;">
                     <div class="col-5 m-0 p-0">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${data[FIELD_PRODUCTS_AREA_RUNNING_METERS] || ""}">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
                     <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center text-secondary">
                         <i class="bi bi-arrow-left-right" style="cursor: pointer;"
@@ -176,7 +207,7 @@ class ProductRow {
                         onmouseout="this.style.color='#6c757d';"></i>
                     </div>
                     <div class="col-5 m-0 p-0">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${data[FIELD_PRODUCTS_AREA_SQUARE_METERS] || ""}">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
                     </div>
                 </div>
                 <div class="col-2 m-0 p-1">
@@ -309,6 +340,15 @@ class ProductRow {
         }
     }
 
+    roundToTwoDecimals(number) {
+        // let number = parseFloat(numberStr); // Преобразуем строку в число
+        if (isNaN(number) || number == "") {
+          return ""; // Возвращаем NaN, если преобразование не удалось
+        }
+        let roundedNumber = Math.round(number * 100) / 100;
+        return roundedNumber.toFixed(2); // Округляем до двух знаков после запятой и возвращаем строку
+    }
+
     async addSmartProcessToBx24() {
         let data = this.getData();
         data["parentId2"] = this.dealId;
@@ -377,7 +417,6 @@ class ProductRow {
     setProductFilesClient(val) {
         return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value = val;
     }
-      
 }
 
 export default class InterfaceBlockfour {

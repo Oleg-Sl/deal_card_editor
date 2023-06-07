@@ -2,7 +2,7 @@ import WindowSearchUser from './components/search_user/sctipt.js'
 
 
 const RESPONSIBLE_MOP = "UF_CRM_1619430831";
-const RESPONSIBLE_MOS = "UF_CRM_1619700503";
+const RESPONSIBLE_MOS = "UF_CRM_1672839295";    //"UF_CRM_1619700503";
 const OBSERVER = "UF_CRM_1684305731";
 // const OBSERVER = "UF_CRM_1625666854";
 
