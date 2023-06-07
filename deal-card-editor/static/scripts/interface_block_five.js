@@ -158,8 +158,8 @@ class ProductRow {
         let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
-            <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
-                <div class="m-0 p-1" style="flex-grow: 0;">
+            <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
+                <div class="m-0 p-1" style="flex-grow: 1;">
                     <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
                 </div>
                 <div class="m-0 p-1" style="width: 70px; flex-grow: 0; flex-shrink: 0;">
