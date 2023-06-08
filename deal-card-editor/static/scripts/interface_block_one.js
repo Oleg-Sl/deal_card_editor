@@ -18,7 +18,7 @@ export default class InterfaceBlockOne {
             console.log("tenderlink = ", this.tenderlink);
             let value = this.tenderInput.value;
             this.tenderlink.innerHTML = value;
-            this.tenderlink.href = value;
+            this.tenderlink.href = this.addPrefixHttps(value);
             this.wrapTenderLink.classList.remove("d-none");
             this.wrapTenderInput.classList.add("d-none");
         })
@@ -68,7 +68,7 @@ export default class InterfaceBlockOne {
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
                 <div class="row wrap-tender-link">
                     <div id="linkTender" class="alert alert-light col-11 p-2 m-0" role="alert" style="height: 48px;">
-                        <a class="link-opacity-100-hover btn-tender-link" href="${linkTender}" target="_blank">${linkTender}</a>
+                        <a class="link-opacity-100-hover btn-tender-link" href="${this.addPrefixHttps(linkTender)}" target="_blank">${linkTender}</a>
                     </div>
                     <div class="col-1 row align-items-center change-tender-url">
                         <i class="bi bi-pencil-square btn-tender-change"></i>
@@ -81,5 +81,12 @@ export default class InterfaceBlockOne {
         `;
         this.container.innerHTML = contentHTML;
         this.initPostRender();
+    }
+
+    addPrefixHttps(str) {
+        if (!str.startsWith("https://") && !str.startsWith("http://")) {
+          str = "https://" + str;
+        }
+        return str;
     }
 }
