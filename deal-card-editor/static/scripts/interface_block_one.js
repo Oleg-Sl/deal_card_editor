@@ -17,6 +17,7 @@ export default class InterfaceBlockOne {
         this.tenderInput.addEventListener("change", async (e) => {
             let value = this.tenderInput.value;
             this.tenderlink.innerHTML = value;
+            this.tenderlink.href = value;
             this.wrapTenderLink.classList.remove("d-none");
             this.wrapTenderInput.classList.add("d-none");
         })
