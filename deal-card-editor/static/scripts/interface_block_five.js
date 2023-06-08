@@ -160,7 +160,7 @@ class ProductRow {
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
-                <div class="m-0 p-1 d-flex align-items-center" style="width: 30px;">
+                <div class="m-0 p-1 d-flex align-items-center" style="width: 30px; height: 38px;">
                     <p class="text-center">${this.currentNumb}</p>
                 </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
