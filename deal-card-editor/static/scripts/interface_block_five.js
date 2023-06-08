@@ -527,10 +527,10 @@ export default class InterfaceBlockfour {
 
     renderInit() {
         let contentHTML = `
-            <div class="product-list-header">
+            <div class="p-0 product-list-header">
                 ${this.getHeaderHTML()}
             </div>
-            <div class="products-list-body" id="productsListBody">
+            <div class="p-0 products-list-body" id="productsListBody">
                 <!--  -->
             </div>
             <div class="product-list-add-element">
