@@ -160,7 +160,7 @@ class ProductRow {
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
-                <div class="m-0 p-1" style="width: 30px;">
+                <div class="m-0 p-1 align-middle" style="width: 30px;">
                     ${this.currentNumb}
                 </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
@@ -548,6 +548,7 @@ export default class InterfaceBlockfour {
     getHeaderHTML() {
         let contentHTML = `
             <div class="" style="display: flex;">
+                <div class="m-0 p-1 align-middle" style="width: 30px;"></div>
                 <div style="flex-grow: 1;">
                     <label for="exampleFormControlInput1" class="form-label">Описание</label>
                 </div>
@@ -587,6 +588,7 @@ export default class InterfaceBlockfour {
     getFooterHTML() {
         let contentHTML = `
             <div class="p-0 m-0 border-top border-bottom" style="display: flex;">
+                <div class="m-0 p-1 align-middle" style="width: 30px;"></div>
                 <div style="flex-grow: 1;">
                     Итого:
                 </div>
