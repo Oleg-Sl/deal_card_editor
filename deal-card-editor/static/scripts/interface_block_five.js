@@ -41,12 +41,13 @@ const FIELD_PRODUCTS_FILES_CLIENT = "ufCrm19_1684142357";
 
 
 class ProductRow {
-    constructor(parentClass, container, bx24, yaDisk, itemsManufactTechn, itemsFilmWidth, dealId) {
+    constructor(parentClass, container, bx24, yaDisk, itemsManufactTechn, itemsFilmWidth, dealId, currentNumb) {
         this.parentClass = parentClass;
         this.container = container;
         this.bx24 = bx24;
         this.yaDisk = yaDisk;
         this.dealId = dealId;
+        this.currentNumb = currentNumb;
 
         this.checkFileUploadCompletion = true;
 
@@ -159,6 +160,9 @@ class ProductRow {
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
+                <div class="m-0 p-1" style="width: 30px;">
+                    ${this.currentNumb}
+                </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
                     <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
                 </div>
@@ -458,7 +462,7 @@ export default class InterfaceBlockfour {
         // Добавление нового продукта
         this.container.addEventListener("click", async (e) => {
             if (e.target == this.elemAddProduct) {
-                let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId);
+                let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length);
                 productObj.addRow();
                 this.productsObj.push(productObj);
                 this.setSummaryData();
@@ -642,7 +646,7 @@ export default class InterfaceBlockfour {
         this.dealId = data.ID;
         let productsList = await this.getProductsList(this.smartNumber, data.ID);
         for (let product of productsList) {
-            let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId);
+            let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length);
             productObj.addRow(product);
             this.productsObj.push(productObj);
         }
