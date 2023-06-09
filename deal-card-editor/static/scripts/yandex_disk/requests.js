@@ -46,8 +46,8 @@ export default class YandexDisk {
             },
         });
         if (response.ok) {
-            let { href } = await response.json();
-            return href;
+            let result = await response.json();
+            return result;
         } else {
             let result = await response.json();
             console.error("Ошибка получения ссылки для загрузки файла на YandexDisk: ", result);
