@@ -64,6 +64,7 @@ class ProductRow {
     }
 
     init() {
+        this.setHeightBlockProductDesc(this.element.querySelector(`.${PRODUCTS_DESC}`));
         // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
@@ -153,13 +154,19 @@ class ProductRow {
                 this.updateDate();
             }
         })
-
+        // 
         this.element.addEventListener("input", async (e) => {
             if (e.target.classList.contains(PRODUCTS_DESC)) {
-                e.target.style.height = 'auto'; // Сбросить высоту до автоматического размера
-                e.target.style.height = e.target.scrollHeight + 'px'; // Установить высоту на основе прокрутки содержимого
+                this.setHeightBlockProductDesc(e.target);
+                // e.target.style.height = 'auto'; // Сбросить высоту до автоматического размера
+                // e.target.style.height = String(parseInt(e.target.scrollHeight) + 5) + 'px'; // Установить высоту на основе прокрутки содержимого
             }
         })
+    }
+
+    setHeightBlockProductDesc(elem) {
+        elem.style.height = 'auto'; // Сбросить высоту до автоматического размера
+        elem.style.height = String(parseInt(elem.scrollHeight) + 5) + 'px'; // Установить высоту на основе прокрутки содержимого
     }
 
     async addRow(data={}) {
@@ -176,7 +183,7 @@ class ProductRow {
                     <p class="m-0 text-center">${this.currentNumb}</p>
                 </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
-                    <textarea class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" style="max-height: 90px;" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
+                    <textarea class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
                 </div>
                 <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
