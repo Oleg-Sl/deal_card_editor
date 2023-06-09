@@ -86,9 +86,11 @@ class ProductRow {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
                 this.checkFileUploadCompletion = false;
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
-                const file = e.target.files[0];
+                // const file = e.target.files[0];
                 elemSpinner.classList.remove("d-none");
-                await this.addFile(this.dealId, file.name, file, file.size);
+                for (let file of e.target.files) {
+                    await this.addFile(this.dealId, file.name, file, file.size);
+                }
                 // let link = await this.yaDisk.uploadFile(this.dealId, file.name, file);
                 // elemSpinner.classList.add("d-none");
                 // this.files.push({
@@ -216,7 +218,7 @@ class ProductRow {
                         <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="col-10 m-0 p-0">
                             <p class="m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="font-size: 14px; text-decoration: underline; color: #0d6efd; cursor: pointer;">Добавить+</p>
-                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="">
+                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
                         </div>
                     </div>
                 </div>
