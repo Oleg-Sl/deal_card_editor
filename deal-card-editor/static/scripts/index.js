@@ -84,7 +84,7 @@ class App {
             await this.saveDealToBx24(dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
             await this.saveSmartProcessToBx24(dataSmartProcess);
-            // await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            await this.interfaceBlockFive.deleteRemovingFiles();
             spinner.classList.add("d-none");
         })
 
@@ -93,17 +93,11 @@ class App {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
-            console.log("Обновление сделки");
             await this.saveDealToBx24(dataDeal);
-            console.log("Получение данных продуктов");
             let dataSmartProcess = this.getDataSmartProcess();
-            console.log("Список продуктов", dataSmartProcess);
             await this.saveSmartProcessToBx24(dataSmartProcess);
-            console.log("Продуты успешно сохранены");
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
-            console.log("Обновление задачи");
-
-            console.log("Новые данные сделки: ", dataDeal);
+            await this.interfaceBlockFive.deleteRemovingFiles();
             let responsible = this.interfaceBlockThree.getResponsible();
             let msgToUser = `[USER=${responsible.id}]${responsible.lastname} ${responsible.name}[/USER], ВНИМАНИЕ! Задача изменена.`;
             await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);

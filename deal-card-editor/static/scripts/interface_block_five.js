@@ -60,6 +60,7 @@ class ProductRow {
         this.smartProcessId = null;
         this.data = {};
         this.files = [];    // список файлов прикрепленных к продукту
+        this.removingFiles = [];
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
@@ -113,8 +114,9 @@ class ProductRow {
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
                 
                 let fileData = this.files[childIndex] || {};
-                let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
-                console.log("removeFile response = ", response);
+                this.removingFiles.push(fileData);
+                // let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
+                // console.log("removeFile response = ", response);
 
                 this.files.splice(childIndex, 1);
                 this.renderTableFilesHTML();
@@ -487,6 +489,17 @@ export default class InterfaceBlockfour {
         let data = [];
         for (let product of this.productsObj) {
             data.push(product.getData());
+        }
+        return data;
+    }
+
+    async deleteRemovingFiles() {
+        let data = [];
+        for (let product of this.productsObj) {
+            for (let file of product.removingFiles) {
+                let response = await this.yaDisk.removeFile(this.dealId, file.name);
+                console.log("removeFile response = ", response);
+            }
         }
         return data;
     }
