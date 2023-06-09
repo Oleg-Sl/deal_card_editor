@@ -176,7 +176,7 @@ class ProductRow {
                     <p class="m-0 text-center">${this.currentNumb}</p>
                 </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
-                    <textarea class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" rows="3" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
+                    <textarea class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" rows="1" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
                 </div>
                 <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
