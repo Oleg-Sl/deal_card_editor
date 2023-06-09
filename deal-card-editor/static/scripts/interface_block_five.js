@@ -63,17 +63,6 @@ class ProductRow {
         this.removingFiles = [];
     }
 
-    async addFile(dealId, fileName, fileData, fileSize) {
-        let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
-        this.files.push({
-            "url": link,
-            "name": fileName,
-            "size": this.formatFileSize(fileSize)
-        });
-        this.renderTableFilesHTML();
-        BX24.fitWindow();
-    }
-
     init() {
         // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
         this.element.addEventListener("click", async (e) => {
@@ -173,13 +162,14 @@ class ProductRow {
         this.smartProcessId = data.id;
         let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
         let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
+        // <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
                 <div class="m-0 p-1 d-flex align-items-center" style="width: 30px; height: 46px;">
                     <p class="m-0 text-center">${this.currentNumb}</p>
                 </div>
                 <div class="m-0 p-1" style="flex-grow: 1;">
-                    <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
+                    <textarea class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" rows="3" data-field="${FIELD_PRODUCTS_DESC}>${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
                 </div>
                 <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
@@ -243,6 +233,17 @@ class ProductRow {
             this.updateDate();
             await this.addSmartProcessToBx24();
         }
+        BX24.fitWindow();
+    }
+
+    async addFile(dealId, fileName, fileData, fileSize) {
+        let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
+        this.files.push({
+            "url": link,
+            "name": fileName,
+            "size": this.formatFileSize(fileSize)
+        });
+        this.renderTableFilesHTML();
         BX24.fitWindow();
     }
 
