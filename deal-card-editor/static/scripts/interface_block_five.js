@@ -153,6 +153,13 @@ class ProductRow {
                 this.updateDate();
             }
         })
+
+        this.element.addEventListener("input", async (e) => {
+            if (e.target.classList.contains(PRODUCTS_DESC)) {
+                e.target.style.height = 'auto'; // Сбросить высоту до автоматического размера
+                e.target.style.height = e.target.scrollHeight + 'px'; // Установить высоту на основе прокрутки содержимого
+            }
+        })
     }
 
     async addRow(data={}) {
@@ -246,6 +253,11 @@ class ProductRow {
         this.renderTableFilesHTML();
         BX24.fitWindow();
     }
+
+    // autoResize(textarea) {
+    //     textarea.style.height = 'auto'; // Сбросить высоту до автоматического размера
+    //     textarea.style.height = textarea.scrollHeight + 'px'; // Установить высоту на основе прокрутки содержимого
+    // }
 
     getData() {
         this.data[FIELD_PRODUCTS_FILES_CLIENT] = [];
