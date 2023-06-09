@@ -40,7 +40,7 @@ export default class YandexDisk {
     async removeFile(dirPath, fileName) {
         const fileNameEncode = encodeURIComponent(fileName);
         const response = await fetch(`${this.url}?path=app:/${dirPath}/${fileNameEncode}&permanently=false`, {
-            method: 'GET',
+            method: 'DELETE',
             headers: {
                 Authorization: `OAuth ${this.secretKey}`,
             },
