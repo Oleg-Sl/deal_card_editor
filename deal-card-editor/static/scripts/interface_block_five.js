@@ -500,6 +500,7 @@ export default class InterfaceBlockfour {
                 let response = await this.yaDisk.removeFile(this.dealId, file.name);
                 console.log("removeFile response = ", response);
             }
+            product.removingFiles = [];
         }
         return data;
     }
