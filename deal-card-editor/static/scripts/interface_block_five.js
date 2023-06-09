@@ -639,21 +639,21 @@ export default class InterfaceBlockfour {
                 <div class="fw-medium" style="flex-grow: 1;">
                     Итого:
                 </div>
-                <div class="d-flex justify-content-end col-1">
-                    <div class="fw-medium">Позиций:<div>&nbsp;<span id="${ID__SUMMARY_COUNT_POSITION}">&ndash;</span>
+                <div class="d-flex justify-content-end col-1 fw-medium">
+                    Позиций: &nbsp;<span id="${ID__SUMMARY_COUNT_POSITION}">&ndash;</span>
                 </div>
-                <div class="d-flex justify-content-end col-1">
-                    <div class="fw-medium">Кол-во:</div> &nbsp;<span id="${ID__SUMMARY_COUNT_PRODUCTS}">&ndash;</span>
+                <div class="d-flex justify-content-end col-1 fw-medium">
+                    Кол-во: &nbsp;<span id="${ID__SUMMARY_COUNT_PRODUCTS}">&ndash;</span>
                 </div>
                 <div class="col-3"></div>
                 <div style="height: fit-content; width: fit-content;">
                     <div class="row">
-                        <div class="d-flex justify-content-end col-5">
-                            <div class="fw-medium">м.пог:</div> &nbsp;<span id="${ID__SUMMARY_AREA_RUNNING_METERS}">&ndash;</span>
+                        <div class="d-flex justify-content-end col-5 fw-medium">
+                            м.пог: &nbsp;<span id="${ID__SUMMARY_AREA_RUNNING_METERS}">&ndash;</span>
                         </div>
                         <div class="col-2"></div>
-                        <div class="d-flex justify-content-end col-5">
-                            <div class="fw-medium">м2:</div> &nbsp;<span id="${ID__SUMMARY_AREA_SQUARE_METERS}">&ndash;</span>
+                        <div class="d-flex justify-content-end col-5 fw-medium">
+                            м2:  &nbsp;<span id="${ID__SUMMARY_AREA_SQUARE_METERS}">&ndash;</span>
                         </div>
                     </div>
                 </div>
