@@ -109,17 +109,15 @@ class ProductRow {
             if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
                 this.checkFileUploadCompletion = false;
                 let rowFile = e.target.closest(".file-row");
-                console.log("rowFile = ", rowFile);
                 let containerFiles = rowFile.parentNode;
-                console.log("containerFiles = ", containerFiles);
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
-                console.log("childIndex = ", childIndex);
-                // let elemTbody = e.target.closest("tbody");
-                // let elemTr = e.target.closest("tr");
-                // const childIndex = Array.prototype.indexOf.call(elemTbody.children, elemTr);
+                
+                let fileData = this.files[childIndex] || {};
+                let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
+                console.log("removeFile response = ", response);
+
                 this.files.splice(childIndex, 1);
                 this.renderTableFilesHTML();
-                console.log(this.files);
                 BX24.fitWindow();
                 this.checkFileUploadCompletion = true;
             }

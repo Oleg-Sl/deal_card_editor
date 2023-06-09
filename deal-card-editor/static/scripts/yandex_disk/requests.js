@@ -33,6 +33,27 @@ export default class YandexDisk {
         }
     }
 
+    // https://cloud-api.yandex.net/v1/disk/resources
+    // ? path=<путь к удаляемому ресурсу>
+    // & [permanently=<признак безвозвратного удаления>]
+    // & [fields=<свойства, которые нужно включить в ответ>]
+    async removeFile(dirPath, fileName) {
+        const fileNameEncode = encodeURIComponent(fileName);
+        const response = await fetch(`${this.url}/upload?path=app:/${dirPath}/${fileNameEncode}&permanently=false`, {
+            method: 'GET',
+            headers: {
+                Authorization: `OAuth ${this.secretKey}`,
+            },
+        });
+        if (response.ok) {
+            let { href } = await response.json();
+            return href;
+        } else {
+            let result = await response.json();
+            console.error("Ошибка получения ссылки для загрузки файла на YandexDisk: ", result);
+        }
+    }
+
     async getUploadURL(dirPath, fileName, file) {
         const fileNameEncode = encodeURIComponent(fileName);
         const response = await fetch(`${this.url}/upload?path=app:/${dirPath}/${fileNameEncode}&overwrite=true`, {
