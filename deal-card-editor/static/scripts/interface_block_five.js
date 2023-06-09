@@ -62,6 +62,17 @@ class ProductRow {
         this.files = [];    // список файлов прикрепленных к продукту
     }
 
+    async addFile(dealId, fileName, fileData, fileSize) {
+        let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
+        this.files.push({
+            "url": link,
+            "name": fileName,
+            "size": this.formatFileSize(fileSize)
+        });
+        this.renderTableFilesHTML();
+        BX24.fitWindow();
+    }
+
     init() {
         // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
         this.element.addEventListener("click", async (e) => {
@@ -77,15 +88,17 @@ class ProductRow {
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
                 const file = e.target.files[0];
                 elemSpinner.classList.remove("d-none");
-                let link = await this.yaDisk.uploadFile(this.dealId, file.name, file);
+                await this.addFile(this.dealId, file.name, file, file.size);
+                // let link = await this.yaDisk.uploadFile(this.dealId, file.name, file);
+                // elemSpinner.classList.add("d-none");
+                // this.files.push({
+                //     "url": link,
+                //     "name": file.name,
+                //     "size": this.formatFileSize(file.size)
+                // });
+                // this.renderTableFilesHTML();
+                // BX24.fitWindow();
                 elemSpinner.classList.add("d-none");
-                this.files.push({
-                    "url": link,
-                    "name": file.name,
-                    "size": this.formatFileSize(file.size)
-                });
-                this.renderTableFilesHTML();
-                BX24.fitWindow();
                 this.checkFileUploadCompletion = true;
             }
         });
@@ -404,7 +417,7 @@ class ProductRow {
         return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value = val;
     }
 }
-
+ 
 export default class InterfaceBlockfour {
     constructor(container, bx24, yaDisk, dealId) {
         this.container = container;

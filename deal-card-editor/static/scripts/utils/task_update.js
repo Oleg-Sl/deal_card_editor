@@ -24,7 +24,7 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
 
 
 function getValidData(str) {
-    return str.replace(/<strong\b[^>]*>(.*?)<\/strong>/gi, "<b>$1</b>").replace(/<em\b[^>]*>(.*?)<\/em>/gi, "<i>$1</i>");
+    return str.replace(/<strong\b[^>]*>(.*?)<\/strong>/gi, "<b>$1</b>").replace(/<em\b[^>]*>(.*?)<\/em>/gi, "<i>$1</i>").replace(/<p>(.*?)<\/p>/gi, '\n');
 }
 
 

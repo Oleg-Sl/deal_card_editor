@@ -112,8 +112,8 @@ export default class InterfaceBlockFour {
         // let contents = this.quill.getText();
         // let contents = this.quill.getHTML();
         var contents = this.quill.root.innerHTML;
-        console.log("this.quill = ", this.quill);
-        console.log("getText = ", contents);
+        // console.log("this.quill = ", this.quill);
+        // console.log("getText = ", contents);
         // console.log("getContents = ", this.quill.getContents());
 
 
@@ -124,7 +124,7 @@ export default class InterfaceBlockFour {
 
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
-        console.log("descOrder = ", descOrder);
+        // console.log("descOrder = ", descOrder);
         // this.quill.setText(descOrder);
         this.quill.clipboard.dangerouslyPasteHTML(descOrder);
     }
