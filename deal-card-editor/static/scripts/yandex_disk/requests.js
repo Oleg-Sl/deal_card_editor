@@ -39,7 +39,7 @@ export default class YandexDisk {
     // & [fields=<свойства, которые нужно включить в ответ>]
     async removeFile(dirPath, fileName) {
         const fileNameEncode = encodeURIComponent(fileName);
-        const response = await fetch(`${this.url}/upload?path=app:/${dirPath}/${fileNameEncode}&permanently=false`, {
+        const response = await fetch(`${this.url}?path=app:/${dirPath}/${fileNameEncode}&permanently=false`, {
             method: 'GET',
             headers: {
                 Authorization: `OAuth ${this.secretKey}`,
