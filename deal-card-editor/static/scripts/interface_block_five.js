@@ -597,35 +597,35 @@ export default class InterfaceBlockfour {
             <div class="" style="display: flex;">
                 <div class="m-0 p-1 align-middle" style="width: 30px;"></div>
                 <div style="flex-grow: 1;">
-                    <label for="exampleFormControlInput1" class="form-label">Описание</label>
+                    <label for="exampleFormControlInput1" class="form-label fw-medium">Описание</label>
                 </div>
                 <div style="width: 70px;">
-                    <label for="exampleFormControlInput1" class="form-label">Кол-во</label>
+                    <label for="exampleFormControlInput1" class="form-label fw-medium">Кол-во</label>
                 </div>
                 <div style="width: 15%; min-width: 200px; max-width: 30px;">
-                    <label for="exampleFormControlInput1" class="form-label">Технология изготовления</label>
+                    <label for="exampleFormControlInput1" class="form-label fw-medium">Технология изготовления</label>
                 </div>
                 <div style="width: 75px;">
-                    <label for="" class="form-label">Ширина пленки</label>
+                    <label for="" class="form-label fw-medium">Ширина пленки</label>
                 </div>
                 <div style="height: fit-content; width: fit-content;">
                     <div class="row m-0 p-0">
                         <div class="row m-0 p-0" style="width: 70px;">
-                            <label for="" class="form-label">м.пог</label>
+                            <label for="" class="form-label fw-medium">м.пог</label>
                         </div>
                         <div class="row m-0 p-0" style="width: 30px;">
                         </div>
                         <div class="row m-0 p-0" style="width: 70px;">
-                            <label for="" class="form-label">м2</label>
+                            <label for="" class="form-label fw-medium">м2</label>
                         </div>
                     </div>
                 </div>
                 
                 <div style="width: 15%; min-width: 200px; max-width: 300px;">
-                    <label for="" class="form-label">Ссылка на исходники клиента</label>
+                    <label for="" class="form-label fw-medium">Ссылка на исходники клиента</label>
                 </div>
                 <div style="width: 20%; min-width: 250px; max-width: 400px;">
-                    <label for="" class="form-label">Файлы клиента</label>
+                    <label for="" class="form-label fw-medium">Файлы клиента</label>
                 </div>
             </div>
         `;
@@ -636,24 +636,24 @@ export default class InterfaceBlockfour {
         let contentHTML = `
             <div class="p-0 m-0 border-top border-bottom" style="display: flex;">
                 <div class="m-0 p-1 align-middle" style="width: 30px;"></div>
-                <div style="flex-grow: 1;">
+                <div class="fw-medium" style="flex-grow: 1;">
                     Итого:
                 </div>
                 <div class="d-flex justify-content-end col-1">
-                    Позиций: &nbsp;<span id="${ID__SUMMARY_COUNT_POSITION}">&ndash;</span>
+                    <div class="fw-medium">Позиций:<div>&nbsp;<span id="${ID__SUMMARY_COUNT_POSITION}">&ndash;</span>
                 </div>
                 <div class="d-flex justify-content-end col-1">
-                    Кол-во: &nbsp;<span id="${ID__SUMMARY_COUNT_PRODUCTS}">&ndash;</span>
+                    <div class="fw-medium">Кол-во:</div> &nbsp;<span id="${ID__SUMMARY_COUNT_PRODUCTS}">&ndash;</span>
                 </div>
                 <div class="col-3"></div>
                 <div style="height: fit-content; width: fit-content;">
                     <div class="row">
                         <div class="d-flex justify-content-end col-5">
-                            м.пог: &nbsp;<span id="${ID__SUMMARY_AREA_RUNNING_METERS}">&ndash;</span>
+                            <div class="fw-medium">м.пог:</div> &nbsp;<span id="${ID__SUMMARY_AREA_RUNNING_METERS}">&ndash;</span>
                         </div>
                         <div class="col-2"></div>
                         <div class="d-flex justify-content-end col-5">
-                            м2: &nbsp;<span id="${ID__SUMMARY_AREA_SQUARE_METERS}">&ndash;</span>
+                            <div class="fw-medium">м2:</div> &nbsp;<span id="${ID__SUMMARY_AREA_SQUARE_METERS}">&ndash;</span>
                         </div>
                     </div>
                 </div>
