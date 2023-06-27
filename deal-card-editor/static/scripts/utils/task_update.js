@@ -65,7 +65,7 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
     for (let product of products) {
         tbody += `[TR][TD]${product.ufCrm19_1684137706 || ""}[/TD][TD]${product.ufCrm19_1684137811 || ""}[/TD][TD]${getValueByKey(itemsdManufactTechn, product.ufCrm19_1684137822)}[/TD]
 [TD]${getValueByKey(itemsFilmWidth, product.ufCrm19_1684137877)}[/TD][TD]${product.ufCrm19_1684137925 || ""}[/TD][TD]${product.ufCrm19_1684137950 || ""}[/TD]
-[TD][URL=${product.ufCrm19_1684138153 || ""}]${product.ufCrm19_1684138153 || ""}[/URL][/TD][TD]${getUrlFiles(product.ufCrm19_1684142357)}[/TD][/TR]`
+[TD][URL=${product.ufCrm19_1684138153 || "-"}]${product.ufCrm19_1684138153 || "-"}[/URL][/TD][TD]${getUrlFiles(product.ufCrm19_1684142357)}[/TD][/TR]`
     }
     let data = `
 [TABLE]
