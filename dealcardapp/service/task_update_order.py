@@ -109,8 +109,8 @@ def get_data_table(products, items_manufact_techn, items_film_width):
     for product in products:
         manufact_techn = get_value_by_key(items_manufact_techn, product.get('ufCrm19_1684137822'))
         film_width = get_value_by_key(items_film_width, product.get('ufCrm19_1684137877'))
-        tbody += f"[TR][TD]{product.get('ufCrm19_1684137706') or ''}[/TD][TD]{product.get('ufCrm19_1684137811') or ''}[/TD][TD]{items_manufact_techn or ''}[/TD]" \
-                 f"[TD]{items_film_width or ''}[/TD][TD]{product.get('ufCrm19_1684137925') or ''}[/TD][TD]{product.get('ufCrm19_1684137950') or ''}[/TD]" \
+        tbody += f"[TR][TD]{product.get('ufCrm19_1684137706') or ''}[/TD][TD]{product.get('ufCrm19_1684137811') or ''}[/TD][TD]{product.get('ufCrm19_1684137822') or ''}[/TD]" \
+                 f"[TD]{product.get('ufCrm19_1684137877') or ''}[/TD][TD]{product.get('ufCrm19_1684137925') or ''}[/TD][TD]{product.get('ufCrm19_1684137950') or ''}[/TD]" \
                  f"[TD]{product.get('ufCrm19_1684138153') or ''}[/TD][TD]{get_url_files(product.get('ufCrm19_1684142357', []))}[/TD][/TR]"
     data = f"""
 [TABLE]
