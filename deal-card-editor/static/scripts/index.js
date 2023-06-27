@@ -152,7 +152,7 @@ class App {
 
     getDataSmartProcess() {
         let products = this.interfaceBlockFive.getData();
-        console.log("products = ", products);
+        // console.log("products = ", products);
         return products;
     }
 

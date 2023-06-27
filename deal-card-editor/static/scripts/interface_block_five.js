@@ -261,11 +261,6 @@ class ProductRow {
         BX24.fitWindow();
     }
 
-    // autoResize(textarea) {
-    //     textarea.style.height = 'auto'; // Сбросить высоту до автоматического размера
-    //     textarea.style.height = textarea.scrollHeight + 'px'; // Установить высоту на основе прокрутки содержимого
-    // }
-
     getData() {
         this.data[FIELD_PRODUCTS_FILES_CLIENT] = [];
         for (let file of this.files) {
