@@ -17,8 +17,8 @@ def run(task_id, deal_id):
     # task = response.get("result", {}).get("task", {}).get("task", {})
 
     task_data = {
-        "RESPONSIBLE_ID": deal.get("UF_CRM_1619700503"),    # Исполнитель МОС
-        "AUDITORS": deal.get("UF_CRM_1684305731"),          # Наблюдатели
+        # "RESPONSIBLE_ID": deal.get("UF_CRM_1619700503"),    # Исполнитель МОС
+        # "AUDITORS": deal.get("UF_CRM_1684305731"),          # Наблюдатели
         "DESCRIPTION": get_description(deal, fields),
     }
     # pprint(task_data)
@@ -120,6 +120,13 @@ def get_data_table(products, items_manufact_techn, items_film_width):
     return data
 
 
+def getValidData(string):
+    string = re.sub(r'<strong\b[^>]*>(.*?)<\/strong>', r'<b>\1</b>', string)
+    string = re.sub(r'<em\b[^>]*>(.*?)<\/em>', r'<i>\1</i>', string)
+    string = re.sub(r'<p>(.*?)<\/p>', r'\n\1', string)
+    return string
+
+
 def get_description(deal, fields):
     # print("itemsdManufactTechn = ", fields.get("UF_CRM_1625666854", {}).get("items", {}))
     # print("itemsFilmWidth = ", fields.get("UF_CRM_1672744985962", {}).get("items", {}))
@@ -139,8 +146,11 @@ def get_description(deal, fields):
     company = company[0] if company else {}
     contact_measurement = contact_measurement[0] if contact_measurement else {}
     contact_measurment_text = get_valid_phone(contact_measurement.get("PHONE"))
+
     desc = f"""
-{deal.get("UF_CRM_1655918107", "-")}
+{getValidData(deal.get("UF_CRM_1687857777", "-"))}
+{getValidData(deal.get("UF_CRM_1655918107", "-"))}
+
 ____________
 Согласно ЦП:{get_text_print_according_to_cp(deal.get("UF_CRM_1640199620"))}
 Нужен Замер: {get_text_required_measurement(deal.get("UF_CRM_1619441905773"))}
@@ -158,7 +168,7 @@ ____________
 
 {get_data_table(products, fields.get("UF_CRM_1625666854", {}).get("items", {}), fields.get("UF_CRM_1672744985962", {}).get("items", {}))}
 """
-    print(desc)
+    # print(desc)
     return desc
 
 
