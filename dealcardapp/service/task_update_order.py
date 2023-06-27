@@ -1,3 +1,5 @@
+import re
+
 from pprint import pprint
 from .bitrix24 import bitrix as bx24
 
@@ -21,9 +23,7 @@ def run(task_id, deal_id):
         # "AUDITORS": deal.get("UF_CRM_1684305731"),          # Наблюдатели
         "DESCRIPTION": get_description(deal, fields),
     }
-    # pprint(task_data)
 
-    # print(task_id)
     response = bx24.request_bx("tasks.task.update", {
         "taskId": task_id,
         "fields": task_data
