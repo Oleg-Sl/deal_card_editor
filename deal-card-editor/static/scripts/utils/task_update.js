@@ -13,10 +13,10 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
         AUDITORS: dataDealNew[OBSERVER],           // Наблюдатели
         DESCRIPTION: desc,
     }
-    if (dataDealNew[RESPONSIBLE_MOS]) {
-        // Исполнитель МОС
-        data["RESPONSIBLE_ID"] = dataDealNew[RESPONSIBLE_MOS];
-    }
+    // if (dataDealNew[RESPONSIBLE_MOS]) {
+    //     // Исполнитель МОС
+    //     data["RESPONSIBLE_ID"] = dataDealNew[RESPONSIBLE_MOS];
+    // }
     // console.log("taskId = ", taskId);
     // console.log("taskData =", data);
     await updateTaskOrderToBx24(taskId, data);

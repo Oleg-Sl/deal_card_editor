@@ -99,10 +99,10 @@ class App {
             await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
             await this.interfaceBlockFive.deleteRemovingFiles();
             let responsible = this.interfaceBlockThree.getResponsible();
-            let msgToUser = `[USER=${responsible.id}]${responsible.lastname} ${responsible.name}[/USER], ВНИМАНИЕ! Задача изменена.`;
+            let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME} ${responsible.NAME}[/USER], ВНИМАНИЕ! Задача изменена.`;
             await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);
             spinner.classList.add("d-none");
-        }) 
+        })
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
@@ -242,6 +242,7 @@ async function main() {
     await app.init();
     await app.render();
 }
+
 
 $(document).ready(function() {
     BX24.init(function(){
