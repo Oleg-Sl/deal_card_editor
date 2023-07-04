@@ -110,7 +110,7 @@ export default class InterfaceBlockFour {
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
         this.editor.innerHTML = `
-            <textarea class="form-control" id="" rows="3">${descOrder}</textarea>
+            <textarea class="form-control" id="" rows="5">${descOrder}</textarea>
         `;
         // this.elemContent = this.container.querySelector("textarea");
         // console.log("textarea = ", this.elemContent);
