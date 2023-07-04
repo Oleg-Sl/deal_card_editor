@@ -92,8 +92,11 @@ export default class InterfaceBlockFour {
     init() {
 
         // Отслеживание изменения размера поля ввода
-        this.elemContent.addEventListener("input", async (e) => {
-            BX24.fitWindow();
+        this.container.addEventListener("input", async (e) => {
+            console.log
+            if (e.target.tagName == "TEXTAREA") {
+                BX24.fitWindow();
+            }
         });
     }
 
