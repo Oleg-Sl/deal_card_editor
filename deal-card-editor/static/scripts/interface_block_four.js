@@ -86,13 +86,15 @@ export default class InterfaceBlockFour {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
-        this.elemContent = null;
+        this.editor = null;
     }
 
     init() {
+        this.editor = this.container.querySelector("#editor");
+        // editor
 
         // Отслеживание изменения размера поля ввода
-        this.container.addEventListener("input", async (e) => {
+        this.editor.addEventListener("input", async (e) => {
             if (e.target.tagName == "TEXTAREA") {
                 BX24.fitWindow();
             }
@@ -101,15 +103,17 @@ export default class InterfaceBlockFour {
 
     getData() {
         let data = {};
-        data[DESC_ORDER] = this.elemContent;
+        data[DESC_ORDER] = this.editor.querySelector("textarea").value;
         return data;
     }
 
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
-        this.container.innerHTML = `<textarea class="form-control" id="" rows="3">${descOrder}</textarea>`;
-        this.elemContent = this.container.querySelector("textarea");
-        console.log("textarea = ", this.elemContent);
+        this.editor.innerHTML = `
+            <textarea class="form-control" id="" rows="3">${descOrder}</textarea>
+        `;
+        // this.elemContent = this.container.querySelector("textarea");
+        // console.log("textarea = ", this.elemContent);
     }
 }
 
