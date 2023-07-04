@@ -78,54 +78,71 @@
 // Quill.register('modules/clipboard', Clipboard);
 
 
-const DESC_ORDER = "UF_CRM_1687857777"; // "UF_CRM_1655918107";
+// const DESC_ORDER = "UF_CRM_1687857777";
+const DESC_ORDER = "UF_CRM_1655918107";
 
 
 export default class InterfaceBlockFour {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
-        this.quill = null;
+        this.elemContent = null;
     }
 
     init() {
-        this.quill = new Quill('#editor', {
-            theme: 'snow',
-            // modules: {
-            //     clipboard: Quill.modules.clipboard
-            // }
-        });
 
         // Отслеживание изменения размера поля ввода
-        this.quill.on('editor-change', function(eventName) {
-            if (eventName === 'text-change') {
-                // var contentHeight = quill.root.offsetHeight;
-                // console.log('Высота поля ввода:', contentHeight);
-                // Здесь можно выполнить нужные действия в случае изменения размера поля ввода
-                BX24.fitWindow();
-            }
+        this.elemContent.addEventListener("input", async (e) => {
+            BX24.fitWindow();
         });
     }
 
     getData() {
-        // let contents = this.quill.getContents();
-        // let contents = this.quill.getText();
-        // let contents = this.quill.getHTML();
-        var contents = this.quill.root.innerHTML;
-        // console.log("this.quill = ", this.quill);
-        // console.log("getText = ", contents);
-        // console.log("getContents = ", this.quill.getContents());
-
-
         let data = {};
-        data[DESC_ORDER] = contents;
+        data[DESC_ORDER] = this.elemContent;
         return data;
     }
 
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
-        // console.log("descOrder = ", descOrder);
-        // this.quill.setText(descOrder);
-        this.quill.clipboard.dangerouslyPasteHTML(descOrder);
+        this.container.innerHTML = `<textarea class="form-control" id="" rows="3">${descOrder}</textarea>`;
+        this.elemContent.querySelector("textarea");
+        console.log("textarea = ", this.elemContent);
     }
 }
+
+
+// export default class InterfaceBlockFour {
+//     constructor(container, bx24) {
+//         this.container = container;
+//         this.bx24 = bx24;
+//         this.quill = null;
+//     }
+
+//     init() {
+//         this.quill = new Quill('#editor', {
+//             theme: 'snow',
+//         });
+
+//         // Отслеживание изменения размера поля ввода
+//         this.quill.on('editor-change', function(eventName) {
+//             if (eventName === 'text-change') {
+//                 // Здесь можно выполнить нужные действия в случае изменения размера поля ввода
+//                 BX24.fitWindow();
+//             }
+//         });
+//     }
+
+//     getData() {
+//         var contents = this.quill.root.innerHTML;
+//         let data = {};
+//         data[DESC_ORDER] = contents;
+//         return data;
+//     }
+
+//     async render(fields, data) {
+//         let descOrder = data[DESC_ORDER];
+//         this.quill.clipboard.dangerouslyPasteHTML(descOrder);
+//     }
+// }
+

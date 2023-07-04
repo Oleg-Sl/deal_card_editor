@@ -36,8 +36,8 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
     
     // ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
+    // ${getValidData(dataDealNew.UF_CRM_1687857777 || "")}
     let desc = `
-${getValidData(dataDealNew.UF_CRM_1687857777 || "")}
 ${getValidData(dataDealOld.UF_CRM_1655918107 || "")}
 ____________
 Согласно ЦП:${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
