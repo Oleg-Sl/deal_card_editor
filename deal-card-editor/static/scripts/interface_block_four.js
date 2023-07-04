@@ -93,7 +93,6 @@ export default class InterfaceBlockFour {
 
         // Отслеживание изменения размера поля ввода
         this.container.addEventListener("input", async (e) => {
-            console.log
             if (e.target.tagName == "TEXTAREA") {
                 BX24.fitWindow();
             }
@@ -109,7 +108,7 @@ export default class InterfaceBlockFour {
     async render(fields, data) {
         let descOrder = data[DESC_ORDER];
         this.container.innerHTML = `<textarea class="form-control" id="" rows="3">${descOrder}</textarea>`;
-        this.elemContent.querySelector("textarea");
+        this.elemContent = this.container.querySelector("textarea");
         console.log("textarea = ", this.elemContent);
     }
 }
