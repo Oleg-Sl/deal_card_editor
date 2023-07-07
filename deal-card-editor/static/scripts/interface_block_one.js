@@ -51,8 +51,8 @@ export default class InterfaceBlockOne {
 
     render(fields, data) {
         let titleDeal = data.TITLE;
-        let numberOrder = data.UF_CRM_1633523035;
-        let linkTender = data.UF_CRM_1620918041;
+        let numberOrder = data.UF_CRM_1633523035 || "";
+        let linkTender = data.UF_CRM_1620918041 || "";
         let contentHTML = `
             <div class="col-6">
                 <label for="titleDeal">Название сделки</label>
