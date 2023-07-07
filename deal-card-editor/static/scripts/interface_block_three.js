@@ -273,7 +273,9 @@ export default class InterfaceBlockThree {
         // }
         let reqPackage = {};
         for (let user_id of users_ids) {
-            reqPackage[user_id] = ["user.get", {"ID": user_id}];
+            if (user_id) {
+                reqPackage[user_id] = ["user.get", {"ID": user_id}];
+            }
             // batch[user_id] = ['user.get', {"ID": user_id}];
         }
         let userData = await this.bx24.batchMethod(reqPackage);
@@ -295,6 +297,8 @@ export default class InterfaceBlockThree {
         let idResponsibleMOP = data[RESPONSIBLE_MOP];
         let idResponsibleMOS = data[RESPONSIBLE_MOS];
         let idsObservers = data[OBSERVER] || [];
+
+        console.log
 
         let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         let contentHTML = `
