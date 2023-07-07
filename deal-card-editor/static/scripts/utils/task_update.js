@@ -48,8 +48,8 @@ ____________
 ____________
 
 ____________
-Ссылки: ${arrToSring(dataDealOld.UF_CRM_1625591420)}
-CRM / Тендер: ${dataDealOld.UF_CRM_1620918041}
+Ссылки: ${dataDealOld.UF_CRM_1625591420}
+CRM / Тендер: ${dataDealNew.UF_CRM_1620918041 || ""}
 ____________
 Контакт: [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
 Написать в Whats App [URL=https://wa.me/${contactMeasurementText}/][/URL]
