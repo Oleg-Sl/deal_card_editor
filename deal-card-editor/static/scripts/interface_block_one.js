@@ -85,7 +85,9 @@ export default class InterfaceBlockOne {
 
     addPrefixHttps(str) {
         if (str && !str.startsWith("https://") && !str.startsWith("http://")) {
-          str = "https://" + str;
+            str = "https://" + str;
+        } else {
+            str = "";
         }
         return str;
     }
