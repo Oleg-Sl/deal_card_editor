@@ -298,7 +298,7 @@ export default class InterfaceBlockThree {
         let idResponsibleMOS = data[RESPONSIBLE_MOS];
         let idsObservers = data[OBSERVER] || [];
 
-        console.log
+        // console.log
 
         let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         let contentHTML = `
