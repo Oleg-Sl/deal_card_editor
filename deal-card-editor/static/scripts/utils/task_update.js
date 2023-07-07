@@ -40,7 +40,7 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     // ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
     // ${getValidData(dataDealNew.UF_CRM_1687857777 || "")}
     let desc = `
-${getValidData(dataDealOld.UF_CRM_1655918107 || "")}
+${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
 ____________
 Согласно ЦП:${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
 Нужен Замер: ${getValueByKey(fields.UF_CRM_1619441905773.items, dataDealNew.UF_CRM_1619441905773)}
