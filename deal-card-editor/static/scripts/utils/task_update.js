@@ -7,6 +7,8 @@ const OBSERVER = "UF_CRM_1684305731";
 
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
     let taskId = dataDealOld.UF_CRM_1661089895;
+    console.log("dataDealNew = ", dataDealNew);
+    console.log("dataDealOld = ", dataDealOld);
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     let data = {
         // RESPONSIBLE_ID: dataDealNew[RESPONSIBLE_MOS],     // Исполнитель МОС
