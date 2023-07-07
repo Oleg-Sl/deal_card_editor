@@ -16,7 +16,7 @@ export default class InterfaceBlockOne {
         })
         this.tenderInput.addEventListener("change", async (e) => {
             console.log("tenderlink = ", this.tenderlink);
-            let value = this.tenderInput.value;
+            let value = this.tenderInput.value || "";
             this.tenderlink.innerHTML = value;
             this.tenderlink.href = this.addPrefixHttps(value);
             this.wrapTenderLink.classList.remove("d-none");
@@ -83,7 +83,7 @@ export default class InterfaceBlockOne {
         this.initPostRender();
     }
 
-    addPrefixHttps(str) {
+    addPrefixHttps(str) {value
         if (str && !str.startsWith("https://") && !str.startsWith("http://")) {
             str = "https://" + str;
         } else {
