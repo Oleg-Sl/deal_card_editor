@@ -193,6 +193,7 @@ class App {
     }
 
     async saveDealToBx24(data) {
+        console.log("saveDealToBx24 = ", data);
         let response = await this.bx24.callMethod(
             "crm.deal.update",
             {

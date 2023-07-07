@@ -174,7 +174,7 @@ class UserMultiple {
     }
 
     getData() {
-        return Object.keys(this.selectedUser);
+        return Object.keys(this.selectedUser) || [];
     }
 
     addedUser(userId, lastname, name, userPhoto) {
