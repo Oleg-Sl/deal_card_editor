@@ -231,6 +231,7 @@ class ProductRow {
     }
 
     getProductTechnologiesHTML(dataProduct) {
+        console.log("dataProduct = ", dataProduct);
         let manufactTechnologyList = dataProduct[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || [];
         let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
         let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
