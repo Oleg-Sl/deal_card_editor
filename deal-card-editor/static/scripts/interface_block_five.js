@@ -310,7 +310,7 @@ class ProductRow {
         }
         console.log("contentHTML 2 = ", contentHTML);
 
-        return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>``;
+        return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>`;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
