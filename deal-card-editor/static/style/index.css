@@ -456,7 +456,7 @@ body {
 
 .product-header-table {
   display: grid;
-  grid-template-columns: 15px 1fr 70px 295px 70px 200px 220px 350px;
+  grid-template-columns: 15px 1fr 70px 205px 70px 200px 220px 350px;
   -moz-column-gap: 5px;
        column-gap: 5px;
 }
