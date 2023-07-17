@@ -241,45 +241,7 @@ class ProductRow {
         // console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
         // console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
         
-        let contentHTML = "";
-        for (let i = 0; i < manufactTechnologyList.length; ++i) {
-            let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
-            let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
-            contentHTML += ```
-                <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
-                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-                        ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
-                    </select>
-                </div>
-                <div class="m-0 p-0 products-film-width" style="width: 75px;">
-                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-                        ${this.getOptionsFilmWidthHTML(filmWidthsList[i] || "")}
-                    </select>
-                </div>
-                <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
-                    </div>
-                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
-                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
-                        onmouseover="this.style.color='black';" 
-                        onmouseout="this.style.color='#6c757d';"></i>
-                    </div>
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
-                    </div>
-                </div>
-                <div class="col-1 p-0 my-2">
-                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
-                </div>
-            ```;
-        }
-        console.log("contentHTML 1 = ", contentHTML);
-
-        console.log("contentHTML 2 = ", contentHTML);
-
-        let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
-        return tmp;
+        return "";
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
