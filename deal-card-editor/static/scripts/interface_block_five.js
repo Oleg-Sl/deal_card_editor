@@ -274,10 +274,8 @@ class ProductRow {
                 </div>
             `;
         }
-        console.log("contentHTML 1 = ", contentHTML);
 
         if (manufactTechnologyList.length == 0) {
-            console.log("manufactTechnologyList.length == 0");
             contentHTML += `
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
@@ -306,9 +304,7 @@ class ProductRow {
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
                 </div>
             `;
-            console.log("contentHTML 3 = ", contentHTML);
         }
-        console.log("contentHTML 2 = ", contentHTML);
 
         return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>`;
     }
@@ -564,6 +560,7 @@ export default class InterfaceBlockfour {
         for (let product of this.productsObj) {
             data.push(product.getData());
         }
+        console.log("data 5 = ", data);
         return data;
     }
 
