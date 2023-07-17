@@ -127,7 +127,6 @@ class ProductRow {
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) * parseFloat(found.VALUE.replace(",", "."));
                     containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
-                    // this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
@@ -136,12 +135,10 @@ class ProductRow {
             if (e.target.classList.contains(PRODUCTS_AREA_SQUARE_METERS)) {
                 let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
                 let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-                // let idWidth = this.getProductFilmWidth();
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) / parseFloat(found.VALUE.replace(",", "."));
                     containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = this.roundToTwoDecimals(area);
-                    // this.setProductAreaRunningMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
@@ -151,23 +148,20 @@ class ProductRow {
                 let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
                 let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
                 let runningMeters = containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value
-                // let runningMeters = this.getProductAreaRunningMeters();
-                // let idWidth = this.getProductFilmWidth();
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(runningMeters) * parseFloat(found.VALUE.replace(",", "."));
                     containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
-                    // this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
-        // Событие изменения значений полей
+        // Событие изменения значений полей 
         this.element.addEventListener("change", async (e) => {
             if (e.target.hasAttribute('data-field')) {
                 this.updateDate();
             }
         })
-        // Событие изменения значений полей
+        // Событие изменения значений полей - технология изготовления, ширина и площади
         this.element.addEventListener("change", async (e) => {
             if (e.target.hasAttribute('data-list-field')) {
                 this.updateManufactorTechnology();
@@ -181,23 +175,13 @@ class ProductRow {
                 // e.target.style.height = String(parseInt(e.target.scrollHeight) + 5) + 'px'; // Установить высоту на основе прокрутки содержимого
             }
         })
+        // Добавление новой технологии изготовления
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains("create-manufacturing-technology")) {
                 let containerTechonlogiesList = e.target.closest(".product-techonlogies-list");
                 containerTechonlogiesList.insertAdjacentHTML("beforeend", this.getTechnologyHTML(null, null, null, null));
-                // let containerFiles = rowFile.parentNode;
-                // const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);                
-                // let fileData = this.files[childIndex] || {};
-                // this.removingFiles.push(fileData);
-                // // let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
-                // // console.log("removeFile response = ", response);
-                // this.files.splice(childIndex, 1);
-                // this.renderTableFilesHTML();
-                // BX24.fitWindow();
-                // this.checkFileUploadCompletion = true;
             }
         })
-        //
     }
 
     setHeightBlockProductDesc(elem) {
@@ -210,7 +194,7 @@ class ProductRow {
         this.element = document.createElement('div');
         this.data = data;
         this.smartProcessId = data.id;
-        console.log("addRow = ", this.data);
+        console.log("this.data = ", this.data);
         if (this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].length == 0) {
             this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
             this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
@@ -269,7 +253,7 @@ class ProductRow {
     }
 
     getProductTechnologiesHTML(dataProduct) {
-        console.log("dataProduct = ", dataProduct);
+        // console.log("dataProduct = ", dataProduct);
         let manufactTechnologyList = dataProduct[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || [];
         let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
         let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
@@ -280,38 +264,9 @@ class ProductRow {
             let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
             let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
             contentHTML += this.getTechnologyHTML(manufactTechnologyList[i], filmWidthsList[i], areaRunningMeters, areaSquareMeters);
-            // contentHTML += `
-            //     <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
-            //         <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-            //             ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
-            //         </select>
-            //     </div>
-            //     <div class="m-0 p-0 products-film-width" style="width: 75px;">
-            //         <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-            //             ${this.getOptionsFilmWidthHTML(filmWidthsList[i] || "")}
-            //         </select>
-            //     </div>
-            //     <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
-            //         <div class="m-0 p-0" style="width: 70px;">
-            //             <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
-            //         </div>
-            //         <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
-            //             <i class="bi bi-arrow-left-right" style="cursor: pointer;"
-            //             onmouseover="this.style.color='black';" 
-            //             onmouseout="this.style.color='#6c757d';"></i>
-            //         </div>
-            //         <div class="m-0 p-0" style="width: 70px;">
-            //             <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
-            //         </div>
-            //     </div>
-            //     <div class="col-1 p-0 my-2">
-            //         <i class="bi bi-plus-circle-fill create-manufacturing-technology m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
-            //     </div>
-            // `;
         }
         
         return contentHTML;
-        // return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>`;
     }
 
     getTechnologyHTML(idManufactTechnology, idFilmWidths, areaRunningMeters, areaSquareMeters) {
@@ -387,7 +342,7 @@ class ProductRow {
         for (let rowTechnoloy of rowsTechnologies) {
             let elementsFields = rowTechnoloy.querySelectorAll("[data-list-field]");
             for (let elementField of elementsFields) {
-                this.data[elementField.dataset.listField] = elementField.value;
+                this.data[elementField.dataset.listField].push(elementField.value);
             }
         }
         this.parentClass.setSummaryData();
