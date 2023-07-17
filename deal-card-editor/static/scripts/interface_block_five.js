@@ -192,6 +192,7 @@ class ProductRow {
     async addRow(data={}) {
         this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
         this.element = document.createElement('div');
+        this.element.style.paddingBottom = "0px";
         this.data = data;
         this.smartProcessId = data.id;
         console.log("this.data = ", this.data);
@@ -204,7 +205,7 @@ class ProductRow {
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}">
                 <div class="m-0 p-1 d-flex align-items-center">
-                    <p class="m-0 text-center">${this.currentNumb}</p>
+                    <p class="m-0 text-center" style="padding-top: 7px;">${this.currentNumb}</p>
                 </div>
                 <div class="m-0 p-1">
                     <textarea class="form-control ${PRODUCTS_DESC}" rows="1" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
@@ -263,7 +264,7 @@ class ProductRow {
 
     getTechnologyHTML(idManufactTechnology, idFilmWidths, areaRunningMeters, areaSquareMeters) {
         return `
-            <div class="m-0 p-0 manufact-technology-item">
+            <div class="m-0 p-0 manufact-technology-item" >
                 <div class="m-0 p-0">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
                         ${this.getOptionsManufactTechnHTML(idManufactTechnology || "")}
@@ -274,8 +275,8 @@ class ProductRow {
                         ${this.getOptionsFilmWidthHTML(idFilmWidths) || ""}
                     </select>
                 </div>
-                <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
-                    <div class="m-0 p-0" style="width: 70px;">
+                <div class="row m-0 p-0 ${PRODUCTS_AREA}">
+                    <div class="m-0 p-0">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
                     <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary">
@@ -572,7 +573,35 @@ export default class InterfaceBlockfour {
         return data;
     }
 
-    getDataNew() {
+    getDataNew() {// async addRow(data={}) {
+        //     this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
+        //     this.element = document.createElement('div');
+        //     this.data = data;
+        //     this.smartProcessId = data.id;
+        //     let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
+        //     let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
+        //     let contentHTML = `
+        //         <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
+        //             <div class="col-2 m-0 p-1">
+        //                 <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
+        //             </div>
+        //             <div class="col-1 m-0 p-1">
+        //                 <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
+        //             </div>
+        //             <div class="col-2 m-0 p-1">
+        //                 <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
+        //                     ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
+        //                 </select>
+        //             </div>
+        //             <div class="col-1 m-0 p-1">
+        //                 <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
+        //                     ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
+        //                 </select>
+        //             </div>
+        //             <div class="row col-2 m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content;">
+        //                 <div class="col-5 m-0 p-0">
+        //                     <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
+        
         let data = [];
         for (let product of this.productsObj) {
             let productData = product.getData();
@@ -749,91 +778,6 @@ export default class InterfaceBlockfour {
         }
         return state;
     }
-
-    // async render_(productsList) {
-    //     for (let product of productsList) {
-    //         let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId);
-    //         productObj.addRow(product);
-    //         this.productsObj.push(productObj);
-    //     }
-    //     this.setSummaryData();
-    // }
 }
 
 
-// async addRow(data={}) {
-//     this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
-//     this.element = document.createElement('div');
-//     this.data = data;
-//     this.smartProcessId = data.id;
-//     let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
-//     let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
-//     let contentHTML = `
-//         <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
-//             <div class="col-2 m-0 p-1">
-//                 <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
-//             </div>
-//             <div class="col-1 m-0 p-1">
-//                 <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
-//             </div>
-//             <div class="col-2 m-0 p-1">
-//                 <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-//                     ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
-//                 </select>
-//             </div>
-//             <div class="col-1 m-0 p-1">
-//                 <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-//                     ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
-//                 </select>
-//             </div>
-//             <div class="row col-2 m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content;">
-//                 <div class="col-5 m-0 p-0">
-//                     <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
-//                 </div>
-//                 <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center text-secondary">
-//                     <i class="bi bi-arrow-left-right" style="cursor: pointer;"
-//                     onmouseover="this.style.color='black';" 
-//                     onmouseout="this.style.color='#6c757d';"></i>
-//                 </div>
-//                 <div class="col-5 m-0 p-0">
-//                     <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
-//                 </div>
-//             </div>
-//             <div class="col-2 m-0 p-1">
-//                 <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
-//             </div>
-//             <div class="col-2 m-0 p-1">
-//                 <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
-//                     <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;"></div>
-//                 </div>
-//                 <div class="row m-0 p-0">
-//                     <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
-//                     <div class="col-10 m-0 p-0">
-//                         <p class="m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="font-size: 14px; text-decoration: underline; color: #0d6efd; cursor: pointer;">Добавить+</p>
-//                         <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="">
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     `;
-//     // <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
-//     //                 <colgroup>
-//     //                     <col width="25px">
-//     //                     <col >
-//     //                     <col width="50px">
-//     //                     <col width="25px">
-//     //                 </colgroup>
-//     //                 <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
-//     //                 </tbody>
-//     //             </table>
-//     this.element.innerHTML = contentHTML;
-//     this.container.append(this.element);
-//     this.init();
-//     this.renderTableFilesHTML();
-//     BX24.fitWindow();
-//     if (!this.smartProcessId) {
-//         this.updateDate();
-//         await this.addSmartProcessToBx24();
-//     }
-//     BX24.fitWindow();
-// }

@@ -83,6 +83,11 @@ body
     padding: 20px
 
 .product-row
+    display: grid
+    grid-template-columns: 15px 1fr 100px 500px 221px 350px
+    column-gap: 5px
+    padding-bottom: 1px
+
     input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button 
         -webkit-appearance: none
         margin: 0
@@ -93,6 +98,15 @@ body
     .products-film-width select, input[type=number]
         padding-left: 3px
         padding-right: 3px
+
+    .manufact-technology-item
+        display: grid
+        grid-template-columns: 1fr 70px 165px 35px
+        column-gap: 5px
+
+    .product-area-item
+        display: grid
+        grid-template-columns: 70px 25px 70px
 
 .product-techonlogies-list > *:not(:last-child) .create-manufacturing-technology
     display: none
