@@ -278,9 +278,7 @@ class ProductRow {
 
         if (manufactTechnologyList.length == 0) {
             console.log("manufactTechnologyList.length == 0");
-            cccontentHTML += ```
-                sdfjlk;m
-            ```;
+            cccontentHTML += "sdfjlk ";
             console.log("contentHTML 3 = ", cccontentHTML);
         }
         console.log("contentHTML 2 = ", cccontentHTML);
