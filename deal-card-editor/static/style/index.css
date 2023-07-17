@@ -456,15 +456,13 @@ body {
 
 .product-header-table {
   display: grid;
-  grid-template-columns: 15px 1fr 70px 475px 220px 350px;
+  grid-template-columns: 15px 1fr 70px 295px 70px 200px 220px 350px;
   -moz-column-gap: 5px;
        column-gap: 5px;
 }
 .product-header-table .product-manufact-technology-header-table {
   display: grid;
-  grid-template-columns: 1fr 70px 165px 35px;
-  -moz-column-gap: 5px;
-       column-gap: 5px;
+  grid-template-columns: 70px 25px 70px;
 }
 
 .product-row {
