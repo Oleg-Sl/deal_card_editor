@@ -236,6 +236,11 @@ class ProductRow {
         let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
         let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
         let areaSquareMetersList = dataProduct[FIELD_PRODUCTS_AREA_SQUARE_METERS] || [];
+        console.log("manufactTechnologyList = ", manufactTechnologyList, " -> ", FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY);
+        console.log("filmWidthsList = ", filmWidthsList, " -> ", FIELD_PRODUCTS_FILM_WIDTH);
+        console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
+        console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
+        
         let contentHTML = "";
         for (let i = 0; i < manufactTechnologyList.length; ++i) {
             let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
