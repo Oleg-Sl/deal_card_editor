@@ -274,7 +274,7 @@ class ProductRow {
         //         </div>
         //     ```;
         // }
-        console.log("contentHTML 1 = ", contentHTML);
+        // console.log("contentHTML 1 = ", contentHTML);
 
         // if (manufactTechnologyList.length == 0) {
         //     console.log("manufactTechnologyList.length == 0");
@@ -310,8 +310,9 @@ class ProductRow {
         // }
         console.log("contentHTML 2 = ", contentHTML);
 
-        let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
-        return tmp;
+        // let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
+        // return tmp;
+        return contentHTML;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
