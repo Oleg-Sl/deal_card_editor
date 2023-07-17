@@ -121,34 +121,43 @@ class ProductRow {
         // Событие изменения поля "м. пог"
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(PRODUCTS_AREA_RUNNING_METERS)) {
-                let idWidth = this.getProductFilmWidth();
+                let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
+                let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) * parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
+                    containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
+                    // this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
         // Событие изменения поля "м2"
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(PRODUCTS_AREA_SQUARE_METERS)) {
-                let idWidth = this.getProductFilmWidth();
+                let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
+                let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
+                // let idWidth = this.getProductFilmWidth();
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(e.target.value.replace(",", ".")) / parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaRunningMeters(this.roundToTwoDecimals(area));
+                    containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = this.roundToTwoDecimals(area);
+                    // this.setProductAreaRunningMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
         // Событие изменения поля "Ширина пленки"
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(PRODUCTS_FILM_WIDTH)) {
-                let runningMeters = this.getProductAreaRunningMeters();
-                let idWidth = this.getProductFilmWidth();
+                let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
+                let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
+                let runningMeters = containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value
+                // let runningMeters = this.getProductAreaRunningMeters();
+                // let idWidth = this.getProductFilmWidth();
                 const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
                 if (found) {
                     let area = parseFloat(runningMeters) * parseFloat(found.VALUE.replace(",", "."));
-                    this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
+                    containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
+                    // this.setProductAreaSquareMeters(this.roundToTwoDecimals(area));
                 }
             }
         })
