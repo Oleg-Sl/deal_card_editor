@@ -224,8 +224,8 @@ class ProductRow {
                         <div class="${PRODUCTS_FILES_CLIENT}"></div>
                     </div>
                     <div class="row m-0 p-0">
-                        <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
-                        <div class="col-10 m-0 p-0">
+                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+                        <div class="m-0 p-0 px-4">
                             <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
                             <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
                         </div>
@@ -393,11 +393,11 @@ class ProductRow {
     // HTML код с информацией о файле
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <div class="m-0 p-0 file-row" style="display: flex; width: 100%;">
-                <div class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</div>
-                <div class="m-0 p-0 text-truncate" style="width: 100%;"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
-                <div class="text-secondary m-0 p-0" style="width: 50px;">${fileSize}</div>
-                <div class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></div>
+            <div class="m-0 p-0 file-row" style="">
+                <div class="text-secondary m-0 p-0 product-number-file" style="">${number}</div>
+                <div class="m-0 p-0 text-truncate" style=""><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
+                <div class="text-secondary m-0 p-0" style="">${fileSize}</div>
+                <div class="m-0 p-0" style=""><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></div>
             </div>
         `;
         return contentHTML;
