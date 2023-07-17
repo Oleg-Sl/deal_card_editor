@@ -189,6 +189,10 @@ class ProductRow {
             this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
             this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
             this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS].push(0);
+            this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
+            this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
+            this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
+            this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS].push(0);
         }
         // let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
         // let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
