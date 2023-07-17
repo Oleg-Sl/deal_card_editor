@@ -245,7 +245,7 @@ class ProductRow {
         for (let i = 0; i < manufactTechnologyList.length; ++i) {
             let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
             let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
-            contentHTML += ```
+            contentHTML += `
                 <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
                         ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
@@ -272,13 +272,13 @@ class ProductRow {
                 <div class="col-1 p-0 my-2">
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
                 </div>
-            ```;
+            `;
         }
         console.log("contentHTML 1 = ", contentHTML);
 
         if (manufactTechnologyList.length == 0) {
             console.log("manufactTechnologyList.length == 0");
-            contentHTML = ```
+            contentHTML += `
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
 
@@ -305,13 +305,12 @@ class ProductRow {
                 <div class="col-1 p-0 my-2">
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
                 </div>
-            ```;
+            `;
             console.log("contentHTML 3 = ", contentHTML);
         }
         console.log("contentHTML 2 = ", contentHTML);
 
-        let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
-        return tmp;
+        return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>``;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
