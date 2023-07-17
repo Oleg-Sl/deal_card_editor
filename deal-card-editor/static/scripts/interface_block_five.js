@@ -200,40 +200,32 @@ class ProductRow {
             this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
             this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
             this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS].push(0);
-            this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
-            this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
-            this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
-            this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS].push(0);
         }
-        // let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
-        // let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
-        // <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
-        
         let contentHTML = `
-            <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
-                <div class="m-0 p-1 d-flex align-items-center" style="width: 30px; height: 46px;">
+            <div class="product-row" data-smart-id="${this.smartProcessId || ''}">
+                <div class="m-0 p-1 d-flex align-items-center">
                     <p class="m-0 text-center">${this.currentNumb}</p>
                 </div>
-                <div class="m-0 p-1" style="flex-grow: 1;">
+                <div class="m-0 p-1">
                     <textarea class="form-control ${PRODUCTS_DESC}" rows="1" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
                 </div>
-                <div class="m-0 p-1" style="width: 70px;">
+                <div class="m-0 p-1">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="product-techonlogies-list m-0 p-1" data-smart-id="1" style="display: flex;height: fit-content;flex-direction: column;" data-field="">
+                <div class="product-techonlogies-list m-0 p-1" data-smart-id="1" data-field="">
                     ${this.getProductTechnologiesHTML(data)}
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px;">
+                <div class="m-0 p-1">
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 20%; min-width: 250px; max-width: 400px;">
-                    <div class="m-0 p-0" style="width: 100%; font-size: 14px;">
-                        <div class="${PRODUCTS_FILES_CLIENT}"  style="display: flex; width: 100%; flex-direction: column;"></div>
+                <div class="m-0 p-1">
+                    <div class="m-0 p-0">
+                        <div class="${PRODUCTS_FILES_CLIENT}"></div>
                     </div>
                     <div class="row m-0 p-0">
                         <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="col-10 m-0 p-0">
-                            <p class="m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="font-size: 14px; text-decoration: underline; color: #0d6efd; cursor: pointer;">Добавить+</p>
+                            <p class="m-0 p-0 ${ADD_FILE_TO_PRODUCT}">Добавить+</p>
                             <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
                         </div>
                     </div>
@@ -271,13 +263,13 @@ class ProductRow {
 
     getTechnologyHTML(idManufactTechnology, idFilmWidths, areaRunningMeters, areaSquareMeters) {
         return `
-            <div class="m-0 p-0 manufact-technology-item" style="display: flex;">
-                <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
+            <div class="m-0 p-0 manufact-technology-item">
+                <div class="m-0 p-0">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
                         ${this.getOptionsManufactTechnHTML(idManufactTechnology || "")}
                     </select>
                 </div>
-                <div class="m-0 p-0 products-film-width" style="width: 75px;">
+                <div class="m-0 p-0 products-film-width">
                     <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
                         ${this.getOptionsFilmWidthHTML(idFilmWidths) || ""}
                     </select>
@@ -286,12 +278,12 @@ class ProductRow {
                     <div class="m-0 p-0" style="width: 70px;">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
                     </div>
-                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
+                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary">
                         <i class="bi bi-arrow-left-right" style="cursor: pointer;"
                         onmouseover="this.style.color='black';" 
                         onmouseout="this.style.color='#6c757d';"></i>
                     </div>
-                    <div class="m-0 p-0" style="width: 70px;">
+                    <div class="m-0 p-0">
                         <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
                     </div>
                 </div>
