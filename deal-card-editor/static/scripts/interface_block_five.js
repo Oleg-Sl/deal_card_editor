@@ -241,7 +241,7 @@ class ProductRow {
         // console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
         // console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
         
-        let contentHTML = "";
+        let cccontentHTML = "";
         // for (let i = 0; i < manufactTechnologyList.length; ++i) {
         //     let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
         //     let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
@@ -278,16 +278,16 @@ class ProductRow {
 
         if (manufactTechnologyList.length == 0) {
             console.log("manufactTechnologyList.length == 0");
-            contentHTML += ```
+            cccontentHTML += ```
                 sdfjlk;m
             ```;
-            console.log("contentHTML 3 = ", contentHTML);
+            console.log("contentHTML 3 = ", cccontentHTML);
         }
-        console.log("contentHTML 2 = ", contentHTML);
+        console.log("contentHTML 2 = ", cccontentHTML);
 
         // let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
         // return tmp;
-        return contentHTML;
+        return cccontentHTML;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
