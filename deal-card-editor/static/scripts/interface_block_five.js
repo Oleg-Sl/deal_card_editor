@@ -437,62 +437,6 @@ class ProductRow {
         this.smartProcessId = response.item.id;
         return response.item;
     }
-
-    // getDesc() {
-    //     return this.element.querySelector(`${PRODUCTS_DESC}`).value;
-    // }
-
-    // getProductCount() {
-    //     return this.element.querySelector(`${PRODUCTS_COUNT}`).value;
-    // }
-
-    // getProductManufacturingTechnology() {
-    //     return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value;
-    // }
-
-    // getProductFilmWidth() {
-    //     return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-    // }
-
-    // getProductAreaRunningMeters() {
-    //     return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value;
-    // }
-
-    // getProductAreaSquareMeters() {
-    //     return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value;
-    // }
-
-    // getProductLinkSourceClient() {
-    //     return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value;
-    // }
-
-    // getProductFilesClient() {
-    //     return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value;
-    // }
-
-    // setProductManufacturingTechnology(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value = val;
-    // }
-
-    // setProductFilmWidth(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value = val;
-    // }
-
-    // setProductAreaRunningMeters(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = val;
-    // }
-
-    // setProductAreaSquareMeters(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = val;
-    // }
-
-    // setProductLinkSourceClient(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value = val;
-    // }
-
-    // setProductFilesClient(val) {
-    //     return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value = val;
-    // }
 }
  
 export default class InterfaceBlockfour {
@@ -573,35 +517,7 @@ export default class InterfaceBlockfour {
         return data;
     }
 
-    getDataNew() {// async addRow(data={}) {
-        //     this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
-        //     this.element = document.createElement('div');
-        //     this.data = data;
-        //     this.smartProcessId = data.id;
-        //     let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
-        //     let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
-        //     let contentHTML = `
-        //         <div class="row product-row" data-smart-id="${this.smartProcessId || ''}">
-        //             <div class="col-2 m-0 p-1">
-        //                 <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
-        //             </div>
-        //             <div class="col-1 m-0 p-1">
-        //                 <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
-        //             </div>
-        //             <div class="col-2 m-0 p-1">
-        //                 <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-        //                     ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
-        //                 </select>
-        //             </div>
-        //             <div class="col-1 m-0 p-1">
-        //                 <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-        //                     ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
-        //                 </select>
-        //             </div>
-        //             <div class="row col-2 m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content;">
-        //                 <div class="col-5 m-0 p-0">
-        //                     <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
-        
+    getDataNew() {
         let data = [];
         for (let product of this.productsObj) {
             let productData = product.getData();
@@ -663,39 +579,26 @@ export default class InterfaceBlockfour {
 
     getHeaderHTML() {
         let contentHTML = `
-            <div class="" style="display: flex;">
-                <div class="m-0 p-1 align-middle" style="width: 30px;"></div>
-                <div style="flex-grow: 1;">
-                    <label for="exampleFormControlInput1" class="form-label fw-medium">Описание</label>
-                </div>
-                <div style="width: 70px;">
-                    <label for="exampleFormControlInput1" class="form-label fw-medium">Кол-во</label>
-                </div>
-                <div style="width: 15%; min-width: 200px; max-width: 30px;">
-                    <label for="exampleFormControlInput1" class="form-label fw-medium">Технология изготовления</label>
-                </div>
-                <div style="width: 75px;">
-                    <label for="" class="form-label fw-medium">Ширина пленки</label>
-                </div>
-                <div style="height: fit-content; width: fit-content;">
-                    <div class="row m-0 p-0">
-                        <div class="row m-0 p-0" style="width: 70px;">
+            <div class="product-header-table"">
+                <div class="m-0 p-1 align-middle"></div>
+                <div><label for="exampleFormControlInput1" class="form-label fw-medium">Описание</label></div>
+                <div><label for="exampleFormControlInput1" class="form-label fw-medium">Кол-во</label></div>
+                <div><label for="exampleFormControlInput1" class="form-label fw-medium">Технология изготовления</label></div>
+                <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
+                <div>
+                    <div class="row m-0 p-0 product-manufact-technology-header-table">
+                        <div class="row m-0 p-0">
                             <label for="" class="form-label fw-medium">м.пог</label>
                         </div>
-                        <div class="row m-0 p-0" style="width: 30px;">
+                        <div class="row m-0 p-0">
                         </div>
-                        <div class="row m-0 p-0" style="width: 70px;">
+                        <div class="row m-0 p-0">
                             <label for="" class="form-label fw-medium">м2</label>
                         </div>
                     </div>
                 </div>
-                
-                <div style="width: 15%; min-width: 200px; max-width: 300px;">
-                    <label for="" class="form-label fw-medium">Ссылка на исходники клиента</label>
-                </div>
-                <div style="width: 20%; min-width: 250px; max-width: 400px;">
-                    <label for="" class="form-label fw-medium">Файлы клиента</label>
-                </div>
+                <div><label for="" class="form-label fw-medium">Ссылка на исходники клиента</label></div>
+                <div><label for="" class="form-label fw-medium">Файлы клиента</label></div>
             </div>
         `;
         return contentHTML;
