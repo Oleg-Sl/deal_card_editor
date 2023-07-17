@@ -305,7 +305,8 @@ class ProductRow {
                 <div class="col-1 p-0 my-2">
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
                 </div>
-            ```
+            ```;
+            console.log("contentHTML 3 = ", contentHTML);
         }
         console.log("contentHTML 2 = ", contentHTML);
 
