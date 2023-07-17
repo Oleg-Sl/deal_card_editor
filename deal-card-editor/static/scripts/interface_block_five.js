@@ -197,7 +197,7 @@ class ProductRow {
         this.smartProcessId = data.id;
         console.log("this.data = ", this.data);
         console.log("FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY = ", this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY]);
-        if (this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].length == 0) {
+        if (!this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].length == 0) {
             this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
             this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
             this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
