@@ -172,6 +172,23 @@ class ProductRow {
                 // e.target.style.height = String(parseInt(e.target.scrollHeight) + 5) + 'px'; // Установить высоту на основе прокрутки содержимого
             }
         })
+        this.element.addEventListener("click", async (e) => {
+            if (e.target.classList.contains("create-manufacturing-technology")) {
+                let containerTechonlogiesList = e.target.closest(".product-techonlogies-list");
+                containerTechonlogiesList.insertAdjacentHTML("beforeend", this.getTechnologyHTML(null, null, null, null));
+                // let containerFiles = rowFile.parentNode;
+                // const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);                
+                // let fileData = this.files[childIndex] || {};
+                // this.removingFiles.push(fileData);
+                // // let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
+                // // console.log("removeFile response = ", response);
+                // this.files.splice(childIndex, 1);
+                // this.renderTableFilesHTML();
+                // BX24.fitWindow();
+                // this.checkFileUploadCompletion = true;
+            }
+        })
+        //
     }
 
     setHeightBlockProductDesc(elem) {
@@ -210,7 +227,7 @@ class ProductRow {
                 <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="m-0 p-1" data-smart-id="1" style="display: flex;height: fit-content;flex-direction: column;" data-field="">
+                <div class="product-techonlogies-list m-0 p-1" data-smart-id="1" style="display: flex;height: fit-content;flex-direction: column;" data-field="">
                     ${this.getProductTechnologiesHTML(data)}
                 </div>
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px;">
@@ -248,27 +265,57 @@ class ProductRow {
         let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
         let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
         let areaSquareMetersList = dataProduct[FIELD_PRODUCTS_AREA_SQUARE_METERS] || [];
-        // console.log("manufactTechnologyList = ", manufactTechnologyList, " -> ", FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY);
-        // console.log("filmWidthsList = ", filmWidthsList, " -> ", FIELD_PRODUCTS_FILM_WIDTH);
-        // console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
-        // console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
-        // if (manufactTechnologyList.length == 0) {
-        //     this.data = 
-        // }
         
         let contentHTML = "";
         for (let i = 0; i < manufactTechnologyList.length; ++i) {
             let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
             let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
-            contentHTML += `
+            contentHTML += this.getTechnologyHTML(manufactTechnologyList[i], filmWidthsList[i], areaRunningMeters, areaSquareMeters);
+            // contentHTML += `
+            //     <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
+            //         <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
+            //             ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
+            //         </select>
+            //     </div>
+            //     <div class="m-0 p-0 products-film-width" style="width: 75px;">
+            //         <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
+            //             ${this.getOptionsFilmWidthHTML(filmWidthsList[i] || "")}
+            //         </select>
+            //     </div>
+            //     <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
+            //         <div class="m-0 p-0" style="width: 70px;">
+            //             <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
+            //         </div>
+            //         <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
+            //             <i class="bi bi-arrow-left-right" style="cursor: pointer;"
+            //             onmouseover="this.style.color='black';" 
+            //             onmouseout="this.style.color='#6c757d';"></i>
+            //         </div>
+            //         <div class="m-0 p-0" style="width: 70px;">
+            //             <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
+            //         </div>
+            //     </div>
+            //     <div class="col-1 p-0 my-2">
+            //         <i class="bi bi-plus-circle-fill create-manufacturing-technology m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
+            //     </div>
+            // `;
+        }
+        
+        return contentHTML;
+        // return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>`;
+    }
+
+    getTechnologyHTML(idManufactTechnology, idFilmWidths, areaRunningMeters, areaSquareMeters) {
+        return `
+            <div class="m-0 p-0 manufact-technology-item" style="display: flex;">
                 <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-                        ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
+                        ${this.getOptionsManufactTechnHTML(idManufactTechnology || "")}
                     </select>
                 </div>
                 <div class="m-0 p-0 products-film-width" style="width: 75px;">
                     <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-                        ${this.getOptionsFilmWidthHTML(filmWidthsList[i] || "")}
+                        ${this.getOptionsFilmWidthHTML(idFilmWidths) || ""}
                     </select>
                 </div>
                 <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
@@ -285,43 +332,10 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="col-1 p-0 my-2">
-                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
+                    <i class="bi bi-plus-circle-fill create-manufacturing-technology m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
                 </div>
-            `;
-        }
-
-        if (manufactTechnologyList.length == 0) {
-            contentHTML += `
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
-                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-                        ${this.getOptionsManufactTechnHTML()}
-                    </select>
-                </div>
-                <div class="m-0 p-1 products-film-width" style="width: 75px;">
-                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-                        ${this.getOptionsFilmWidthHTML()}
-                    </select>
-                </div>
-                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="">
-                    </div>
-                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
-                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
-                        onmouseover="this.style.color='black';" 
-                        onmouseout="this.style.color='#6c757d';"></i>
-                    </div>
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="">
-                    </div>
-                </div>
-                <div class="col-1 p-0 my-2">
-                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
-                </div>
-            `;
-        }
-
-        return `<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>`;
+            </div>
+        `;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
