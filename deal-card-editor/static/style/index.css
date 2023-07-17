@@ -464,4 +464,8 @@ body {
 .product-row .products-film-width select, .product-row input[type=number] {
   padding-left: 3px;
   padding-right: 3px;
+}
+
+.product-techonlogies-list > *:not(:last-child) .create-manufacturing-technology {
+  display: none;
 }/*# sourceMappingURL=index.css.map */
