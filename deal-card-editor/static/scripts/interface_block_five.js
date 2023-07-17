@@ -279,12 +279,12 @@ class ProductRow {
             contentHTML += `
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
                     <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-
+                        ${this.getOptionsManufactTechnHTML()}
                     </select>
                 </div>
                 <div class="m-0 p-1 products-film-width" style="width: 75px;">
                     <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-
+                        ${this.getOptionsFilmWidthHTML()}
                     </select>
                 </div>
                 <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
@@ -356,7 +356,7 @@ class ProductRow {
     }
 
     // HTML код опций - технология изготовления
-    getOptionsManufactTechnHTML(manufactTechnId) {
+    getOptionsManufactTechnHTML(manufactTechnId=null) {
         let contentHTML = "";
         for (let item of this.itemsManufactTechn) {
             if (item.ID == manufactTechnId) {
@@ -369,7 +369,7 @@ class ProductRow {
     }
 
     // HTML код опций - ширина пленки
-    getOptionsFilmWidthHTML(filmWidthId) {
+    getOptionsFilmWidthHTML(filmWidthId=null) {
         let contentHTML = "";
         for (let item of this.itemsFilmWidth) {
             if (item.ID == filmWidthId) {
