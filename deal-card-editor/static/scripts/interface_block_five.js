@@ -32,10 +32,14 @@ const PRODUCTS_AREA = "product-area-item";
 // Название полей из смартпроцесса
 const FIELD_PRODUCTS_DESC = "ufCrm19_1684137706";
 const FIELD_PRODUCTS_COUNT = "ufCrm19_1684137811";
-const FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY = "ufCrm19_1684137822";
-const FIELD_PRODUCTS_FILM_WIDTH = "ufCrm19_1684137877";
-const FIELD_PRODUCTS_AREA_RUNNING_METERS = "ufCrm19_1684137925";
-const FIELD_PRODUCTS_AREA_SQUARE_METERS = "ufCrm19_1684137950";
+// const FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY = "ufCrm19_1684137822";
+// const FIELD_PRODUCTS_FILM_WIDTH = "ufCrm19_1684137877";
+// const FIELD_PRODUCTS_AREA_RUNNING_METERS = "ufCrm19_1684137925";
+// const FIELD_PRODUCTS_AREA_SQUARE_METERS = "ufCrm19_1684137950";
+const FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY = "ufCrm19_1689155340";
+const FIELD_PRODUCTS_FILM_WIDTH = "ufCrm19_1689155449";
+const FIELD_PRODUCTS_AREA_RUNNING_METERS = "ufCrm19_1689155525";
+const FIELD_PRODUCTS_AREA_SQUARE_METERS = "ufCrm19_1689155598";
 const FIELD_PRODUCTS_LINK_SOURCES_CLIENT = "ufCrm19_1684138153";
 const FIELD_PRODUCTS_FILES_CLIENT = "ufCrm19_1684142357";
 
@@ -154,6 +158,12 @@ class ProductRow {
                 this.updateDate();
             }
         })
+        // Событие изменения значений полей
+        this.element.addEventListener("change", async (e) => {
+            if (e.target.hasAttribute('data-list-field')) {
+                this.updateManufactorTechnology();
+            }
+        })
         // 
         this.element.addEventListener("input", async (e) => {
             if (e.target.classList.contains(PRODUCTS_DESC)) {
@@ -174,8 +184,8 @@ class ProductRow {
         this.element = document.createElement('div');
         this.data = data;
         this.smartProcessId = data.id;
-        let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
-        let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
+        // let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
+        // let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         // <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
@@ -188,28 +198,8 @@ class ProductRow {
                 <div class="m-0 p-1" style="width: 70px;">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
-                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
-                        ${this.getOptionsManufactTechnHTML(data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || "")}
-                    </select>
-                </div>
-                <div class="m-0 p-1 products-film-width" style="width: 75px;">
-                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
-                        ${this.getOptionsFilmWidthHTML(data[FIELD_PRODUCTS_FILM_WIDTH] || "")}
-                    </select>
-                </div>
-                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
-                    </div>
-                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
-                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
-                        onmouseover="this.style.color='black';" 
-                        onmouseout="this.style.color='#6c757d';"></i>
-                    </div>
-                    <div class="m-0 p-0" style="width: 70px;">
-                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
-                    </div>
+                <div class="m-0 p-1" data-smart-id="1" style="display: flex;height: fit-content;flex-direction: column;" data-field="">
+                    ${this.getProductTechnologiesHTML(data)}
                 </div>
                 <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 300px;">
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
@@ -228,16 +218,6 @@ class ProductRow {
                 </div>
             </div>
         `;
-        // <table class="table table-borderless table-sm m-0 p-0" style="width: 100%; font-size: 14px;">
-        //                 <colgroup>
-        //                     <col width="25px">
-        //                     <col >
-        //                     <col width="50px">
-        //                     <col width="25px">
-        //                 </colgroup>
-        //                 <tbody class="${PRODUCTS_FILES_CLIENT}"  style="width: 100%;">
-        //                 </tbody>
-        //             </table>
         this.element.innerHTML = contentHTML;
         this.container.append(this.element);
         this.init();
@@ -248,6 +228,79 @@ class ProductRow {
             await this.addSmartProcessToBx24();
         }
         BX24.fitWindow();
+    }
+
+    getProductTechnologiesHTML(dataProduct) {
+        let manufactTechnologyList = dataProduct[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] || [];
+        let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
+        let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
+        let areaSquareMetersList = dataProduct[FIELD_PRODUCTS_AREA_SQUARE_METERS] || [];
+        let contentHTML = "";
+        for (let i = 0; i < manufactTechnologyList.length; ++i) {
+            let areaRunningMeters = this.roundToTwoDecimals(parseFloat(areaRunningMetersList[i]));
+            let areaSquareMeters = this.roundToTwoDecimals(parseFloat(areaSquareMetersList[i]));
+            contentHTML += ```
+                <div class="m-0 p-0" style="width: 50%; min-width: 200px; max-width: 30px;">
+                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
+                        ${this.getOptionsManufactTechnHTML(manufactTechnologyList[i] || "")}
+                    </select>
+                </div>
+                <div class="m-0 p-0 products-film-width" style="width: 75px;">
+                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-list-field="${FIELD_PRODUCTS_FILM_WIDTH}">
+                        ${this.getOptionsFilmWidthHTML(filmWidthsList[i] || "")}
+                    </select>
+                </div>
+                <div class="row m-0 p-0 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="${areaRunningMeters || ""}">
+                    </div>
+                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
+                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
+                        onmouseover="this.style.color='black';" 
+                        onmouseout="this.style.color='#6c757d';"></i>
+                    </div>
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-list-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="${areaSquareMeters || ""}">
+                    </div>
+                </div>
+                <div class="col-1 p-0 my-2">
+                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
+                </div>
+            ```
+        }
+
+        if (manufactTechnologyList.length == 0) {
+            contentHTML += ```
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
+                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
+
+                    </select>
+                </div>
+                <div class="m-0 p-1 products-film-width" style="width: 75px;">
+                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
+
+                    </select>
+                </div>
+                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="">
+                    </div>
+                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
+                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
+                        onmouseover="this.style.color='black';" 
+                        onmouseout="this.style.color='#6c757d';"></i>
+                    </div>
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="">
+                    </div>
+                </div>
+                <div class="col-1 p-0 my-2">
+                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
+                </div>
+            ```
+        }
+
+        return ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
@@ -281,6 +334,22 @@ class ProductRow {
         this.parentClass.setSummaryData();
     }
 
+    updateManufactorTechnology() {
+        this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY] = [];
+        this.data[FIELD_PRODUCTS_FILM_WIDTH] = [];
+        this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS] = [];
+        this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS] = [];
+        let rowsTechnologies = this.element.querySelectorAll(".manufact-technology-item");
+        for (let rowTechnoloy of rowsTechnologies) {
+            let elementsFields = rowTechnoloy.querySelectorAll("[data-list-field]");
+            for (let elementField of elementsFields) {
+                this.data[elementField.dataset.listField] = elementField.value;
+            }
+        }
+        this.parentClass.setSummaryData();
+    }
+
+    // HTML код опций - технология изготовления
     getOptionsManufactTechnHTML(manufactTechnId) {
         let contentHTML = "";
         for (let item of this.itemsManufactTechn) {
@@ -293,6 +362,7 @@ class ProductRow {
         return contentHTML;
     }
 
+    // HTML код опций - ширина пленки
     getOptionsFilmWidthHTML(filmWidthId) {
         let contentHTML = "";
         for (let item of this.itemsFilmWidth) {
@@ -305,6 +375,7 @@ class ProductRow {
         return contentHTML;
     }
 
+    // сохранение данных файла на диск
     saveFilesHTML(filesData) {
         for (let i in filesData) {
             let fileData = filesData[i].split(";");
@@ -316,6 +387,7 @@ class ProductRow {
         }
     }
 
+    // вставка списка файлов с информацией
     renderTableFilesHTML() {
         let contentHTML = "";
         for (let i in this.files) {
@@ -326,6 +398,7 @@ class ProductRow {
         filesContainer.innerHTML = contentHTML;
     }
 
+    // HTML код с информацией о файле
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
             <div class="m-0 p-0 file-row" style="display: flex; width: 100%;">
@@ -335,15 +408,10 @@ class ProductRow {
                 <div class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></div>
             </div>
         `;
-    //     <tr class="m-0 p-0" style="width: 100%;">
-    //     <td class="text-secondary m-0 p-0 product-number-file" style="width: 20px;">${number}</td>
-    //     <td class="m-0 p-0 text-truncate"><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></td>
-    //     <td class="text-secondary m-0 p-0" style="width: 45px;">${fileSize}</td>
-    //     <td class="m-0 p-0" style="width: 20px;"><button type="button" class="btn-close btn-sm m-0 p-0 ${REMOOVE_FILE_FROM_PRODUCT}" aria-label="Close"></button></td>
-    // </tr>
         return contentHTML;
     }
 
+    // приведение размера к короткой записи с указанием единицы размера
     formatFileSize(size) {
         const KB = 1024;
         const MB = KB * KB;
@@ -356,13 +424,13 @@ class ProductRow {
         }
     }
 
+    // приведение числа к строке с двумя знаками после запятой
     roundToTwoDecimals(number) {
-        // let number = parseFloat(numberStr); // Преобразуем строку в число
         if (isNaN(number) || number == "") {
-          return ""; // Возвращаем NaN, если преобразование не удалось
+            return "";
         }
         let roundedNumber = Math.round(number * 100) / 100;
-        return roundedNumber.toFixed(2); // Округляем до двух знаков после запятой и возвращаем строку
+        return roundedNumber.toFixed(2);
     }
 
     async addSmartProcessToBx24() {
@@ -378,61 +446,61 @@ class ProductRow {
         return response.item;
     }
 
-    getDesc() {
-        return this.element.querySelector(`${PRODUCTS_DESC}`).value;
-    }
+    // getDesc() {
+    //     return this.element.querySelector(`${PRODUCTS_DESC}`).value;
+    // }
 
-    getProductCount() {
-        return this.element.querySelector(`${PRODUCTS_COUNT}`).value;
-    }
+    // getProductCount() {
+    //     return this.element.querySelector(`${PRODUCTS_COUNT}`).value;
+    // }
 
-    getProductManufacturingTechnology() {
-        return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value;
-    }
+    // getProductManufacturingTechnology() {
+    //     return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value;
+    // }
 
-    getProductFilmWidth() {
-        return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-    }
+    // getProductFilmWidth() {
+    //     return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
+    // }
 
-    getProductAreaRunningMeters() {
-        return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value;
-    }
+    // getProductAreaRunningMeters() {
+    //     return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value;
+    // }
 
-    getProductAreaSquareMeters() {
-        return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value;
-    }
+    // getProductAreaSquareMeters() {
+    //     return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value;
+    // }
 
-    getProductLinkSourceClient() {
-        return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value;
-    }
+    // getProductLinkSourceClient() {
+    //     return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value;
+    // }
 
-    getProductFilesClient() {
-        return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value;
-    }
+    // getProductFilesClient() {
+    //     return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value;
+    // }
 
-    setProductManufacturingTechnology(val) {
-        return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value = val;
-    }
+    // setProductManufacturingTechnology(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_MANUFACTURING_TECHNOLOGY}`).value = val;
+    // }
 
-    setProductFilmWidth(val) {
-        return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value = val;
-    }
+    // setProductFilmWidth(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value = val;
+    // }
 
-    setProductAreaRunningMeters(val) {
-        return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = val;
-    }
+    // setProductAreaRunningMeters(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = val;
+    // }
 
-    setProductAreaSquareMeters(val) {
-        return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = val;
-    }
+    // setProductAreaSquareMeters(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = val;
+    // }
 
-    setProductLinkSourceClient(val) {
-        return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value = val;
-    }
+    // setProductLinkSourceClient(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_LINK_SOURCES_CLIENT}`).value = val;
+    // }
 
-    setProductFilesClient(val) {
-        return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value = val;
-    }
+    // setProductFilesClient(val) {
+    //     return this.element.querySelector(`.${PRODUCTS_FILES_CLIENT}`).value = val;
+    // }
 }
  
 export default class InterfaceBlockfour {
@@ -468,25 +536,6 @@ export default class InterfaceBlockfour {
         this.elemAddProduct = this.container.querySelector(`#${ID__ADD_PRODUCT}`);
         this.initHandler();
     }
-
-    // init_() {
-    //     this.renderInit();
-    //     this.elemSummaryCountPosition = this.container.querySelector(`#${ID__SUMMARY_COUNT_POSITION}`);
-    //     this.elemSummaryCountProducts = this.container.querySelector(`#${ID__SUMMARY_COUNT_PRODUCTS}`);
-    //     this.elemSummaryAreaRunningMeters = this.container.querySelector(`#${ID__SUMMARY_AREA_RUNNING_METERS}`);
-    //     this.elemSummaryAreaSquareMeters = this.container.querySelector(`#${ID__SUMMARY_AREA_SQUARE_METERS}`);
-    //     this.containerProductList = this.container.querySelector("#productsListBody");
-    //     this.elemAddProduct = this.container.querySelector(`#${ID__ADD_PRODUCT}`);
-    // }
-    // async update() {
-    //     for (let i = 0; i < objects.length; i++) {
-    //         productsObj[i] = null;
-    //     }
-    //     this.productsObj = [];
-    //     let productsList = await this.getProductsList(this.smartNumber, this.dealId);
-    //     this.init_();
-    //     await this.render_(productsList);
-    // }
 
     initHandler() {
         // Добавление нового продукта
@@ -555,10 +604,14 @@ export default class InterfaceBlockfour {
                 countProducts += parseFloat(productData[FIELD_PRODUCTS_COUNT]);
             }
             if (productData[FIELD_PRODUCTS_AREA_RUNNING_METERS]) {
-                areaRunningMeters += parseFloat(productData[FIELD_PRODUCTS_AREA_RUNNING_METERS]);
+                for (let area of productData[FIELD_PRODUCTS_AREA_RUNNING_METERS]) {
+                    areaRunningMeters += parseFloat(area);
+                }
             }
             if (productData[FIELD_PRODUCTS_AREA_SQUARE_METERS]) {
-                areaSquareMeters += parseFloat(productData[FIELD_PRODUCTS_AREA_SQUARE_METERS]);
+                for (let area of productData[FIELD_PRODUCTS_AREA_SQUARE_METERS]) {
+                    areaSquareMeters += parseFloat(area);
+                }
             }
         }
         this.elemSummaryCountPosition.innerHTML = countPosition;
