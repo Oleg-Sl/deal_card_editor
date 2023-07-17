@@ -456,7 +456,7 @@ body {
 
 .product-row {
   display: grid;
-  grid-template-columns: 15px 1fr 100px 500px 221px 350px;
+  grid-template-columns: 15px 1fr 70px 475px 220px 350px;
   -moz-column-gap: 5px;
        column-gap: 5px;
   padding-bottom: 1px;

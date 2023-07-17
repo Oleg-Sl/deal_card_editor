@@ -204,22 +204,22 @@ class ProductRow {
         }
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}">
-                <div class="m-0 p-1 d-flex align-items-center">
+                <div class="m-0 p-0">
                     <p class="m-0 text-center" style="padding-top: 7px;">${this.currentNumb}</p>
                 </div>
-                <div class="m-0 p-1">
+                <div class="m-0 p-0">
                     <textarea class="form-control ${PRODUCTS_DESC}" rows="1" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}">${data[FIELD_PRODUCTS_DESC] || ""}</textarea>
                 </div>
-                <div class="m-0 p-1">
+                <div class="m-0 p-0">
                     <input type="number" step="1" min="0" class="form-control ${PRODUCTS_COUNT}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_COUNT}" value="${data[FIELD_PRODUCTS_COUNT] || ""}">
                 </div>
-                <div class="product-techonlogies-list m-0 p-1" data-smart-id="1" data-field="">
+                <div class="product-techonlogies-list m-0 p-0" data-smart-id="1" data-field="">
                     ${this.getProductTechnologiesHTML(data)}
                 </div>
-                <div class="m-0 p-1">
+                <div class="m-0 p-0">
                     <input type="url" class="form-control ${PRODUCTS_LINK_SOURCES_CLIENT}" placeholder="" data-field="${FIELD_PRODUCTS_LINK_SOURCES_CLIENT}" value="${data[FIELD_PRODUCTS_LINK_SOURCES_CLIENT] || ""}">
                 </div>
-                <div class="m-0 p-1">
+                <div class="m-0 p-0">
                     <div class="m-0 p-0">
                         <div class="${PRODUCTS_FILES_CLIENT}"></div>
                     </div>
