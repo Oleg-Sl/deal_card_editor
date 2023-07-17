@@ -236,10 +236,10 @@ class ProductRow {
         let filmWidthsList = dataProduct[FIELD_PRODUCTS_FILM_WIDTH] || [];
         let areaRunningMetersList = dataProduct[FIELD_PRODUCTS_AREA_RUNNING_METERS] || [];
         let areaSquareMetersList = dataProduct[FIELD_PRODUCTS_AREA_SQUARE_METERS] || [];
-        console.log("manufactTechnologyList = ", manufactTechnologyList, " -> ", FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY);
-        console.log("filmWidthsList = ", filmWidthsList, " -> ", FIELD_PRODUCTS_FILM_WIDTH);
-        console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
-        console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
+        // console.log("manufactTechnologyList = ", manufactTechnologyList, " -> ", FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY);
+        // console.log("filmWidthsList = ", filmWidthsList, " -> ", FIELD_PRODUCTS_FILM_WIDTH);
+        // console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
+        // console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
         
         let contentHTML = "";
         for (let i = 0; i < manufactTechnologyList.length; ++i) {
@@ -278,12 +278,40 @@ class ProductRow {
 
         if (manufactTechnologyList.length == 0) {
             console.log("manufactTechnologyList.length == 0");
-            contentHTML += "ertyuio"
+            contentHTML += ```
+                <div class="m-0 p-1" style="width: 15%; min-width: 200px; max-width: 30px;">
+                    <select class="form-select ${PRODUCTS_MANUFACTURING_TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY}">
+
+                    </select>
+                </div>
+                <div class="m-0 p-1 products-film-width" style="width: 75px;">
+                    <select class="form-select ${PRODUCTS_FILM_WIDTH}" aria-label=".form-select-lg example" data-field="${FIELD_PRODUCTS_FILM_WIDTH}">
+
+                    </select>
+                </div>
+                <div class="row m-0 p-1 ${PRODUCTS_AREA}" style="height: fit-content; width: fit-content;">
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_RUNNING_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_RUNNING_METERS}" value="">
+                    </div>
+                    <div class="m-0 p-0 d-flex align-items-center justify-content-center text-secondary" style="width: 30px;">
+                        <i class="bi bi-arrow-left-right" style="cursor: pointer;"
+                        onmouseover="this.style.color='black';" 
+                        onmouseout="this.style.color='#6c757d';"></i>
+                    </div>
+                    <div class="m-0 p-0" style="width: 70px;">
+                        <input type="number" min="0" class="form-control ${PRODUCTS_AREA_SQUARE_METERS}" placeholder="" data-field="${FIELD_PRODUCTS_AREA_SQUARE_METERS}" value="">
+                    </div>
+                </div>
+                <div class="col-1 p-0 my-2">
+                    <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="createManufacturingTechnology"></i>
+                </div>
+            ```;
             console.log("contentHTML 3 = ", contentHTML);
         }
         console.log("contentHTML 2 = ", contentHTML);
 
-        return ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
+        let tmp = ```<div class="m-0 p-0 manufact-technology-item" style="display: flex;">${contentHTML}</div>```;
+        return tmp;
     }
 
     async addFile(dealId, fileName, fileData, fileSize) {
