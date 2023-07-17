@@ -184,9 +184,16 @@ class ProductRow {
         this.element = document.createElement('div');
         this.data = data;
         this.smartProcessId = data.id;
+        if (this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].length == 0) {
+            this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
+            this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
+            this.data[FIELD_PRODUCTS_AREA_RUNNING_METERS].push(0);
+            this.data[FIELD_PRODUCTS_AREA_SQUARE_METERS].push(0);
+        }
         // let areaRunningMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_RUNNING_METERS]));
         // let areaSquareMeters = this.roundToTwoDecimals(parseFloat(data[FIELD_PRODUCTS_AREA_SQUARE_METERS]));
         // <input type="text" class="form-control ${PRODUCTS_DESC}" placeholder="Не заполнено" data-field="${FIELD_PRODUCTS_DESC}" value="${data[FIELD_PRODUCTS_DESC] || ""}">
+        
         let contentHTML = `
             <div class="product-row" data-smart-id="${this.smartProcessId || ''}" style="display: flex;">
                 <div class="m-0 p-1 d-flex align-items-center" style="width: 30px; height: 46px;">
@@ -240,6 +247,9 @@ class ProductRow {
         // console.log("filmWidthsList = ", filmWidthsList, " -> ", FIELD_PRODUCTS_FILM_WIDTH);
         // console.log("areaRunningMetersList = ", areaRunningMetersList, " -> ", FIELD_PRODUCTS_AREA_RUNNING_METERS);
         // console.log("areaSquareMetersList = ", areaSquareMetersList, " -> ", FIELD_PRODUCTS_AREA_SQUARE_METERS);
+        // if (manufactTechnologyList.length == 0) {
+        //     this.data = 
+        // }
         
         let contentHTML = "";
         for (let i = 0; i < manufactTechnologyList.length; ++i) {
