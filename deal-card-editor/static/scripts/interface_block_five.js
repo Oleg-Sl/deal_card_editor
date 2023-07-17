@@ -226,7 +226,7 @@ class ProductRow {
                     <div class="row m-0 p-0">
                         <div class="col-1 m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="col-10 m-0 p-0">
-                            <p class="m-0 p-0 ${ADD_FILE_TO_PRODUCT}">Добавить+</p>
+                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
                             <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
                         </div>
                     </div>
