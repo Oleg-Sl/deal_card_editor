@@ -184,6 +184,7 @@ class ProductRow {
         this.element = document.createElement('div');
         this.data = data;
         this.smartProcessId = data.id;
+        console.log("addRow = ", this.data);
         if (this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].length == 0) {
             this.data[FIELD_PRODUCTS_MANUFACTURING_TECHNOLOGY].push(this.itemsManufactTechn[0].ID);
             this.data[FIELD_PRODUCTS_FILM_WIDTH].push(this.itemsFilmWidth[0].ID);
