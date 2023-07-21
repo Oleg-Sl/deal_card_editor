@@ -180,6 +180,7 @@ class ProductRow {
             if (e.target.classList.contains("create-manufacturing-technology")) {
                 let containerTechonlogiesList = e.target.closest(".product-techonlogies-list");
                 containerTechonlogiesList.insertAdjacentHTML("beforeend", this.getTechnologyHTML(null, null, null, null));
+                BX24.fitWindow();
             }
         })
     }
