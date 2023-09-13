@@ -47,12 +47,14 @@ export default class InterfaceBlockfour {
                 <div><label for="" class="form-label fw-medium">Технология изготовления</label></div>
                 <div><label for="" class="form-label fw-medium">Пленка</label></div>
                 <div><label for="" class="form-label fw-medium">Ламинация</label></div>
-                <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
-                <div><label for="" class="form-label fw-medium">П.м.</label></div>
-                <div><label for="" class="form-label fw-medium">Длина, м</label></div>
-                <div><label for="" class="form-label fw-medium">Высота, м</label></div>
-                <div><label for="" class="form-label fw-medium">Кол-во бортов</label></div>
-                <div><label for="" class="form-label fw-medium">Кол-во авто</label></div>
+                <div class="product-list__cols-sizes">
+                    <div class="product-list__cols-sizes-10"><label for="" class="form-label fw-medium">Ширина пленки</label></div>
+                    <div class="product-list__cols-sizes-11"><label for="" class="form-label fw-medium">П.м.</label></div>
+                    <div class="product-list__cols-sizes-20"><label for="" class="form-label fw-medium">Длина, м</label></div>
+                    <div class="product-list__cols-sizes-21"><label for="" class="form-label fw-medium">Высота, м</label></div>
+                    <div class="product-list__cols-sizes-30"><label for="" class="form-label fw-medium">Кол-во бортов</label></div>
+                    <div class="product-list__cols-sizes-31"><label for="" class="form-label fw-medium">Кол-во авто</label></div>
+                </div>
                 <div><label for="" class="form-label fw-medium">Кв.м. монтажа</label></div>
                 <div><label for="" class="form-label fw-medium">Ссылка на исходники клиента</label></div>
                 <div><label for="" class="form-label fw-medium">Файлы клиента</label></div>
