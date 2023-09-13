@@ -364,6 +364,13 @@
   border-radius: 50%;
 }
 
+.product-list__header-table {
+  display: grid;
+  grid-template-columns: 15px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+
 body {
   background-color: #eef2f4 !important;
   overflow-y: hidden;

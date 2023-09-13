@@ -22,13 +22,11 @@ export default class InterfaceBlockfour {
 
     renderInit() {
         let contentHTML = `
-            <div class="p-0 product-list-header">
+            <div class="p-0 product-list__header">
                 ${this.getHeaderHTML()}
             </div>
-            <div class="p-0 products-list-body" id="productsListBody">
-                <!--  -->
-            </div>
-            <div class="product-list-add-element">
+            <div class="p-0 products-list__body" id="productsListBody"></div>
+            <div class="product-list__add">
                 <div class="col-1 p-0 my-2">
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="${ID__ADD_PRODUCT}"></i>
                 </div>
@@ -39,7 +37,7 @@ export default class InterfaceBlockfour {
 
     getHeaderHTML() {
         let contentHTML = `
-            <div class="product-header-table"">
+            <div class="product-list__header-table"">
                 <div class="m-0 p-1 align-middle"></div>
                 <div><label for="" class="form-label fw-medium">Технология изготовления</label></div>
                 <div><label for="" class="form-label fw-medium">Пленка</label></div>
@@ -58,6 +56,96 @@ export default class InterfaceBlockfour {
         `;
         return contentHTML;
     }
+
+    async addRow() {
+        this.element = document.createElement('div');
+        this.element.style.paddingBottom = "0px";
+        let contentHTML = `
+            <div class="product-list__product-row">
+                <div class="m-0 p-0">
+                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                        <option value="1">печать</option>
+                        <option value="2">плоттерная резка</option>
+                        <option value="3">печать+контурная резка</option>
+                    </select>
+                </div>
+                <div class="m-0 p-0">
+                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                        <option value="1">ORAJET 3640</option>
+                        <option value="2">ORAJET 3551</option>
+                        <option value="3">Китай 010</option>
+                        <option value="4">ORACAL 641</option>
+                        <option value="5">ORACAL 551</option>
+                        <option value="6">Другое (указать в комментариях)</option>
+                    </select>
+                </div>
+                <div class="m-0 p-0">
+                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                        <option value="1">ORAJET 3640 G</option>
+                        <option value="2">ORAJET 3640 M</option>
+                        <option value="3">ORAGARD 215 G</option>
+                        <option value="4">ORAGARD 215 M</option>
+                        <option value="5">Китай G</option>
+                        <option value="6">Китай M</option>
+                        <option value="7">нет</option>
+                    </select>
+                </div>
+                <div class="m-0 p-0">
+                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                        <option value="1">1</option>
+                        <option value="2">1,05</option>
+                        <option value="3">1,26</option>
+                        <option value="4">1,37</option>
+                        <option value="5">1,52</option>
+                        <option value="6">1,6</option>
+                    </select>
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <input type="url" class="form-control" placeholder="" data-field="" value="">
+                </div>
+                <div class="m-0 p-0">
+                    <div class="m-0 p-0">
+                        <div class=""></div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+                        <div class="m-0 p-0 px-4">
+                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
+                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-0 p-0">
+                    <textarea class="form-control" rows="1" placeholder="" data-field="">
+                    
+                    </textarea>
+                </div>
+            </div>
+        `;
+        this.element.innerHTML = contentHTML;
+    }
+
 
 }
 
