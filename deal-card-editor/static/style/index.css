@@ -410,9 +410,11 @@
   -moz-column-gap: 5px;
        column-gap: 5px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "A1 B1 A2 B2 A3 B3";
 }
 @media screen and (max-width: 1500px) {
   .product-list__cols-sizes {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "A1 A2 A3" "B1 B2 B3";
   }
 }
