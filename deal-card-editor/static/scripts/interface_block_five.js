@@ -98,34 +98,50 @@ export default class InterfaceBlockfour {
                         <option value="7">нет</option>
                     </select>
                 </div>
-                <div class="m-0 p-0">
-                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                        <option value="1">1</option>
-                        <option value="2">1,05</option>
-                        <option value="3">1,26</option>
-                        <option value="4">1,37</option>
-                        <option value="5">1,52</option>
-                        <option value="6">1,6</option>
-                    </select>
+
+
+                <div class="product-list__cols-sizes">
+                    <div class="product-list__cols-sizes-10">
+                        <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                            <option value="1">1</option>
+                            <option value="2">1,05</option>
+                            <option value="3">1,26</option>
+                            <option value="4">1,37</option>
+                            <option value="5">1,52</option>
+                            <option value="6">1,6</option>
+                        </select>
+                    </div>
+                    <div class="product-list__cols-sizes-11">
+                        <div class="m-0 p-0">
+                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                        </div>
+                    </div>
+                    <div class="product-list__cols-sizes-20">
+                        <div class="m-0 p-0">
+                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                        </div>
+                    </div>
+                    <div class="product-list__cols-sizes-21">
+                        <div class="m-0 p-0">
+                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                        </div>
+                    </div>
+                    <div class="product-list__cols-sizes-30">
+                        <div class="m-0 p-0">
+                            <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="product-list__cols-sizes-31">
+                        <div class="m-0 p-0">
+                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+                        </div>
+                    </div>
                 </div>
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                </div>
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                </div>
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                </div>
-                <div class="m-0 p-0">
-                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                </div>
+
+
                 <div class="m-0 p-0">
                     <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
                 </div>
