@@ -59,7 +59,7 @@ export default class InterfaceBlockfour {
         return contentHTML;
     }
 
-    async addRow() {
+    addRow() {
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         let contentHTML = `
@@ -145,7 +145,8 @@ export default class InterfaceBlockfour {
                 </div>
             </div>
         `;
-        this.element.innerHTML = contentHTML;
+        return contentHTML;
+        // this.element.innerHTML = contentHTML;
     }
 
 
