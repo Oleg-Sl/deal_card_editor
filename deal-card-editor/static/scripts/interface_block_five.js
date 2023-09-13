@@ -66,8 +66,8 @@ export default class InterfaceBlockfour {
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         let contentHTML = `
-            <div class="m-0 p-1 align-middle">1</div>
             <div class="product-list__product-row product-list__header-table">
+                <div class="m-0 p-1 align-middle">1</div>
                 <div class="m-0 p-0">
                     <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
                         <option value="1">печать</option>
