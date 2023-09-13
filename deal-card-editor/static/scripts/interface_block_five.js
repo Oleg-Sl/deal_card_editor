@@ -25,7 +25,9 @@ export default class InterfaceBlockfour {
             <div class="p-0 product-list__header">
                 ${this.getHeaderHTML()}
             </div>
-            <div class="p-0 products-list__body" id="productsListBody"></div>
+            <div class="p-0 products-list__body" id="productsListBody">
+                ${this.addRow()}
+            </div>
             <div class="product-list__add">
                 <div class="col-1 p-0 my-2">
                     <i class="bi bi-plus-circle-fill m-0 p-2 text-success" style="cursor: pointer; " id="${ID__ADD_PRODUCT}"></i>
