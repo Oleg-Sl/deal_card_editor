@@ -2,6 +2,9 @@ const SMART_PROCESS_NUMBER = 184;
 
 const ID__ADD_PRODUCT = "CreateProduct";
 
+const ADD_FILE_TO_PRODUCT = "product-choose-file-button";
+const ADD_FILE_TO_PRODUCT_INPUT = "product-choose-file-input";
+
 
 export default class InterfaceBlockfour {
     constructor(container, bx24, yaDisk, dealId) {
