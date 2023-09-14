@@ -222,6 +222,10 @@ class ProductRow {
         this.element.innerHTML = this.getRowHTML();
         this.container.append(this.element);
         this.renderFilesHTML();
+
+        let textareaComment = this.element.querySelector(`.${SMART_FIELDS.COMMENT}`);
+        textareaComment.style.height = 'auto';
+        textareaComment.style.height = (textareaComment.scrollHeight) + 'px';
         this.initHandler();
         BX24.fitWindow();
         if (!this.smartProcessId) {
