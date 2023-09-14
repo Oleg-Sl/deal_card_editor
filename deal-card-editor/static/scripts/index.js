@@ -1,5 +1,5 @@
 import InterfaceBlockOne from './interface_block_one.js'
-import InterfaceBlockTwo from './interface_block_two.js'
+import { InterfaceBlockTwo } from './interface_block_two.js'
 import InterfaceBlockThree from './interface_block_three.js'
 import InterfaceBlockFour from './interface_block_four.js'
 import InterfaceBlockFive from './interface_block_five.js'

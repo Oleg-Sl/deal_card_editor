@@ -1,4 +1,7 @@
-export default class InterfaceBlockTwo {
+// UF_CRM_1694710116
+// UF_CRM_1694710578
+
+export class InterfaceBlockTwo {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
@@ -16,7 +19,9 @@ export default class InterfaceBlockTwo {
             "UF_CRM_1637861351": this.container.querySelector("#taskeditor__UF_CRM_1637861351").value,
             "UF_CRM_1637861029": this.container.querySelector("#taskeditor__UF_CRM_1637861029").value,
             "UF_CRM_1637326777": this.container.querySelector("#taskeditor__UF_CRM_1637326777").value,
-            "UF_CRM_1619441621": this.container.querySelector("#taskeditor__UF_CRM_1619441621").value,
+            // "UF_CRM_1619441621": this.container.querySelector("#taskeditor__UF_CRM_1619441621").value,
+            "UF_CRM_1694710116": this.container.querySelector("#taskeditor__UF_CRM_1694710116").value,
+            "UF_CRM_1694710578": this.container.querySelector("#taskeditor__UF_CRM_1694710578").value,
         };
         // console.log("data = ", data);
         return data;
@@ -32,7 +37,9 @@ export default class InterfaceBlockTwo {
         // !!! Неизвестно поле !!!
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637861029.items, data.UF_CRM_1637861029, "UF_CRM_1637861029", "Монтаж 24/7", 1);    // isMounting24
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637326777.items, data.UF_CRM_1637326777, "UF_CRM_1637326777", "Наши реквизиты", 2); // ourRequisite
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1619441621", "Спопоб оплаты", 2);  // paymentMethod
+        // contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1619441621", "Спопоб оплаты", 2);  // paymentMethod
+        contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1694710116", "Аренда бокса", 2);  // paymentMethod
+        contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1694710578", "Монтаж на территории", 2);  // paymentMethod
 
         this.container.innerHTML = contentHTML;
     }
