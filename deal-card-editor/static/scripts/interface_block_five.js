@@ -167,6 +167,8 @@ class ProductRow {
         // Событие изменения поля "м2"
         this.element.addEventListener("input", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+                e.target.style.height = 'auto';
+                e.target.style.height = (e.target.scrollHeight) + 'px';
                 BX24.fitWindow();
             }
         })
