@@ -139,7 +139,7 @@ class App {
         this.interfaceBlockTwo.render(this.fields, this.data);
         this.interfaceBlockThree.render(this.fields, this.data);
         this.interfaceBlockFour.render(this.fields, this.data);
-        this.interfaceBlockFive.render(this.fields, this.data, );
+        this.interfaceBlockFive.render(this.fields, this.data);
     }
 
     getDataDeal() {
