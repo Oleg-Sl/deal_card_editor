@@ -85,7 +85,7 @@ class ProductRow {
         this.dealId = dealId;
         this.currentNumb = currentNumb;
 
-        // this.checkFileUploadCompletion = true;
+        this.checkFileUploadCompletion = true;
 
         // HTML-элемент строки продукта 
         this.element = null;
@@ -100,10 +100,6 @@ class ProductRow {
 
     }
 
-    init() {
-
-    }
-
     initHandler() {
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
@@ -112,100 +108,44 @@ class ProductRow {
                 selectContainer.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
             }
         })
-        // // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
-        // this.element.addEventListener("click", async (e) => {
-        //     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
-        //         let elemInput = e.target.parentNode.querySelector("input");
-        //         elemInput.click();
-        //     }
-        // })
-        // // Событие добавления файла
-        // this.element.addEventListener('change', async (e) => {
-        //     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
-        //         this.checkFileUploadCompletion = false;
-        //         let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
-        //         // const file = e.target.files[0];
-        //         elemSpinner.classList.remove("d-none");
-        //         for (let file of e.target.files) {
-        //             await this.addFile(this.dealId, file.name, file, file.size);
-        //         }
-        //         // let link = await this.yaDisk.uploadFile(this.dealId, file.name, file);
-        //         // elemSpinner.classList.add("d-none");
-        //         // this.files.push({
-        //         //     "url": link,
-        //         //     "name": file.name,
-        //         //     "size": this.formatFileSize(file.size)
-        //         // });
-        //         // this.renderTableFilesHTML();
-        //         // BX24.fitWindow();
-        //         elemSpinner.classList.add("d-none");
-        //         this.checkFileUploadCompletion = true;
-        //     }
-        // });
-        // // Событие удаления файла
-        // this.element.addEventListener("click", async (e) => {
-        //     if (e.target.classList.contains(REMOOVE_FILE_FROM_PRODUCT)) {
-        //         this.checkFileUploadCompletion = false;
-        //         let rowFile = e.target.closest(".file-row");
-        //         let containerFiles = rowFile.parentNode;
-        //         const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
+        // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
+        this.element.addEventListener("click", async (e) => {
+            if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
+                let elemInput = e.target.parentNode.querySelector("input");
+                elemInput.click();
+            }
+        })
+        // Событие добавления файла
+        this.element.addEventListener('change', async (e) => {
+            if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
+                this.checkFileUploadCompletion = false;
+                let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
+                elemSpinner.classList.remove("d-none");
+                for (let file of e.target.files) {
+                    await this.addFile(this.dealId, file.name, file, file.size);
+                }
+                elemSpinner.classList.add("d-none");
+                this.checkFileUploadCompletion = true;
+            }
+        });
+        // Событие удаления файла
+        this.element.addEventListener("click", async (e) => {
+            if (e.target.classList.contains("product-list__remove-files")) {
+                this.checkFileUploadCompletion = false;
+                let rowFile = e.target.closest(".file-row");
+                let containerFiles = rowFile.parentNode;
+                const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
                 
-        //         let fileData = this.files[childIndex] || {};
-        //         this.removingFiles.push(fileData);
-        //         // let response = await this.yaDisk.removeFile(this.dealId, fileData.name);
-        //         // console.log("removeFile response = ", response);
+                let fileData = this.files[childIndex] || {};
+                this.removingFiles.push(fileData);
 
-        //         this.files.splice(childIndex, 1);
-        //         this.renderTableFilesHTML();
-        //         BX24.fitWindow();
-        //         this.checkFileUploadCompletion = true;
-        //     }
-        // })
-        // // Событие изменения поля "м. пог"
-        // this.element.addEventListener("change", async (e) => {
-        //     if (e.target.classList.contains(PRODUCTS_AREA_RUNNING_METERS)) {
-        //         let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
-        //         let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-        //         const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
-        //         if (found) {
-        //             let area = parseFloat(e.target.value.replace(",", ".")) * parseFloat(found.VALUE.replace(",", "."));
-        //             containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
-        //         }
-        //     }
-        // })
-        // // Событие изменения поля "м2"
-        // this.element.addEventListener("change", async (e) => {
-        //     if (e.target.classList.contains(PRODUCTS_AREA_SQUARE_METERS)) {
-        //         let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
-        //         let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-        //         const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
-        //         if (found) {
-        //             let area = parseFloat(e.target.value.replace(",", ".")) / parseFloat(found.VALUE.replace(",", "."));
-        //             containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value = this.roundToTwoDecimals(area);
-        //         }
-        //     }
-        // })
-        // // Событие изменения поля "Ширина пленки"
-        // this.element.addEventListener("change", async (e) => {
-        //     if (e.target.classList.contains(PRODUCTS_FILM_WIDTH)) {
-        //         let containerTechonlogyItem = e.target.closest(".manufact-technology-item");
-        //         let idWidth = containerTechonlogyItem.querySelector(`.${PRODUCTS_FILM_WIDTH}`).value;
-        //         let runningMeters = containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_RUNNING_METERS}`).value
-        //         const found = this.itemsFilmWidth.find(item => item.ID == idWidth);
-        //         if (found) {
-        //             let area = parseFloat(runningMeters) * parseFloat(found.VALUE.replace(",", "."));
-        //             containerTechonlogyItem.querySelector(`.${PRODUCTS_AREA_SQUARE_METERS}`).value = this.roundToTwoDecimals(area);
-        //         }
-        //     }
-        // })
+                this.files.splice(childIndex, 1);
+                this.renderFilesHTML();
+                BX24.fitWindow();
+                this.checkFileUploadCompletion = true;
+            }
+        })
 
-        // this.element.addEventListener("input", async (e) => {
-        //     if (e.target.classList.contains(PRODUCTS_DESC)) {
-        //         this.setHeightBlockProductDesc(e.target);
-        //         // e.target.style.height = 'auto'; // Сбросить высоту до автоматического размера
-        //         // e.target.style.height = String(parseInt(e.target.scrollHeight) + 5) + 'px'; // Установить высоту на основе прокрутки содержимого
-        //     }
-        // })
     }
 
     async addRow(data={}) {
@@ -404,6 +344,17 @@ class ProductRow {
         this.data.id = response.item.id;
         this.smartProcessId = response.item.id;
         return response.item;
+    }
+
+    async addFile(dealId, fileName, fileData, fileSize) {
+        let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
+        this.files.push({
+            "url": link,
+            "name": fileName,
+            "size": this.formatFileSize(fileSize)
+        });
+        this.renderFilesHTML();
+        BX24.fitWindow();
     }
 }
 
