@@ -5,19 +5,19 @@ const ADD_FILE_TO_PRODUCT = "product-choose-file-button";
 const ADD_FILE_TO_PRODUCT_INPUT = "product-choose-file-input";
 
 const SMART_FIELDS = {
-    TECHNOLOGY:    "UF_CRM_21_1694680011",  // Технология изготовления
-    FILM:          "UF_CRM_21_1694679978",  // Пленка
-    LAMINATION:    "UF_CRM_21_1694680039",  // Ламинация
-    WIDTH_FILM:    "UF_CRM_21_1694680085",  // Ширина пленки
-    LINEAR_METER:  "UF_CRM_21_1694680054",  // П.м.
-    LENGTH_AREA:   "UF_CRM_21_1694680115",  // Длина, м
-    HEIGHT_AREA:   "UF_CRM_21_1694680100",  // Высота, м
-    COUNT_SIDE:    "UF_CRM_21_1694680138",  // Кол-во бортов
-    COUNT_CARS:    "UF_CRM_21_1694680127",  // Кол-во авто
-    SQUARE_METERS: "UF_CRM_21_1694680155",  // Кв.м. монтажа
-    LINK_SRC:      "UF_CRM_21_1694680292",  // Ссылка на исходники клиента
-    COMMENT:       "UF_CRM_21_1694680324",  // Комментарии
-    CLIENT_FILES:  "UF_CRM_21_1694680404"   // Файлы клиента
+    TECHNOLOGY:    "ufCrm21_1694680011",  // Технология изготовления
+    FILM:          "ufCrm21_1694679978",  // Пленка
+    LAMINATION:    "ufCrm21_1694680039",  // Ламинация
+    WIDTH_FILM:    "ufCrm21_1694680085",  // Ширина пленки
+    LINEAR_METER:  "ufCrm21_1694680054",  // П.м.
+    LENGTH_AREA:   "ufCrm21_1694680115",  // Длина, м
+    HEIGHT_AREA:   "ufCrm21_1694680100",  // Высота, м
+    COUNT_SIDE:    "ufCrm21_1694680138",  // Кол-во бортов
+    COUNT_CARS:    "ufCrm21_1694680127",  // Кол-во авто
+    SQUARE_METERS: "ufCrm21_1694680155",  // Кв.м. монтажа
+    LINK_SRC:      "ufCrm21_1694680292",  // Ссылка на исходники клиента
+    COMMENT:       "ufCrm21_1694680324",  // Комментарии
+    CLIENT_FILES:  "ufCrm21_1694680404"   // Файлы клиента
 };
 
 const LIST_TECHNOLOGY = [
