@@ -203,7 +203,7 @@ class ProductRow {
     }
 
     updateDate() {
-        let elements = this.container.querySelectorAll("[data-field]");
+        let elements = this.element.querySelectorAll("[data-field]");
         for (let elem of elements) {
             this.data[elem.dataset.field] = elem.value;
         }

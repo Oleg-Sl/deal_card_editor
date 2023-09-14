@@ -208,7 +208,7 @@ class App {
             return;
         }
         let reqPackage = {};
-        console.log("DATA = ", data);
+        // console.log("DATA = ", data);
         for (let item of data) {
             let tmp = {...item};
             delete tmp.id;
@@ -217,7 +217,7 @@ class App {
                 entityTypeId: this.smartNumber, id: idSmartProcess, fields: tmp
             }];
         }
-        console.log("REQ_METHOD = ", reqPackage);
+        // console.log("REQ_METHOD = ", reqPackage);
         let response = await this.bx24.batchMethod(reqPackage);
         return response;
     }
