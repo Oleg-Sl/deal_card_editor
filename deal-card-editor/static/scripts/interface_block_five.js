@@ -92,7 +92,7 @@ class ProductRow {
         // HTML-элемент строки продукта 
         this.element = null;
         // идентификатор элемента смартпроцесса
-        newLocal.smartProcessId = null;
+        this.smartProcessId = null;
         // данные хранящмеся в смарт-процессе
         this.data = {};
         // список файлов прикрепленных к продукту
