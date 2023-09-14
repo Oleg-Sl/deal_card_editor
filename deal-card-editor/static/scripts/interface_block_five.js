@@ -1,4 +1,4 @@
-const SMART_PROCESS_NUMBER = 184;
+const SMART_PROCESS_NUMBER = 144;
 
 
 const ADD_FILE_TO_PRODUCT = "product-choose-file-button";
@@ -107,7 +107,7 @@ class ProductRow {
     initHandler() {
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.TECHNOLOGY)) {
+            if (e.target.classList.contains(SMART_FIELDS.FILM)) {
                 let selectContainer = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
                 selectContainer.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
             }
@@ -219,11 +219,18 @@ class ProductRow {
         this.renderFilesHTML();
         this.initHandler();
         BX24.fitWindow();
-        // if (!this.smartProcessId) {
-        //     this.updateDate();
-        //     await this.addSmartProcessToBx24();
-        // }
+        if (!this.smartProcessId) {
+            this.updateDate();
+            await this.addSmartProcessToBx24();
+        }
         // BX24.fitWindow();
+    }
+
+    updateDate() {
+        let elements = this.container.querySelectorAll("[data-field]");
+        for (let elem of elements) {
+            this.data[elem.dataset.field] = elem.value;
+        }
     }
 
     // возвращает список файлов в виде словаря преобразуя данные из сеонкатенированной строки
@@ -245,61 +252,61 @@ class ProductRow {
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-list-field="">
+                    <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
                         ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 0)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.FILM}" aria-label=".form-select-lg example" data-list-field="">
+                    <select class="form-select ${SMART_FIELDS.FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}">
                         ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM] || 0)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-list-field="">
+                    <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
                         ${this.getOptionsForSelectHTML(LIST_LAMINATIONS, this.data[SMART_FIELDS.LAMINATION] || 0)}
                     </select>
                 </div>
 
                 <div class="product-list__cols-sizes">
                     <div class="product-list__cols-sizes-10">
-                        <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-list-field="">
+                        <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
                             ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.WIDTH_FILM] || 0)}
                         </select>
                     </div>
                     <div class="product-list__cols-sizes-11">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.LINEAR_METER] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER}" value="${this.data[SMART_FIELDS.LINEAR_METER] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-20">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LENGTH_AREA}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.LENGTH_AREA] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LENGTH_AREA}" placeholder="" data-field="${SMART_FIELDS.LENGTH_AREA}" value="${this.data[SMART_FIELDS.LENGTH_AREA] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-21">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.HEIGHT_AREA}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.HEIGHT_AREA] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.HEIGHT_AREA}" placeholder="" data-field="${SMART_FIELDS.HEIGHT_AREA}" value="${this.data[SMART_FIELDS.HEIGHT_AREA] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-30">
                         <div class="m-0 p-0">
-                            <select class="form-select ${SMART_FIELDS.COUNT_SIDE}" aria-label=".form-select-lg example" data-list-field="">
+                            <select class="form-select ${SMART_FIELDS.COUNT_SIDE}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.COUNT_SIDE}">
                                 ${this.getOptionsForSelectHTML(LIST_COUNT_SIDES, this.data[SMART_FIELDS.COUNT_SIDE] || 0)}
                             </select>
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-31">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.COUNT_CARS}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.COUNT_CARS] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.COUNT_CARS}" placeholder="" data-field="${SMART_FIELDS.COUNT_CARS}" value="${this.data[SMART_FIELDS.COUNT_CARS] || 0}">
                         </div>
                     </div>
                 </div>
 
                 <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METERS}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.SQUARE_METERS] || 0}">
+                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METERS}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METERS}" value="${this.data[SMART_FIELDS.SQUARE_METERS] || 0}">
                 </div>
                 <div class="m-0 p-0">
-                    <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC}" placeholder="" data-field="" value="${this.data[SMART_FIELDS.LINK_SRC] || "-"}">
+                    <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC}" placeholder="" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || "-"}">
                 </div>
                 <div class="m-0 p-0">
                     <div class="m-0 p-0">
@@ -315,7 +322,7 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="">
+                    <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">
                         ${this.data[SMART_FIELDS.COMMENT] || ""}
                     </textarea>
                 </div>
@@ -381,7 +388,22 @@ class ProductRow {
         let roundedNumber = Math.round(number * 100) / 100;
         return roundedNumber.toFixed(2);
     }
- 
+    
+    async addSmartProcessToBx24() {
+        this.data[SMART_FIELDS.CLIENT_FILES] = [];
+        for (let file of this.files) {
+            this.data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
+        }
+        data["parentId2"] = this.dealId;
+        let response = await this.bx24.callMethod("crm.item.add", {
+            entityTypeId: SMART_PROCESS_NUMBER,
+            fields: data,
+        });
+        console.log("response => ", response);
+        this.data.id = response.item.id;
+        this.smartProcessId = response.item.id;
+        return response.item;
+    }
 }
 
 
