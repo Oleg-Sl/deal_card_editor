@@ -129,12 +129,12 @@ class ProductRow {
     }
 
     async addRow(data={}) {
-        this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
+        // this.saveFilesHTML(data[FIELD_PRODUCTS_FILES_CLIENT] || "");
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         this.data = data;
         this.smartProcessId = data.id;
-        this.element.innerHTML = contentHTML;
+        this.element.innerHTML = this.getRowHTML();
         this.container.append(this.element);
         this.init();
         // this.renderTableFilesHTML();
