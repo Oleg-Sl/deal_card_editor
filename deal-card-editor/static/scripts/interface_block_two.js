@@ -38,8 +38,8 @@ export class InterfaceBlockTwo {
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637861029.items, data.UF_CRM_1637861029, "UF_CRM_1637861029", "Монтаж 24/7", 1);    // isMounting24
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637326777.items, data.UF_CRM_1637326777, "UF_CRM_1637326777", "Наши реквизиты", 2); // ourRequisite
         // contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1619441621", "Спопоб оплаты", 2);  // paymentMethod
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1694710116", "Аренда бокса", 2);  // paymentMethod
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1694710578", "Монтаж на территории", 2);  // paymentMethod
+        contentHTML += this.getSelectHTML(fields.UF_CRM_1694710116.items, data.UF_CRM_1694710116, "UF_CRM_1694710116", "Аренда бокса", 2);  // paymentMethod
+        contentHTML += this.getSelectHTML(fields.UF_CRM_1694710578.items, data.UF_CRM_1694710578, "UF_CRM_1694710578", "Монтаж на территории", 2);  // paymentMethod
 
         this.container.innerHTML = contentHTML;
     }
