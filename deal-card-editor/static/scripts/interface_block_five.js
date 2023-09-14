@@ -440,7 +440,8 @@ export default class InterfaceBlockfour {
 
     async render(fields, data) {
         console.log("data");
-        this.productsObj = await this.getProductsList(this.smartNumber, data.ID);
+        this.productsObj = [];
+        let productsList = await this.getProductsList(this.smartNumber, data.ID);
         for (let product of productsList) {
             let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.dealId, this.productsObj.length + 1);
             productObj.addRow(product);
