@@ -439,17 +439,12 @@ export default class InterfaceBlockfour {
     }
 
     async render(fields, data) {
-        // this.productsObj = [];
-        // this.itemsdManufactTechn = fields[MANUFACTURING_TECHNOLOGY].items;
-        // this.itemsFilmWidth = fields[FILM_WIDTH].items;
-        // this.dealId = data.ID;
-        // let productsList = await this.getProductsList(this.smartNumber, data.ID);
-        // for (let product of productsList) {
-        //     let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
-        //     productObj.addRow(product);
-        //     this.productsObj.push(productObj);
-        // }
-        // this.setSummaryData();
+        this.productsObj = await this.getProductsList(this.smartNumber, data.ID);
+        for (let product of productsList) {
+            let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.dealId, this.productsObj.length + 1);
+            productObj.addRow(product);
+            this.productsObj.push(productObj);
+        }
     }
 
     renderInit() {
@@ -492,120 +487,147 @@ export default class InterfaceBlockfour {
         return contentHTML;
     }
 
-    addRow() {
-        this.element = document.createElement('div');
-        this.element.style.paddingBottom = "0px";
-        let contentHTML = `
-            <div class="product-list__product-row product-list__header-table">
-                <div class="m-0 p-1 align-middle">1</div>
-                <div class="m-0 p-0">
-                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                        <option value="1">печать</option>
-                        <option value="2">плоттерная резка</option>
-                        <option value="3">печать+контурная резка</option>
-                    </select>
-                </div>
-                <div class="m-0 p-0">
-                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                        <option value="1">ORAJET 3640</option>
-                        <option value="2">ORAJET 3551</option>
-                        <option value="3">Китай 010</option>
-                        <option value="4">ORACAL 641</option>
-                        <option value="5">ORACAL 551</option>
-                        <option value="6">Другое (указать в комментариях)</option>
-                    </select>
-                </div>
-                <div class="m-0 p-0">
-                    <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                        <option value="1">ORAJET 3640 G</option>
-                        <option value="2">ORAJET 3640 M</option>
-                        <option value="3">ORAGARD 215 G</option>
-                        <option value="4">ORAGARD 215 M</option>
-                        <option value="5">Китай G</option>
-                        <option value="6">Китай M</option>
-                        <option value="7">нет</option>
-                    </select>
-                </div>
-
-                <div class="product-list__cols-sizes">
-                    <div class="product-list__cols-sizes-10">
-                        <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                            <option value="1">1</option>
-                            <option value="2">1,05</option>
-                            <option value="3">1,26</option>
-                            <option value="4">1,37</option>
-                            <option value="5">1,52</option>
-                            <option value="6">1,6</option>
-                        </select>
-                    </div>
-                    <div class="product-list__cols-sizes-11">
-                        <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-20">
-                        <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-21">
-                        <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-30">
-                        <div class="m-0 p-0">
-                            <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-31">
-                        <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
-                </div>
-                <div class="m-0 p-0">
-                    <input type="url" class="form-control" placeholder="" data-field="" value="">
-                </div>
-                <div class="m-0 p-0">
-                    <div class="m-0 p-0">
-                        <div class="product-list__row-files">
-                            <div class="m-0 p-0 file-row" style="">
-                                <div class="text-secondary m-0 p-0 product-number-file" style="">1</div>
-                                <div class="m-0 p-0 text-truncate" style=""><a href="google.com" class="link-underline-primary " target="_blank">google.com</a></div>
-                                <div class="text-secondary m-0 p-0" style="">1.2MB</div>
-                                <div class="m-0 p-0" style=""><button type="button" class="btn-close btn-sm m-0 p-0" aria-label="Close"></button></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
-                        <div class="m-0 p-0 px-4">
-                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
-                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-0 p-0">
-                    <textarea class="form-control" rows="1" placeholder="" data-field="">
-                    
-                    </textarea>
-                </div>
-            </div>
-        `;
-        return contentHTML;
-        // this.element.innerHTML = contentHTML;
+    async getProductsList(smartNumber, dealId) {
+        let data = await this.bx24.callMethod(
+            "crm.item.list",
+            {
+                "entityTypeId": smartNumber,
+                "filter": { "parentId2": dealId },
+                "select": [
+                    "id",
+                    SMART_FIELDS.TECHNOLOGY,
+                    SMART_FIELDS.FILM,
+                    SMART_FIELDS.LAMINATION,
+                    SMART_FIELDS.WIDTH_FILM,
+                    SMART_FIELDS.LINEAR_METER,
+                    SMART_FIELDS.LENGTH_AREA,
+                    SMART_FIELDS.HEIGHT_AREA,
+                    SMART_FIELDS.COUNT_SIDE,
+                    SMART_FIELDS.COUNT_CARS,
+                    SMART_FIELDS.SQUARE_METERS,
+                    SMART_FIELDS.LINK_SRC,
+                    SMART_FIELDS.COMMENT,
+                    SMART_FIELDS.CLIENT_FILES,
+                ]
+            }
+        );
+        // return data.result.items;
+        return data.items;
     }
-
-
 }
 
+
+
+// addRow() {
+//     this.element = document.createElement('div');
+//     this.element.style.paddingBottom = "0px";
+//     let contentHTML = `
+//         <div class="product-list__product-row product-list__header-table">
+//             <div class="m-0 p-1 align-middle">1</div>
+//             <div class="m-0 p-0">
+//                 <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+//                     <option value="1">печать</option>
+//                     <option value="2">плоттерная резка</option>
+//                     <option value="3">печать+контурная резка</option>
+//                 </select>
+//             </div>
+//             <div class="m-0 p-0">
+//                 <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+//                     <option value="1">ORAJET 3640</option>
+//                     <option value="2">ORAJET 3551</option>
+//                     <option value="3">Китай 010</option>
+//                     <option value="4">ORACAL 641</option>
+//                     <option value="5">ORACAL 551</option>
+//                     <option value="6">Другое (указать в комментариях)</option>
+//                 </select>
+//             </div>
+//             <div class="m-0 p-0">
+//                 <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+//                     <option value="1">ORAJET 3640 G</option>
+//                     <option value="2">ORAJET 3640 M</option>
+//                     <option value="3">ORAGARD 215 G</option>
+//                     <option value="4">ORAGARD 215 M</option>
+//                     <option value="5">Китай G</option>
+//                     <option value="6">Китай M</option>
+//                     <option value="7">нет</option>
+//                 </select>
+//             </div>
+
+//             <div class="product-list__cols-sizes">
+//                 <div class="product-list__cols-sizes-10">
+//                     <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+//                         <option value="1">1</option>
+//                         <option value="2">1,05</option>
+//                         <option value="3">1,26</option>
+//                         <option value="4">1,37</option>
+//                         <option value="5">1,52</option>
+//                         <option value="6">1,6</option>
+//                     </select>
+//                 </div>
+//                 <div class="product-list__cols-sizes-11">
+//                     <div class="m-0 p-0">
+//                         <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+//                     </div>
+//                 </div>
+//                 <div class="product-list__cols-sizes-20">
+//                     <div class="m-0 p-0">
+//                         <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+//                     </div>
+//                 </div>
+//                 <div class="product-list__cols-sizes-21">
+//                     <div class="m-0 p-0">
+//                         <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+//                     </div>
+//                 </div>
+//                 <div class="product-list__cols-sizes-30">
+//                     <div class="m-0 p-0">
+//                         <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
+//                             <option value="1">1</option>
+//                             <option value="2">2</option>
+//                         </select>
+//                     </div>
+//                 </div>
+//                 <div class="product-list__cols-sizes-31">
+//                     <div class="m-0 p-0">
+//                         <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+//                     </div>
+//                 </div>
+//             </div>
+
+
+//             <div class="m-0 p-0">
+//                 <input type="number" step="0.01" min="0" class="form-control" placeholder="" data-field="" value="">
+//             </div>
+//             <div class="m-0 p-0">
+//                 <input type="url" class="form-control" placeholder="" data-field="" value="">
+//             </div>
+//             <div class="m-0 p-0">
+//                 <div class="m-0 p-0">
+//                     <div class="product-list__row-files">
+//                         <div class="m-0 p-0 file-row" style="">
+//                             <div class="text-secondary m-0 p-0 product-number-file" style="">1</div>
+//                             <div class="m-0 p-0 text-truncate" style=""><a href="google.com" class="link-underline-primary " target="_blank">google.com</a></div>
+//                             <div class="text-secondary m-0 p-0" style="">1.2MB</div>
+//                             <div class="m-0 p-0" style=""><button type="button" class="btn-close btn-sm m-0 p-0" aria-label="Close"></button></div>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <div class="row m-0 p-0">
+//                     <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+//                     <div class="m-0 p-0 px-4">
+//                         <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
+//                         <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="m-0 p-0">
+//                 <textarea class="form-control" rows="1" placeholder="" data-field="">
+                
+//                 </textarea>
+//             </div>
+//         </div>
+//     `;
+//     return contentHTML;
+//     // this.element.innerHTML = contentHTML;
+// }
 
