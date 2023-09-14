@@ -65,6 +65,7 @@ export default class Bitrix24 {
 
     // Выполнение пакетного запроса
     async batchMethod(reqPackage) {
+        console.log("reqPackage = ", reqPackage);
         return new Promise((resolve, reject) => {
             let callback = result => {
                 let response = {};
