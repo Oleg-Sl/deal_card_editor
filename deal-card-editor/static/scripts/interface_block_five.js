@@ -164,6 +164,12 @@ class ProductRow {
                 this.updateDate();
             }
         })
+        // Событие изменения поля "м2"
+        this.element.addEventListener("input", async (e) => {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+                BX24.fitWindow();
+            }
+        })
     }
 
     getData() {
