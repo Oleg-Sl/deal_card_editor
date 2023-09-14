@@ -163,7 +163,7 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
             [TD]${product[SMART_FIELDS.COUNT_CARS] || ""}[/TD]
             [TD]${product[SMART_FIELDS.SQUARE_METERS] || ""}[/TD]
             [TD][URL=${product[SMART_FIELDS.LINK_SRC] || "-"}]${product[SMART_FIELDS.LINK_SRC] || "-"}[/URL][/TD]\
-            [TD]${getUrlFiles(product.CLIENT_FILES)}[/TD]
+            [TD]${getUrlFiles(product[SMART_FIELDS.CLIENT_FILES])}[/TD]
             [TD]${product[SMART_FIELDS.COMMENT] || ""}[/TD]
         [/TR]`;
     }
