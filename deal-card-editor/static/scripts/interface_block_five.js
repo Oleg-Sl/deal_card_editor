@@ -99,7 +99,6 @@ export default class InterfaceBlockfour {
                     </select>
                 </div>
 
-
                 <div class="product-list__cols-sizes">
                     <div class="product-list__cols-sizes-10">
                         <select class="form-select" aria-label=".form-select-lg example" data-list-field="">
@@ -150,7 +149,14 @@ export default class InterfaceBlockfour {
                 </div>
                 <div class="m-0 p-0">
                     <div class="m-0 p-0">
-                        <div class=""></div>
+                        <div class="">
+                            <div class="m-0 p-0 file-row" style="">
+                                <div class="text-secondary m-0 p-0 product-number-file" style="">1</div>
+                                <div class="m-0 p-0 text-truncate" style=""><a href="google.com" class="link-underline-primary " target="_blank">google.com</a></div>
+                                <div class="text-secondary m-0 p-0" style="">1.2MB</div>
+                                <div class="m-0 p-0" style=""><button type="button" class="btn-close btn-sm m-0 p-0" aria-label="Close"></button></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row m-0 p-0">
                         <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
