@@ -96,7 +96,8 @@ class ProductRow {
         // список файлов прикрепленных к продукту
         this.files = [];
 
-        // this.removingFiles = [];
+        // файлы которые нужно удалить по нажатию кнопки
+        this.removingFiles = [];
 
     }
 
@@ -145,7 +146,35 @@ class ProductRow {
                 this.checkFileUploadCompletion = true;
             }
         })
+        // Событие изменения поля "м2"
+        this.element.addEventListener("change", async (e) => {
+            if (e.target.classList.contains(SMART_FIELDS.LENGTH_AREA)) {
+                this.updateSquareMeters();
+            } else if (e.target.classList.contains(SMART_FIELDS.HEIGHT_AREA)) {
+                this.updateSquareMeters();
+            } else if (e.target.classList.contains(SMART_FIELDS.COUNT_SIDE)) {
+                this.updateSquareMeters();
+            } else if (e.target.classList.contains(SMART_FIELDS.COUNT_CARS)) {
+                this.updateSquareMeters();
+            }
+        })
+    }
 
+    getData() {
+        let data = this.data;
+        data[SMART_FIELDS.CLIENT_FILES] = [];
+        for (let file of this.files) {
+            data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
+        }
+        return data;
+    }
+
+    updateSquareMeters() {
+        let lengthFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.LENGTH_AREA}`).value.replace(",", "."));
+        let heightFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
+        let countSideFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", "."));
+        let counCarsFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
+        containerTechonlogyItem.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
     }
 
     async addRow(data={}) {
@@ -330,11 +359,7 @@ class ProductRow {
     }
     
     async addSmartProcessToBx24() {
-        let data = this.data;
-        data[SMART_FIELDS.CLIENT_FILES] = [];
-        for (let file of this.files) {
-            data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
-        }
+        let data = this.getData();
         data["parentId2"] = this.dealId;
         let response = await this.bx24.callMethod("crm.item.add", {
             entityTypeId: SMART_PROCESS_NUMBER,
@@ -348,7 +373,6 @@ class ProductRow {
 
     async addFile(dealId, fileName, fileData, fileSize) {
         let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
-        console.log("link = ", link);
         this.files.push({
             "url": link,
             "name": fileName,
