@@ -20,6 +20,7 @@ const SMART_FIELDS = {
     CLIENT_FILES:  "ufCrm21_1694680404"   // Файлы клиента
 };
 
+
 const LIST_TECHNOLOGY = [
     {ID: 0, VALUE: "печать"},
     {ID: 1, VALUE: "плоттерная резка"},
@@ -212,8 +213,7 @@ class ProductRow {
         this.element.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
     }
 
-    async addRow(data={}) {
-        console.log("smart data[SMART_FIELDS.CLIENT_FILES] = ", data[SMART_FIELDS.CLIENT_FILES]);
+    async addRow(data={"ufCrm21_1694680011":0, "ufCrm21_1694679978": 0, "ufCrm21_1694680039": 0, "ufCrm21_1694680085": 0, "ufCrm21_1694680054": 0, "ufCrm21_1694680115": 0, "ufCrm21_1694680100": 0, "ufCrm21_1694680138": 0, "ufCrm21_1694680127": 0, "ufCrm21_1694680155": 0}) {
         this.files = this.getFilesHTML(data[SMART_FIELDS.CLIENT_FILES] || "");
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
