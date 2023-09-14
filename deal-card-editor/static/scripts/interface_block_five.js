@@ -184,7 +184,7 @@ class ProductRow {
     }
 
     async addRow(data={}) {
-        console.log("smart data = ", data);
+        console.log("smart data = ", data.CLIENT_FILES);
         this.files = this.getFilesHTML(data.CLIENT_FILES || "");
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
