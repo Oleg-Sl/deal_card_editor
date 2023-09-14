@@ -174,10 +174,6 @@ class ProductRow {
         let heightFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
         let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", ".")) + 1;
         let counCarsFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
-        console.log("lengthFloat = ", lengthFloat);
-        console.log("heightFloat = ", heightFloat);
-        console.log("countSideFloat = ", countSideFloat);
-        console.log("counCarsFloat = ", counCarsFloat);
         this.element.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
     }
 
@@ -418,8 +414,28 @@ export default class InterfaceBlockfour {
         })
     }
 
+    getData() {
+        let data = [];
+        for (let product of this.productsObj) {
+            data.push(product.getData());
+        }
+        console.log("data 5 = ", data);
+        return data;
+    }
+
+    async deleteRemovingFiles() {
+        let data = [];
+        for (let product of this.productsObj) {
+            for (let file of product.removingFiles) {
+                let response = await this.yaDisk.removeFile(this.dealId, file.name);
+                console.log("removeFile response = ", response);
+            }
+            product.removingFiles = [];
+        }
+        return data;
+    }
+
     async render(fields, data) {
-        console.log("data");
         this.productsObj = [];
         let productsList = await this.getProductsList(this.smartNumber, data.ID);
         for (let product of productsList) {
