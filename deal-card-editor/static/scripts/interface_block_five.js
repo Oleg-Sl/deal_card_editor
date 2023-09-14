@@ -158,6 +158,12 @@ class ProductRow {
                 this.updateSquareMeters();
             }
         })
+        // Событие изменения значений полей 
+        this.element.addEventListener("change", async (e) => {
+            if (e.target.hasAttribute('data-field')) {
+                this.updateDate();
+            }
+        })
     }
 
     getData() {
