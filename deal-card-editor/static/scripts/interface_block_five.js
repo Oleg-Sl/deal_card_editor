@@ -283,25 +283,25 @@ export default class InterfaceBlockfour {
         // Добавление нового продукта
         this.container.addEventListener("click", async (e) => {
             if (e.target == this.elemAddProduct) {
-                // let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
-                // productObj.addRow();
-                // this.productsObj.push(productObj);
+                let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
+                productObj.addRow();
+                this.productsObj.push(productObj);
             }
         })
     }
 
     async render(fields, data) {
-        this.productsObj = [];
-        this.itemsdManufactTechn = fields[MANUFACTURING_TECHNOLOGY].items;
-        this.itemsFilmWidth = fields[FILM_WIDTH].items;
-        this.dealId = data.ID;
-        let productsList = await this.getProductsList(this.smartNumber, data.ID);
-        for (let product of productsList) {
-            let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
-            productObj.addRow(product);
-            this.productsObj.push(productObj);
-        }
-        this.setSummaryData();
+        // this.productsObj = [];
+        // this.itemsdManufactTechn = fields[MANUFACTURING_TECHNOLOGY].items;
+        // this.itemsFilmWidth = fields[FILM_WIDTH].items;
+        // this.dealId = data.ID;
+        // let productsList = await this.getProductsList(this.smartNumber, data.ID);
+        // for (let product of productsList) {
+        //     let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
+        //     productObj.addRow(product);
+        //     this.productsObj.push(productObj);
+        // }
+        // this.setSummaryData();
     }
 
     renderInit() {
