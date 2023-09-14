@@ -171,7 +171,22 @@ class ProductRow {
             }
         })
         // Событие изменения поля "м2"
-        this.element.addEventListener("resize", async (e) => {
+        this.element.addEventListener("focus", async (e) => {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+                BX24.fitWindow();
+            }
+        })
+        this.element.addEventListener("blur", async (e) => {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+                BX24.fitWindow();
+            }
+        })
+        this.element.addEventListener("keyup", async (e) => {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+                BX24.fitWindow();
+            }
+        })
+        this.element.addEventListener("contextmenu", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
                 BX24.fitWindow();
             }
