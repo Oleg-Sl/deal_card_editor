@@ -390,9 +390,10 @@ class ProductRow {
     }
     
     async addSmartProcessToBx24() {
-        this.data[SMART_FIELDS.CLIENT_FILES] = [];
+        let data = this.data;
+        data[SMART_FIELDS.CLIENT_FILES] = [];
         for (let file of this.files) {
-            this.data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
+            data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
         }
         data["parentId2"] = this.dealId;
         let response = await this.bx24.callMethod("crm.item.add", {
