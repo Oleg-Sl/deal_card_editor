@@ -170,11 +170,11 @@ class ProductRow {
     }
 
     updateSquareMeters() {
-        let lengthFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.LENGTH_AREA}`).value.replace(",", "."));
-        let heightFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
-        let countSideFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", "."));
-        let counCarsFloat = parseFloat(containerTechonlogyItem.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
-        containerTechonlogyItem.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
+        let lengthFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.LENGTH_AREA}`).value.replace(",", "."));
+        let heightFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
+        let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", "."));
+        let counCarsFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
+        this.element.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
     }
 
     async addRow(data={}) {
