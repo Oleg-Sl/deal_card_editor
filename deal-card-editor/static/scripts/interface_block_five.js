@@ -172,7 +172,7 @@ class ProductRow {
     updateSquareMeters() {
         let lengthFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.LENGTH_AREA}`).value.replace(",", "."));
         let heightFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
-        let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", "."));
+        let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", ".")) + 1;
         let counCarsFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
         console.log("lengthFloat = ", lengthFloat);
         console.log("heightFloat = ", heightFloat);
