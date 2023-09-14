@@ -325,7 +325,7 @@ class ProductRow {
             if (item.ID == actualyId) {
                 contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
             } else {
-                contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
+                contentHTML += `<option value="${item.ID}">${item.VALUE}</option>`;
             }
         }
         return contentHTML;
@@ -403,7 +403,7 @@ export default class InterfaceBlockfour {
         // Добавление нового продукта
         this.container.addEventListener("click", async (e) => {
             if (e.target == this.elemAddProduct) {
-                let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.itemsdManufactTechn, this.itemsFilmWidth, this.dealId, this.productsObj.length + 1);
+                let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.dealId, this.productsObj.length + 1);
                 productObj.addRow();
                 this.productsObj.push(productObj);
             }
