@@ -184,6 +184,7 @@ class ProductRow {
     }
 
     async addRow(data={}) {
+        console.log("smart data = ", data);
         this.files = this.getFilesHTML(data.CLIENT_FILES || "");
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
@@ -297,9 +298,7 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">
-                        ${this.data[SMART_FIELDS.COMMENT] || ""}
-                    </textarea>
+                    <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
             </div>
         `;
