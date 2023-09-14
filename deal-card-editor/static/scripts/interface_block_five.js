@@ -348,10 +348,11 @@ class ProductRow {
 
     async addFile(dealId, fileName, fileData, fileSize) {
         let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
+        console.log("link = ", link);
         this.files.push({
             "url": link,
             "name": fileName,
-            "size": this.formatFileSize(fileSize)
+            "size": this.getFormatingFileSize(fileSize)
         });
         this.renderFilesHTML();
         BX24.fitWindow();
