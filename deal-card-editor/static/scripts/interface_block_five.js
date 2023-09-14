@@ -174,6 +174,10 @@ class ProductRow {
         let heightFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
         let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", "."));
         let counCarsFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
+        console.log("lengthFloat = ", lengthFloat);
+        console.log("heightFloat = ", heightFloat);
+        console.log("countSideFloat = ", countSideFloat);
+        console.log("counCarsFloat = ", counCarsFloat);
         this.element.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
     }
 
