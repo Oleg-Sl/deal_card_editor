@@ -22,7 +22,7 @@ class App {
         this.currentUserId = null;
         this.taskId = null;
 
-        this.smartNumber = 184;
+        this.smartNumber = 144;
 
         this.data = null;
         this.fields = null;
