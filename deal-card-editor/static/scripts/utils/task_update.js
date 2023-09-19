@@ -153,6 +153,7 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
         [TD][B]Комментарии[/B][/TD]
     `;
     for (let product of products) {
+        console.log("product = ", product);
         tbody += `[TR]
             [TD]${getValueByKey(LIST_TECHNOLOGY, product[SMART_FIELDS.TECHNOLOGY])}[/TD]
             [TD]${getValueByKey(LIST_FILMS, product[SMART_FIELDS.FILM])}[/TD]
