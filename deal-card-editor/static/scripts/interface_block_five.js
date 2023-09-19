@@ -110,8 +110,10 @@ class ProductRow {
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
-                let selectContainer = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
-                selectContainer.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
+                let selectContainerLamination = this.container.querySelector(`.${SMART_FIELDS.LAMINATION}`);
+                selectContainerLamination.innerHTML = this.getOptionsForSelectHTML(LIST_LAMINATIONS[e.target.value], 0);
+                let selectContainerWidth = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
+                selectContainerWidth.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
             }
         })
         // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
