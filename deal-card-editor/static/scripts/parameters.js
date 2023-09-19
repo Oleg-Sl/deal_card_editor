@@ -19,23 +19,62 @@ export const LIST_TECHNOLOGY = [
     {ID: 1, VALUE: "плоттерная резка"},
     {ID: 2, VALUE: "печать+контурная резка"},
 ];
+// список пленок
 export const LIST_FILMS = [
     {ID: 0, VALUE: "ORAJET 3640"},
     {ID: 1, VALUE: "ORAJET 3551"},
     {ID: 2, VALUE: "Китай 010"},
     {ID: 3, VALUE: "ORACAL 641"},
     {ID: 4, VALUE: "ORACAL 551"},
-    {ID: 5, VALUE: "Другое (указать в комментариях)"},
+    {ID: 5, VALUE: "ORAJET 3551RA"},
+    {ID: 6, VALUE: "Другое (указать в комментариях)"},
 ];
-export const LIST_LAMINATIONS = [
-    {ID: 0, VALUE: "ORAJET 3640 G"},
-    {ID: 1, VALUE: "ORAJET 3640 M"},
-    {ID: 2, VALUE: "ORAGARD 215 G"},
-    {ID: 3, VALUE: "ORAGARD 215 M"},
-    {ID: 4, VALUE: "Китай G"},
-    {ID: 5, VALUE: "Китай M"},
-    {ID: 6, VALUE: "нет"},
-];
+// список ламинаций
+export const LIST_LAMINATIONS = {
+    "0": [
+        {ID: 0, VALUE: "ORAJET 3640 G"},
+        {ID: 1, VALUE: "ORAJET 3640 M"},
+        {ID: 2, VALUE: "нет"},
+    ],
+    "1": [
+        {ID: 0, VALUE: "ORAGARD 215 G"},
+        {ID: 1, VALUE: "ORAGARD 215 M"},
+        {ID: 2, VALUE: "нет"},
+    ],
+    "2": [
+        {ID: 0, VALUE: "Китай G"},
+        {ID: 1, VALUE: "Китай М"},
+        {ID: 2, VALUE: "нет"},
+    ],
+    "3": [
+    ],
+    "4": [
+    ],
+    "5": [
+        {ID: 0, VALUE: "ORAGARD 215 G"},
+        {ID: 1, VALUE: "ORAGARD 215 M"},
+        {ID: 2, VALUE: "нет"},
+    ],
+    "6": [
+        {ID: 0, VALUE: "ORAJET 3640 G"},
+        {ID: 0, VALUE: "ORAJET 3640 M"},
+        {ID: 0, VALUE: "ORAGARD 215 G"},
+        {ID: 0, VALUE: "ORAGARD 215 M"},
+        {ID: 0, VALUE: "Китай G"},
+        {ID: 0, VALUE: "Китай М"},
+        {ID: 0, VALUE: "нет"},
+    ],
+};
+// export const LIST_LAMINATIONS = [
+//     {ID: 0, VALUE: "ORAJET 3640 G"},
+//     {ID: 1, VALUE: "ORAJET 3640 M"},
+//     {ID: 2, VALUE: "ORAGARD 215 G"},
+//     {ID: 3, VALUE: "ORAGARD 215 M"},
+//     {ID: 4, VALUE: "Китай G"},
+//     {ID: 5, VALUE: "Китай M"},
+//     {ID: 6, VALUE: "нет"},
+// ];
+
 export const LIST_WIDTH_FILMS = {
     "0": [
         {ID: 0, VALUE: "1"},
@@ -62,7 +101,8 @@ export const LIST_WIDTH_FILMS = {
     "4": [
         {ID: 0, VALUE: "1,26"},
     ],
-    "5": []
+    "5": [],
+    "6": []
 };
 export const LIST_COUNT_SIDES = [
     {ID: 0, VALUE: 1},

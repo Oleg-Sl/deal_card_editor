@@ -276,7 +276,7 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
-                        ${this.getOptionsForSelectHTML(LIST_LAMINATIONS, this.data[SMART_FIELDS.LAMINATION] || 0)}
+                        ${this.getOptionsForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || 0)}
                     </select>
                 </div>
 
