@@ -23,10 +23,10 @@ export const LIST_TECHNOLOGY = [
 export const LIST_FILMS = [
     {ID: 0, VALUE: "ORAJET 3640"},
     {ID: 1, VALUE: "ORAJET 3551"},
-    {ID: 2, VALUE: "Китай 010"},
-    {ID: 3, VALUE: "ORACAL 641"},
-    {ID: 4, VALUE: "ORACAL 551"},
-    {ID: 5, VALUE: "ORAJET 3551RA"},
+    {ID: 2, VALUE: "ORAJET 3551RA"},
+    {ID: 3, VALUE: "Китай 010"},
+    {ID: 4, VALUE: "ORACAL 641"},
+    {ID: 5, VALUE: "ORACAL 551"},
     {ID: 6, VALUE: "Другое (указать в комментариях)"},
 ];
 // список ламинаций
@@ -42,27 +42,27 @@ export const LIST_LAMINATIONS = {
         {ID: 2, VALUE: "нет"},
     ],
     "2": [
-        {ID: 0, VALUE: "Китай G"},
-        {ID: 1, VALUE: "Китай М"},
-        {ID: 2, VALUE: "нет"},
-    ],
-    "3": [
-    ],
-    "4": [
-    ],
-    "5": [
         {ID: 0, VALUE: "ORAGARD 215 G"},
         {ID: 1, VALUE: "ORAGARD 215 M"},
         {ID: 2, VALUE: "нет"},
     ],
+    "3": [
+        {ID: 0, VALUE: "Китай G"},
+        {ID: 1, VALUE: "Китай М"},
+        {ID: 2, VALUE: "нет"},
+    ],
+    "4": [
+    ],
+    "5": [
+    ],
     "6": [
         {ID: 0, VALUE: "ORAJET 3640 G"},
-        {ID: 0, VALUE: "ORAJET 3640 M"},
-        {ID: 0, VALUE: "ORAGARD 215 G"},
-        {ID: 0, VALUE: "ORAGARD 215 M"},
-        {ID: 0, VALUE: "Китай G"},
-        {ID: 0, VALUE: "Китай М"},
-        {ID: 0, VALUE: "нет"},
+        {ID: 1, VALUE: "ORAJET 3640 M"},
+        {ID: 2, VALUE: "ORAGARD 215 G"},
+        {ID: 3, VALUE: "ORAGARD 215 M"},
+        {ID: 4, VALUE: "Китай G"},
+        {ID: 5, VALUE: "Китай М"},
+        {ID: 6, VALUE: "нет"},
     ],
 };
 // export const LIST_LAMINATIONS = [
@@ -88,20 +88,20 @@ export const LIST_WIDTH_FILMS = {
         {ID: 0, VALUE: "1,26"},
         {ID: 1, VALUE: "1,37"},
     ],
-    "2": [
+    "2": [],
+    "3": [
         {ID: 0, VALUE: "1,07"},
         {ID: 1, VALUE: "1,27"},
         {ID: 2, VALUE: "1,37"},
         {ID: 3, VALUE: "1,52"},
     ],
-    "3": [
+    "4": [
         {ID: 0, VALUE: "1"},
         {ID: 1, VALUE: "1,26"},
     ],
-    "4": [
+    "5": [
         {ID: 0, VALUE: "1,26"},
     ],
-    "5": [],
     "6": []
 };
 export const LIST_COUNT_SIDES = [
