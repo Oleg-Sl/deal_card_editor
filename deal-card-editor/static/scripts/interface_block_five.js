@@ -112,8 +112,10 @@ class ProductRow {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
                 let selectContainerLamination = this.container.querySelector(`.${SMART_FIELDS.LAMINATION}`);
                 selectContainerLamination.innerHTML = this.getOptionsForSelectHTML(LIST_LAMINATIONS[e.target.value], 0);
+                selectContainerLamination.value = 0;
                 let selectContainerWidth = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
                 selectContainerWidth.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
+                selectContainerWidth.value = 0;
             }
         })
         // Событие нажатия кнопки дообавления нового файла к продукту -> вызов события добавления файла 
