@@ -196,37 +196,37 @@ export const LIST_LAMINATIONS = {
 
 export const LIST_WIDTH_FILMS = {
     "1": [
-        {ID: 0, VALUE: "1"},
-        {ID: 1, VALUE: "1,05"},
-        {ID: 2, VALUE: "1,26"},
-        {ID: 3, VALUE: "1,37"},
-        {ID: 4, VALUE: "1,52"},
-        {ID: 5, VALUE: "1,6"},
+        {ID: 1, VALUE: "1"},
+        {ID: 2, VALUE: "1,05"},
+        {ID: 3, VALUE: "1,26"},
+        {ID: 4, VALUE: "1,37"},
+        {ID: 5, VALUE: "1,52"},
+        {ID: 6, VALUE: "1,6"},
     ],
     "2": [
-        {ID: 0, VALUE: "1,26"},
-        {ID: 1, VALUE: "1,37"},
+        {ID: 1, VALUE: "1,26"},
+        {ID: 2, VALUE: "1,37"},
     ],
     "3": [],
     "4": [
-        {ID: 0, VALUE: "1,07"},
-        {ID: 1, VALUE: "1,27"},
-        {ID: 2, VALUE: "1,37"},
-        {ID: 3, VALUE: "1,52"},
+        {ID: 1, VALUE: "1,07"},
+        {ID: 2, VALUE: "1,27"},
+        {ID: 3, VALUE: "1,37"},
+        {ID: 4, VALUE: "1,52"},
     ],
     "6": [
-        {ID: 0, VALUE: "1"},
-        {ID: 1, VALUE: "1,26"},
+        {ID: 1, VALUE: "1"},
+        {ID: 2, VALUE: "1,26"},
     ],
     "7": [
-        {ID: 0, VALUE: "1"},
-        {ID: 1, VALUE: "1,26"},
+        {ID: 1, VALUE: "1"},
+        {ID: 2, VALUE: "1,26"},
     ],
     "9": [
-        {ID: 0, VALUE: "1,26"},
+        {ID: 1, VALUE: "1,26"},
     ],
     "10": [
-        {ID: 0, VALUE: "1,26"},
+        {ID: 1, VALUE: "1,26"},
     ],
     "11": []
 };
