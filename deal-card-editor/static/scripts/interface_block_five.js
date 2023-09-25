@@ -176,18 +176,18 @@ class ProductRow {
             data = {}
             data[SMART_FIELDS.TITLE] = "";
             data[SMART_FIELDS.COUNT_PIECES] = 0;
-            data[TECHNOLOGY] = 1;
-            data[FILM] = 1;
-            data[LAMINATION] = 1;
-            data[WIDTH_FILM] = 1;
-            data[LINEAR_METER_PIECES] = 0;
-            data[SQUARE_METER_PIECES] = 0;
-            data[LINEAR_METER_TOTAL] = 0;
-            data[SQUARE_METER_TOTAL] = 0;
-            data[LINK_SRC] = "";
-            data[CLIENT_FILES] = "";
-            data[PREPRESS] = "";
-            data[COMMENT] = "";
+            data[SMART_FIELDS.TECHNOLOGY] = 1;
+            data[SMART_FIELDS.FILM] = 1;
+            data[SMART_FIELDS.LAMINATION] = 1;
+            data[SMART_FIELDS.WIDTH_FILM] = 1;
+            data[SMART_FIELDS.LINEAR_METER_PIECES] = 0;
+            data[SMART_FIELDS.SQUARE_METER_PIECES] = 0;
+            data[SMART_FIELDS.LINEAR_METER_TOTAL] = 0;
+            data[SMART_FIELDS.SQUARE_METER_TOTAL] = 0;
+            data[SMART_FIELDS.LINK_SRC] = "";
+            data[SMART_FIELDS.CLIENT_FILES] = "";
+            data[SMART_FIELDS.PREPRESS] = "";
+            data[SMART_FIELDS.COMMENT] = "";
         };
 
         // разбивка строки с инормацией о файле, для получения: имени, размера и пути в облаке яндекса
