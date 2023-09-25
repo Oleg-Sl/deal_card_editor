@@ -474,6 +474,7 @@ export default class InterfaceBlockfour {
         for (let product of this.productsObj) {
             data.push(product.getData());
         }
+        console.log("DATA = ", data);
         return data;
     }
 
