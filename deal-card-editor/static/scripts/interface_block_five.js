@@ -349,6 +349,7 @@ class ProductRow {
     
     // возвращает HTML списка выбора (SELECT)
     getOptionsForSelectHTML(items, actualyId=0) {
+        console.log("items = ", items);
         let contentHTML = '';
         for (let item of items) {
             if (item.ID == actualyId) {
