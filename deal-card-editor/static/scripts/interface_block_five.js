@@ -45,7 +45,7 @@ class ProductRow {
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
                 let selectContainerLamination = this.container.querySelector(`.${SMART_FIELDS.LAMINATION}`);
-                selectContainerLamination.innerHTML = this.getOptionsForSelectHTML(LIST_LAMINATIONS[e.target.value], 0);
+                selectContainerLamination.innerHTML = this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[e.target.value], LIST_LAMINATIONS[e.target.value][0]);
                 selectContainerLamination.value = 0;
                 let selectContainerWidth = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
                 selectContainerWidth.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
@@ -120,29 +120,29 @@ class ProductRow {
         })
         // Событие изменения полей textarea
         this.element.addEventListener("input", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 e.target.style.height = 'auto';
                 e.target.style.height = (e.target.scrollHeight) + 'px';
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("focus", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("blur", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("keyup", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("contextmenu", async (e) => {не
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 BX24.fitWindow();
             }
         })
@@ -250,7 +250,7 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
-                        ${this.getOptionsForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || 0)}
+                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]][0])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
@@ -355,6 +355,19 @@ class ProductRow {
                 contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
             } else {
                 contentHTML += `<option value="${item.ID}">${item.VALUE}</option>`;
+            }
+        }
+        return contentHTML;
+    }
+
+    // возвращает HTML списка выбора (SELECT)
+    getOptionsFromArrayForSelectHTML(items, actualyName="") {
+        let contentHTML = '';
+        for (let item of items) {
+            if (item == actualyName) {
+                contentHTML += `<option value="${item}" selected>${item}</option>`;
+            } else {
+                contentHTML += `<option value="${item}">${item}</option>`;
             }
         }
         return contentHTML;
@@ -509,7 +522,7 @@ export default class InterfaceBlockfour {
                 <div><label for="" class="form-label fw-medium">Кол-во шт.</label></div>
                 <div><label for="" class="form-label fw-medium">Технология изготовления</label></div>
                 <div><label for="" class="form-label fw-medium">Пленка</label></div>
-                <div><label for="" class="form-label fw-medium">Ламинация</label></div>
+                <div><label for="" class="form-label fw-medium">Ламинация / номер цвета</label></div>
                 <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
                 <div class="product-list__cols-sizes">
                     <div class="product-list__cols-sizes-10"><label for="" class="form-label fw-medium">П.м. за шт.</label></div>
