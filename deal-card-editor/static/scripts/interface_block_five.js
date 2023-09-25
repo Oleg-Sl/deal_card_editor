@@ -93,12 +93,12 @@ class ProductRow {
                     let fileData = this.clientFiles[childIndex] || {};
                     this.removingFiles.push(fileData);
                     this.clientFiles.splice(childIndex, 1);
-                    renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles)
+                    this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles)
                 } else if (e.target.closest(`.${CONTAINER_PREPRESS_FILES}`)) {
                     let fileData = this.prepressFiles[childIndex] || {};
                     this.removingFiles.push(fileData);
                     this.prepressFiles.splice(childIndex, 1);
-                    renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles)
+                    this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles)
                 }
                 BX24.fitWindow();
             }
