@@ -4,9 +4,9 @@ $small_width: 1420px
 .product-list__header-table
     display: grid
     column-gap: 5px
-    grid-template-columns: 15px 150px 150px 150px 420px 70px 125px 1fr 1fr 
+    grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 280px 125px 1fr 1fr 1fr 
     @media screen and (max-width: $small_width)
-        grid-template-columns: 15px 150px 150px 150px 210px 70px 125px 1fr 1fr 
+        grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 140px 125px 1fr 1fr 1fr
 
 .product-list__product-row select, .product-list__product-row input
     padding-left: 0
@@ -24,20 +24,14 @@ $small_width: 1420px
 .product-list__cols-sizes-21
     grid-area: B2
 
-.product-list__cols-sizes-30
-    grid-area: A3
-
-.product-list__cols-sizes-31
-    grid-area: B3
-
 .product-list__cols-sizes
     display: grid
     column-gap: 5px
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
-    grid-template-areas: "A1 B1 A2 B2 A3 B3"
+    grid-template-columns: 1fr 1fr 1fr 1fr
+    grid-template-areas: "A1 B1 A2 B2"
     @media screen and (max-width: $small_width)
-        grid-template-columns: 1fr 1fr 1fr
-        grid-template-areas: "A1 A2 A3" "B1 B2 B3"
+        grid-template-columns: 1fr 1fr
+        grid-template-areas: "A1 A2" "B1 B2"
     // grid-template-columns: 15px 150px 150px 150px 70px 70px 70px 70px 60px 60px 70px 125px 1fr 1fr
 
 .product-list__row-files > div
