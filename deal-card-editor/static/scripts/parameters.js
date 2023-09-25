@@ -3,7 +3,7 @@ export const SMART_FIELDS = {
     COUNT_PIECES:           "ufCrm21_1694680127",  // Кол-во шт.
     TECHNOLOGY:             "ufCrm21_1694680011",  // Технология изготовления
     FILM:                   "ufCrm21_1694679978",  // Пленка
-    LAMINATION:             "ufCrm21_1694680039",  // Ламинация
+    LAMINATION:             "ufCrm21_1695660066",  // Ламинация
     WIDTH_FILM:             "ufCrm21_1694680085",  // Ширина пленки
     LINEAR_METER_PIECES:    "ufCrm21_1694680054",  // П.м. за шт.
     SQUARE_METER_PIECES:    "ufCrm21_1694680115",  // Кв. м. за шт.
