@@ -45,7 +45,6 @@ class ProductRow {
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
                 let selectContainerLamination = this.container.querySelector(`.${SMART_FIELDS.LAMINATION}`);
-                console.log(LIST_LAMINATIONS[e.target.value]);
                 selectContainerLamination.innerHTML = this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[e.target.value], LIST_LAMINATIONS[e.target.value][0]);
                 selectContainerLamination.value = 0;
                 let selectContainerWidth = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
@@ -367,7 +366,9 @@ class ProductRow {
     // возвращает HTML списка выбора (SELECT)
     getOptionsFromArrayForSelectHTML(items, actualyName="") {
         let contentHTML = '';
+        console.log("actualyName = ", actualyName);
         for (let item of items) {
+            console.log("item = ", item);
             if (item == actualyName) {
                 contentHTML += `<option value="${item}" selected>${item}</option>`;
             } else {
