@@ -411,7 +411,7 @@
   }
 }
 
-.product-list__row-files > div {
+.product-list__row-files > div, .product-list__row-prepress > div {
   display: grid;
   grid-template-columns: 15px 1fr 60px 20px;
 }
