@@ -65,14 +65,16 @@ class ProductRow {
         // Событие добавления файла
         this.element.addEventListener('change', async (e) => {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT) || e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
-                this.checkFileUploadCompletion = false;
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
                 elemSpinner.classList.remove("d-none");
                 for (let file of e.target.files) {
-                    await this.addFile(this.dealId, file.name, file, file.size);
+                    if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
+                        await this.addFile(ADD_FILE_TO_PRODUCT_INPUT, this.dealId, file.name, file, file.size);
+                    } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
+                        await this.addFile(ADD_FILE_TO_PREPRESS_INPUT, this.dealId, file.name, file, file.size);
+                    }
                 }
                 elemSpinner.classList.add("d-none");
-                this.checkFileUploadCompletion = true;
             }
         });
         // Событие удаления файла
@@ -403,15 +405,23 @@ class ProductRow {
         return files;
     }
     
-    async addFile(dealId, fileName, fileData, fileSize) {
+    async addFile(classFileContainer, dealId, fileName, fileData, fileSize) {
         let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
-        this.clientFiles.push({
-            "url": link,
-            "name": fileName,
-            "size": this.getFormatingFileSize(fileSize)
-        });
-        this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);
-        this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
+        if (classFileContainer == CONTAINER_CLIENT_FILES) {
+            this.clientFiles.push({
+                "url": link,
+                "name": fileName,
+                "size": this.getFormatingFileSize(fileSize)
+            });
+            this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);    
+        } else if (classFileContainer == CONTAINER_PREPRESS_FILES) {
+            this.clientFiles.push({
+                "url": link,
+                "name": fileName,
+                "size": this.getFormatingFileSize(fileSize)
+            });
+            this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
+        }
         BX24.fitWindow();
     }
 }
