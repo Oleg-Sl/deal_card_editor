@@ -368,11 +368,11 @@
   display: grid;
   -moz-column-gap: 5px;
        column-gap: 5px;
-  grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 280px 125px 1fr 1fr 1fr;
+  grid-template-columns: 15px 135px 70px 135px 135px 135px 70px 250px 115px 1fr 1fr 1fr;
 }
 @media screen and (max-width: 1420px) {
   .product-list__header-table {
-    grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 140px 125px 1fr 1fr 1fr;
+    grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 129px 115px 1fr 1fr 1fr;
   }
 }
 
