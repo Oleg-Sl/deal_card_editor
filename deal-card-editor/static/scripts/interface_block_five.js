@@ -253,7 +253,7 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
-                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]][0])}
+                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || (LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]] || [])[0])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
