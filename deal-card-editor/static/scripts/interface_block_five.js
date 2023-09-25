@@ -410,7 +410,8 @@ class ProductRow {
             "name": fileName,
             "size": this.getFormatingFileSize(fileSize)
         });
-        this.renderFilesHTML();
+        this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);
+        this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
         BX24.fitWindow();
     }
 }
