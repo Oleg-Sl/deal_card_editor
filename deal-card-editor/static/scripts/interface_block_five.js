@@ -195,6 +195,8 @@ class ProductRow {
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         this.data = data;
+        console.log("this.data = ", this.data);
+
         this.smartProcessId = data.id;
         this.element.innerHTML = this.getRowHTML();
         // вставка HTML-кода продукта на страницу
