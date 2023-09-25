@@ -236,7 +236,7 @@ class ProductRow {
                     <textarea class="form-control ${SMART_FIELDS.TITLE}" rows="1" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES}" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
+                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES}" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
@@ -276,7 +276,7 @@ class ProductRow {
                     </div>
                     <div class="product-list__cols-sizes-21">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.COUNSQUARE_METER_TOTALT_CARS}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL] || 0}">
                         </div>
                     </div>
                 </div>
