@@ -89,12 +89,12 @@ class ProductRow {
                 let containerFiles = rowFile.parentNode;
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
                 
-                if (e.target.classList.contains(CONTAINER_CLIENT_FILES)) {
+                if (e.target.closest(`.${CONTAINER_CLIENT_FILES}`)) {
                     let fileData = this.clientFiles[childIndex] || {};
                     this.removingFiles.push(fileData);
                     this.clientFiles.splice(childIndex, 1);
                     renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles)
-                } else if (e.target.classList.contains(CONTAINER_PREPRESS_FILES)) {
+                } else if (e.target.closest(`.${CONTAINER_PREPRESS_FILES}`)) {
                     let fileData = this.prepressFiles[childIndex] || {};
                     this.removingFiles.push(fileData);
                     this.prepressFiles.splice(childIndex, 1);
