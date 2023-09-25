@@ -512,10 +512,10 @@ export default class InterfaceBlockfour {
                 <div><label for="" class="form-label fw-medium">Ламинация</label></div>
                 <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
                 <div class="product-list__cols-sizes">
-                    <div class="product-list__cols-sizes-11"><label for="" class="form-label fw-medium">П.м. за шт.</label></div>
-                    <div class="product-list__cols-sizes-20"><label for="" class="form-label fw-medium"></label>Кв. м. за шт.</div>
-                    <div class="product-list__cols-sizes-21"><label for="" class="form-label fw-medium"></label>П.м. всего</div>
-                    <div class="product-list__cols-sizes-30"><label for="" class="form-label fw-medium"></label>Кв.м. всего</div>
+                    <div class="product-list__cols-sizes-10"><label for="" class="form-label fw-medium">П.м. за шт.</label></div>
+                    <div class="product-list__cols-sizes-11"><label for="" class="form-label fw-medium">Кв. м. за шт.</label></div>
+                    <div class="product-list__cols-sizes-20"><label for="" class="form-label fw-medium">П.м. всего</label></div>
+                    <div class="product-list__cols-sizes-21"><label for="" class="form-label fw-medium">Кв.м. всего</label></div>
                 </div>
                 <div><label for="" class="form-label fw-medium">Ссылка на исходники клиента</label></div>
                 <div><label for="" class="form-label fw-medium">Файлы клиента</label></div>
