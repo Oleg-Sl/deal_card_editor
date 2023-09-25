@@ -415,12 +415,14 @@ class ProductRow {
             });
             this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);    
         } else if (classFileContainer == CONTAINER_PREPRESS_FILES) {
-            this.clientFiles.push({
+            this.prepressFiles.push({
                 "url": link,
                 "name": fileName,
                 "size": this.getFormatingFileSize(fileSize)
             });
             this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
+        } else {
+            console.log("______STRANGE_______");
         }
         BX24.fitWindow();
     }
