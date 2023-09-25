@@ -4,81 +4,13 @@ import { SMART_FIELDS, LIST_TECHNOLOGY, LIST_FILMS,
 
 const SMART_PROCESS_NUMBER = 144;
 
-
+const CONTAINER_CLIENT_FILES = "product-list__row-files";
 const ADD_FILE_TO_PRODUCT = "product-choose-file-button";
 const ADD_FILE_TO_PRODUCT_INPUT = "product-choose-file-input";
 
-// const SMART_FIELDS = {
-//     TECHNOLOGY:    "ufCrm21_1694680011",  // Технология изготовления
-//     FILM:          "ufCrm21_1694679978",  // Пленка
-//     LAMINATION:    "ufCrm21_1694680039",  // Ламинация
-//     WIDTH_FILM:    "ufCrm21_1694680085",  // Ширина пленки
-//     LINEAR_METER:  "ufCrm21_1694680054",  // П.м.
-//     LENGTH_AREA:   "ufCrm21_1694680115",  // Длина, м
-//     HEIGHT_AREA:   "ufCrm21_1694680100",  // Высота, м
-//     COUNT_SIDE:    "ufCrm21_1694680138",  // Кол-во бортов
-//     COUNT_CARS:    "ufCrm21_1694680127",  // Кол-во авто
-//     SQUARE_METERS: "ufCrm21_1694680155",  // Кв.м. монтажа
-//     LINK_SRC:      "ufCrm21_1694680292",  // Ссылка на исходники клиента
-//     COMMENT:       "ufCrm21_1694680324",  // Комментарии
-//     CLIENT_FILES:  "ufCrm21_1694680404"   // Файлы клиента
-// };
-
-
-// const LIST_TECHNOLOGY = [
-//     {ID: 0, VALUE: "печать"},
-//     {ID: 1, VALUE: "плоттерная резка"},
-//     {ID: 2, VALUE: "печать+контурная резка"},
-// ];
-// const LIST_FILMS = [
-//     {ID: 0, VALUE: "ORAJET 3640"},
-//     {ID: 1, VALUE: "ORAJET 3551"},
-//     {ID: 2, VALUE: "Китай 010"},
-//     {ID: 3, VALUE: "ORACAL 641"},
-//     {ID: 4, VALUE: "ORACAL 551"},
-//     {ID: 5, VALUE: "Другое (указать в комментариях)"},
-// ];
-// const LIST_LAMINATIONS = [
-//     {ID: 0, VALUE: "ORAJET 3640 G"},
-//     {ID: 1, VALUE: "ORAJET 3640 M"},
-//     {ID: 2, VALUE: "ORAGARD 215 G"},
-//     {ID: 3, VALUE: "ORAGARD 215 M"},
-//     {ID: 4, VALUE: "Китай G"},
-//     {ID: 5, VALUE: "Китай M"},
-//     {ID: 6, VALUE: "нет"},
-// ];
-// const LIST_WIDTH_FILMS = {
-//     "0": [
-//         {ID: 0, VALUE: "1"},
-//         {ID: 1, VALUE: "1,05"},
-//         {ID: 2, VALUE: "1,26"},
-//         {ID: 3, VALUE: "1,37"},
-//         {ID: 4, VALUE: "1,52"},
-//         {ID: 5, VALUE: "1,6"},
-//     ],
-//     "1": [
-//         {ID: 0, VALUE: "1,26"},
-//         {ID: 1, VALUE: "1,37"},
-//     ],
-//     "2": [
-//         {ID: 0, VALUE: "1,07"},
-//         {ID: 1, VALUE: "1,27"},
-//         {ID: 2, VALUE: "1,37"},
-//         {ID: 3, VALUE: "1,52"},
-//     ],
-//     "3": [
-//         {ID: 0, VALUE: "1"},
-//         {ID: 1, VALUE: "1,26"},
-//     ],
-//     "4": [
-//         {ID: 0, VALUE: "1,26"},
-//     ],
-//     "5": []
-// };
-// const LIST_COUNT_SIDES = [
-//     {ID: 0, VALUE: 1},
-//     {ID: 1, VALUE: 2},
-// ];
+const CONTAINER_PREPRESS_FILES = "product-list__row-prepress";
+const ADD_FILE_TO_PREPRESS = "prepress-choose-file-button";
+const ADD_FILE_TO_PREPRESS_INPUT = "prepress-choose-file-input";
 
 
 class ProductRow {
@@ -99,7 +31,9 @@ class ProductRow {
         // данные хранящмеся в смарт-процессе
         this.data = {};
         // список файлов прикрепленных к продукту
-        this.files = [];
+        this.clientFiles = [];
+        // список файлов - черновой препресс
+        this.prepressFiles = [];
 
         // файлы которые нужно удалить по нажатию кнопки
         this.removingFiles = [];
@@ -123,11 +57,14 @@ class ProductRow {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
                 let elemInput = e.target.parentNode.querySelector("input");
                 elemInput.click();
+            } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS)) {
+                let elemInput = e.target.parentNode.querySelector("input");
+                elemInput.click();
             }
         })
         // Событие добавления файла
         this.element.addEventListener('change', async (e) => {
-            if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
+            if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT) || e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
                 this.checkFileUploadCompletion = false;
                 let elemSpinner = e.target.parentNode.parentNode.querySelector("span");
                 elemSpinner.classList.remove("d-none");
@@ -141,106 +78,140 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains("product-list__remove-files")) {
-                this.checkFileUploadCompletion = false;
                 let rowFile = e.target.closest(".file-row");
                 let containerFiles = rowFile.parentNode;
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
                 
-                let fileData = this.files[childIndex] || {};
-                this.removingFiles.push(fileData);
-
-                this.files.splice(childIndex, 1);
-                this.renderFilesHTML();
+                if (e.target.classList.contains(CONTAINER_CLIENT_FILES)) {
+                    let fileData = this.clientFiles[childIndex] || {};
+                    this.removingFiles.push(fileData);
+                    this.clientFiles.splice(childIndex, 1);
+                    renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles)
+                } else if (e.target.classList.contains(CONTAINER_PREPRESS_FILES)) {
+                    let fileData = this.prepressFiles[childIndex] || {};
+                    this.removingFiles.push(fileData);
+                    this.prepressFiles.splice(childIndex, 1);
+                    renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles)
+                }
                 BX24.fitWindow();
-                this.checkFileUploadCompletion = true;
             }
         })
-        // Событие изменения поля "м2"
+        // Событие изменения полей с размерами
         this.element.addEventListener("change", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.LENGTH_AREA)) {
-                this.updateSquareMeters();
-            } else if (e.target.classList.contains(SMART_FIELDS.HEIGHT_AREA)) {
-                this.updateSquareMeters();
-            } else if (e.target.classList.contains(SMART_FIELDS.COUNT_SIDE)) {
-                this.updateSquareMeters();
-            } else if (e.target.classList.contains(SMART_FIELDS.COUNT_CARS)) {
-                this.updateSquareMeters();
+            if (e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
+                this.updateArea();
+            } else if (e.target.classList.contains(SMART_FIELDS.LINEAR_METER_PIECES)) {
+                this.updateArea();
+            } else if (e.target.classList.contains(SMART_FIELDS.SQUARE_METER_PIECES)) {
+                this.updateArea();
             }
         })
-        // Событие изменения значений полей 
+        // Событие изменения значений любых полей 
         this.element.addEventListener("change", async (e) => {
             if (e.target.hasAttribute('data-field')) {
                 this.updateDate();
             }
         })
-        // Событие изменения поля "м2"
+        // Событие изменения полей textarea
         this.element.addEventListener("input", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
                 e.target.style.height = 'auto';
                 e.target.style.height = (e.target.scrollHeight) + 'px';
                 BX24.fitWindow();
             }
         })
-        // Событие изменения поля "м2"
         this.element.addEventListener("focus", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("blur", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
                 BX24.fitWindow();
             }
         })
         this.element.addEventListener("keyup", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
                 BX24.fitWindow();
             }
         })
-        this.element.addEventListener("contextmenu", async (e) => {
-            if (e.target.classList.contains(SMART_FIELDS.COMMENT)) {
+        this.element.addEventListener("contextmenu", async (e) => {не
+            if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.PREPRESS)) {
                 BX24.fitWindow();
             }
         })
     }
 
+    // получить текущие данные о продукте
     getData() {
         let data = this.data;
         data[SMART_FIELDS.CLIENT_FILES] = [];
-        for (let file of this.files) {
+        for (let file of this.clientFiles) {
             data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
+        }
+        for (let file of this.prepressFiles) {
+            data[SMART_FIELDS.PREPRESS].push(`${file.name};${file.size};${file.url}`);
         }
         return data;
     }
 
-    updateSquareMeters() {
-        let lengthFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.LENGTH_AREA}`).value.replace(",", "."));
-        let heightFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.HEIGHT_AREA}`).value.replace(",", "."));
-        let countSideFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_SIDE}`).value.replace(",", ".")) + 1;
-        let counCarsFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_CARS}`).value.replace(",", "."));
-        this.element.querySelector(`.${SMART_FIELDS.SQUARE_METERS}`).value = this.roundToTwoDecimals(lengthFloat * heightFloat * countSideFloat * counCarsFloat);
+    updateArea() {
+        let countFloat             = parseFloat(this.element.querySelector(`.${SMART_FIELDS.COUNT_PIECES}`).value.replace(",", "."));
+        let linerMeterPiecesFloat  = parseFloat(this.element.querySelector(`.${SMART_FIELDS.LINEAR_METER_PIECES}`).value.replace(",", "."));
+        let squareMeterPiecesFloat = parseFloat(this.element.querySelector(`.${SMART_FIELDS.SQUARE_METER_PIECES}`).value.replace(",", "."));
+        this.element.querySelector(`.${SMART_FIELDS.LINEAR_METER_TOTAL}`).value = this.roundToTwoDecimals(countFloat * linerMeterPiecesFloat);
+        this.element.querySelector(`.${SMART_FIELDS.SQUARE_METER_TOTAL}`).value = this.roundToTwoDecimals(countFloat * squareMeterPiecesFloat);
     }
 
-    async addRow(data={"ufCrm21_1694680011":0, "ufCrm21_1694679978": 0, "ufCrm21_1694680039": 0, "ufCrm21_1694680085": 0, "ufCrm21_1694680054": 0, "ufCrm21_1694680115": 0, "ufCrm21_1694680100": 0, "ufCrm21_1694680138": 0, "ufCrm21_1694680127": 0, "ufCrm21_1694680155": 0}) {
-        this.files = this.getFilesHTML(data[SMART_FIELDS.CLIENT_FILES] || "");
+    async addRow(data=null) {
+        if (!data) {
+            data = {}
+            data[SMART_FIELDS.TITLE] = "";
+            data[SMART_FIELDS.COUNT_PIECES] = 0;
+            data[TECHNOLOGY] = 0;
+            data[FILM] = 0;
+            data[LAMINATION] = 0;
+            data[WIDTH_FILM] = 0;
+            data[LINEAR_METER_PIECES] = 0;
+            data[SQUARE_METER_PIECES] = 0;
+            data[LINEAR_METER_TOTAL] = 0;
+            data[SQUARE_METER_TOTAL] = 0;
+            data[LINK_SRC] = "";
+            data[CLIENT_FILES] = "";
+            data[PREPRESS] = "";
+            data[COMMENT] = "";
+        };
+
+        // разбивка строки с инормацией о файле, для получения: имени, размера и пути в облаке яндекса
+        this.clientFiles = this.getFilesDataFromStr(data[SMART_FIELDS.CLIENT_FILES] || "");
+        this.prepressFiles = this.getFilesDataFromStr(data[SMART_FIELDS.PREPRESS] || "");
+        // создание контейнера продукта
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         this.data = data;
         this.smartProcessId = data.id;
         this.element.innerHTML = this.getRowHTML();
+        // вставка HTML-кода продукта на страницу
         this.container.append(this.element);
-        this.renderFilesHTML();
+        // вывод файлов
+        this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);
+        this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
 
+        // изменение размеров полей: название, комментарий
+        let textareaTitle = this.element.querySelector(`.${SMART_FIELDS.TITLE}`);
+        textareaTitle.style.height = 'auto';
+        textareaTitle.style.height = (textareaTitle.scrollHeight) + 'px';
         let textareaComment = this.element.querySelector(`.${SMART_FIELDS.COMMENT}`);
         textareaComment.style.height = 'auto';
         textareaComment.style.height = (textareaComment.scrollHeight) + 'px';
+        
+        // инициализация обработчиков
         this.initHandler();
         BX24.fitWindow();
         if (!this.smartProcessId) {
             this.updateDate();
             await this.addSmartProcessToBx24();
         }
-        // BX24.fitWindow();
     }
 
     updateDate() {
@@ -250,24 +221,17 @@ class ProductRow {
         }
     }
 
-    // возвращает список файлов в виде словаря преобразуя данные из сеонкатенированной строки
-    getFilesHTML(filesData) {
-        let files = [];
-        for (let i in filesData) {
-            let fileData = filesData[i].split(";");
-            files.push({
-                "name": fileData[0],
-                "size": fileData[1],
-                "url": fileData[2],
-            });
-        }
-        return files;
-    }
-
+    // возвращает HTML строки продукта
     getRowHTML() {
-        let contentHTML = `
+        return `
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
+                <div class="m-0 p-0">
+                    <textarea class="form-control ${SMART_FIELDS.TITLE}" rows="1" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
+                </div>
+                <div class="m-0 p-0">
+                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES}" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
+                </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
                         ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 0)}
@@ -283,51 +247,40 @@ class ProductRow {
                         ${this.getOptionsForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || 0)}
                     </select>
                 </div>
-
+                <div class="m-0 p-0">
+                    <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
+                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.WIDTH_FILM] || 0)}
+                    </select>
+                </div>
                 <div class="product-list__cols-sizes">
                     <div class="product-list__cols-sizes-10">
-                        <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
-                            ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.WIDTH_FILM] || 0)}
-                        </select>
+                        <div class="m-0 p-0">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_PIECES}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_PIECES}" value="${this.data[SMART_FIELDS.LINEAR_METER_PIECES] || 0}">
+                        </div>
                     </div>
                     <div class="product-list__cols-sizes-11">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER}" value="${this.data[SMART_FIELDS.LINEAR_METER] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-20">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LENGTH_AREA}" placeholder="" data-field="${SMART_FIELDS.LENGTH_AREA}" value="${this.data[SMART_FIELDS.LENGTH_AREA] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-21">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.HEIGHT_AREA}" placeholder="" data-field="${SMART_FIELDS.HEIGHT_AREA}" value="${this.data[SMART_FIELDS.HEIGHT_AREA] || 0}">
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-30">
-                        <div class="m-0 p-0">
-                            <select class="form-select ${SMART_FIELDS.COUNT_SIDE}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.COUNT_SIDE}">
-                                ${this.getOptionsForSelectHTML(LIST_COUNT_SIDES, this.data[SMART_FIELDS.COUNT_SIDE] || 0)}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="product-list__cols-sizes-31">
-                        <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.COUNT_CARS}" placeholder="" data-field="${SMART_FIELDS.COUNT_CARS}" value="${this.data[SMART_FIELDS.COUNT_CARS] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.COUNSQUARE_METER_TOTALT_CARS}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL] || 0}">
                         </div>
                     </div>
                 </div>
 
-                <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METERS}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METERS}" value="${this.data[SMART_FIELDS.SQUARE_METERS] || 0}">
-                </div>
                 <div class="m-0 p-0">
                     <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC}" placeholder="" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || "-"}">
                 </div>
                 <div class="m-0 p-0">
                     <div class="m-0 p-0">
-                        <div class="product-list__row-files">
+                        <div class="${CONTAINER_CLIENT_FILES}">
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -339,36 +292,42 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="m-0 p-0">
+                    <div class="m-0 p-0">
+                        <div class="${CONTAINER_PREPRESS_FILES}">
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+                        <div class="m-0 p-0 px-4">
+                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PREPRESS}" style="cursor: pointer;">Добавить+</p>
+                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PREPRESS_INPUT}" type="file" id="" multiple>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-0 p-0">
                     <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
             </div>
         `;
-        return contentHTML;
-    }
-
-    getOptionsForSelectHTML(items, actualyId=0) {
-        let contentHTML = '';
-        for (let item of items) {
-            if (item.ID == actualyId) {
-                contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
-            } else {
-                contentHTML += `<option value="${item.ID}">${item.VALUE}</option>`;
-            }
-        }
-        return contentHTML;
+        
     }
 
     // вставка списка файлов с информацией
-    renderFilesHTML() {
+    renderFiles(classFileContainer, files) {
+        let filesContainer = this.element.querySelector(`.${classFileContainer}`);
+        filesContainer.innerHTML = this.getFilesHTML(files);
+    }
+
+    // получение HTML-кода списка файлов
+    getFilesHTML(files) {
         let contentHTML = "";
-        for (let i in this.files) {
-            let fileData = this.files[i];
+        for (let i in files) {
+            let fileData = files[i];
             contentHTML += this.getRowTableFileHTML(+i + 1, fileData.name, fileData.size, fileData.url);
         }
-        let filesContainer = this.element.querySelector(`.product-list__row-files`);
-        filesContainer.innerHTML = contentHTML;
+        return contentHTML;
     }
-    
+
     // HTML код с информацией о файле
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
@@ -382,6 +341,19 @@ class ProductRow {
         return contentHTML;
     }
     
+    // возвращает HTML списка выбора (SELECT)
+    getOptionsForSelectHTML(items, actualyId=0) {
+        let contentHTML = '';
+        for (let item of items) {
+            if (item.ID == actualyId) {
+                contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
+            } else {
+                contentHTML += `<option value="${item.ID}">${item.VALUE}</option>`;
+            }
+        }
+        return contentHTML;
+    }
+
     // приведение размера к короткой записи с указанием единицы размера
     getFormatingFileSize(size) {
         const KB = 1024;
@@ -417,9 +389,23 @@ class ProductRow {
         return response.item;
     }
 
+    // возвращает список файлов в виде словаря преобразуя данные из сеонкатенированной строки
+    getFilesDataFromStr(filesData) {
+        let files = [];
+        for (let i in filesData) {
+            let fileData = filesData[i].split(";");
+            files.push({
+                "name": fileData[0],
+                "size": fileData[1],
+                "url": fileData[2],
+            });
+        }
+        return files;
+    }
+    
     async addFile(dealId, fileName, fileData, fileSize) {
         let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
-        this.files.push({
+        this.clientFiles.push({
             "url": link,
             "name": fileName,
             "size": this.getFormatingFileSize(fileSize)
@@ -510,20 +496,21 @@ export default class InterfaceBlockfour {
         let contentHTML = `
             <div class="product-list__header-table">
                 <div class="m-0 p-1 align-middle"></div>
+                <div><label for="" class="form-label fw-medium">Название</label></div>
+                <div><label for="" class="form-label fw-medium">Кол-во шт.</label></div>
                 <div><label for="" class="form-label fw-medium">Технология изготовления</label></div>
                 <div><label for="" class="form-label fw-medium">Пленка</label></div>
                 <div><label for="" class="form-label fw-medium">Ламинация</label></div>
+                <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
                 <div class="product-list__cols-sizes">
-                    <div class="product-list__cols-sizes-10"><label for="" class="form-label fw-medium">Ширина пленки</label></div>
-                    <div class="product-list__cols-sizes-11"><label for="" class="form-label fw-medium">П.м.</label></div>
-                    <div class="product-list__cols-sizes-20"><label for="" class="form-label fw-medium">Длина, м</label></div>
-                    <div class="product-list__cols-sizes-21"><label for="" class="form-label fw-medium">Высота, м</label></div>
-                    <div class="product-list__cols-sizes-30"><label for="" class="form-label fw-medium">Кол-во бортов</label></div>
-                    <div class="product-list__cols-sizes-31"><label for="" class="form-label fw-medium">Кол-во авто</label></div>
+                    <div class="product-list__cols-sizes-11"><label for="" class="form-label fw-medium">П.м. за шт.</label></div>
+                    <div class="product-list__cols-sizes-20"><label for="" class="form-label fw-medium"></label>Кв. м. за шт.</div>
+                    <div class="product-list__cols-sizes-21"><label for="" class="form-label fw-medium"></label>П.м. всего</div>
+                    <div class="product-list__cols-sizes-30"><label for="" class="form-label fw-medium"></label>Кв.м. всего</div>
                 </div>
-                <div><label for="" class="form-label fw-medium">Кв.м. монтажа</label></div>
                 <div><label for="" class="form-label fw-medium">Ссылка на исходники клиента</label></div>
                 <div><label for="" class="form-label fw-medium">Файлы клиента</label></div>
+                <div><label for="" class="form-label fw-medium">Черновой препресс</label></div>
                 <div><label for="" class="form-label fw-medium">Комментарии</label></div>
             </div>
         `;
@@ -538,23 +525,23 @@ export default class InterfaceBlockfour {
                 "filter": { "parentId2": dealId },
                 "select": [
                     "id",
+                    SMART_FIELDS.TITLE,
+                    SMART_FIELDS.COUNT_PIECES,
                     SMART_FIELDS.TECHNOLOGY,
                     SMART_FIELDS.FILM,
                     SMART_FIELDS.LAMINATION,
                     SMART_FIELDS.WIDTH_FILM,
-                    SMART_FIELDS.LINEAR_METER,
-                    SMART_FIELDS.LENGTH_AREA,
-                    SMART_FIELDS.HEIGHT_AREA,
-                    SMART_FIELDS.COUNT_SIDE,
-                    SMART_FIELDS.COUNT_CARS,
-                    SMART_FIELDS.SQUARE_METERS,
+                    SMART_FIELDS.LINEAR_METER_PIECES,
+                    SMART_FIELDS.SQUARE_METER_PIECES,
+                    SMART_FIELDS.LINEAR_METER_TOTAL,
+                    SMART_FIELDS.SQUARE_METER_TOTAL,
                     SMART_FIELDS.LINK_SRC,
-                    SMART_FIELDS.COMMENT,
                     SMART_FIELDS.CLIENT_FILES,
+                    SMART_FIELDS.PREPRESS,
+                    SMART_FIELDS.COMMENT,
                 ]
             }
         );
-        // return data.result.items;
         return data.items;
     }
 }
