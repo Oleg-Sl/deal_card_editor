@@ -84,6 +84,7 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains("product-list__remove-files")) {
+                console.log("product-list__remove-files = ", e.target);
                 let rowFile = e.target.closest(".file-row");
                 let containerFiles = rowFile.parentNode;
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
@@ -155,6 +156,7 @@ class ProductRow {
         for (let file of this.clientFiles) {
             data[SMART_FIELDS.CLIENT_FILES].push(`${file.name};${file.size};${file.url}`);
         }
+        data[SMART_FIELDS.PREPRESS] = [];
         for (let file of this.prepressFiles) {
             data[SMART_FIELDS.PREPRESS].push(`${file.name};${file.size};${file.url}`);
         }
@@ -474,7 +476,6 @@ export default class InterfaceBlockfour {
         for (let product of this.productsObj) {
             data.push(product.getData());
         }
-        console.log("DATA = ", data);
         return data;
     }
 
