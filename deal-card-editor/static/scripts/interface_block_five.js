@@ -57,9 +57,11 @@ class ProductRow {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
                 let elemInput = e.target.parentNode.querySelector("input");
                 elemInput.click();
+                console.log("Открыли окно выбора файла - ADD_FILE_TO_PRODUCT");
             } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS)) {
                 let elemInput = e.target.parentNode.querySelector("input");
                 elemInput.click();
+                console.log("Открыли окно выбора файла - ADD_FILE_TO_PREPRESS");
             }
         })
         // Событие добавления файла
@@ -69,8 +71,10 @@ class ProductRow {
                 elemSpinner.classList.remove("d-none");
                 for (let file of e.target.files) {
                     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
+                        console.log("Добавление файла - ADD_FILE_TO_PRODUCT_INPUT");
                         await this.addFile(this.clientFiles, this.dealId, file.name, file, file.size);
                     } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
+                        console.log("Добавление файла - ADD_FILE_TO_PREPRESS_INPUT");
                         await this.addFile(this.prepressFiles, this.dealId, file.name, file, file.size);
                     }
                 }
