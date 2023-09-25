@@ -69,9 +69,9 @@ class ProductRow {
                 elemSpinner.classList.remove("d-none");
                 for (let file of e.target.files) {
                     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
-                        await this.addFile(ADD_FILE_TO_PRODUCT_INPUT, this.dealId, file.name, file, file.size);
+                        await this.addFile(this.clientFiles, this.dealId, file.name, file, file.size);
                     } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
-                        await this.addFile(ADD_FILE_TO_PREPRESS_INPUT, this.dealId, file.name, file, file.size);
+                        await this.addFile(this.prepressFiles, this.dealId, file.name, file, file.size);
                     }
                 }
                 elemSpinner.classList.add("d-none");
@@ -405,25 +405,17 @@ class ProductRow {
         return files;
     }
     
-    async addFile(classFileContainer, dealId, fileName, fileData, fileSize) {
+    async addFile(files, dealId, fileName, fileData, fileSize) {
         let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
-        if (classFileContainer == CONTAINER_CLIENT_FILES) {
-            this.clientFiles.push({
-                "url": link,
-                "name": fileName,
-                "size": this.getFormatingFileSize(fileSize)
-            });
-            this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);    
-        } else if (classFileContainer == CONTAINER_PREPRESS_FILES) {
-            this.prepressFiles.push({
-                "url": link,
-                "name": fileName,
-                "size": this.getFormatingFileSize(fileSize)
-            });
-            this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
-        } else {
-            console.log("______STRANGE_______");
-        }
+        files.push({
+            "url": link,
+            "name": fileName,
+            "size": this.getFormatingFileSize(fileSize)
+        });
+
+        this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles);    
+        this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles);
+
         BX24.fitWindow();
     }
 }
