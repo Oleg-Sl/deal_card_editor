@@ -176,10 +176,10 @@ class ProductRow {
             data = {}
             data[SMART_FIELDS.TITLE] = "";
             data[SMART_FIELDS.COUNT_PIECES] = 0;
-            data[TECHNOLOGY] = 0;
-            data[FILM] = 0;
-            data[LAMINATION] = 0;
-            data[WIDTH_FILM] = 0;
+            data[TECHNOLOGY] = 1;
+            data[FILM] = 1;
+            data[LAMINATION] = 1;
+            data[WIDTH_FILM] = 1;
             data[LINEAR_METER_PIECES] = 0;
             data[SQUARE_METER_PIECES] = 0;
             data[LINEAR_METER_TOTAL] = 0;
@@ -243,22 +243,22 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
-                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 0)}
+                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 1)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}">
-                        ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM] || 0)}
+                        ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM] || 1)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
-                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.LAMINATION] || (LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]] || [])[0])}
+                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION] || (LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]] || [])[0])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
-                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 0], this.data[SMART_FIELDS.WIDTH_FILM] || 0)}
+                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM] || 1)}
                     </select>
                 </div>
                 <div class="product-list__cols-sizes">
