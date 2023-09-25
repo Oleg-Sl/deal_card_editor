@@ -195,7 +195,6 @@ class ProductRow {
         this.element = document.createElement('div');
         this.element.style.paddingBottom = "0px";
         this.data = data;
-        console.log("this.data = ", this.data);
 
         this.smartProcessId = data.id;
         this.element.innerHTML = this.getRowHTML();
@@ -351,7 +350,6 @@ class ProductRow {
     
     // возвращает HTML списка выбора (SELECT)
     getOptionsForSelectHTML(items, actualyId=0) {
-        console.log("items = ", items);
         let contentHTML = '';
         for (let item of items) {
             if (item.ID == actualyId) {

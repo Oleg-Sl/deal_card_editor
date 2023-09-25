@@ -214,14 +214,21 @@ export const LIST_WIDTH_FILMS = {
         {ID: 2, VALUE: "1,37"},
         {ID: 3, VALUE: "1,52"},
     ],
-    "4": [
+    "5": [
         {ID: 0, VALUE: "1"},
         {ID: 1, VALUE: "1,26"},
     ],
-    "5": [
+    "6": [
+        {ID: 0, VALUE: "1"},
+        {ID: 1, VALUE: "1,26"},
+    ],
+    "8": [
         {ID: 0, VALUE: "1,26"},
     ],
-    "6": []
+    "9": [
+        {ID: 0, VALUE: "1,26"},
+    ],
+    "10": []
 };
 export const LIST_COUNT_SIDES = [
     {ID: 0, VALUE: 1},
