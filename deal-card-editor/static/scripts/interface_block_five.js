@@ -293,7 +293,7 @@ class ProductRow {
                         <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="m-0 p-0 px-4">
                             <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
-                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
+                            <input class="d-none ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
                         </div>
                     </div>
                 </div>
@@ -306,7 +306,7 @@ class ProductRow {
                         <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
                         <div class="m-0 p-0 px-4">
                             <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PREPRESS}" style="cursor: pointer;">Добавить+</p>
-                            <input class="d-none product-choose-file-input ${ADD_FILE_TO_PREPRESS_INPUT}" type="file" id="" multiple>
+                            <input class="d-none ${ADD_FILE_TO_PREPRESS_INPUT}" type="file" id="" multiple>
                         </div>
                     </div>
                 </div>
