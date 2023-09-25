@@ -28,7 +28,7 @@ export default class YandexDisk {
             urlMetaInfoFile = await this.publishFile(`${dirPath}/${fileName}`);
         }
         if (res && href && urlMetaInfoFile) {
-            let publishUrl = await this.getPublishLinkFile(replaceHttpWithHttps(urlMetaInfoFile));
+            let publishUrl = await this.getPublishLinkFile(this.replaceHttpWithHttps(urlMetaInfoFile));
             return publishUrl;
         }
     }
