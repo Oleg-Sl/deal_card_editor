@@ -391,16 +391,16 @@
 }
 
 .product-list__product-row select {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 2;
+  padding-right: 20;
 }
 .product-list__product-row select ::after {
   right: 0px;
 }
 
 .product-list__product-row input {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 2;
+  padding-right: 2;
 }
 
 .product-list__cols-sizes-10 {
