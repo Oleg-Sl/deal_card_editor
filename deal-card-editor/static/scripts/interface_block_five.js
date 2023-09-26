@@ -171,24 +171,24 @@ class ProductRow {
         this.element.querySelector(`.${SMART_FIELDS.SQUARE_METER_TOTAL}`).value = this.roundToTwoDecimals(countFloat * squareMeterPiecesFloat);
     }
 
-    async addRow(data=null) {
-        if (!data) {
-            data = {}
-            data[SMART_FIELDS.TITLE] = "";
-            data[SMART_FIELDS.COUNT_PIECES] = 0;
-            data[SMART_FIELDS.TECHNOLOGY] = 0;
-            data[SMART_FIELDS.FILM] = 0;
-            data[SMART_FIELDS.LAMINATION] = 0;
-            data[SMART_FIELDS.WIDTH_FILM] = 0;
-            data[SMART_FIELDS.LINEAR_METER_PIECES] = 0;
-            data[SMART_FIELDS.SQUARE_METER_PIECES] = 0;
-            data[SMART_FIELDS.LINEAR_METER_TOTAL] = 0;
-            data[SMART_FIELDS.SQUARE_METER_TOTAL] = 0;
-            data[SMART_FIELDS.LINK_SRC] = "";
-            data[SMART_FIELDS.CLIENT_FILES] = "";
-            data[SMART_FIELDS.PREPRESS] = "";
-            data[SMART_FIELDS.COMMENT] = "";
-        };
+    async addRow(data={}) {
+        // if (!data) {
+        //     data = {}
+        //     data[SMART_FIELDS.TITLE] = "";
+        //     data[SMART_FIELDS.COUNT_PIECES] = 0;
+        //     data[SMART_FIELDS.TECHNOLOGY] = 0;
+        //     data[SMART_FIELDS.FILM] = 0;
+        //     data[SMART_FIELDS.LAMINATION] = 0;
+        //     data[SMART_FIELDS.WIDTH_FILM] = 0;
+        //     data[SMART_FIELDS.LINEAR_METER_PIECES] = 0;
+        //     data[SMART_FIELDS.SQUARE_METER_PIECES] = 0;
+        //     data[SMART_FIELDS.LINEAR_METER_TOTAL] = 0;
+        //     data[SMART_FIELDS.SQUARE_METER_TOTAL] = 0;
+        //     data[SMART_FIELDS.LINK_SRC] = "";
+        //     data[SMART_FIELDS.CLIENT_FILES] = "";
+        //     data[SMART_FIELDS.PREPRESS] = "";
+        //     data[SMART_FIELDS.COMMENT] = "";
+        // };
 
         // разбивка строки с инормацией о файле, для получения: имени, размера и пути в облаке яндекса
         this.clientFiles = this.getFilesDataFromStr(data[SMART_FIELDS.CLIENT_FILES] || "");
@@ -243,22 +243,22 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY} product_list__fontstyle" aria-label=".product_list__fontstyleform-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
-                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 1)}
+                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}">
-                        ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM] || 1)}
+                        ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.LAMINATION} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
-                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION] || (LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]] || [])[0])}
+                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.WIDTH_FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
-                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM] || 1)}
+                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM])}
                     </select>
                 </div>
                 <div class="product-list__cols-sizes">
