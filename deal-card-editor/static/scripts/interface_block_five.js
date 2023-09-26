@@ -236,28 +236,28 @@ class ProductRow {
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
+                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
-                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
+                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} " placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
+                    <select class="form-select ${SMART_FIELDS.TECHNOLOGY} product_list__fontstyle" aria-label=".product_list__fontstyleform-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
                         ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY] || 1)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}">
+                    <select class="form-select ${SMART_FIELDS.FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}">
                         ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM] || 1)}
                     </select>
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.LAMINATION}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
+                    <select class="form-select ${SMART_FIELDS.LAMINATION} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}">
                         ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION] || (LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM]] || [])[0])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
-                    <select class="form-select ${SMART_FIELDS.WIDTH_FILM}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
+                    <select class="form-select ${SMART_FIELDS.WIDTH_FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}">
                         ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM] || 1)}
                     </select>
                 </div>
