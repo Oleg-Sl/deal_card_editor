@@ -44,10 +44,10 @@ class ProductRow {
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
-                let selectContainerLamination = this.container.querySelector(`.${SMART_FIELDS.LAMINATION}`);
+                let selectContainerLamination = this.element.querySelector(`.${SMART_FIELDS.LAMINATION}`);
                 selectContainerLamination.innerHTML = this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[e.target.value], LIST_LAMINATIONS[e.target.value][0]);
                 selectContainerLamination.value = 0;
-                let selectContainerWidth = this.container.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
+                let selectContainerWidth = this.element.querySelector(`.${SMART_FIELDS.WIDTH_FILM}`);
                 selectContainerWidth.innerHTML = this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[e.target.value], 0);
                 selectContainerWidth.value = 0;
             }
