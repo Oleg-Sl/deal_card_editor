@@ -314,7 +314,7 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT]}</textarea>
+                    <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
             </div>
         `;
