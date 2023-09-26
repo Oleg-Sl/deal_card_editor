@@ -382,7 +382,16 @@
   }
 }
 
-.product-list__product-row select, .product-list__product-row input {
+.product-list__product-row select {
+  padding-left: 1;
+  padding-right: 5;
+}
+.product-list__product-row select ::after {
+  position: absolute;
+  right: 0px;
+}
+
+.product-list__product-row input {
   padding-left: 0;
   padding-right: 0;
 }

@@ -19,7 +19,14 @@ $small_width: 1420px
     @media screen and (max-width: $small_width)
         grid-template-columns: 15px 1fr 70px 150px 150px 150px 70px 129px 115px 1fr 1fr 1fr
 
-.product-list__product-row select, .product-list__product-row input
+.product-list__product-row select
+    padding-left: 1
+    padding-right: 5
+    ::after
+        position: absolute
+        right: 0px
+
+.product-list__product-row input
     padding-left: 0
     padding-right: 0
 
