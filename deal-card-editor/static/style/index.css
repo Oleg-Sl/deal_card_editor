@@ -389,7 +389,7 @@
   padding-right: 20px;
 }
 
-.product-list__product-row select:after {
+.product-list__product-row .form-selec:after {
   content: "▼" !important;
   padding: 0 8px;
   font-size: 12px;
