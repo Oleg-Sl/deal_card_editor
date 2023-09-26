@@ -391,6 +391,7 @@
 }
 
 .product-list__product-row select {
+  border-radius: 0;
   padding-left: 2;
   padding-right: 20;
 }
@@ -399,6 +400,7 @@
 }
 
 .product-list__product-row input {
+  border-radius: 0;
   padding-left: 2;
   padding-right: 2;
 }
