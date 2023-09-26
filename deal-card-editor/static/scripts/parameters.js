@@ -19,6 +19,8 @@ export const LIST_TECHNOLOGY = [
     {ID: 1, VALUE: "печать"},
     {ID: 2, VALUE: "плоттерная резка"},
     {ID: 3, VALUE: "печать+контурная резка"},
+    {ID: 4, VALUE: "без производства"},
+    {ID: 5, VALUE: "другое"},
 ];
 // список пленок
 export const LIST_FILMS = [

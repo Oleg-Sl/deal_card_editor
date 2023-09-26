@@ -17,6 +17,7 @@ export class InterfaceBlockTwo {
             "UF_CRM_1695664525": this.container.querySelector("#taskeditor__UF_CRM_1695664525").value,
             "UF_CRM_1657651541": this.container.querySelector("#taskeditor__UF_CRM_1657651541").value,
             "UF_CRM_1637861351": this.container.querySelector("#taskeditor__UF_CRM_1637861351").value,
+            "UF_CRM_1640199620": this.container.querySelector("#taskeditor__UF_CRM_1640199620").value,
             "UF_CRM_1637861029": this.container.querySelector("#taskeditor__UF_CRM_1637861029").value,
             "UF_CRM_1637326777": this.container.querySelector("#taskeditor__UF_CRM_1637326777").value,
             // "UF_CRM_1619441621": this.container.querySelector("#taskeditor__UF_CRM_1619441621").value,
@@ -34,6 +35,7 @@ export class InterfaceBlockTwo {
         contentHTML += this.getSelectHTML(fields.UF_CRM_1695664525.items, data.UF_CRM_1695664525, "UF_CRM_1695664525", "Замер", 1);  // isMeasuring
         contentHTML += this.getSelectHTML(fields.UF_CRM_1657651541.items, data.UF_CRM_1657651541, "UF_CRM_1657651541", "Демонтаж", 1);   // isDismantling
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637861351.items, data.UF_CRM_1637861351, "UF_CRM_1637861351", "Парковка", 1);   // isParking
+        contentHTML += this.getSelectHTML(fields.UF_CRM_1637861351.items, data.UF_CRM_1637861351, "UF_CRM_1640199620", "печать согласно ЦП?", 1);
         // !!! Неизвестно поле !!!
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637861029.items, data.UF_CRM_1637861029, "UF_CRM_1637861029", "Монтаж 24/7", 1);    // isMounting24
         contentHTML += this.getSelectHTML(fields.UF_CRM_1637326777.items, data.UF_CRM_1637326777, "UF_CRM_1637326777", "Наши реквизиты", 2); // ourRequisite
