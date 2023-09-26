@@ -117,26 +117,26 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     // console.log("fields = ", fields);
     // console.log("dataDealNew = ", dataDealNew);
     return `
-Что делаем по заказу в целом:
+[B]Что делаем по заказу в целом:[/B]
 ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
 ____________
-№ заказа: ${dataDealNew.UF_CRM_1633523035}
-Ссылка на тендер/CRM клиента: : [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041}[/URL]
+[B]№ заказа:[/B] ${dataDealNew.UF_CRM_1633523035}
+[B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041}[/URL]
 ____________
-Командировка: ${getValueByKey(fields.UF_CRM_1668129559.items, dataDealNew.UF_CRM_1668129559)}
-Замер: ${getValueByKey(fields.UF_CRM_1695664525.items, dataDealNew.UF_CRM_1695664525)}
-Демонтаж: ${getValueByKey(fields.UF_CRM_1657651541.items, dataDealNew.UF_CRM_1657651541)}
-Парковка: ${getValueByKey(fields.UF_CRM_1637861351.items, dataDealNew.UF_CRM_1637861351)}
-Печать согласно ЦП?: ${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
-Монтаж 24/7: ${getValueByKey(fields.UF_CRM_1637861029.items, dataDealNew.UF_CRM_1637861029)}
-Наши реквизиты: ${getValueByKey(fields.UF_CRM_1637326777.items, dataDealNew.UF_CRM_1637326777)}
-Аренда бокса: ${getValueByKey(fields.UF_CRM_1694710116.items, dataDealNew.UF_CRM_1694710116)}
-Монтаж на территории: ${getValueByKey(fields.UF_CRM_1694710578.items, dataDealNew.UF_CRM_1694710578)}
+[B]Командировка:[/B] ${getValueByKey(fields.UF_CRM_1668129559.items, dataDealNew.UF_CRM_1668129559)}
+[B]Замер:[/B] ${getValueByKey(fields.UF_CRM_1695664525.items, dataDealNew.UF_CRM_1695664525)}
+[B]Демонтаж:[/B] ${getValueByKey(fields.UF_CRM_1657651541.items, dataDealNew.UF_CRM_1657651541)}
+[B]Парковка:[/B] ${getValueByKey(fields.UF_CRM_1637861351.items, dataDealNew.UF_CRM_1637861351)}
+[B]Печать согласно ЦП?:[/B] ${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
+[B]Монтаж 24/7:[/B] ${getValueByKey(fields.UF_CRM_1637861029.items, dataDealNew.UF_CRM_1637861029)}
+[B]Наши реквизиты:[/B] ${getValueByKey(fields.UF_CRM_1637326777.items, dataDealNew.UF_CRM_1637326777)}
+[B]Аренда бокса:[/B] ${getValueByKey(fields.UF_CRM_1694710116.items, dataDealNew.UF_CRM_1694710116)}
+[B]Монтаж на территории:[/B] ${getValueByKey(fields.UF_CRM_1694710578.items, dataDealNew.UF_CRM_1694710578)}
 ____________
-Контакт: [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
-Написать в Whats App [URL=https://wa.me/${contactMeasurementText}/][/URL]
+[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
+[B]Написать в Whats App[/B] [URL=https://wa.me/${contactMeasurementText}/][/URL]
 ____________
-Компания: [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
+[B]Компания:[/B] [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
 
 ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_1672744985962.items)}
 `;
