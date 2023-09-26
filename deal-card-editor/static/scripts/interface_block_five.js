@@ -123,7 +123,7 @@ class ProductRow {
         this.element.addEventListener("input", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 e.target.style.height = 'auto';
-                e.target.style.height = (e.target.scrollHeight) + 'px';
+                e.target.style.height = (e.target.scrollHeight + 4) + 'px';
                 BX24.fitWindow();
             }
         })
