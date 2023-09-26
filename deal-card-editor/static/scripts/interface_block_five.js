@@ -355,9 +355,9 @@ class ProductRow {
         let contentHTML = '';
         for (let item of items) {
             if (item.ID == actualyId) {
-                contentHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
+                contentHTML += `<option class="product_list__fontstyle" value="${item.ID}" selected>${item.VALUE}</option>`;
             } else {
-                contentHTML += `<option value="${item.ID}">${item.VALUE}</option>`;
+                contentHTML += `<option class="product_list__fontstyle" value="${item.ID}">${item.VALUE}</option>`;
             }
         }
         return contentHTML;
@@ -370,9 +370,9 @@ class ProductRow {
         for (let item of items) {
             console.log("item = ", item);
             if (item == actualyName) {
-                contentHTML += `<option value="${item}" selected>${item}</option>`;
+                contentHTML += `<option class="product_list__fontstyle" value="${item}" selected>${item}</option>`;
             } else {
-                contentHTML += `<option value="${item}">${item}</option>`;
+                contentHTML += `<option class="product_list__fontstyle" value="${item}">${item}</option>`;
             }
         }
         return contentHTML;
