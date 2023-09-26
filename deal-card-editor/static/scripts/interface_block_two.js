@@ -57,7 +57,7 @@ export class InterfaceBlockTwo {
         }
         let contentHTML = `
             <div class="col-${widthCols}" id="${titleEng}">
-                <label for="taskeditor__${titleEng}" class="text-truncate" style="width: 100%;">${titleRus}</label>
+                <label for="taskeditor__${titleEng}" class="text-truncate" style="width: 100%;" title="${titleRus}">${titleRus}</label>
                 <select id="taskeditor__${titleEng}" class="form-select" aria-label=".form-select-lg example">
                     ${contentSelectHTML}
                 </select>
