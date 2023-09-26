@@ -236,7 +236,7 @@ class ProductRow {
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
+                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
                     <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} product_list__fontstyle" placeholder="шт." data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
