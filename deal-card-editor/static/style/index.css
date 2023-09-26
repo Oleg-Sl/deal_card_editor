@@ -388,7 +388,7 @@
   padding-right: 20px;
 }
 
-.product-list__product-row select::after {
+.product-list__product-row select:after {
   right: 0px;
 }
 
