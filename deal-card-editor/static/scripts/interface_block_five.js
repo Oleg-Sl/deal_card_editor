@@ -236,10 +236,10 @@ class ProductRow {
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.TITLE}" rows="1" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
+                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
-                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES}" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
+                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES] || 0}">
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY}" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}">
@@ -264,28 +264,28 @@ class ProductRow {
                 <div class="product-list__cols-sizes">
                     <div class="product-list__cols-sizes-10">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_PIECES}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_PIECES}" value="${this.data[SMART_FIELDS.LINEAR_METER_PIECES] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_PIECES} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_PIECES}" value="${this.data[SMART_FIELDS.LINEAR_METER_PIECES] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-11">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-20">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL] || 0}">
                         </div>
                     </div>
                     <div class="product-list__cols-sizes-21">
                         <div class="m-0 p-0">
-                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL}" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL] || 0}">
+                            <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL] || 0}">
                         </div>
                     </div>
                 </div>
 
                 <div class="m-0 p-0">
-                    <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC}" placeholder="" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || "-"}">
+                    <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC} product_list__fontstyle" placeholder="" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || "-"}">
                 </div>
                 <div class="m-0 p-0">
                     <div class="m-0 p-0">
@@ -314,7 +314,7 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="m-0 p-0">
-                    <textarea class="form-control ${SMART_FIELDS.COMMENT}" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
+                    <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
             </div>
         `;

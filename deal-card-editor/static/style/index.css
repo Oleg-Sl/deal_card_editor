@@ -364,6 +364,12 @@
   border-radius: 50%;
 }
 
+.product_list__fontstyle {
+  color: #333;
+  font: 13px "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 400;
+}
+
 .product-list__header-table {
   display: grid;
   -moz-column-gap: 5px;
