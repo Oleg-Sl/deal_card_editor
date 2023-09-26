@@ -370,6 +370,14 @@
   font-weight: 400;
 }
 
+.product-list__select {
+  border-radius: 0;
+}
+
+.product-list__input {
+  border-radius: 0;
+}
+
 .product-list__header-table {
   display: grid;
   -moz-column-gap: 5px;
@@ -383,11 +391,10 @@
 }
 
 .product-list__product-row select {
-  padding-left: 1;
-  padding-right: 5;
+  padding-left: 0;
+  padding-right: 0;
 }
 .product-list__product-row select ::after {
-  position: absolute;
   right: 0px;
 }
 
