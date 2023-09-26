@@ -111,17 +111,13 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let company = (Array.isArray(response.company) ? response.company[0] : {}) || {};
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
-    
-    // ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
-    // ${getValidData(dataDealNew.UF_CRM_1687857777 || "")}
-    // console.log("fields = ", fields);
-    // console.log("dataDealNew = ", dataDealNew);
+
     return `
 [B]Что делаем по заказу в целом:[/B]
 ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
 ____________
 [B]№ заказа:[/B] ${dataDealNew.UF_CRM_1633523035}
-[B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041}[/URL]
+[B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041 || '-'}[/URL]
 ____________
 [B]Командировка:[/B] ${getValueByKey(fields.UF_CRM_1668129559.items, dataDealNew.UF_CRM_1668129559)}
 [B]Замер:[/B] ${getValueByKey(fields.UF_CRM_1695664525.items, dataDealNew.UF_CRM_1695664525)}
@@ -162,20 +158,20 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
     for (let product of products) {
         console.log("product = ", product);
         tbody += `[TR]
-            [TD]${product[SMART_FIELDS.TITLE]}[/TD]
-            [TD]${product[SMART_FIELDS.COUNT_PIECES]}[/TD]
+            [TD]${product[SMART_FIELDS.TITLE] || "-"}[/TD]
+            [TD]${product[SMART_FIELDS.COUNT_PIECES] || "-"}[/TD]
             [TD]${getValueByKey(LIST_TECHNOLOGY, product[SMART_FIELDS.TECHNOLOGY])}[/TD]
             [TD]${getValueByKey(LIST_FILMS, product[SMART_FIELDS.FILM])}[/TD]
-            [TD]${product[SMART_FIELDS.LAMINATION]}[/TD]
+            [TD]${product[SMART_FIELDS.LAMINATION] || "-"}[/TD]
             [TD]${getValueByKey(LIST_WIDTH_FILMS[product[SMART_FIELDS.FILM]] || [], product[SMART_FIELDS.WIDTH_FILM])}[/TD]
-            [TD]${product[SMART_FIELDS.LINEAR_METER_PIECES] || ""}[/TD]
-            [TD]${product[SMART_FIELDS.SQUARE_METER_PIECES] || ""}[/TD]
-            [TD]${product[SMART_FIELDS.LINEAR_METER_TOTAL] || ""}[/TD]
-            [TD]${product[SMART_FIELDS.SQUARE_METER_TOTAL] || ""}[/TD]
+            [TD]${product[SMART_FIELDS.LINEAR_METER_PIECES] || "-"}[/TD]
+            [TD]${product[SMART_FIELDS.SQUARE_METER_PIECES] || "-"}[/TD]
+            [TD]${product[SMART_FIELDS.LINEAR_METER_TOTAL] || "-"}[/TD]
+            [TD]${product[SMART_FIELDS.SQUARE_METER_TOTAL] || "-"}[/TD]
             [TD][URL=${product[SMART_FIELDS.LINK_SRC] || "-"}]${product[SMART_FIELDS.LINK_SRC] || "-"}[/URL][/TD]\
             [TD]${getUrlFiles(product[SMART_FIELDS.CLIENT_FILES])}[/TD]
             [TD]${getUrlFiles(product[SMART_FIELDS.PREPRESS])}[/TD]
-            [TD]${product[SMART_FIELDS.COMMENT] || ""}[/TD]
+            [TD]${product[SMART_FIELDS.COMMENT] || "-"}[/TD]
         [/TR]`;
     }
     let data = `
@@ -261,7 +257,7 @@ function getValidPhone(items) {
 
 
 function getValueByKey(items, itemKey) {
-    let itemValue = "";
+    let itemValue = "-";
     for (let item of items) {
         if (item.ID == itemKey) {
             itemValue = item.VALUE;
@@ -272,7 +268,7 @@ function getValueByKey(items, itemKey) {
 
 
 function getUrlFiles(files_data) {
-    let data = ""
+    let data = "-"
     for (let file_data of files_data) {
         let tmp_ = file_data.split(";")
         // let {name, size, url} = file_data.split(";")
