@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .window-searchcontact {
   position: absolute;
   top: 100px;
@@ -389,7 +390,18 @@
 }
 
 .product-list__product-row select:after {
-  right: 0px;
+  content: "▼" !important;
+  padding: 0 8px;
+  font-size: 12px;
+  position: absolute !important;
+  right: 1px !important;
+  top: 4px;
+  z-index: 1;
+  text-align: center;
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+  box-sizing: border-box;
 }
 
 .product-list__product-row input {
