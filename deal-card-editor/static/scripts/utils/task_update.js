@@ -114,6 +114,7 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     
     // ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
     // ${getValidData(dataDealNew.UF_CRM_1687857777 || "")}
+    console.log("dataDealNew = ", dataDealNew);
     return `
 Что делаем по заказу в целом:
 ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
