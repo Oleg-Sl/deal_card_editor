@@ -176,10 +176,10 @@ class ProductRow {
             data = {}
             data[SMART_FIELDS.TITLE] = "";
             data[SMART_FIELDS.COUNT_PIECES] = 0;
-            data[SMART_FIELDS.TECHNOLOGY] = 1;
-            data[SMART_FIELDS.FILM] = 1;
-            data[SMART_FIELDS.LAMINATION] = 1;
-            data[SMART_FIELDS.WIDTH_FILM] = 1;
+            data[SMART_FIELDS.TECHNOLOGY] = 0;
+            data[SMART_FIELDS.FILM] = 0;
+            data[SMART_FIELDS.LAMINATION] = 0;
+            data[SMART_FIELDS.WIDTH_FILM] = 0;
             data[SMART_FIELDS.LINEAR_METER_PIECES] = 0;
             data[SMART_FIELDS.SQUARE_METER_PIECES] = 0;
             data[SMART_FIELDS.LINEAR_METER_TOTAL] = 0;
@@ -234,7 +234,7 @@ class ProductRow {
     getRowHTML() {
         return `
             <div class="product-list__product-row product-list__header-table">
-                <div class="m-0 p-1 align-middle">${this.currentNumb}</div>
+                <div class="m-0 p-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
                     <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
                 </div>
@@ -340,7 +340,7 @@ class ProductRow {
     // HTML код с информацией о файле
     getRowTableFileHTML(number, fileName, fileSize, fileLink) {
         let contentHTML = `
-            <div class="m-0 p-0 file-row" style="">
+            <div class="m-0 p-0 file-row product_list__fontstyle" style="">
                 <div class="text-secondary m-0 p-0 product-number-file" style="">${number}</div>
                 <div class="m-0 p-0 text-truncate" style=""><a href="${fileLink}" class="link-underline-primary " target="_blank">${fileName}</a></div>
                 <div class="text-secondary m-0 p-0" style="">${fileSize}</div>
