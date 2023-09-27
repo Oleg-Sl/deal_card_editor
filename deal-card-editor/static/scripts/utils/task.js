@@ -49,14 +49,11 @@ class Task {
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
         let descTask = "";
         descTask += "[B]Что делаем по заказу в целом:[/B]";
-        descTask += `
-        `;
+        descTask += `\n`;
         descTask += dataDeal[FIELD_DESC_ORDER];
-        descTask += `
-        `;
+        descTask += `\n`;
         descTask += this.getDataTask_(FIELDS_FOR_TABLE_TASK_, dataDeal, contactMeasure);
-        descTask += `
-        `;
+        descTask += `\n`;
         descTask += this.getDataProductsTable_(dataProducts);
         return descTask;
     }
