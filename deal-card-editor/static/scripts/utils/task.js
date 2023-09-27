@@ -47,7 +47,7 @@ class Task {
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
-        let phoneMeasure = this.formatPhoneNumber_(contactMeasure.PHONE);
+        let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
         let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure || ""}`;
         let descTask = "";
         descTask += "[B]Что делаем по заказу в целом:[/B]";
@@ -75,7 +75,7 @@ class Task {
             content+= `
                 [TR]
                     [TD][B]${this.fieldsData[field].listLabel}[/B][/TD] 
-                    [TD]${this.getValueByKey(this.fieldsData[field].items, data[field])}[TD]
+                    [TD]${this.getValueByKey(this.fieldsData[field].items, data[field])}[/TD]
                 [/TR]
             `;
         }
@@ -164,6 +164,18 @@ class Task {
         };
 
         return fileData;
+    }
+
+    getPhoneNumber_(phones) {
+        if (Array.isArray(phones)) {
+            for (let phone of phones) {
+                let phoneNumber = this.formatPhoneNumber_(phone.VALUE);
+                if (phoneNumber) {
+                    return phoneNumber;
+                }
+            }
+        }
+        return "";
     }
 
     formatPhoneNumber_(phoneNumber) {
