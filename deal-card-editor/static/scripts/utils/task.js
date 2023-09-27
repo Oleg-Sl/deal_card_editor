@@ -89,7 +89,7 @@ class Task {
             [TR]    
                 [TD][B]Написать в Whats App[/B][/TD]
                 [TD][URL=https://wa.me/${phoneMeasure}/][/URL][/TD]
-            [.TR]
+            [/TR]
         `;
         return `[TABLE]${content}[/TABLE]`;
     }
