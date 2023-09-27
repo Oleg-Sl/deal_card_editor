@@ -109,7 +109,7 @@ class App {
             this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
             await this.interfaceBlockFive.deleteRemovingFiles();
             let responsible = this.interfaceBlockThree.getResponsible();
-            let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME} ${responsible.NAME}[/USER], ВНИМАНИЕ! Задача изменена.`;
+            let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
             await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUser.ID);
             spinner.classList.add("d-none");
         })
