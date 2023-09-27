@@ -83,13 +83,13 @@ class Task {
             [TR]    
                 [TD][B]Контакт:[/B][/TD]
                 [TD][URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL][/TD]
-            [TR]
+            [/TR]
         `;
         content+= `
             [TR]    
                 [TD][B]Написать в Whats App[/B][/TD]
                 [TD][URL=https://wa.me/${phoneMeasure}/][/URL][/TD]
-            [TR]
+            [.TR]
         `;
         return `[TABLE]${content}[/TABLE]`;
     }
