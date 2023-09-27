@@ -57,12 +57,6 @@ class Task {
         descTask += this.getDataTask_(FIELDS_FOR_TABLE_TASK_, dataDeal, contactMeasure);
         descTask += `
         `;
-        // descTask += `[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL]`;
-        // descTask += `
-        // `;
-        // descTask += `[B]Написать в Whats App[/B] [URL=https://wa.me/${phoneMeasure}/][/URL]`;
-        // descTask += `
-        // `;
         descTask += this.getDataProductsTable_(dataProducts);
         return descTask;
     }
@@ -75,7 +69,7 @@ class Task {
             content+= `
                 [TR]
                     [TD][B]${this.fieldsData[field].listLabel}[/B][/TD] 
-                    [TD]${this.getValueByKey(this.fieldsData[field].items, data[field])}[/TD]
+                    [TD]${this.getValueByKey_(this.fieldsData[field].items, data[field])}[/TD]
                 [/TR]
             `;
         }
@@ -101,10 +95,10 @@ class Task {
                 [TR]
                     [TD]${productData[SMART_FIELDS.TITLE] || "-"}[/TD]
                     [TD]${productData[SMART_FIELDS.COUNT_PIECES] || "-"}[/TD]
-                    [TD]${this.getValueByKey(LIST_TECHNOLOGY, productData[SMART_FIELDS.TECHNOLOGY])}[/TD]
-                    [TD]${this.getValueByKey(LIST_FILMS, productData[SMART_FIELDS.FILM])}[/TD]
+                    [TD]${this.getValueByKey_(LIST_TECHNOLOGY, productData[SMART_FIELDS.TECHNOLOGY])}[/TD]
+                    [TD]${this.getValueByKey_(LIST_FILMS, productData[SMART_FIELDS.FILM])}[/TD]
                     [TD]${productData[SMART_FIELDS.LAMINATION] || "-"}[/TD]
-                    [TD]${this.getValueByKey(LIST_WIDTH_FILMS[productData[SMART_FIELDS.FILM]] || [], productData[SMART_FIELDS.WIDTH_FILM])}[/TD]
+                    [TD]${this.getValueByKey_(LIST_WIDTH_FILMS[productData[SMART_FIELDS.FILM]] || [], productData[SMART_FIELDS.WIDTH_FILM])}[/TD]
                     [TD]${productData[SMART_FIELDS.LINEAR_METER_PIECES] || "-"}[/TD]
                     [TD]${productData[SMART_FIELDS.SQUARE_METER_PIECES] || "-"}[/TD]
                     [TD]${productData[SMART_FIELDS.LINEAR_METER_TOTAL] || "-"}[/TD]
@@ -140,7 +134,7 @@ class Task {
         return contentTable;
     }
 
-    getValueByKey(items, itemKey) {
+    getValueByKey_(items, itemKey) {
         let itemValue = "-";
         for (let item of items) {
             if (item.ID == itemKey) {
