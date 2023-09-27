@@ -56,7 +56,7 @@ class UserSingle {
     getFullInfo() {
         return {
             ID: this.userId,
-            LASTNAME: this.userLastname,
+            LAST_NAME: this.userLastname,
             NAME: this.userName
         }
     }
