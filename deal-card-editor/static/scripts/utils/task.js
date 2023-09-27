@@ -79,7 +79,7 @@ class Task {
                 [/TR]
             `;
         }
-        return content;
+        return `[TABLE]${content}[/TABLE]`;
     }
 
     getDataProductsTable_(productsData) {
