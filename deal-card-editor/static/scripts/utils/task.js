@@ -47,8 +47,6 @@ class Task {
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
-        let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
-        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure || ""}`;
         let descTask = "";
         descTask += "[B]Что делаем по заказу в целом:[/B]";
         descTask += `
@@ -56,20 +54,22 @@ class Task {
         descTask += dataDeal[FIELD_DESC_ORDER];
         descTask += `
         `;
-        descTask += this.getDataTask_(FIELDS_FOR_TABLE_TASK_, dataDeal);
+        descTask += this.getDataTask_(FIELDS_FOR_TABLE_TASK_, dataDeal, contactMeasure);
         descTask += `
         `;
-        descTask += `[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL]`;
-        descTask += `
-        `;
-        descTask += `[B]Написать в Whats App[/B] [URL=https://wa.me/${phoneMeasure}/][/URL]`;
-        descTask += `
-        `;
+        // descTask += `[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL]`;
+        // descTask += `
+        // `;
+        // descTask += `[B]Написать в Whats App[/B] [URL=https://wa.me/${phoneMeasure}/][/URL]`;
+        // descTask += `
+        // `;
         descTask += this.getDataProductsTable_(dataProducts);
         return descTask;
     }
 
-    getDataTask_(fields, data) {
+    getDataTask_(fields, data, contactMeasure) {
+        let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
+        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure || ""}`;
         let content = "";
         for (let field of fields) {
             content+= `
@@ -79,6 +79,18 @@ class Task {
                 [/TR]
             `;
         }
+        content+= `
+            [TR]    
+                [TD][B]Контакт:[/B][/TD]
+                [TD][URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL][/TD]
+            [TR]
+        `;
+        content+= `
+            [TR]    
+                [TD][B]Написать в Whats App[/B][/TD]
+                [TD][URL=https://wa.me/${phoneMeasure}/][/URL][/TD]
+            [TR]
+        `;
         return `[TABLE]${content}[/TABLE]`;
     }
 
