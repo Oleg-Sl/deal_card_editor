@@ -98,8 +98,8 @@ class Task {
                     [TD]${productData[SMART_FIELDS.LINEAR_METER_TOTAL] || "-"}[/TD]
                     [TD]${productData[SMART_FIELDS.SQUARE_METER_TOTAL] || "-"}[/TD]
                     [TD][URL=${productData[SMART_FIELDS.LINK_SRC] || "-"}]${productData[SMART_FIELDS.LINK_SRC] || "-"}[/URL][/TD]\
-                    [TD]${this.getUrlFiles(productData[SMART_FIELDS.CLIENT_FILES])}[/TD]
-                    [TD]${this.getUrlFiles(productData[SMART_FIELDS.PREPRESS])}[/TD]
+                    [TD]${this.getUrlFiles_(productData[SMART_FIELDS.CLIENT_FILES])}[/TD]
+                    [TD]${this.getUrlFiles_(productData[SMART_FIELDS.PREPRESS])}[/TD]
                     [TD]${productData[SMART_FIELDS.COMMENT] || "-"}[/TD]
                 [/TR]
             `;
