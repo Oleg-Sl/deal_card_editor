@@ -142,7 +142,7 @@ class Task {
         let data = "";
         for (let fileDataString of filesDataStrings) {
             try {
-                let fileData = this.parseFileDataString_(fileDataString);
+                let fileData = this.parseFileDataString_(fileDataString, ";");
                 data += `[URL=${fileData.url}]${fileData.name}[/URL] <br>`;
             } catch {
                 console.error("Не удалось получить данные файла из строки");
