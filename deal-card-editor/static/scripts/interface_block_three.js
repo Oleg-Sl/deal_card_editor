@@ -261,7 +261,8 @@ export default class InterfaceBlockThree {
         return data;
     }
     getResponsible() {
-        return this.responsibleTask;
+        return this.userMOS;
+        // return this.responsibleTask;
         // return this.userMOS.getFullInfo();
     }
 
