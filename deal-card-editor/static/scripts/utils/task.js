@@ -14,7 +14,7 @@ import {
     FIELD_OURDETAILS,
     FIELD_BOXING_RENTAL,
     FIELD_INSTALL_ON_TERRIT,
-} from './parameters.js';
+} from '../parameters.js';
 
 
 // Список имен полей со свойствами заказа
