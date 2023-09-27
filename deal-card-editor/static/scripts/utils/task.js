@@ -42,12 +42,12 @@ class Task {
             }
             await this.updateTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
-            console.log(`${err.name}: ${err.message}`);
+            console.error(`${err.name}: ${err.message}`);
         }
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
-        let titleContactMeasure = `${contact.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${this.formatPhoneNumber_(contactMeasure.PHONE) || ""}`;
+        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${this.formatPhoneNumber_(contactMeasure.PHONE) || ""}`;
         let descTask = "";
         descTask += "[B]Что делаем по заказу в целом:[/B]";
         descTask += `
@@ -58,7 +58,7 @@ class Task {
         descTask += this.getDataTask_(FIELDS_FOR_TABLE_TASK_, dataDeal);
         descTask += `
         `;
-        descTask += `[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${contact.ID}/]${titleContactMeasure}[/URL]`;
+        descTask += `[B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID}/]${titleContactMeasure}[/URL]`;
         descTask += `
         `;
         descTask += `[B]Написать в Whats App[/B] [URL=https://wa.me/${contactMeasurementText}/][/URL]`;
