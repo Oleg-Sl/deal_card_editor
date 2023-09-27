@@ -2,15 +2,31 @@ import Bitrix24 from '../bx24/requests.js'
 import { SMART_FIELDS, LIST_TECHNOLOGY, LIST_FILMS, LIST_WIDTH_FILMS} from '../parameters.js';
 
 
-const RESPONSIBLE_MOS = "UF_CRM_1672839295";
-const OBSERVER = "UF_CRM_1684305731";
+// const RESPONSIBLE_MOS = "UF_CRM_1672839295";
 
+// Поля в сделке
+const FIELD_OBSERVERS           = "UF_CRM_1684305731";      // Список наблюдателей задачи "ЗАКАЗ"
+const FIELD_ID_TASK_ORDER       = "UF_CRM_1661089895";      // ID задачи "ЗАКАЗ" (сохраненное в сделке)
+const FIELD_DESC_ORDER          = "UF_CRM_1655918107";      // Что делаем по заказу в целом
+const FIELD_BUSINESS_TRIP       = "UF_CRM_1668129559";      // Командировка
+const FIELD_METERING            = "UF_CRM_1695664525";      // Замер
+const FIELD_DISMANTLING         = "UF_CRM_1657651541";      // Демонтаж
+const FIELD_PARKING             = "UF_CRM_1637861351";      // Парковка
+const FIELD_COLOR_PROOF         = "UF_CRM_1640199620";      // Печать согласно ЦП?
+const FIELD_INSTALL             = "UF_CRM_1637861029";      // Монтаж 24/7
+const FIELD_OURDETAILS          = "UF_CRM_1637326777";      // Наши реквизиты
+const FIELD_BOXING_RENTAL       = "UF_CRM_1694710116";      // Аренда бокса
+const FIELD_INSTALL_ON_TERRIT   = "UF_CRM_1694710578";      // Монтаж на территории
+const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";      // Контакт для Замера
+
+// Список имен полей со свойствами заказа
+const FIELD_PROPERTIES = [FIELD_BUSINESS_TRIP, FIELD_METERING, FIELD_DISMANTLING, FIELD_PARKING, FIELD_COLOR_PROOF, FIELD_INSTALL, FIELD_OURDETAILS, FIELD_BOXING_RENTAL, FIELD_INSTALL_ON_TERRIT];
 
 async function update(dataDealNew, dataDealOld, dataProducts, fields) {
-    let taskId = dataDealOld.UF_CRM_1661089895;
+    let taskId = dataDealOld[FIELD_ID_TASK_ORDER];
     let desc = await getDescription(dataDealNew, dataDealOld, dataProducts, fields);
     let data = {
-        AUDITORS: dataDealNew[OBSERVER],           // Наблюдатели
+        AUDITORS: dataDealNew[FIELD_OBSERVERS],           // Наблюдатели
         DESCRIPTION: desc,
     }
     await updateTaskOrderToBx24(taskId, data);
@@ -18,7 +34,10 @@ async function update(dataDealNew, dataDealOld, dataProducts, fields) {
 
 
 function getValidData(str) {
-    return str.replace(/<strong\b[^>]*>(.*?)<\/strong>/gi, "<b>$1</b>").replace(/<em\b[^>]*>(.*?)<\/em>/gi, "<i>$1</i>").replace(/<p>(.*?)<\/p>/gi, '\n$1');
+    if (typeof str === 'string') {
+        return str.replace(/<strong\b[^>]*>(.*?)<\/strong>/gi, "<b>$1</b>").replace(/<em\b[^>]*>(.*?)<\/em>/gi, "<i>$1</i>").replace(/<p>(.*?)<\/p>/gi, '\n$1');
+    }
+    return "";
 }
 
 
@@ -29,32 +48,38 @@ async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let company = (Array.isArray(response.company) ? response.company[0] : {}) || {};
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
-    // ____________
-    // [B]№ заказа:[/B] ${dataDealNew.UF_CRM_1633523035}
-    // [B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041 || '-'}[/URL]
-    // ____
-    //     ____________
-    // [B]Компания:[/B] [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
     return `
 [B]Что делаем по заказу в целом:[/B]
-${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
-________
-[B]Командировка:[/B] ${getValueByKey(fields.UF_CRM_1668129559.items, dataDealNew.UF_CRM_1668129559)}
-[B]Замер:[/B] ${getValueByKey(fields.UF_CRM_1695664525.items, dataDealNew.UF_CRM_1695664525)}
-[B]Демонтаж:[/B] ${getValueByKey(fields.UF_CRM_1657651541.items, dataDealNew.UF_CRM_1657651541)}
-[B]Парковка:[/B] ${getValueByKey(fields.UF_CRM_1637861351.items, dataDealNew.UF_CRM_1637861351)}
-[B]Печать согласно ЦП?:[/B] ${getValueByKey(fields.UF_CRM_1640199620.items, dataDealNew.UF_CRM_1640199620)}
-[B]Монтаж 24/7:[/B] ${getValueByKey(fields.UF_CRM_1637861029.items, dataDealNew.UF_CRM_1637861029)}
-[B]Наши реквизиты:[/B] ${getValueByKey(fields.UF_CRM_1637326777.items, dataDealNew.UF_CRM_1637326777)}
-[B]Аренда бокса:[/B] ${getValueByKey(fields.UF_CRM_1694710116.items, dataDealNew.UF_CRM_1694710116)}
-[B]Монтаж на территории:[/B] ${getValueByKey(fields.UF_CRM_1694710578.items, dataDealNew.UF_CRM_1694710578)}
-____________
+${getValidData(dataDealNew[FIELD_DESC_ORDER])}
+
+${getTaskPropertiesTableBBCODE(FIELD_PROPERTIES, fields, dataDealNew)}
+
 [B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
 [B]Написать в Whats App[/B] [URL=https://wa.me/${contactMeasurementText}/][/URL]
 
-
 ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_1672744985962.items)}
 `;
+}
+
+function getTaskPropertiesTableBBCODE(fields, fieldsData, data) {
+    let content = "";
+    for (let field of fields) {
+        content+= `
+            [TR]
+                [TD][B]Командировка:[/B][/TD] 
+                [TD]${getValueByKey(fieldsData[field].items, data[field])}[TD]
+            [/TR]
+        `;
+    }
+    return content;
+// [B]Замер:[/B] ${                    getValueByKey(fieldsData.UF_CRM_1695664525.items, data.UF_CRM_1695664525)}
+// [B]Демонтаж:[/B] ${                 getValueByKey(fieldsData.UF_CRM_1657651541.items, data.UF_CRM_1657651541)}
+// [B]Парковка:[/B] ${                 getValueByKey(fieldsData.UF_CRM_1637861351.items, data.UF_CRM_1637861351)}
+// [B]Печать согласно ЦП?:[/B] ${      getValueByKey(fieldsData.UF_CRM_1640199620.items, data.UF_CRM_1640199620)}
+// [B]Монтаж 24/7:[/B] ${              getValueByKey(fieldsData.UF_CRM_1637861029.items, data.UF_CRM_1637861029)}
+// [B]Наши реквизиты:[/B] ${           getValueByKey(fieldsData.UF_CRM_1637326777.items, data.UF_CRM_1637326777)}
+// [B]Аренда бокса:[/B] ${             getValueByKey(fieldsData.UF_CRM_1694710116.items, data.UF_CRM_1694710116)}
+// [B]Монтаж на территории:[/B] ${     getValueByKey(fieldsData.UF_CRM_1694710578.items, data.UF_CRM_1694710578)}`;
 }
 
 function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
@@ -169,31 +194,5 @@ async function updateTaskOrderToBx24(taskId, data) {
     );
     return response;
 }
-
-
-
-// Поля сделки
-// UF_CRM_1668129559 - Командировка
-// UF_CRM_1619441905773 - Нужен замер
-// UF_CRM_1657651541 - Демонтаж
-// UF_CRM_1637861351 - Парковка
-// UF_CRM_1637861029 - Монтаж 24/7
-// UF_CRM_1637326777 - Наши реквизиты
-// UF_CRM_1619441621 - Спопоб оплаты
-// UF_CRM_1619430831 - Ответственный МОП
-// UF_CRM_1672839295 - Ответственный МОС
-// UF_CRM_1684305731 - Наблюдатели
-// UF_CRM_1655918107 - Описание
-
-// Поля смарт процесса
-// ufCrm19_1684137706 - описание
-// ufCrm19_1684137811 - количество
-// ufCrm19_1684137822 - технология изготовления
-// ufCrm19_1684137877 - Ширина пленки
-// ufCrm19_1684137925 - Площадь метерр погонный
-// ufCrm19_1684137950 - Площадь м2
-// ufCrm19_1684138153 - Ссылка на источник клиента
-// ufCrm19_1684142357 - Файлы клиента
-
 
 export {update};

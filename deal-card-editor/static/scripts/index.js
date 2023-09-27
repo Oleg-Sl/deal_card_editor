@@ -4,11 +4,16 @@ import InterfaceBlockThree from './interface_block_three.js'
 import InterfaceBlockFour from './interface_block_four.js'
 import InterfaceBlockFive from './interface_block_five.js'
 
-// import Bitrix24 from './bx24/requests_webhook.js'
 import Bitrix24 from './bx24/requests.js'
 import YandexDisk from './yandex_disk/requests.js'
 
-import {update as updateTaskOrder} from "./utils/task_update.js"
+// import {update as updateTaskOrder} from "./utils/task_update.js"
+import {Task} from "./utils/task.js"
+
+import {
+    FIELD_ID_TASK_ORDER,
+    FIELD_CONTACT_MESURE,
+} from "./parameters.js"
 
 
 const SETTINGS__SECRETS_KEY = "yandex_secret_key";
@@ -19,13 +24,15 @@ class App {
         this.bx24 = bx24;
         this.yaDisk = yaDisk;
         this.dealId = dealId;
-        this.currentUserId = null;
-        this.taskId = null;
-
+        this.taskId = NaN;
+        
         this.smartNumber = 144;
+        
+        this.data = NaN;
+        this.currentUser = NaN;
+        this.fields = NaN;
 
-        this.data = null;
-        this.fields = null;
+        this.task = Task(this.bx24);
 
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
@@ -57,21 +64,22 @@ class App {
         this.elemBtnSaveBottom = this.containerButtonsBottom.querySelector('#saveButtonBottom');
         this.elemBtnRewriteBottom = this.containerButtonsBottom.querySelector('#rewriteButtonBottom');
         this.elemBtnCancelBottom = this.containerButtonsBottom.querySelector('#cancelButtonBottom');
-        // this.elemBtnSettingsBottom = this.containerButtonsBottom.querySelector('#settingsButtonBottom');
 
     }
 
     async init() {
-        let user = await this.getCurrentUserFromBx24();
-        this.data = await this.getDealDataFromBx24(this.dealId);
-        this.fields = await this.getDealFieldsFromBx24();
-        this.currentUserId = user.ID;
-        this.taskId = this.data.UF_CRM_1661089895;
+        this.currentUser = await this.getCurrentUserFromBx24();
+        this.data        = await this.getDealDataFromBx24(this.dealId);
+        this.fields      = await this.getDealFieldsFromBx24();
+        this.taskId = this.data[FIELD_ID_TASK_ORDER];
+
+        this.task.init(this.fields);
         this.interfaceBlockOne.init();
         this.interfaceBlockTwo.init();
         this.interfaceBlockThree.init();
         this.interfaceBlockFour.init();
         this.interfaceBlockFive.init();
+
         this.initHandler();
     }
 
@@ -96,11 +104,13 @@ class App {
             await this.saveDealToBx24(dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
             await this.saveSmartProcessToBx24(dataSmartProcess);
-            await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            // await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
+            let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
+            this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
             await this.interfaceBlockFive.deleteRemovingFiles();
             let responsible = this.interfaceBlockThree.getResponsible();
             let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME} ${responsible.NAME}[/USER], ВНИМАНИЕ! Задача изменена.`;
-            await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUserId);
+            await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUser.ID);
             spinner.classList.add("d-none");
         })
 
@@ -117,7 +127,7 @@ class App {
         })
 
         // Открыть модальное окно с настройками
-        if (this.currentUserId == 1) {
+        if (this.currentUser.ID == 1) {
             this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
                 this.modalSettings.show();
             })
@@ -132,7 +142,7 @@ class App {
     }
 
     render() {
-        if (this.currentUserId == 1) {
+        if (this.currentUser.ID == 1) {
             this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
         }
         this.interfaceBlockOne.render(this.fields, this.data);
@@ -190,6 +200,17 @@ class App {
     async getDealFieldsFromBx24() {
         let data = await this.bx24.callMethod("crm.deal.fields", {});
         return data;
+    }
+
+    async getContactDataFromBx24(contactId) {
+        let data = await this.bx24.callMethod(
+            "crm.contact.list",
+            {
+                "filter": { "ID": contactId },
+                "select": ["NAME", "LAST_NAME","SECOND_NAME", "PHONE"]
+            }
+        );
+        return data[0];
     }
 
     async saveDealToBx24(data) {
