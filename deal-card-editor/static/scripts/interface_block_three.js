@@ -55,9 +55,9 @@ class UserSingle {
 
     getFullInfo() {
         return {
-            "id": this.userId,
-            "lastname": this.userLastname,
-            "name": this.userName
+            ID: this.userId,
+            LASTNAME: this.userLastname,
+            NAME: this.userName
         }
     }
 
@@ -261,9 +261,9 @@ export default class InterfaceBlockThree {
         return data;
     }
     getResponsible() {
-        return this.userMOS.getData();
+        // return this.userMOS.getData();
         // return this.responsibleTask;
-        // return this.userMOS.getFullInfo();
+        return this.userMOS.getFullInfo();
     }
 
     async getDataUserById(users_ids) {
