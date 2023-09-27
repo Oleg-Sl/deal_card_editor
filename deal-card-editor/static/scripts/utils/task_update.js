@@ -24,18 +24,21 @@ function getValidData(str) {
 
 async function getDescription(dataDealNew, dataDealOld, dataProducts, fields) {
     let response = await getDataFromBx24(dataDealOld.CONTACT_ID, dataDealOld.COMPANY_ID, dataDealNew.UF_CRM_1621943311);
+    console.log("DATA FROM BITRIX FOR TASK UPDATE = ", response);
     let contact = (Array.isArray(response.contact) ? response.contact[0] : {}) || {};
     let company = (Array.isArray(response.company) ? response.company[0] : {}) || {};
     let contactMeasurement = Array.isArray(response.contact_measurement) ? response.contact_measurement[0] : {};
     let contactMeasurementText = typeof contactMeasurement === 'object' ? getValidPhone(contactMeasurement.PHONE) : "";
-
+    // ____________
+    // [B]№ заказа:[/B] ${dataDealNew.UF_CRM_1633523035}
+    // [B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041 || '-'}[/URL]
+    // ____
+    //     ____________
+    // [B]Компания:[/B] [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
     return `
 [B]Что делаем по заказу в целом:[/B]
 ${getValidData(dataDealNew.UF_CRM_1655918107 || "")}
-____________
-[B]№ заказа:[/B] ${dataDealNew.UF_CRM_1633523035}
-[B]Ссылка на тендер/CRM клиента:[/B] [URL=${dataDealNew.UF_CRM_1620918041}] ${dataDealNew.UF_CRM_1620918041 || '-'}[/URL]
-____________
+________
 [B]Командировка:[/B] ${getValueByKey(fields.UF_CRM_1668129559.items, dataDealNew.UF_CRM_1668129559)}
 [B]Замер:[/B] ${getValueByKey(fields.UF_CRM_1695664525.items, dataDealNew.UF_CRM_1695664525)}
 [B]Демонтаж:[/B] ${getValueByKey(fields.UF_CRM_1657651541.items, dataDealNew.UF_CRM_1657651541)}
@@ -48,8 +51,7 @@ ____________
 ____________
 [B]Контакт:[/B] [URL=https://007.bitrix24.ru/crm/contact/details/${dataDealOld.UF_CRM_1621943311}/]${contact.NAME} ${contact.LAST_NAME} ${contact.SECOND_NAME} ${contactMeasurementText}[/URL]
 [B]Написать в Whats App[/B] [URL=https://wa.me/${contactMeasurementText}/][/URL]
-____________
-[B]Компания:[/B] [URL=https://007.bitrix24.ru/crm/company/details/${dataDealOld.COMPANY_ID}/] ${company.TITLE} ${arrToSring(company.PHONE)}[/URL]
+
 
 ${getDataTable(dataProducts, fields.UF_CRM_1625666854.items, fields.UF_CRM_1672744985962.items)}
 `;

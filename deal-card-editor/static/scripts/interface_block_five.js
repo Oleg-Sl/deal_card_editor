@@ -172,24 +172,6 @@ class ProductRow {
     }
 
     async addRow(data={}) {
-        // if (!data) {
-        //     data = {}
-        //     data[SMART_FIELDS.TITLE] = "";
-        //     data[SMART_FIELDS.COUNT_PIECES] = 0;
-        //     data[SMART_FIELDS.TECHNOLOGY] = 0;
-        //     data[SMART_FIELDS.FILM] = 0;
-        //     data[SMART_FIELDS.LAMINATION] = 0;
-        //     data[SMART_FIELDS.WIDTH_FILM] = 0;
-        //     data[SMART_FIELDS.LINEAR_METER_PIECES] = 0;
-        //     data[SMART_FIELDS.SQUARE_METER_PIECES] = 0;
-        //     data[SMART_FIELDS.LINEAR_METER_TOTAL] = 0;
-        //     data[SMART_FIELDS.SQUARE_METER_TOTAL] = 0;
-        //     data[SMART_FIELDS.LINK_SRC] = "";
-        //     data[SMART_FIELDS.CLIENT_FILES] = "";
-        //     data[SMART_FIELDS.PREPRESS] = "";
-        //     data[SMART_FIELDS.COMMENT] = "";
-        // };
-
         // разбивка строки с инормацией о файле, для получения: имени, размера и пути в облаке яндекса
         this.clientFiles = this.getFilesDataFromStr(data[SMART_FIELDS.CLIENT_FILES] || "");
         this.prepressFiles = this.getFilesDataFromStr(data[SMART_FIELDS.PREPRESS] || "");

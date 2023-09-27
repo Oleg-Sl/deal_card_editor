@@ -266,11 +266,6 @@ export default class InterfaceBlockThree {
     }
 
     async getDataUserById(users_ids) {
-        // let batch = {};
-        // for (let user_id of users_ids) {
-        //     batch[user_id] = `user.get?ID=${user_id}`;
-        //     // batch[user_id] = ['user.get', {"ID": user_id}];
-        // }
         let reqPackage = {};
         for (let user_id of users_ids) {
             if (user_id) {
@@ -279,28 +274,19 @@ export default class InterfaceBlockThree {
             // batch[user_id] = ['user.get', {"ID": user_id}];
         }
         let userData = await this.bx24.batchMethod(reqPackage);
-        // return userData.result.result;
         console.log("userData = ", userData);
         return userData;
     }
 
-    // getResponsibleTask() {
-    //     return {
-    //         "id": this.userId,
-    //         "lastname": this.userLastname,
-    //         "name": this.userName
-    //     }
-    // }
-
     async render(fields, data) {
+        console.log("InterfaceBlockThree INPUT DATA = ", data);
         let idResponsibleTask = data[RESPONSIBLE_TASK];
         let idResponsibleMOP = data[RESPONSIBLE_MOP];
         let idResponsibleMOS = data[RESPONSIBLE_MOS];
         let idsObservers = data[OBSERVER] || [];
 
-        // console.log
-
         let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
+        console.log("InterfaceBlockThree USER DATA = ", usersData);
         let contentHTML = `
             <div class="col-3">
                 <label for="">Ответственный (МОП)</label>
