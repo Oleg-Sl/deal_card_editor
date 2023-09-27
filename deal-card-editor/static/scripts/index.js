@@ -32,7 +32,7 @@ class App {
         this.currentUser = NaN;
         this.fields = NaN;
 
-        this.task = Task(this.bx24);
+        this.task = new Task(this.bx24);
 
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
