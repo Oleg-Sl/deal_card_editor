@@ -3,9 +3,15 @@ export default class InterfaceBlockOne {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
+
+        this.fields = NaN;
+        this.data = NaN;
     }
 
-    init() {}
+    init(fields, data) {
+        this.fields = fields;
+        this.data = data;
+    }
 
     initHandler() {
         this.btnTenderChange.addEventListener("click", async (e) => {
@@ -14,8 +20,8 @@ export default class InterfaceBlockOne {
             this.wrapTenderLink.classList.add("d-none");
             this.wrapTenderInput.classList.remove("d-none");
         })
+
         this.tenderInput.addEventListener("change", async (e) => {
-            console.log("tenderlink = ", this.tenderlink);
             let value = this.tenderInput.value || "";
             this.tenderlink.innerHTML = value;
             this.tenderlink.href = this.addHttpsPrefixIfMissing(value);
@@ -35,17 +41,16 @@ export default class InterfaceBlockOne {
     }
 
     getData() {
-        let data = {
-            "UF_CRM_1633523035": this.numberTaskInput.value,
-            "UF_CRM_1620918041": this.tenderInput.value,
+        return {
+            FIELD_NUMBER_ORDER: this.numberTaskInput.value,
+            FIELD_LINK_TENDER:  this.tenderInput.value,
         };
-        return data;
     }
 
-    render(fields, data) {
-        let titleDeal = data.TITLE;
-        let numberOrder = data.UF_CRM_1633523035 || "";
-        let linkTender = data.UF_CRM_1620918041 || "";
+    render() {
+        let titleDeal   = data.TITLE;
+        let numberOrder = data[FIELD_NUMBER_ORDER] || "";
+        let linkTender  = data[FIELD_LINK_TENDER] || "";
         let contentHTML = `
             <div class="col-6">
                 <label for="titleDeal">Название сделки</label>
@@ -75,15 +80,6 @@ export default class InterfaceBlockOne {
         this.container.innerHTML = contentHTML;
         this.initPostRender();
     }
-
-    // addPrefixHttps(str) {
-    //     if (str && !str.startsWith("https://") && !str.startsWith("http://")) {
-    //         str = "https://" + str;
-    //     } else {
-    //         str = "";
-    //     }
-    //     return str;
-    // }
 
     addHttpsPrefixIfMissing(url) {
         if (url && !url.startsWith("https://") && !url.startsWith("http://")) {
