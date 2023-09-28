@@ -72,7 +72,7 @@ class Task {
 
     getDataTask_(fields, data, contactMeasure) {
         let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
-        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure || ""}`;
+        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure}`;
         let content = "";
         for (let field of fields) {
             content+= `
@@ -85,13 +85,13 @@ class Task {
         content+= `
             [TR]    
                 [TD][B]Контакт:[/B][/TD]
-                [TD][URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID || ""}/]${titleContactMeasure || "-"}[/URL][/TD]
+                [TD][URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID || ""}/]${titleContactMeasure}[/URL][/TD]
             [/TR]
         `;
         content+= `
             [TR]    
                 [TD][B]Написать в Whats App[/B][/TD]
-                [TD][URL=https://wa.me/${phoneMeasure || ""}/][/URL][/TD]
+                [TD][URL=https://wa.me/${phoneMeasure}/][/URL][/TD]
             [/TR]
         `;
         return `[TABLE]${content}[/TABLE]`;
@@ -190,7 +190,7 @@ class Task {
                 }
             }
         }
-        return "";
+        return "-";
     }
 
     formatPhoneNumber_(phoneNumber) {
