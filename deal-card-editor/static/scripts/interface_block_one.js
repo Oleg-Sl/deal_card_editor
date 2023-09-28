@@ -18,25 +18,19 @@ export default class InterfaceBlockOne {
             console.log("tenderlink = ", this.tenderlink);
             let value = this.tenderInput.value || "";
             this.tenderlink.innerHTML = value;
-            this.tenderlink.href = this.addPrefixHttps(value);
+            this.tenderlink.href = this.addHttpsPrefixIfMissing(value);
             this.wrapTenderLink.classList.remove("d-none");
             this.wrapTenderInput.classList.add("d-none");
         })
     }
 
     initPostRender() {
-        this.wrapTenderLink = this.container.querySelector(".wrap-tender-link");
+        this.wrapTenderLink  = this.container.querySelector(".wrap-tender-link");
         this.btnTenderChange = this.wrapTenderLink.querySelector(".btn-tender-change");
-        this.tenderlink = this.wrapTenderLink.querySelector(".btn-tender-link");
+        this.tenderlink      = this.wrapTenderLink.querySelector(".btn-tender-link");
         this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
-        this.tenderInput = this.wrapTenderInput.querySelector("input");
+        this.tenderInput     = this.wrapTenderInput.querySelector("input");
         this.numberTaskInput = this.container.querySelector(".wrap-number-task");
-        // console.log("this.wrapTenderLink = ", this.wrapTenderLink);
-        // console.log("this.btnTenderChange = ", this.btnTenderChange);
-        // console.log("this.tenderlink = ", this.tenderlink);
-        // console.log("this.wrapTenderInput = ", this.wrapTenderInput);
-        // console.log("this.tenderInput = ", this.tenderInput);
-        // console.log("this.numberTaskInput = ", this.numberTaskInput);
         this.initHandler();
     }
 
@@ -45,7 +39,6 @@ export default class InterfaceBlockOne {
             "UF_CRM_1633523035": this.numberTaskInput.value,
             "UF_CRM_1620918041": this.tenderInput.value,
         };
-        // console.log("data = ", data);
         return data;
     }
 
@@ -68,7 +61,7 @@ export default class InterfaceBlockOne {
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
                 <div class="row wrap-tender-link">
                     <div id="linkTender" class="alert alert-light col-11 p-2 m-0" role="alert" style="height: 48px;">
-                        <a class="link-opacity-100-hover btn-tender-link" href="${this.addPrefixHttps(linkTender)}" target="_blank">${linkTender}</a>
+                        <a class="link-opacity-100-hover btn-tender-link" href="${this.addHttpsPrefixIfMissing(linkTender)}" target="_blank">${linkTender}</a>
                     </div>
                     <div class="col-1 row align-items-center change-tender-url">
                         <i class="bi bi-pencil-square btn-tender-change"></i>
@@ -83,12 +76,19 @@ export default class InterfaceBlockOne {
         this.initPostRender();
     }
 
-    addPrefixHttps(str) {
-        if (str && !str.startsWith("https://") && !str.startsWith("http://")) {
-            str = "https://" + str;
-        } else {
-            str = "";
+    // addPrefixHttps(str) {
+    //     if (str && !str.startsWith("https://") && !str.startsWith("http://")) {
+    //         str = "https://" + str;
+    //     } else {
+    //         str = "";
+    //     }
+    //     return str;
+    // }
+
+    addHttpsPrefixIfMissing(url) {
+        if (url && !url.startsWith("https://") && !url.startsWith("http://")) {
+            return "https://" + url;
         }
-        return str;
+        return url;
     }
 }

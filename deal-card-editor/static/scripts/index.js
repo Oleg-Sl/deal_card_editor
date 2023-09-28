@@ -61,9 +61,9 @@ class App {
 
         // Кнопки
         this.containerButtonsBottom = document.querySelector('#containerSaveChangesBottom');
-        this.elemBtnSaveBottom = this.containerButtonsBottom.querySelector('#saveButtonBottom');
-        this.elemBtnRewriteBottom = this.containerButtonsBottom.querySelector('#rewriteButtonBottom');
-        this.elemBtnCancelBottom = this.containerButtonsBottom.querySelector('#cancelButtonBottom');
+        this.elemBtnSaveBottom      = this.containerButtonsBottom.querySelector('#saveButtonBottom');
+        this.elemBtnRewriteBottom   = this.containerButtonsBottom.querySelector('#rewriteButtonBottom');
+        this.elemBtnCancelBottom    = this.containerButtonsBottom.querySelector('#cancelButtonBottom');
 
     }
 
@@ -71,7 +71,7 @@ class App {
         this.currentUser = await this.getCurrentUserFromBx24();
         this.data        = await this.getDealDataFromBx24(this.dealId);
         this.fields      = await this.getDealFieldsFromBx24();
-        this.taskId = this.data[FIELD_ID_TASK_ORDER];
+        this.taskId      = this.data[FIELD_ID_TASK_ORDER];
 
         this.task.init(this.fields);
         this.interfaceBlockOne.init();
@@ -162,7 +162,6 @@ class App {
 
     getDataSmartProcess() {
         let products = this.interfaceBlockFive.getData();
-        // console.log("products = ", products);
         return products;
     }
 
@@ -260,9 +259,9 @@ class App {
 async function main() {
     console.log("Ready!!!");
     let seretKeyYandex = await BX24.appOption.get(SETTINGS__SECRETS_KEY);
-    let bx24 = new Bitrix24();
+    let bx24   = new Bitrix24();
     let yaDisk = new YandexDisk(seretKeyYandex);
-    let app = new App(dealId, bx24, yaDisk);
+    let app    = new App(dealId, bx24, yaDisk);
     await app.init();
     await app.render();
 }

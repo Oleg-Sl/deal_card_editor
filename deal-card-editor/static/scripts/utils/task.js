@@ -16,6 +16,7 @@ import {
     FIELD_INSTALL_ON_TERRIT,
 } from '../parameters.js';
 
+import {bx24TaskUpdate} from '../bx24/api.js'
 
 // Список имен полей со свойствами заказа
 const FIELDS_FOR_TABLE_TASK_ = [FIELD_BUSINESS_TRIP, FIELD_METERING, FIELD_DISMANTLING, FIELD_PARKING, FIELD_COLOR_PROOF, FIELD_INSTALL, FIELD_OURDETAILS, FIELD_BOXING_RENTAL, FIELD_INSTALL_ON_TERRIT];
@@ -40,10 +41,21 @@ class Task {
                 AUDITORS: dataDeal[FIELD_OBSERVERS],           // Наблюдатели
                 DESCRIPTION: descTask,
             }
-            await this.updateTaskIntoBX24_(taskId, newDataTask);
+            bx24TaskUpdate(this.bx24, taskId, newDataTask)
+            // await this.updateTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);
         }
+    }
+
+    createTask(dataDeal, dataProducts, contactMeasure) {
+        try {
+            let descTask = this.getDescTask_(dataDeal, dataProducts, contactMeasure);
+            // await this.createTaskIntoBX24_(taskId, newDataTask);
+        } catch(err) {
+            console.error(`${err.name}: ${err.message}`);
+        }
+
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
@@ -191,15 +203,15 @@ class Task {
         return formattedPhoneNumber;
     }
 
-    async updateTaskIntoBX24_(taskId, data) {
-        let response = await this.bx24.callMethod(
-            "tasks.task.update",
-            {
-                "taskId": taskId,
-                "fields": data
-            }
-        );
-        return response;
-    }
+    // async updateTaskIntoBX24_(taskId, data) {
+    //     let response = await this.bx24.callMethod(
+    //         "tasks.task.update",
+    //         {
+    //             "taskId": taskId,
+    //             "fields": data
+    //         }
+    //     );
+    //     return response;
+    // }
 }
 export {Task};

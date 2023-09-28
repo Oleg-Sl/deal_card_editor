@@ -113,19 +113,18 @@ export const LIST_WIDTH_FILMS = {
         {ID: 4, VALUE: "1,52"},
     ],
     "6": [
-        {ID: 1, VALUE: "1"},
-        {ID: 2, VALUE: "1,26"},
+        {ID: 1, VALUE: "1,26"},
     ],
     "7": [
+        {ID: 1, VALUE: "1,26"},
+    ],
+    "9": [
         {ID: 1, VALUE: "1"},
         {ID: 2, VALUE: "1,26"},
     ],
-    "9": [
-        {ID: 1, VALUE: "1,26"},
-    ],
     "10": [
-        {ID: 1, VALUE: "1,26"},
+        {ID: 1, VALUE: "1"},
+        {ID: 2, VALUE: "1,26"},
     ],
     "11": []
 };
-
