@@ -1,20 +1,21 @@
  
 // Поля в сделке
-export const FIELD_OBSERVERS           = "UF_CRM_1684305731";      // Список наблюдателей задачи "ЗАКАЗ"
-export const FIELD_ID_TASK_ORDER       = "UF_CRM_1661089895";      // ID задачи "ЗАКАЗ" (сохраненное в сделке)
-export const FIELD_DESC_ORDER          = "UF_CRM_1655918107";      // Что делаем по заказу в целом
-export const FIELD_BUSINESS_TRIP       = "UF_CRM_1668129559";      // Командировка
-export const FIELD_METERING            = "UF_CRM_1695664525";      // Замер
-export const FIELD_DISMANTLING         = "UF_CRM_1657651541";      // Демонтаж
-export const FIELD_PARKING             = "UF_CRM_1637861351";      // Парковка
-export const FIELD_COLOR_PROOF         = "UF_CRM_1640199620";      // Печать согласно ЦП?
-export const FIELD_INSTALL             = "UF_CRM_1637861029";      // Монтаж 24/7
-export const FIELD_OURDETAILS          = "UF_CRM_1637326777";      // Наши реквизиты
-export const FIELD_BOXING_RENTAL       = "UF_CRM_1694710116";      // Аренда бокса
-export const FIELD_INSTALL_ON_TERRIT   = "UF_CRM_1694710578";      // Монтаж на территории
-export const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";      // Контакт для Замера
-export const FIELD_NUMBER_ORDER        = "UF_CRM_1633523035";      // № заказа (автоматически)
-export const FIELD_LINK_TENDER         = "UF_CRM_1620918041";      // Ссылка  рабочую таблицу / тендер / CRM Клиента
+export const FIELD_TITLE               = "TITLE";                   // Название сделки
+export const FIELD_OBSERVERS           = "UF_CRM_1684305731";       // Список наблюдателей задачи "ЗАКАЗ"
+export const FIELD_ID_TASK_ORDER       = "UF_CRM_1661089895";       // ID задачи "ЗАКАЗ" (сохраненное в сделке)
+export const FIELD_DESC_ORDER          = "UF_CRM_1655918107";       // Что делаем по заказу в целом
+export const FIELD_BUSINESS_TRIP       = "UF_CRM_1668129559";       // Командировка
+export const FIELD_METERING            = "UF_CRM_1695664525";       // Замер
+export const FIELD_DISMANTLING         = "UF_CRM_1657651541";       // Демонтаж
+export const FIELD_PARKING             = "UF_CRM_1637861351";       // Парковка
+export const FIELD_COLOR_PROOF         = "UF_CRM_1640199620";       // Печать согласно ЦП?
+export const FIELD_INSTALL             = "UF_CRM_1637861029";       // Монтаж 24/7
+export const FIELD_OURDETAILS          = "UF_CRM_1637326777";       // Наши реквизиты
+export const FIELD_BOXING_RENTAL       = "UF_CRM_1694710116";       // Аренда бокса
+export const FIELD_INSTALL_ON_TERRIT   = "UF_CRM_1694710578";       // Монтаж на территории
+export const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";       // Контакт для Замера
+export const FIELD_NUMBER_ORDER        = "UF_CRM_1633523035";       // № заказа (автоматически)
+export const FIELD_LINK_TENDER         = "UF_CRM_1620918041";       // Ссылка  рабочую таблицу / тендер / CRM Клиента
 
 
 // Поля в смартпроцессе
