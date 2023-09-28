@@ -11,6 +11,16 @@ import YandexDisk from './yandex_disk/requests.js'
 import {Task} from "./utils/task.js"
 
 import {
+    bx24TaskAddComment,
+    bx24UserGetCurrent,
+    bx24DealGetFields,
+    bx24DealGetData,
+    bx24DealUpdate,
+    bx24ContactGetData,
+    bx24SmartProcessUpdate,
+} from "./bx24/api.js"
+
+import {
     FIELD_ID_TASK_ORDER,
     FIELD_CONTACT_MESURE,
 } from "./parameters.js"
@@ -68,12 +78,15 @@ class App {
     }
 
     async init() {
-        this.currentUser = await this.getCurrentUserFromBx24();
-        this.data        = await this.getDealDataFromBx24(this.dealId);
-        this.fields      = await this.getDealFieldsFromBx24();
+        // this.currentUser = await this.getCurrentUserFromBx24();
+        // this.data        = await this.getDealDataFromBx24(this.dealId);
+        // this.fields      = await this.getDealFieldsFromBx24();
+        this.currentUser = await bx24UserGetCurrent(this.bx24);
+        this.data        = await bx24DealGetData(this.bx24, this.dealId);
+        this.fields      = await bx24DealGetFields(this.bx24);
         this.taskId      = this.data[FIELD_ID_TASK_ORDER];
-        let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
-        console.log("contactMeasure = ", contactMeasure);
+        // let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
+        // console.log("contactMeasure = ", contactMeasure);
 
         this.task.init(this.fields);
         this.interfaceBlockOne.init();
@@ -91,9 +104,11 @@ class App {
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
-            await this.saveDealToBx24(dataDeal);
+            // await this.saveDealToBx24(dataDeal);
+            await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
-            await this.saveSmartProcessToBx24(dataSmartProcess);
+            // await this.saveSmartProcessToBx24(dataSmartProcess);
+            await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
             await this.interfaceBlockFive.deleteRemovingFiles();
             spinner.classList.add("d-none");
         })
@@ -103,16 +118,21 @@ class App {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             let dataDeal = this.getDataDeal();
-            await this.saveDealToBx24(dataDeal);
+            // await this.saveDealToBx24(dataDeal);
+            await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
             let dataSmartProcess = this.getDataSmartProcess();
-            await this.saveSmartProcessToBx24(dataSmartProcess);
+            // await this.saveSmartProcessToBx24(dataSmartProcess);
+            await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
             // await updateTaskOrder(dataDeal, this.data, dataSmartProcess, this.fields);
-            let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
+            // let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
+            let contactMeasure = await bx24ContactGetData(this.bx24, this.data[FIELD_CONTACT_MESURE]);
+
             this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
             await this.interfaceBlockFive.deleteRemovingFiles();
             let responsible = this.interfaceBlockThree.getResponsible();
             let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-            await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUser.ID);
+            await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+            // await this.sendMessageToResponsible(this.taskId, msgToUser, this.currentUser.ID);
             spinner.classList.add("d-none");
         })
 
@@ -121,8 +141,11 @@ class App {
             // BX24.reloadWindow();
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            this.data = await this.getDealDataFromBx24(this.dealId);
-            this.fields = await this.getDealFieldsFromBx24();
+            this.data = await bx24DealGetData(this.bx24, this.dealId);
+            this.fields = await bx24DealGetFields(this.bx24);
+            // this.data = await this.getDealDataFromBx24(this.dealId);
+            // this.fields = await this.getDealFieldsFromBx24();
+
             this.interfaceBlockFive.init();
             this.render();
             spinner.classList.add("d-none");
@@ -167,97 +190,97 @@ class App {
         return products;
     }
 
-    async sendMessageToResponsible(taskId, msg, authorId) {
-        let data = await this.bx24.callMethod(
-            "task.commentitem.add",
-            {
-                "taskId": taskId,
-                "fields": {
-                    "AUTHOR_ID": authorId,
-                    "POST_MESSAGE": msg
-                }
-            }
-        );
-        console.log("Отправлен комментарий, овет от Битрикс: ", data);
-        return data;
-    }
+    // async sendMessageToResponsible(taskId, msg, authorId) {
+    //     let data = await this.bx24.callMethod(
+    //         "task.commentitem.add",
+    //         {
+    //             "taskId": taskId,
+    //             "fields": {
+    //                 "AUTHOR_ID": authorId,
+    //                 "POST_MESSAGE": msg
+    //             }
+    //         }
+    //     );
+    //     console.log("Отправлен комментарий, овет от Битрикс: ", data);
+    //     return data;
+    // }
 
-    async getCurrentUserFromBx24() {
-        let data = await this.bx24.callMethod("user.current", {});
-        return data;
-    }
+    // async getCurrentUserFromBx24() {
+    //     let data = await this.bx24.callMethod("user.current", {});
+    //     return data;
+    // }
 
-    async getDealDataFromBx24(dealId) {
-        let data = await this.bx24.callMethod(
-            "crm.deal.list",
-            {
-                "filter": { "ID": dealId },
-                "select": ["*", "UF_*",]
-            }
-        );
-        return data[0];
-    }
+    // async getDealDataFromBx24(dealId) {
+    //     let data = await this.bx24.callMethod(
+    //         "crm.deal.list",
+    //         {
+    //             "filter": { "ID": dealId },
+    //             "select": ["*", "UF_*",]
+    //         }
+    //     );
+    //     return data[0];
+    // }
 
-    async getDealFieldsFromBx24() {
-        let data = await this.bx24.callMethod("crm.deal.fields", {});
-        return data;
-    }
+    // async getDealFieldsFromBx24() {
+    //     let data = await this.bx24.callMethod("crm.deal.fields", {});
+    //     return data;
+    // }
 
-    async getContactDataFromBx24(contactId) {
-        if (!contactId) {
-            return;
-        }
-        let data = await this.bx24.callMethod(
-            "crm.contact.list",
-            {
-                "filter": { "ID": contactId },
-                "select": ["NAME", "LAST_NAME","SECOND_NAME", "PHONE"]
-            }
-        );
-        return data[0];
-    }
+    // async getContactDataFromBx24(contactId) {
+    //     if (!contactId) {
+    //         return;
+    //     }
+    //     let data = await this.bx24.callMethod(
+    //         "crm.contact.list",
+    //         {
+    //             "filter": { "ID": contactId },
+    //             "select": ["NAME", "LAST_NAME","SECOND_NAME", "PHONE"]
+    //         }
+    //     );
+    //     return data[0];
+    // }
 
-    async saveDealToBx24(data) {
-        console.log("saveDealToBx24 = ", data);
-        let response = await this.bx24.callMethod(
-            "crm.deal.update",
-            {
-                "id": this.dealId,
-                "fields": data
-            }
-        );
-    }
+    // async saveDealToBx24(data) {
+    //     console.log("saveDealToBx24 = ", data);
+    //     let response = await this.bx24.callMethod(
+    //         "crm.deal.update",
+    //         {
+    //             "id": this.dealId,
+    //             "fields": data
+    //         }
+    //     );
+    // }
 
-    async saveSmartProcessToBx24(data) {
-        if (data.length == 0) {
-            return;
-        }
-        let reqPackage = {};
-        // console.log("DATA = ", data);
-        for (let item of data) {
-            let tmp = {...item};
-            delete tmp.id;
-            let idSmartProcess = item.id;
-            reqPackage[idSmartProcess] = ["crm.item.update", {
-                entityTypeId: this.smartNumber, id: idSmartProcess, fields: tmp
-            }];
-        }
-        // console.log("REQ_METHOD = ", reqPackage);
-        let response = await this.bx24.batchMethod(reqPackage);
-        return response;
-    }
+    // async saveSmartProcessToBx24(data) {
+    //     if (data.length == 0) {
+    //         return;
+    //     }
+    //     let reqPackage = {};
+    //     // console.log("DATA = ", data);
+    //     for (let item of data) {
+    //         let tmp = {...item};
+    //         delete tmp.id;
+    //         let idSmartProcess = item.id;
+    //         reqPackage[idSmartProcess] = ["crm.item.update", {
+    //             entityTypeId: this.smartNumber, id: idSmartProcess, fields: tmp
+    //         }];
+    //     }
+    //     // console.log("REQ_METHOD = ", reqPackage);
+    //     let response = await this.bx24.batchMethod(reqPackage);
+    //     return response;
+    // }
     
-    async addSmartProcessToBx24(data) {
-        let reqPackage = {};
-        for (let item of data) {
-            let idSmartProcess = item.id;
-            reqPackage[idSmartProcess] = ["crm.item.update", {
-                entityTypeId: this.smartNumber, fields: item
-            }];
-        }
-        let response = await this.bx24.batchMethod(reqPackage);
-        return response;
-    }
+    // async addSmartProcessToBx24(data) {
+    //     let reqPackage = {};
+    //     for (let item of data) {
+    //         let idSmartProcess = item.id;
+    //         reqPackage[idSmartProcess] = ["crm.item.update", {
+    //             entityTypeId: this.smartNumber, fields: item
+    //         }];
+    //     }
+    //     let response = await this.bx24.batchMethod(reqPackage);
+    //     return response;
+    // }
 }
 
 
