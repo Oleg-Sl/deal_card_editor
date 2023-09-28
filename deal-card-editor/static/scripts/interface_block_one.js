@@ -48,9 +48,9 @@ export default class InterfaceBlockOne {
     }
 
     render() {
-        let titleDeal   = data.TITLE;
-        let numberOrder = data[FIELD_NUMBER_ORDER] || "";
-        let linkTender  = data[FIELD_LINK_TENDER] || "";
+        let titleDeal   = this.data.TITLE;
+        let numberOrder = this.data[FIELD_NUMBER_ORDER] || "";
+        let linkTender  = this.data[FIELD_LINK_TENDER] || "";
         let contentHTML = `
             <div class="col-6">
                 <label for="titleDeal">Название сделки</label>
