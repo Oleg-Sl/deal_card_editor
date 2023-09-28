@@ -41,7 +41,7 @@ class Task {
                 AUDITORS: dataDeal[FIELD_OBSERVERS],           // Наблюдатели
                 DESCRIPTION: descTask,
             }
-            bx24TaskUpdate(this.bx24, taskId, newDataTask)
+            bx24TaskUpdate(this.bx24, taskId, newDataTask);
             // await this.updateTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);

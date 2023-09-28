@@ -72,6 +72,8 @@ class App {
         this.data        = await this.getDealDataFromBx24(this.dealId);
         this.fields      = await this.getDealFieldsFromBx24();
         this.taskId      = this.data[FIELD_ID_TASK_ORDER];
+        let contactMeasure = await this.getContactDataFromBx24(this.data[FIELD_CONTACT_MESURE]);
+        console.log("contactMeasure = ", contactMeasure);
 
         this.task.init(this.fields);
         this.interfaceBlockOne.init();
