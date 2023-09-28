@@ -152,7 +152,7 @@ class App {
         if (this.currentUser.ID == 1) {
             this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
         }
-        this.interfaceBlockOne.render(this.fields, this.data);
+        this.interfaceBlockOne.render();
         this.interfaceBlockTwo.render(this.fields, this.data);
         this.interfaceBlockThree.render(this.fields, this.data);
         this.interfaceBlockFour.render(this.fields, this.data);

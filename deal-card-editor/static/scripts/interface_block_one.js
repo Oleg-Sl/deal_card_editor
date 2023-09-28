@@ -19,38 +19,22 @@ export default class InterfaceBlockOne {
         this.data = data;
     }
 
-    initHandler() {
-        this.btnTenderChange.addEventListener("click", async (e) => {
-            let value = this.tenderlink.innerHTML;
-            this.tenderInput.value = value;
-            this.wrapTenderLink.classList.add("d-none");
-            this.wrapTenderInput.classList.remove("d-none");
-        })
-
-        this.tenderInput.addEventListener("change", async (e) => {
-            let value = this.tenderInput.value || "";
-            this.tenderlink.innerHTML = value;
-            this.tenderlink.href = this.addHttpsPrefixIfMissing(value);
-            this.wrapTenderLink.classList.remove("d-none");
-            this.wrapTenderInput.classList.add("d-none");
-        })
-    }
-
-    initPostRender() {
-        this.wrapTenderLink  = this.container.querySelector(".wrap-tender-link");
-        this.btnTenderChange = this.wrapTenderLink.querySelector(".btn-tender-change");
-        this.tenderlink      = this.wrapTenderLink.querySelector(".btn-tender-link");
-        this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
-        this.tenderInput     = this.wrapTenderInput.querySelector("input");
-        this.numberTaskInput = this.container.querySelector(".wrap-number-task");
-        this.initHandler();
-    }
-
     getData() {
         return {
             FIELD_NUMBER_ORDER: this.numberTaskInput.value,
             FIELD_LINK_TENDER:  this.tenderInput.value,
         };
+    }
+
+    getChanges() {
+        let data = {};
+        if (this.data[FIELD_LINK_TENDER] != this.tenderInput.value) {
+            data[this.field[FIELD_LINK_TENDER]] = {
+                "old": this.data[FIELD_LINK_TENDER],
+                "new": this.tenderInput.value
+            };
+        }
+        return data;
     }
 
     render() {
@@ -72,7 +56,7 @@ export default class InterfaceBlockOne {
                 <label for="linkTender">Ссылка на тендер/CRM клиента</label>
                 <div class="row wrap-tender-link">
                     <div id="linkTender" class="alert alert-light col-11 p-2 m-0" role="alert" style="height: 48px;">
-                        <a class="link-opacity-100-hover btn-tender-link" href="${this.addHttpsPrefixIfMissing(linkTender)}" target="_blank">${linkTender}</a>
+                        <a class="link-opacity-100-hover btn-tender-link" href="${this.addHttpsPrefixIfMissing_(linkTender)}" target="_blank">${linkTender}</a>
                     </div>
                     <div class="col-1 row align-items-center change-tender-url">
                         <i class="bi bi-pencil-square btn-tender-change"></i>
@@ -84,10 +68,37 @@ export default class InterfaceBlockOne {
             </div> 
         `;
         this.container.innerHTML = contentHTML;
-        this.initPostRender();
+        this.initPostRender_();
     }
 
-    addHttpsPrefixIfMissing(url) {
+    initHandler_() {
+        this.btnTenderChange.addEventListener("click", async (e) => {
+            let value = this.tenderlink.innerHTML;
+            this.tenderInput.value = value;
+            this.wrapTenderLink.classList.add("d-none");
+            this.wrapTenderInput.classList.remove("d-none");
+        })
+
+        this.tenderInput.addEventListener("change", async (e) => {
+            let value = this.tenderInput.value || "";
+            this.tenderlink.innerHTML = value;
+            this.tenderlink.href = this.addHttpsPrefixIfMissing_(value);
+            this.wrapTenderLink.classList.remove("d-none");
+            this.wrapTenderInput.classList.add("d-none");
+        })
+    }
+
+    initPostRender_() {
+        this.wrapTenderLink  = this.container.querySelector(".wrap-tender-link");
+        this.btnTenderChange = this.wrapTenderLink.querySelector(".btn-tender-change");
+        this.tenderlink      = this.wrapTenderLink.querySelector(".btn-tender-link");
+        this.wrapTenderInput = this.container.querySelector(".wrap-tender-input");
+        this.tenderInput     = this.wrapTenderInput.querySelector("input");
+        this.numberTaskInput = this.container.querySelector(".wrap-number-task");
+        this.initHandler_();
+    }
+
+    addHttpsPrefixIfMissing_(url) {
         if (url && !url.startsWith("https://") && !url.startsWith("http://")) {
             return "https://" + url;
         }
