@@ -204,6 +204,9 @@ class App {
     }
 
     async getContactDataFromBx24(contactId) {
+        if (!contactId) {
+            return;
+        }
         let data = await this.bx24.callMethod(
             "crm.contact.list",
             {
