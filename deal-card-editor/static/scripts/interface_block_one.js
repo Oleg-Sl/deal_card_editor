@@ -1,3 +1,9 @@
+import {
+    FIELD_TITLE,
+    FIELD_NUMBER_ORDER,
+    FIELD_LINK_TENDER,
+} from "./parameters.js"
+
 
 export default class InterfaceBlockOne {
     constructor(container, bx24) {
@@ -48,7 +54,7 @@ export default class InterfaceBlockOne {
     }
 
     render() {
-        let titleDeal   = this.data.TITLE;
+        let titleDeal   = this.data[FIELD_TITLE] || "";
         let numberOrder = this.data[FIELD_NUMBER_ORDER] || "";
         let linkTender  = this.data[FIELD_LINK_TENDER] || "";
         let contentHTML = `
