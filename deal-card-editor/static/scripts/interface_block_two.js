@@ -27,17 +27,16 @@ export class InterfaceBlockTwo {
     }
 
     getData() {
-        let data = {
-            FIELD_BUSINESS_TRIP:     this.container.querySelector(`#taskeditor__${FIELD_BUSINESS_TRIP}`).value,
-            FIELD_METERING:          this.container.querySelector(`#taskeditor__${FIELD_METERING}`).value,
-            FIELD_DISMANTLING:       this.container.querySelector(`#taskeditor__${FIELD_DISMANTLING}`).value,
-            FIELD_PARKING:           this.container.querySelector(`#taskeditor__${FIELD_PARKING}`).value,
-            FIELD_COLOR_PROOF:       this.container.querySelector(`#taskeditor__${FIELD_COLOR_PROOF}`).value,
-            FIELD_INSTALL:           this.container.querySelector(`#taskeditor__${FIELD_INSTALL}`).value,
-            FIELD_OURDETAILS:        this.container.querySelector(`#taskeditor__${FIELD_OURDETAILS}`).value,
-            FIELD_BOXING_RENTAL:     this.container.querySelector(`#taskeditor__${FIELD_BOXING_RENTAL}`).value,
-            FIELD_INSTALL_ON_TERRIT: this.container.querySelector(`#taskeditor__${FIELD_INSTALL_ON_TERRIT}`).value,
-        };
+        let data = {};
+        data[FIELD_BUSINESS_TRIP]     = this.container.querySelector(`#taskeditor__${FIELD_BUSINESS_TRIP}`).value,
+        data[FIELD_METERING]          = this.container.querySelector(`#taskeditor__${FIELD_METERING}`).value,
+        data[FIELD_DISMANTLING]       = this.container.querySelector(`#taskeditor__${FIELD_DISMANTLING}`).value,
+        data[FIELD_PARKING]           = this.container.querySelector(`#taskeditor__${FIELD_PARKING}`).value,
+        data[FIELD_COLOR_PROOF]       = this.container.querySelector(`#taskeditor__${FIELD_COLOR_PROOF}`).value,
+        data[FIELD_INSTALL]           = this.container.querySelector(`#taskeditor__${FIELD_INSTALL}`).value,
+        data[FIELD_OURDETAILS]        = this.container.querySelector(`#taskeditor__${FIELD_OURDETAILS}`).value,
+        data[FIELD_BOXING_RENTAL]     = this.container.querySelector(`#taskeditor__${FIELD_BOXING_RENTAL}`).value,
+        data[FIELD_INSTALL_ON_TERRIT] = this.container.querySelector(`#taskeditor__${FIELD_INSTALL_ON_TERRIT}`).value,
         console.log("DATA = ", data)
         return data;
     }
