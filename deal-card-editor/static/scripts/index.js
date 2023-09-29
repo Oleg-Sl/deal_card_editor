@@ -86,7 +86,7 @@ class App {
         this.interfaceBlockOne.init(this.fields, this.data);
         this.interfaceBlockTwo.init(this.fields, this.data);
         this.interfaceBlockThree.init(this.fields, this.data);
-        this.interfaceBlockFour.init();
+        this.interfaceBlockFour.init(this.fields, this.data);
         this.interfaceBlockFive.init();
 
         this.initHandler();
@@ -155,7 +155,7 @@ class App {
         this.interfaceBlockOne.render();
         this.interfaceBlockTwo.render();
         this.interfaceBlockThree.render();
-        this.interfaceBlockFour.render(this.fields, this.data);
+        this.interfaceBlockFour.render();
         this.interfaceBlockFive.render(this.fields, this.data);
     }
 

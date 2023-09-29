@@ -1,100 +1,26 @@
-// const DESC_ORDER = "UF_CRM_1655918107";
-
-// export default class InterfaceBlockFour {
-//     constructor(container, bx24) {
-//         this.container = container;
-//         this.bx24 = bx24;
-//     }
-
-    
-
-//     init() {
-//         // Создание экземпляра ResizeObserver
-//         let resizeObserver = new ResizeObserver(function(entries) {
-//             // for (var entry of entries) {
-//             //     BX24.fitWindow(); 
-//             // }
-//             BX24.fitWindow();
-//         });
-        
-//         // Добавление блока для отслеживания изменения высоты
-//         // resizeObserver.observe(this.container);
-  
-//         // this.container.addEventListener('resize', function() {
-//         //     console.log("resize");
-//         //     BX24.fitWindow();
-//         // });
-//         // this.container.addEventListener('input', function() {
-//         //     console.log("input");
-//         //     BX24.fitWindow();
-//         // });
-//         // $(document.body).bind("DOMSubtreeModified", (e) => {
-//         //     console.log("DOMSubtreeModified");
-//         //     BX24.fitWindow();
-//         //     console.log("AFTER");
-//         // })
-//     }
-
-//     getData() {
-//         let textarea = document.querySelector('#editor');
-//         let editor = sceditor.instance(textarea);
-//         let data = {};
-//         data[DESC_ORDER] = this.truncateStr(editor.val());
-//         return data;
-//     }
-
-//     truncateStr(str) {
-//         return str.replace(/(<p(?:\s[^>]*)?>\s*<br>\s*<\/p>)$/i, "");
-//         // if (str.endsWith("<p><br></p>")) {
-//         //     return str.slice(0, str.length - "<p><br></p>".length);
-//         // }
-//         // return str;
-//     }
-
-//     async render(fields, data) {
-//         let descOrder = data[DESC_ORDER];
-//         let textarea = document.querySelector('#editor');
-//         let editor = sceditor.instance(textarea);
-//         editor.insert(descOrder);
-//         editor.updateOriginal();
-
-//     }
-
-//     // convertingStrToASCII(str) {
-//     //     return str.replace("<p>", "").replace("</p>", "\n");
-//     // }
-
-//     // convertingStrToHTML(str) {
-//     //     return str.replace("<p>", "").replace("</p>", "\n");
-//     // }
-
-// }
-
-
-
-// var Quill = window.Quill;
-// var Clipboard = Quill.import('modules/clipboard');
-
-// Quill.register('modules/clipboard', Clipboard);
-
-
-// const DESC_ORDER = "UF_CRM_1687857777";
-const DESC_ORDER = "UF_CRM_1655918107";
+import {
+    FIELD_DESC_ORDER,
+} from "./parameters.js"
 
 
 export default class InterfaceBlockFour {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
-        this.editor = null;
+
+        this.elementEditor = NaN;
     }
 
-    init() {
-        this.editor = this.container.querySelector("#editor");
-        // editor
+    init(fields, data) {
+        this.fields = fields;
+        this.data = data;
 
-        // Отслеживание изменения размера поля ввода
-        this.editor.addEventListener("input", async (e) => {
+        this.elementEditor = this.container.querySelector("#editor");
+        this.initHandler();
+    }
+
+    initHandler() {
+        this.elementEditor.addEventListener("input", async (e) => {
             if (e.target.tagName == "TEXTAREA") {
                 BX24.fitWindow();
             }
@@ -103,52 +29,14 @@ export default class InterfaceBlockFour {
 
     getData() {
         let data = {};
-        data[DESC_ORDER] = this.editor.querySelector("textarea").value;
+        data[FIELD_DESC_ORDER] = this.elementEditor.querySelector("textarea").value;
         return data;
     }
 
-    async render(fields, data) {
-        let descOrder = data[DESC_ORDER];
-        this.editor.innerHTML = `
+    async render() {
+        let descOrder = this.data[FIELD_DESC_ORDER];
+        this.elementEditor.innerHTML = `
             <textarea class="form-control" id="" rows="5">${descOrder}</textarea>
         `;
-        // this.elemContent = this.container.querySelector("textarea");
-        // console.log("textarea = ", this.elemContent);
     }
 }
-
-
-// export default class InterfaceBlockFour {
-//     constructor(container, bx24) {
-//         this.container = container;
-//         this.bx24 = bx24;
-//         this.quill = null;
-//     }
-
-//     init() {
-//         this.quill = new Quill('#editor', {
-//             theme: 'snow',
-//         });
-
-//         // Отслеживание изменения размера поля ввода
-//         this.quill.on('editor-change', function(eventName) {
-//             if (eventName === 'text-change') {
-//                 // Здесь можно выполнить нужные действия в случае изменения размера поля ввода
-//                 BX24.fitWindow();
-//             }
-//         });
-//     }
-
-//     getData() {
-//         var contents = this.quill.root.innerHTML;
-//         let data = {};
-//         data[DESC_ORDER] = contents;
-//         return data;
-//     }
-
-//     async render(fields, data) {
-//         let descOrder = data[DESC_ORDER];
-//         this.quill.clipboard.dangerouslyPasteHTML(descOrder);
-//     }
-// }
-

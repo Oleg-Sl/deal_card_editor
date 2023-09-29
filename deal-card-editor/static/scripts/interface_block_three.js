@@ -11,12 +11,6 @@ import {
 } from "./parameters.js"
 
 
-// const RESPONSIBLE_TASK =  "UF_CRM_1619430831";
-// const RESPONSIBLE_MOP =  "ASSIGNED_BY_ID";      // "UF_CRM_1619430831";
-// const RESPONSIBLE_MOS = "UF_CRM_1672839295";    //"UF_CRM_1619700503";
-// const OBSERVER = "UF_CRM_1684305731";
-// // const OBSERVER = "UF_CRM_1625666854";
-
 const ID__RESPONSIBLE_MOP = "responsibleMOP";
 const ID__RESPONSIBLE_MOS = "responsibleMOS";
 const ID__OBSERVER = "observerUser";
@@ -269,12 +263,10 @@ export default class InterfaceBlockThree {
     }
 
     async initUsers() {
-        // let idResponsibleTask = this.data[RESPONSIBLE_TASK];
         let idResponsibleMOP  = this.data[FIELD_RESPONSIBLE_MOP];
         let idResponsibleMOS  = this.data[FIELD_RESPONSIBLE_MOS];
         let idsObservers      = this.data[FIELD_OBSERVERS] || [];
 
-        // let usersData = await bx24UserGetDataByIds(this.bx24, [idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         let usersData = await bx24UserGetDataByIds(this.bx24, [idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         
         let containerMOP      = this.container.querySelector(`#${ID__RESPONSIBLE_MOP}`);
@@ -289,7 +281,6 @@ export default class InterfaceBlockThree {
         await this.userMOS.init();
         await this.usersObserver.init();
 
-        // this.responsibleTask  = usersData[idResponsibleTask] ? usersData[idResponsibleTask][0] || {}: {};
         let dataUserMOP       = usersData[idResponsibleMOP]  ? usersData[idResponsibleMOP][0]  || {}: {};
         let dataUserMOS       = usersData[idResponsibleMOS]  ? usersData[idResponsibleMOS][0]  || {}: {};
         let dataUserObservers = this.getUserSelectedData(idsObservers, usersData);
