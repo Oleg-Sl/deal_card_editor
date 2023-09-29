@@ -35,6 +35,18 @@ export async function bx24UserGetCurrent(bx24) {
     return data;
 }
 
+export async function bx24UserGetDataByIds(bx24, users_ids) {
+    let reqPackage = {};
+    for (let user_id of users_ids) {
+        if (user_id) {
+            reqPackage[user_id] = ["user.get", {"ID": user_id}];
+        }
+    }
+    let userData = await bx24.batchMethod(reqPackage);
+    return userData;
+}
+
+
 
 // *******DEAL*******
 export async function bx24DealGetFields(bx24) {

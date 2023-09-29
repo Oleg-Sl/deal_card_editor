@@ -1,5 +1,9 @@
 import WindowSearchUser from './components/search_user/sctipt.js'
 
+import {
+    bx24UserGetDataByIds
+} from "./bx24/api.js"
+
 
 const RESPONSIBLE_TASK =  "UF_CRM_1619430831";
 const RESPONSIBLE_MOP =  "ASSIGNED_BY_ID";      // "UF_CRM_1619430831";
@@ -248,9 +252,45 @@ export default class InterfaceBlockThree {
         this.userMOS = null;
         // Объект блока - наблюдатели
         this.usersObserver = null;
+
+        this.fields = NaN;
+        this.data = NaN;
     }
 
-    init() {
+    async init(fields, data) {
+        this.fields = fields;
+        this.data = data;
+    }
+
+    async initUsers() {
+        let idResponsibleTask = this.data[RESPONSIBLE_TASK];
+        let idResponsibleMOP  = this.data[RESPONSIBLE_MOP];
+        let idResponsibleMOS  = this.data[RESPONSIBLE_MOS];
+        let idsObservers      = this.data[OBSERVER] || [];
+
+        // let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
+        let usersData = await this.bx24UserGetDataByIds([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
+        
+        let containerMOP      = this.container.querySelector(`#${ID__RESPONSIBLE_MOP}`);
+        let containerMOS      = this.container.querySelector(`#${ID__RESPONSIBLE_MOS}`);
+        let containerObserver = this.container.querySelector(`#${ID__OBSERVER}`);
+
+        this.userMOP       = new UserSingle(containerMOP, this.bx24);
+        this.userMOS       = new UserSingle(containerMOS, this.bx24);
+        this.usersObserver = new UserMultiple(containerObserver, this.bx24);
+
+        await this.userMOP.init();
+        await this.userMOS.init();
+        await this.usersObserver.init();
+
+        this.responsibleTask  = usersData[idResponsibleTask] ? usersData[idResponsibleTask][0] || {}: {};
+        let dataUserMOP       = usersData[idResponsibleMOP]  ? usersData[idResponsibleMOP][0]  || {}: {};
+        let dataUserMOS       = usersData[idResponsibleMOS]  ? usersData[idResponsibleMOS][0]  || {}: {};
+        let dataUserObservers = this.getUserSelectedData(idsObservers, usersData);
+
+        this.userMOP.render(dataUserMOP);
+        this.userMOS.render(dataUserMOS);
+        this.usersObserver.render(dataUserObservers);
     }
 
     getData() {
@@ -261,33 +301,21 @@ export default class InterfaceBlockThree {
         return data;
     }
     getResponsible() {
-        // return this.userMOS.getData();
-        // return this.responsibleTask;
         return this.userMOS.getFullInfo();
     }
 
-    async getDataUserById(users_ids) {
-        let reqPackage = {};
-        for (let user_id of users_ids) {
-            if (user_id) {
-                reqPackage[user_id] = ["user.get", {"ID": user_id}];
-            }
-            // batch[user_id] = ['user.get', {"ID": user_id}];
-        }
-        let userData = await this.bx24.batchMethod(reqPackage);
-        console.log("userData = ", userData);
-        return userData;
-    }
+    // async getDataUserById(users_ids) {
+    //     let reqPackage = {};
+    //     for (let user_id of users_ids) {
+    //         if (user_id) {
+    //             reqPackage[user_id] = ["user.get", {"ID": user_id}];
+    //         }
+    //     }
+    //     let userData = await this.bx24.batchMethod(reqPackage);
+    //     return userData;
+    // }
 
-    async render(fields, data) {
-        console.log("InterfaceBlockThree INPUT DATA = ", data);
-        let idResponsibleTask = data[RESPONSIBLE_TASK];
-        let idResponsibleMOP = data[RESPONSIBLE_MOP];
-        let idResponsibleMOS = data[RESPONSIBLE_MOS];
-        let idsObservers = data[OBSERVER] || [];
-
-        let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
-        console.log("InterfaceBlockThree USER DATA = ", usersData);
+    async render() {
         let contentHTML = `
             <div class="col-3">
                 <label for="">Ответственный (МОП)</label>
@@ -311,27 +339,7 @@ export default class InterfaceBlockThree {
             </div>
         `;
         this.container.innerHTML = contentHTML;
-
-        let containerMOP = this.container.querySelector(`#${ID__RESPONSIBLE_MOP}`);
-        let containerMOS = this.container.querySelector(`#${ID__RESPONSIBLE_MOS}`);
-        let containerObserver = this.container.querySelector(`#${ID__OBSERVER}`);
-
-        this.userMOP = new UserSingle(containerMOP, this.bx24);
-        this.userMOS = new UserSingle(containerMOS, this.bx24);
-        this.usersObserver = new UserMultiple(containerObserver, this.bx24);
-
-        await this.userMOP.init();
-        await this.userMOS.init();
-        await this.usersObserver.init();
-
-        this.responsibleTask = usersData[idResponsibleTask] ? usersData[idResponsibleTask][0] || {}: {};
-        let dataUserMOP = usersData[idResponsibleMOP] ? usersData[idResponsibleMOP][0] || {}: {};
-        let dataUserMOS = usersData[idResponsibleMOS] ? usersData[idResponsibleMOS][0] || {}: {};
-        let dataUserObservers = this.getUserSelectedData(idsObservers, usersData);
-
-        this.userMOP.render(dataUserMOP);
-        this.userMOS.render(dataUserMOS);
-        this.usersObserver.render(dataUserObservers);
+        this.initUsers();
     }
 
     getUserSelectedData(ids, usersData) {
@@ -344,3 +352,5 @@ export default class InterfaceBlockThree {
         return data;
     }
 }
+
+

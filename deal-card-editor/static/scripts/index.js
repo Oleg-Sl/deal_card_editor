@@ -85,7 +85,7 @@ class App {
         this.task.init(this.fields);
         this.interfaceBlockOne.init(this.fields, this.data);
         this.interfaceBlockTwo.init(this.fields, this.data);
-        this.interfaceBlockThree.init();
+        this.interfaceBlockThree.init(this.fields, this.data);
         this.interfaceBlockFour.init();
         this.interfaceBlockFive.init();
 
@@ -154,7 +154,7 @@ class App {
         }
         this.interfaceBlockOne.render();
         this.interfaceBlockTwo.render();
-        this.interfaceBlockThree.render(this.fields, this.data);
+        this.interfaceBlockThree.render();
         this.interfaceBlockFour.render(this.fields, this.data);
         this.interfaceBlockFive.render(this.fields, this.data);
     }
