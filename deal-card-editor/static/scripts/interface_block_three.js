@@ -269,7 +269,7 @@ export default class InterfaceBlockThree {
         let idsObservers      = this.data[OBSERVER] || [];
 
         // let usersData = await this.getDataUserById([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
-        let usersData = await this.bx24UserGetDataByIds([idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
+        let usersData = await bx24UserGetDataByIds(this.bx24, [idResponsibleTask, idResponsibleMOP, idResponsibleMOS, ...idsObservers]);
         
         let containerMOP      = this.container.querySelector(`#${ID__RESPONSIBLE_MOP}`);
         let containerMOS      = this.container.querySelector(`#${ID__RESPONSIBLE_MOS}`);
