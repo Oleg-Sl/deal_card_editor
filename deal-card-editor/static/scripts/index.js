@@ -84,7 +84,7 @@ class App {
 
         this.task.init(this.fields);
         this.interfaceBlockOne.init(this.fields, this.data);
-        this.interfaceBlockTwo.init();
+        this.interfaceBlockTwo.init(this.fields, this.data);
         this.interfaceBlockThree.init();
         this.interfaceBlockFour.init();
         this.interfaceBlockFive.init();
@@ -153,7 +153,7 @@ class App {
             this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
         }
         this.interfaceBlockOne.render();
-        this.interfaceBlockTwo.render(this.fields, this.data);
+        this.interfaceBlockTwo.render();
         this.interfaceBlockThree.render(this.fields, this.data);
         this.interfaceBlockFour.render(this.fields, this.data);
         this.interfaceBlockFive.render(this.fields, this.data);

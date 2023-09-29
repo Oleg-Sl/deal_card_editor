@@ -1,48 +1,49 @@
-// UF_CRM_1694710116
-// UF_CRM_1694710578
+import {
+    FIELD_BUSINESS_TRIP,
+} from "./parameters.js"
+
+
 
 export class InterfaceBlockTwo {
     constructor(container, bx24) {
         this.container = container;
         this.bx24 = bx24;
+
+        this.fields = NaN;
+        this.data = NaN;
     }
 
-    init() {
-
+    init(fields, data) {
+        this.fields = fields;
+        this.data = data;
     }
 
     getData() {
         let data = {
-            "UF_CRM_1668129559": this.container.querySelector("#taskeditor__UF_CRM_1668129559").value,
-            "UF_CRM_1695664525": this.container.querySelector("#taskeditor__UF_CRM_1695664525").value,
-            "UF_CRM_1657651541": this.container.querySelector("#taskeditor__UF_CRM_1657651541").value,
-            "UF_CRM_1637861351": this.container.querySelector("#taskeditor__UF_CRM_1637861351").value,
-            "UF_CRM_1640199620": this.container.querySelector("#taskeditor__UF_CRM_1640199620").value,
-            "UF_CRM_1637861029": this.container.querySelector("#taskeditor__UF_CRM_1637861029").value,
-            "UF_CRM_1637326777": this.container.querySelector("#taskeditor__UF_CRM_1637326777").value,
-            // "UF_CRM_1619441621": this.container.querySelector("#taskeditor__UF_CRM_1619441621").value,
-            "UF_CRM_1694710116": this.container.querySelector("#taskeditor__UF_CRM_1694710116").value,
-            "UF_CRM_1694710578": this.container.querySelector("#taskeditor__UF_CRM_1694710578").value,
+            FIELD_BUSINESS_TRIP:     this.container.querySelector(`#taskeditor__${FIELD_BUSINESS_TRIP}`).value,
+            FIELD_METERING:          this.container.querySelector(`#taskeditor__${FIELD_METERING}`).value,
+            FIELD_DISMANTLING:       this.container.querySelector(`#taskeditor__${FIELD_DISMANTLING}`).value,
+            FIELD_PARKING:           this.container.querySelector(`#taskeditor__${FIELD_PARKING}`).value,
+            FIELD_COLOR_PROOF:       this.container.querySelector(`#taskeditor__${FIELD_COLOR_PROOF}`).value,
+            FIELD_INSTALL:           this.container.querySelector(`#taskeditor__${FIELD_INSTALL}`).value,
+            FIELD_OURDETAILS:        this.container.querySelector(`#taskeditor__${FIELD_OURDETAILS}`).value,
+            FIELD_BOXING_RENTAL:     this.container.querySelector(`#taskeditor__${FIELD_BOXING_RENTAL}`).value,
+            FIELD_INSTALL_ON_TERRIT: this.container.querySelector(`#taskeditor__${FIELD_INSTALL_ON_TERRIT}`).value,
         };
-        // console.log("data = ", data);
         return data;
     }
 
-    render(fields, data) {
+    render() {
         let contentHTML = "";
-
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1668129559.items, data.UF_CRM_1668129559, "UF_CRM_1668129559", "Командировка", 1, );   // isBusinessTrip 
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1695664525.items, data.UF_CRM_1695664525, "UF_CRM_1695664525", "Замер", 1);  // isMeasuring
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1657651541.items, data.UF_CRM_1657651541, "UF_CRM_1657651541", "Демонтаж", 1);   // isDismantling
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1637861351.items, data.UF_CRM_1637861351, "UF_CRM_1637861351", "Парковка", 1);   // isParking
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1640199620.items, data.UF_CRM_1640199620, "UF_CRM_1640199620", "Печать согласно ЦП?", 1);
-        // !!! Неизвестно поле !!!
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1637861029.items, data.UF_CRM_1637861029, "UF_CRM_1637861029", "Монтаж 24/7", 1);    // isMounting24
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1637326777.items, data.UF_CRM_1637326777, "UF_CRM_1637326777", "Наши реквизиты", 2); // ourRequisite
-        // contentHTML += this.getSelectHTML(fields.UF_CRM_1619441621.items, data.UF_CRM_1619441621, "UF_CRM_1619441621", "Спопоб оплаты", 2);  // paymentMethod
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1694710116.items, data.UF_CRM_1694710116, "UF_CRM_1694710116", "Аренда бокса", 2);  // paymentMethod
-        contentHTML += this.getSelectHTML(fields.UF_CRM_1694710578.items, data.UF_CRM_1694710578, "UF_CRM_1694710578", "Монтаж на территории", 2);  // paymentMethod
-
+        contentHTML += this.getSelectHTML(this.fields[FIELD_BUSINESS_TRIP].items,     this.data[FIELD_BUSINESS_TRIP],     FIELD_BUSINESS_TRIP,     "Командировка",         1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_METERING].items,          this.data[FIELD_METERING],          FIELD_METERING,          "Замер",                1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_DISMANTLING].items,       this.data[FIELD_DISMANTLING],       FIELD_DISMANTLING,       "Демонтаж",             1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_PARKING].items,           this.data[FIELD_PARKING],           FIELD_PARKING,           "Парковка",             1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_COLOR_PROOF].items,       this.data[FIELD_COLOR_PROOF],       FIELD_COLOR_PROOF,       "Печать согласно ЦП?",  1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_INSTALL].items,           this.data[FIELD_INSTALL],           FIELD_INSTALL,           "Монтаж 24/7",          1);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_OURDETAILS].items,        this.data[FIELD_OURDETAILS],        FIELD_OURDETAILS,        "Наши реквизиты",       2);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_BOXING_RENTAL].items,     this.data[FIELD_BOXING_RENTAL],     FIELD_BOXING_RENTAL,     "Аренда бокса",         2);
+        contentHTML += this.getSelectHTML(this.fields[FIELD_INSTALL_ON_TERRIT].items, this.data[FIELD_INSTALL_ON_TERRIT], FIELD_INSTALL_ON_TERRIT, "Монтаж на территории", 2);
         this.container.innerHTML = contentHTML;
     }
 
@@ -65,6 +66,5 @@ export class InterfaceBlockTwo {
         `;
         return contentHTML;
     }
-
 }
 
