@@ -38,6 +38,7 @@ export class InterfaceBlockTwo {
             FIELD_BOXING_RENTAL:     this.container.querySelector(`#taskeditor__${FIELD_BOXING_RENTAL}`).value,
             FIELD_INSTALL_ON_TERRIT: this.container.querySelector(`#taskeditor__${FIELD_INSTALL_ON_TERRIT}`).value,
         };
+        console.log("DATA = ", data)
         return data;
     }
 
