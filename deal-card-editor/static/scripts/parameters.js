@@ -1,6 +1,8 @@
  
 // Поля в сделке
 export const FIELD_TITLE               = "TITLE";                   // Название сделки
+export const FIELD_RESPONSIBLE_MOP     = "ASSIGNED_BY_ID";          // Ответственный МОП
+export const FIELD_RESPONSIBLE_MOS     = "UF_CRM_1672839295";       // Ответственный МОС
 export const FIELD_OBSERVERS           = "UF_CRM_1684305731";       // Список наблюдателей задачи "ЗАКАЗ"
 export const FIELD_ID_TASK_ORDER       = "UF_CRM_1661089895";       // ID задачи "ЗАКАЗ" (сохраненное в сделке)
 export const FIELD_DESC_ORDER          = "UF_CRM_1655918107";       // Что делаем по заказу в целом
@@ -16,7 +18,6 @@ export const FIELD_INSTALL_ON_TERRIT   = "UF_CRM_1694710578";       // Монт�
 export const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";       // Контакт для Замера
 export const FIELD_NUMBER_ORDER        = "UF_CRM_1633523035";       // № заказа (автоматически)
 export const FIELD_LINK_TENDER         = "UF_CRM_1620918041";       // Ссылка  рабочую таблицу / тендер / CRM Клиента
-
 
 // Поля в смартпроцессе
 export const SMART_FIELDS = {
