@@ -141,7 +141,7 @@ class App {
     async handleSaveDealData(isChangedTask) {
         if (isChangedTask) {
             this.dealData = await bx24DealGetData(this.bx24, this.dealId);
-            this.productsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+            this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
         }
         
         let dataDeal = this.getDataDeal();
