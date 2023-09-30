@@ -4,7 +4,7 @@ import {
 
 import {
     SMART_FIELDS,
-} from "../bx24/api.js"
+} from "../parameters.js"
 
 
 class DealDataComparator {
