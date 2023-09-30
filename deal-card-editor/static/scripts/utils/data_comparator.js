@@ -93,7 +93,7 @@ class DealDataComparator {
             objChangeText.oldValue = this.getTextUsers_(objChange.oldValue, usersData);
             objChangeText.newValue = this.getTextUsers_(objChange.newValue, usersData);
         } else {
-            objChangeText.name = field.title;
+            objChangeText.name = field.listLabel || field.title;
             objChangeText.oldValue = objChange.oldValue.join(', ');
             objChangeText.newValue = objChange.newValue.join(', ');
         }
@@ -130,7 +130,7 @@ class DealDataComparator {
             objChangeText.oldValue = this.findValueById_(objChange.oldValue, field.items);
             objChangeText.newValue = this.findValueById_(objChange.newValue, field.items);
         } else {
-            objChangeText.name = field.title;
+            objChangeText.name = field.listLabel || field.title;
             objChangeText.oldValue = objChange.oldValue;
             objChangeText.newValue = objChange.newValue;
         }
