@@ -104,7 +104,8 @@ class DealDataComparator {
     getTextUsers_(userIds, usersData) {
         let str = "";
         for (let userId of userIds) {
-            const user = usersData[userId] || {};
+            const users = usersData[userId] || [];
+            const user = user[0] || {};
             str += `${user.LAST_NAME || ""} ${user.NAME || ""}\n`;
         }
         return str;
@@ -118,8 +119,10 @@ class DealDataComparator {
         let field = this.fieldsDeal[key];
         if (field.type == "employee" || field.type == "user") {
             const usersData = await bx24UserGetDataByIds(this.bx24, [objChange.oldValue, objChange.newValue]);
-            const userOld = usersData[item.oldValue] || {};
-            const userNew = usersData[item.newValue] || {};
+            const userOlds = usersData[objChange.oldValue] || [];
+            const userNews = usersData[objChange.newValue] || [];
+            const userOld = userOlds[0] || {};
+            const userNew = userNews[0] || {};
             objChangeText.name = field.listLabel || field.title;
             objChangeText.oldValue = `${userOld.LAST_NAME || ""} ${userOld.NAME || ""}`;
             objChangeText.newValue = `${userNew.LAST_NAME || ""} ${userNew.NAME || ""}`;
