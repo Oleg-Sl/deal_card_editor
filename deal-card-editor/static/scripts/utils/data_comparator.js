@@ -117,7 +117,7 @@ class DealDataComparator {
         let objChangeText = {};
         let field = this.fieldsDeal[key];
         if (field.type == "employee" || field.type == "user") {
-            const usersData = await this.bx24UserGetDataByIds(this.bx24, [objChange.oldValue, objChange.newValue]);
+            const usersData = await bx24UserGetDataByIds(this.bx24, [objChange.oldValue, objChange.newValue]);
             const userOld = usersData[item.oldValue] || {};
             const userNew = usersData[item.newValue] || {};
             objChangeText.name = field.listLabel || field.title;
