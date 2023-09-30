@@ -91,10 +91,10 @@ class DealDataComparator {
         let objChangeText = {};
         let field = this.fieldsDeal[key];
         if (field.type == "employee" || field.type == "user") {
-            const usersData = await bx24UserGetDataByIds(this.bx24, [...item.oldValue, ...item.newValue]);
+            const usersData = await bx24UserGetDataByIds(this.bx24, [...objChange.oldValue, ...objChange.newValue]);
             objChangeText.name = field.listLabel || field.title;
-            objChangeText.oldValue = this.getTextUsers_(item.oldValue, usersData);
-            objChangeText.newValue = this.getTextUsers_(item.newValue, usersData);
+            objChangeText.oldValue = this.getTextUsers_(objChange.oldValue, usersData);
+            objChangeText.newValue = this.getTextUsers_(objChange.newValue, usersData);
         } else {
             objChangeText.name = field.title;
             objChangeText.oldValue = objChange.oldValue.join(', ');
