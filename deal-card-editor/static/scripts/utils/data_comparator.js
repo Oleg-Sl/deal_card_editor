@@ -1,3 +1,8 @@
+import {
+    bx24UserGetDataByIds,
+} from "../bx24/api.js"
+
+
 class DealDataComparator {
     constructor(bx24) {
         this.bx24 = bx24;
