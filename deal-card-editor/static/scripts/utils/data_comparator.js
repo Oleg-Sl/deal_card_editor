@@ -24,7 +24,7 @@ class DealDataComparator {
             let objChangeText = {};
             if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
                 console.log("Массив");
-                objChangeText = await this.getTextChangeForSingle(key, objChange);
+                objChangeText = await this.getTextChangeForMultiple(key, objChange);
             } else {
                 console.log("Одно значение");
                 objChangeText = await this.getTextChangeForSingle(key, objChange);
@@ -55,8 +55,6 @@ class DealDataComparator {
     }
 
     findChanged_(oldValues, newValues) {
-        console.log("oldValues = ", oldValues);
-        console.log("newValues = ", newValues);
         const changedValues = {};
         for (const key in oldValues) {
             if (oldValues.hasOwnProperty(key) && newValues.hasOwnProperty(key)) {
@@ -66,8 +64,6 @@ class DealDataComparator {
                     }
                     let oldValue = this.getArrayDifference_(oldValues[key], newValues[key]);
                     let newValue = this.getArrayDifference_(newValues[key], oldValues[key]);
-                    console.log("oldValues[key] = ", oldValues[key]);
-                    console.log("newValues[key] = ", newValues[key]);
                     if (oldValue.length === 0 && newValue.length === 0) {
                         continue;
                     }
