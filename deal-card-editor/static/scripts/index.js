@@ -9,7 +9,7 @@ import YandexDisk from './yandex_disk/requests.js'
 
 // import {update as updateTaskOrder} from "./utils/task_update.js"
 import {Task} from "./utils/task.js"
-import {DataComparator} from "./utils/data_comparator.js"
+import {DealDataComparator} from "./utils/data_comparator.js"
 
 import {
     bx24TaskAddComment,
@@ -46,7 +46,7 @@ class App {
         this.fieldsData = NaN;
 
         this.task = new Task(this.bx24);
-        this.dataComparator = new DataComparator();
+        this.dataComparator = new DealDataComparator(this.bx24);
 
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
@@ -156,13 +156,13 @@ class App {
     async handleUpdateTask() {
         // const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
         const newDealData = this.getDataDeal();
-        let dealChanged = this.dataComparator.findChangedValues(this.dealData, newDealData);
+        let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
         console.log("dealChanged = ", dealChanged);
 
-        // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
-        const newProductsData = this.getDataSmartProcess();
-        let productsChanged = this.dataComparator.findChagedInProducts(this.productsData, newProductsData);
-        console.log("productsChanged = ", productsChanged);
+        // // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+        // const newProductsData = this.getDataSmartProcess();
+        // let productsChanged = this.dataComparator.findChagedInProducts(this.productsData, newProductsData);
+        // console.log("productsChanged = ", productsChanged);
 
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
         this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});

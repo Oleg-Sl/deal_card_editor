@@ -181,6 +181,14 @@ class UserMultiple {
         return Object.keys(this.selectedUser);
     }
 
+    // getUsersData() {
+    //     return {
+    //         ID: this.userId,
+    //         LAST_NAME: this.userLastname,
+    //         NAME: this.userName
+    //     }
+    // }
+
     addedUser(userId, lastname, name, userPhoto) {
         if (userId in this.selectedUser) {
             return;
