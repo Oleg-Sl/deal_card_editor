@@ -433,8 +433,8 @@ export default class InterfaceBlockfour {
         this.dealId = dealId;
         this.smartNumber = SMART_PROCESS_NUMBER;
 
-        this.fieldsData = fields;
-        this.dealData = data;
+        this.fieldsData = NaN;
+        this.dealData = NaN;
 
         this.productsObj = [];
 
