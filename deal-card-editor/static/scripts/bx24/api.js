@@ -113,6 +113,15 @@ export async function bx24SmartProcessUpdate(bx24, smartNumber, data) {
     return response;
 }
 
+export async function bx24ProductGetFields(bx24, smartNumber) {
+    let data = await bx24.callMethod(
+        "crm.item.fields",
+        {
+            "entityTypeId": smartNumber
+        }
+    );
+    return data.fields;
+}
 
 export async function bx24SmartProcessGetList(bx24, smartNumber, dealId) {
     let data = await bx24.callMethod(

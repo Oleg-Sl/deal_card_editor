@@ -166,7 +166,16 @@ class ProductsDataComparator {
     }
 
     init(fields) {
-        this.fieldsDeal = fields;
+        this.fields = fields;
+        console.log("Products Fields = ", this.fields);
+    }
+
+    async findChaged_(oldProducts, newProducts) {
+        console.log("oldProducts = ", oldProducts);
+        console.log("newProducts = ", newProducts);
+        if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
+            return "";
+        }
     }
 
     // findChagedInProducts(oldProducts, newProducts) {
@@ -204,4 +213,4 @@ class ProductsDataComparator {
 
 }
 
-export {DealDataComparator};
+export {DealDataComparator, ProductsDataComparator};

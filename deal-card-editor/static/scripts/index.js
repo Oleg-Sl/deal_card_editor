@@ -8,8 +8,8 @@ import Bitrix24 from './bx24/requests.js'
 import YandexDisk from './yandex_disk/requests.js'
 
 // import {update as updateTaskOrder} from "./utils/task_update.js"
-import {Task} from "./utils/task.js"
-import {DealDataComparator} from "./utils/data_comparator.js"
+import { Task } from "./utils/task.js"
+import { DealDataComparator, ProductsDataComparator } from "./utils/data_comparator.js"
 
 import {
     bx24TaskAddComment,
@@ -37,17 +37,19 @@ class App {
         this.yaDisk = yaDisk;
         this.dealId = dealId;
         this.taskId = NaN;
-        
+
         this.smartNumber = 144;
-        
+
         this.dealData = NaN;
         this.productsData = NaN;
         this.currentUser = NaN;
-        this.fieldsData = NaN;
+        this.fieldsDealData = NaN;
+        this.fieldsProductData = NaN;
 
         this.task = new Task(this.bx24);
         this.dataComparator = new DealDataComparator(this.bx24);
-
+        this.productComparator = new ProductsDataComparator(this.bx24);
+        
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
         this.interfaceBlockOne = new InterfaceBlockOne(elemInterfaceBlockOne, bx24);
@@ -81,18 +83,20 @@ class App {
     }
 
     async init() {
-        this.currentUser = await bx24UserGetCurrent(this.bx24);
-        this.dealData    = await bx24DealGetData(this.bx24, this.dealId);
-        this.fieldsData  = await bx24DealGetFields(this.bx24);
-        this.taskId      = this.dealData[FIELD_ID_TASK_ORDER];
+        this.currentUser       = await bx24UserGetCurrent(this.bx24);
+        this.dealData          = await bx24DealGetData(this.bx24, this.dealId);
+        this.fieldsDealData    = await bx24DealGetFields(this.bx24);
+        this.fieldsProductData = await bx24ProductGetFields(this.bx24);
+        this.taskId            = this.dealData[FIELD_ID_TASK_ORDER];
 
-        this.task.init(this.fieldsData);
-        this.dataComparator.init(this.fieldsData);
-        this.interfaceBlockOne.init(this.fieldsData, this.dealData);
-        this.interfaceBlockTwo.init(this.fieldsData, this.dealData);
-        this.interfaceBlockThree.init(this.fieldsData, this.dealData);
-        this.interfaceBlockFour.init(this.fieldsData, this.dealData);
-        this.interfaceBlockFive.init(this.fieldsData, this.dealData);
+        this.task.init(this.fieldsDealData);
+        this.dataComparator.init(this.fieldsDealData);
+        this.productComparator.init(this.fieldsProductData);
+        this.interfaceBlockOne.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockTwo.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockThree.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockFour.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData);
 
         this.initHandler();
     }
@@ -154,14 +158,12 @@ class App {
     }
 
     async handleUpdateTask() {
-        // const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
         const newDealData = this.getDataDeal();
         let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
 
-        // // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
         const newProductsData = this.getDataSmartProcess();
-        // let productsChanged = this.dataComparator.findChagedInProducts(this.productsData, newProductsData);
-        // console.log("productsChanged = ", productsChanged);
+        let productsChanged = this.productComparator.findChaged_(this.productsData, newProductsData);
+        console.log("productsChanged = ", productsChanged);
 
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
         this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
@@ -176,7 +178,7 @@ class App {
 
     async handleCancelChanging() {
         this.dealData = await bx24DealGetData(this.bx24, this.dealId);
-        this.fieldsData = await bx24DealGetFields(this.bx24);
+        this.fieldsDealData = await bx24DealGetFields(this.bx24);
         this.interfaceBlockFive.init();
         this.render();
     }
