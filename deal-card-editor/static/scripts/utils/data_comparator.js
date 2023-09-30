@@ -18,8 +18,10 @@ class DealDataComparator {
             const objChange = changedValues[key];
             let objChangeText = {};
             if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
+                console.log("Массив");
                 objChangeText = await this.getTextChangeForSingle(key, objChange);
             } else {
+                console.log("Одно значение");
                 objChangeText = await this.getTextChangeForSingle(key, objChange);
             }
             resultString += `
@@ -109,8 +111,9 @@ class DealDataComparator {
         }
         let objChangeText = {};
         let field = this.fieldsDeal[key];
+        console.log("field.type = ", field.type);
         if (field.type == "employee") {
-            const usersData = await bx24UserGetDataByIds(this.bx24, [item.oldValue, item.newValue]);
+            const usersData = await this.bx24UserGetDataByIds(this.bx24, [item.oldValue, item.newValue]);
             const userOld = usersData[item.oldValue] || {};
             const userNew = usersData[item.newValue] || {};
             objChangeText.name = field.listLabel;
