@@ -57,11 +57,9 @@ class ProductRow {
             if (e.target.classList.contains(ADD_FILE_TO_PRODUCT)) {
                 let elemInput = e.target.parentNode.querySelector("input");
                 elemInput.click();
-                console.log("Открыли окно выбора файла - ADD_FILE_TO_PRODUCT");
             } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS)) {
                 let elemInput = e.target.parentNode.querySelector("input");
                 elemInput.click();
-                console.log("Открыли окно выбора файла - ADD_FILE_TO_PREPRESS");
             }
         })
         // Событие добавления файла
@@ -71,10 +69,8 @@ class ProductRow {
                 elemSpinner.classList.remove("d-none");
                 for (let file of e.target.files) {
                     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
-                        console.log("Добавление файла - ADD_FILE_TO_PRODUCT_INPUT");
                         await this.addFile(this.clientFiles, this.dealId, file.name, file, file.size);
                     } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
-                        console.log("Добавление файла - ADD_FILE_TO_PREPRESS_INPUT");
                         await this.addFile(this.prepressFiles, this.dealId, file.name, file, file.size);
                     }
                 }
@@ -84,7 +80,6 @@ class ProductRow {
         // Событие удаления файла
         this.element.addEventListener("click", async (e) => {
             if (e.target.classList.contains("product-list__remove-files")) {
-                console.log("product-list__remove-files = ", e.target);
                 let rowFile = e.target.closest(".file-row");
                 let containerFiles = rowFile.parentNode;
                 const childIndex = Array.prototype.indexOf.call(containerFiles.children, rowFile);
@@ -348,9 +343,7 @@ class ProductRow {
     // возвращает HTML списка выбора (SELECT)
     getOptionsFromArrayForSelectHTML(items, actualyName="") {
         let contentHTML = '';
-        console.log("actualyName = ", actualyName);
         for (let item of items) {
-            console.log("item = ", item);
             if (item == actualyName) {
                 contentHTML += `<option class="product_list__fontstyle" value="${item}" selected>${item}</option>`;
             } else {
@@ -389,7 +382,6 @@ class ProductRow {
             entityTypeId: SMART_PROCESS_NUMBER,
             fields: data,
         });
-        console.log("response => ", response);
         this.data.id = response.item.id;
         this.smartProcessId = response.item.id;
         return response.item;
@@ -466,7 +458,6 @@ export default class InterfaceBlockfour {
         for (let product of this.productsObj) {
             data.push(product.getData());
         }
-        console.log("DATA = ", data);
         return data;
     }
 
@@ -475,7 +466,6 @@ export default class InterfaceBlockfour {
         for (let product of this.productsObj) {
             for (let file of product.removingFiles) {
                 let response = await this.yaDisk.removeFile(this.dealId, file.name);
-                console.log("removeFile response = ", response);
             }
             product.removingFiles = [];
         }

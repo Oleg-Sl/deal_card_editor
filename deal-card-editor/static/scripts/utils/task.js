@@ -204,4 +204,5 @@ class Task {
     }
 
 }
+
 export {Task};

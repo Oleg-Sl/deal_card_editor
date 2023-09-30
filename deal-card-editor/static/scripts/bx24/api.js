@@ -1,3 +1,5 @@
+import { SMART_FIELDS, } from '../parameters.js';
+
 
 
 
@@ -109,4 +111,33 @@ export async function bx24SmartProcessUpdate(bx24, smartNumber, data) {
     }
     let response = await bx24.batchMethod(reqPackage);
     return response;
+}
+
+
+export async function bx24SmartProcessGetList(bx24, smartNumber, dealId) {
+    let data = await bx24.callMethod(
+        "crm.item.list",
+        {
+            "entityTypeId": smartNumber,
+            "filter": { "parentId2": dealId },
+            "select": [
+                "id",
+                SMART_FIELDS.TITLE,
+                SMART_FIELDS.COUNT_PIECES,
+                SMART_FIELDS.TECHNOLOGY,
+                SMART_FIELDS.FILM,
+                SMART_FIELDS.LAMINATION,
+                SMART_FIELDS.WIDTH_FILM,
+                SMART_FIELDS.LINEAR_METER_PIECES,
+                SMART_FIELDS.SQUARE_METER_PIECES,
+                SMART_FIELDS.LINEAR_METER_TOTAL,
+                SMART_FIELDS.SQUARE_METER_TOTAL,
+                SMART_FIELDS.LINK_SRC,
+                SMART_FIELDS.CLIENT_FILES,
+                SMART_FIELDS.PREPRESS,
+                SMART_FIELDS.COMMENT,
+            ]
+        }
+    );
+    return data.items;
 }

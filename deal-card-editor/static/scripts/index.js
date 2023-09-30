@@ -9,6 +9,7 @@ import YandexDisk from './yandex_disk/requests.js'
 
 // import {update as updateTaskOrder} from "./utils/task_update.js"
 import {Task} from "./utils/task.js"
+import {DataComparator} from "./utils/data_comparator.js"
 
 import {
     bx24TaskAddComment,
@@ -18,6 +19,7 @@ import {
     bx24DealUpdate,
     bx24ContactGetData,
     bx24SmartProcessUpdate,
+    bx24SmartProcessGetList,
 } from "./bx24/api.js"
 
 import {
@@ -43,6 +45,7 @@ class App {
         this.fieldsData = NaN;
 
         this.task = new Task(this.bx24);
+        this.dataComparator = new DataComparator();
 
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
@@ -83,6 +86,7 @@ class App {
         this.taskId      = this.productData[FIELD_ID_TASK_ORDER];
 
         this.task.init(this.fieldsData);
+        this.dataComparator.init(this.fieldsData);
         this.interfaceBlockOne.init(this.fieldsData, this.productData);
         this.interfaceBlockTwo.init(this.fieldsData, this.productData);
         this.interfaceBlockThree.init(this.fieldsData, this.productData);
@@ -167,9 +171,23 @@ class App {
     async handleUpdateTask() {
         let contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
         this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
+
+        let oldDealData = await bx24DealGetData(this.bx24, this.dealId);
+        let newDealData = this.getDataDeal();
+        let dealChanged = this.dataComparator.findChangedValues(oldDealData, newDealData);
+        console.log("dealChanged = ", dealChanged);
+
+        let oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+        let newProductsData = this.getDataSmartProcess();
+        let productsChanged = this.dataComparator.findChagedInProducts(oldProductsData, newProductsData);
+        console.log("productsChanged = ", productsChanged);
+
         let responsible = this.interfaceBlockThree.getResponsible();
+        
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+        
         await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+        
     }
 
     async handleCancelChanging() {
