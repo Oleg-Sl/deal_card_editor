@@ -4,6 +4,10 @@ import {
 
 import {
     SMART_FIELDS,
+    LIST_TECHNOLOGY,
+    LIST_FILMS,
+    LIST_LAMINATIONS,
+    LIST_WIDTH_FILMS,
 } from "../parameters.js"
 
 
