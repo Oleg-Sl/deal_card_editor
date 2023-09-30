@@ -160,6 +160,22 @@ class DealDataComparator {
         return difference;
     }
 
+    arraysAreEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) {
+            return false;
+        }
+        const sortedArr1 = arr1.map(value => parseInt(value, 10)).sort((a, b) => a - b);
+        const sortedArr2 = arr2.map(value => parseInt(value, 10)).sort((a, b) => a - b);
+
+        for (let i = 0; i < sortedArr1.length; i++) {
+            if (sortedArr1[i] !== sortedArr2[i]) {
+                return false;
+            }
+        }
+
+        return true; 
+    }    
+
 
     // findChagedInProducts(oldProducts, newProducts) {
     //     // console.log("oldProducts = ", oldProducts);
