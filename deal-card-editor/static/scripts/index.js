@@ -169,18 +169,18 @@ class App {
     }
 
     async handleUpdateTask() {
-        let contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
-        this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
-
-        let oldDealData = await bx24DealGetData(this.bx24, this.dealId);
-        let newDealData = this.getDataDeal();
+        const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
+        const newDealData = this.getDataDeal();
         let dealChanged = this.dataComparator.findChangedValues(oldDealData, newDealData);
         console.log("dealChanged = ", dealChanged);
 
-        let oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
-        let newProductsData = this.getDataSmartProcess();
+        const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+        const newProductsData = this.getDataSmartProcess();
         let productsChanged = this.dataComparator.findChagedInProducts(oldProductsData, newProductsData);
         console.log("productsChanged = ", productsChanged);
+
+        const contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
+        this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
 
         let responsible = this.interfaceBlockThree.getResponsible();
         
