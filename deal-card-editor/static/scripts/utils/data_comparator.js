@@ -221,7 +221,7 @@ class ProductsDataComparator {
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 content += "";
             } else {
-                if (oldValue != newValue) {
+                if ((oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
                     console.log("*************************");
                     console.log("oldValue = ", oldValue);
                     console.log("newValue = ", newValue);
@@ -236,7 +236,6 @@ class ProductsDataComparator {
 
         return `
             [TR]
-            [CENTER]Текст[/CENTER]
                 [TD][B][CENTER][COLOR=#ff0000]${oldProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
                 [TD][B][CENTER][COLOR=#ff0000]==>[/COLOR][/CENTER][/B][/TD]
                 [TD][B][CENTER][COLOR=#32CD32]${newProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
