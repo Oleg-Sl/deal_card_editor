@@ -23,10 +23,8 @@ class DealDataComparator {
             const objChange = changedValues[key];
             let objChangeText = {};
             if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
-                console.log("Массив");
                 objChangeText = await this.getTextChangeForMultiple(key, objChange);
             } else {
-                console.log("Одно значение");
                 objChangeText = await this.getTextChangeForSingle(key, objChange);
             }
             resultString += `
@@ -79,7 +77,6 @@ class DealDataComparator {
                 }
             }
         }
-        console.log("changedValues = ", changedValues);
 
         return changedValues;
     }
