@@ -12,6 +12,12 @@ class DataComparator {
 
         for (const key in oldValues) {
             if (oldValues.hasOwnProperty(key) && newValues.hasOwnProperty(key)) {
+                if (Array.isArray(oldValues[key]) && Array.isArray(newValues[key])) {
+                    changedValues[key] = {
+                        oldValue: this.arrayDifference(oldValues[key], newValues[key]),
+                        newValue: this.arrayDifference(newValues[key], oldValues[key]),
+                    };
+                } else 
                 if (oldValues[key] != newValues[key]) {
                     changedValues[key] = {
                         oldValue: oldValues[key],
@@ -55,6 +61,18 @@ class DataComparator {
                 ${resultString}
             [/TABLE]
         `;
+    }
+
+    arrayDifference(arr1, arr2) {
+        const difference = [];
+    
+        for (const item of arr1) {
+            if (!arr2.includes(item)) {
+                difference.push(item);
+            }
+        }
+    
+        return difference;
     }
 
     findChagedInProducts(oldProducts, newProducts) {
