@@ -111,7 +111,7 @@ class App {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData(true);
-            // await this.handleUpdateTask();
+            await this.handleUpdateTask();
             spinner.classList.add("d-none");
         })
 
