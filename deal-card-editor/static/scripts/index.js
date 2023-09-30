@@ -160,7 +160,7 @@ class App {
         console.log("dealChanged = ", dealChanged);
 
         // // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
-        // const newProductsData = this.getDataSmartProcess();
+        const newProductsData = this.getDataSmartProcess();
         // let productsChanged = this.dataComparator.findChagedInProducts(this.productsData, newProductsData);
         // console.log("productsChanged = ", productsChanged);
 
