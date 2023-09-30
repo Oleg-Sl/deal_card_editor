@@ -12,7 +12,7 @@ class DataComparator {
 
         for (const key in oldValues) {
             if (oldValues.hasOwnProperty(key) && newValues.hasOwnProperty(key)) {
-                if (Array.isArray(oldValues[key]) && Array.isArray(newValues[key])) {on
+                if (Array.isArray(oldValues[key]) && Array.isArray(newValues[key])) {
                     if (oldValues[key].length === 0 && newValues[key].length > 0) {
                         continue;
                     }
