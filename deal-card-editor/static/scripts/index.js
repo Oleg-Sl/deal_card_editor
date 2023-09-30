@@ -87,7 +87,7 @@ class App {
         this.currentUser       = await bx24UserGetCurrent(this.bx24);
         this.dealData          = await bx24DealGetData(this.bx24, this.dealId);
         this.fieldsDealData    = await bx24DealGetFields(this.bx24);
-        this.fieldsProductData = await bx24ProductGetFields(this.bx24, thi.smartNumber);
+        this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
         this.taskId            = this.dealData[FIELD_ID_TASK_ORDER];
 
         this.task.init(this.fieldsDealData);
