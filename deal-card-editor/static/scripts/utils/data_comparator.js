@@ -106,7 +106,7 @@ class DealDataComparator {
         let str = "";
         for (let userId of userIds) {
             const users = usersData[userId] || [];
-            const user = user[0] || {};
+            const user = users[0] || {};
             str += `${user.LAST_NAME || ""} ${user.NAME || ""}\n`;
         }
         return str;
