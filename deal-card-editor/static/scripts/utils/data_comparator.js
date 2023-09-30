@@ -73,7 +73,7 @@ class DealDataComparator {
                     }
                     changedValues[key] = {
                         oldValue: oldValues[key],
-                        newValue: oldValues[key],
+                        newValue: newValues[key],
                     };
                 } else if (oldValues[key] != newValues[key]) {
                     changedValues[key] = {
