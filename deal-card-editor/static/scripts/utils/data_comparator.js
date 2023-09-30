@@ -55,6 +55,8 @@ class DealDataComparator {
     }
 
     findChanged_(oldValues, newValues) {
+        console.log("oldValues = ", oldValues);
+        console.log("newValues = ", newValues);
         const changedValues = {};
         for (const key in oldValues) {
             if (oldValues.hasOwnProperty(key) && newValues.hasOwnProperty(key)) {
