@@ -40,7 +40,8 @@ class App {
         
         this.smartNumber = 144;
         
-        this.productData = NaN;
+        this.dealData = NaN;
+        this.productsData = NaN;
         this.currentUser = NaN;
         this.fieldsData = NaN;
 
@@ -81,17 +82,17 @@ class App {
 
     async init() {
         this.currentUser = await bx24UserGetCurrent(this.bx24);
-        this.productData = await bx24DealGetData(this.bx24, this.dealId);
+        this.dealData    = await bx24DealGetData(this.bx24, this.dealId);
         this.fieldsData  = await bx24DealGetFields(this.bx24);
-        this.taskId      = this.productData[FIELD_ID_TASK_ORDER];
+        this.taskId      = this.dealData[FIELD_ID_TASK_ORDER];
 
         this.task.init(this.fieldsData);
         this.dataComparator.init(this.fieldsData);
-        this.interfaceBlockOne.init(this.fieldsData, this.productData);
-        this.interfaceBlockTwo.init(this.fieldsData, this.productData);
-        this.interfaceBlockThree.init(this.fieldsData, this.productData);
-        this.interfaceBlockFour.init(this.fieldsData, this.productData);
-        this.interfaceBlockFive.init(this.fieldsData, this.productData);
+        this.interfaceBlockOne.init(this.fieldsData, this.dealData);
+        this.interfaceBlockTwo.init(this.fieldsData, this.dealData);
+        this.interfaceBlockThree.init(this.fieldsData, this.dealData);
+        this.interfaceBlockFour.init(this.fieldsData, this.dealData);
+        this.interfaceBlockFive.init(this.fieldsData, this.dealData);
 
         this.initHandler();
     }
@@ -101,12 +102,7 @@ class App {
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            await this.handleSaveDealData();
-            // let dataDeal = this.getDataDeal();
-            // await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
-            // let dataSmartProcess = this.getDataSmartProcess();
-            // await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
-            // await this.interfaceBlockFive.deleteRemovingFiles();
+            await this.handleSaveDealData(false);
             spinner.classList.add("d-none");
         })
 
@@ -114,20 +110,8 @@ class App {
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            await this.handleSaveDealData();
-            await this.handleUpdateTask();
-            // let dataDeal = this.getDataDeal();
-            // await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
-            // let dataSmartProcess = this.getDataSmartProcess();
-            // await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
-            // await this.interfaceBlockFive.deleteRemovingFiles();
-
-            // let contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
-            // this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
-            // let responsible = this.interfaceBlockThree.getResponsible();
-            // let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-            // await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
-            
+            await this.handleSaveDealData(true);
+            // await this.handleUpdateTask();
             spinner.classList.add("d-none");
         })
 
@@ -136,10 +120,6 @@ class App {
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleCancelChanging();
-            // this.productData = await bx24DealGetData(this.bx24, this.dealId);
-            // this.fieldsData = await bx24DealGetFields(this.bx24);
-            // this.interfaceBlockFive.init();
-            // this.render();
             spinner.classList.add("d-none");
         })
 
@@ -158,7 +138,12 @@ class App {
         })
     }
 
-    async handleSaveDealData() {
+    async handleSaveDealData(isChangedTask) {
+        if (isChangedTask) {
+            this.dealData = await bx24DealGetData(this.bx24, this.dealId);
+            this.productsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+        }
+        
         let dataDeal = this.getDataDeal();
         await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
 
@@ -169,17 +154,17 @@ class App {
     }
 
     async handleUpdateTask() {
-        const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
+        // const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
         const newDealData = this.getDataDeal();
-        let dealChanged = this.dataComparator.findChangedValues(oldDealData, newDealData);
+        let dealChanged = this.dataComparator.findChangedValues(this.dealData, newDealData);
         console.log("dealChanged = ", dealChanged);
 
-        const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+        // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
         const newProductsData = this.getDataSmartProcess();
-        let productsChanged = this.dataComparator.findChagedInProducts(oldProductsData, newProductsData);
+        let productsChanged = this.dataComparator.findChagedInProducts(this.productsData, newProductsData);
         console.log("productsChanged = ", productsChanged);
 
-        const contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
+        const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
         this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
 
         let responsible = this.interfaceBlockThree.getResponsible();
@@ -191,7 +176,7 @@ class App {
     }
 
     async handleCancelChanging() {
-        this.productData = await bx24DealGetData(this.bx24, this.dealId);
+        this.dealData = await bx24DealGetData(this.bx24, this.dealId);
         this.fieldsData = await bx24DealGetFields(this.bx24);
         this.interfaceBlockFive.init();
         this.render();

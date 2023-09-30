@@ -12,7 +12,7 @@ class DataComparator {
 
         for (const key in oldValues) {
             if (oldValues.hasOwnProperty(key) && newValues.hasOwnProperty(key)) {
-                if (oldValues[key] !== newValues[key]) {
+                if (oldValues[key] != newValues[key]) {
                     changedValues[key] = {
                         oldValue: oldValues[key],
                         newValue: newValues[key],
