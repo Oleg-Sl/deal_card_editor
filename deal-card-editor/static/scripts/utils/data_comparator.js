@@ -214,7 +214,6 @@ class ProductsDataComparator {
             if (!this.fields.hasOwnProperty(key)) {
                 continue;
             }
-            const fieldObj = this.fields[key];
             const oldValue = oldProduct[key];
             const newValue = newProduct[key];
             const oldFilm = oldProduct[SMART_FIELDS.FILM];
@@ -223,6 +222,9 @@ class ProductsDataComparator {
                 content += "";
             } else {
                 if (oldValue != newValue) {
+                    console.log("*************************");
+                    console.log("oldValue = ", oldValue);
+                    console.log("newValue = ", newValue);
                     content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm);
                 }
             }
@@ -234,7 +236,7 @@ class ProductsDataComparator {
 
         return `
             [TR]
-                [TD][B][COLOR=#ff0000]${oldProduct[SMART_FIELDS.TITLE]}[/COLOR] ==> [COLOR=#32CD32]${newProduct[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD rowspan="3"][B][COLOR=#ff0000]${oldProduct[SMART_FIELDS.TITLE]}[/COLOR] ==> [COLOR=#32CD32]${newProduct[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
             [/TR]
             ${content}
         `;
