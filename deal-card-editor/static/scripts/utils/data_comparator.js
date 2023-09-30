@@ -58,8 +58,8 @@ class DataComparator {
     }
 
     findChagedInProducts(oldProducts, newProducts) {
-        console.log("oldProducts = ", oldProducts);
-        console.log("newProducts = ", newProducts);
+        // console.log("oldProducts = ", oldProducts);
+        // console.log("newProducts = ", newProducts);
         if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
             return "";
         }
@@ -69,9 +69,13 @@ class DataComparator {
 
         for (let i = 0; i < newProducts.length; i++) {
             const newItem = newProducts[i];
-            const oldItem = newProducts.find(item => item.id === newItem.id);
+            const oldItem = oldProducts.find(item => item.id === newItem.id);
             let changeObj = {};
+            
+            // console.log("newItem = ", newItem);
+            // console.log("oldItem = ", oldItem);
             if (oldItem) {
+                
                 const changedValues = this.findChangedValues(oldItem, newItem);
                 if (Object.keys(changedValues).length > 0) {
                     changeObj[newItem.id] = changedValues;
