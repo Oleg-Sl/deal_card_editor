@@ -221,7 +221,7 @@ class ProductsDataComparator {
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 content += "";
             } else {
-                if ((oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
+                if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
                     console.log("*************************");
                     console.log("oldValue = ", oldValue);
                     console.log("newValue = ", newValue);
