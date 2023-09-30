@@ -72,11 +72,11 @@ class DataComparator {
                 const changedValues = this.findChangedValues(oldItem, newItem);
                 if (Object.keys(changedValues).length > 0) {
                     changeObj[newItem.id] = changedValues;
-                    changedValuesArray.push(changeObj);
+                    changedProductsArray.push(changeObj);
                 }
             } else {
                 changeObj[newItem.id] = {};
-                changedValuesArray.push(changeObj);
+                changedProductsArray.push(changeObj);
             }
         }
 
