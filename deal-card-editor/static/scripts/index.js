@@ -157,7 +157,6 @@ class App {
         // const oldDealData = await bx24DealGetData(this.bx24, this.dealId);
         const newDealData = this.getDataDeal();
         let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
-        console.log("dealChanged = ", dealChanged);
 
         // // const oldProductsData = bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
         const newProductsData = this.getDataSmartProcess();
@@ -169,7 +168,7 @@ class App {
 
         let responsible = this.interfaceBlockThree.getResponsible();
         
-        let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.\n`;
+        let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
         msgToUser += dealChanged;
         await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
         

@@ -23,9 +23,9 @@ class DealDataComparator {
             const objChange = changedValues[key];
             let objChangeText = {};
             if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
-                objChangeText = await this.getTextChangeForMultiple(key, objChange);
+                objChangeText = await this.getTextChangeForMultiple_(key, objChange);
             } else {
-                objChangeText = await this.getTextChangeForSingle(key, objChange);
+                objChangeText = await this.getTextChangeForSingle_(key, objChange);
             }
             resultString += `
                 [TR]
@@ -81,7 +81,7 @@ class DealDataComparator {
         return changedValues;
     }
 
-    async getTextChangeForMultiple(key, objChange) {
+    async getTextChangeForMultiple_(key, objChange) {
         if (!this.fieldsDeal.hasOwnProperty(key)) {
             return "";
         }
@@ -101,16 +101,18 @@ class DealDataComparator {
     }
 
     getTextUsers_(userIds, usersData) {
-        let str = "";
+        // let str = "";
+        let userArrayText = [];
         for (let userId of userIds) {
             const users = usersData[userId] || [];
             const user = users[0] || {};
-            str += `${user.LAST_NAME || ""} ${user.NAME || ""}\n`;
+            userArrayText.push(`${user.LAST_NAME || ""} ${user.NAME || ""}\n`);
+            // str += `${user.LAST_NAME || ""} ${user.NAME || ""}\n`;
         }
-        return str;
+        return userArrayText.join(', ');
     }
 
-    async getTextChangeForSingle(key, objChange) {
+    async getTextChangeForSingle_(key, objChange) {
         if (!this.fieldsDeal.hasOwnProperty(key)) {
             return "";
         }
@@ -154,22 +156,18 @@ class DealDataComparator {
         return difference;
     }
 
-    arraysAreEqual(arr1, arr2) {
-        if (arr1.length !== arr2.length) {
-            return false;
-        }
-        const sortedArr1 = arr1.map(value => parseInt(value, 10)).sort((a, b) => a - b);
-        const sortedArr2 = arr2.map(value => parseInt(value, 10)).sort((a, b) => a - b);
+    
+}
 
-        for (let i = 0; i < sortedArr1.length; i++) {
-            if (sortedArr1[i] !== sortedArr2[i]) {
-                return false;
-            }
-        }
+class ProductsDataComparator {
+    constructor(bx24) {
+        this.bx24 = bx24;
+        this.fieldsDeal = NaN;
+    }
 
-        return true; 
-    }    
-
+    init(fields) {
+        this.fieldsDeal = fields;
+    }
 
     // findChagedInProducts(oldProducts, newProducts) {
     //     // console.log("oldProducts = ", oldProducts);
