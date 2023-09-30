@@ -163,7 +163,7 @@ class App {
         let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
 
         const newProductsData = this.getDataSmartProcess();
-        let productsChanged = this.productComparator.findChaged_(this.productsData, newProductsData);
+        let productsChanged = await this.productComparator.findChaged_(this.productsData, newProductsData);
         console.log("productsChanged = ", productsChanged);
 
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
@@ -173,6 +173,7 @@ class App {
         
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
         msgToUser += dealChanged;
+        msgToUser += productsChanged;
         await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
         
     }
