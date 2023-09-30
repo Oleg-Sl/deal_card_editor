@@ -68,8 +68,8 @@ class DealDataComparator {
                         continue;
                     }
                     changedValues[key] = {
-                        oldValue: oldValue,
-                        newValue: newValue,
+                        oldValue: oldValues[key],
+                        newValue: oldValues[key],
                     };
                 } else if (oldValues[key] != newValues[key]) {
                     changedValues[key] = {
@@ -154,6 +154,7 @@ class DealDataComparator {
     
         return difference;
     }
+
 
     // findChagedInProducts(oldProducts, newProducts) {
     //     // console.log("oldProducts = ", oldProducts);
