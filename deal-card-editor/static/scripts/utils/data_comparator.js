@@ -67,7 +67,7 @@ class DataComparator {
         const difference = [];
     
         for (const item of arr1) {
-            if (!arr2.includes(item)) {
+            if (!arr2.some(elem => item == elem)) {
                 difference.push(item);
             }
         }
