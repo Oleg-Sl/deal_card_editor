@@ -58,9 +58,12 @@ class DataComparator {
     }
 
     findChagedInProducts(oldProducts, newProducts) {
+        console.log("oldProducts = ", oldProducts);
+        console.log("newProducts = ", newProducts);
         if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
             return "";
         }
+
 
         const changedProductsArray = [];
 
