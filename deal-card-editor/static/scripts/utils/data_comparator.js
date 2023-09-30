@@ -66,6 +66,8 @@ class DealDataComparator {
                     }
                     let oldValue = this.getArrayDifference_(oldValues[key], newValues[key]);
                     let newValue = this.getArrayDifference_(newValues[key], oldValues[key]);
+                    console.log("oldValues[key] = ", oldValues[key]);
+                    console.log("newValues[key] = ", newValues[key]);
                     if (oldValue.length === 0 && newValue.length === 0) {
                         continue;
                     }
