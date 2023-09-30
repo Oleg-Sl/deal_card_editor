@@ -38,9 +38,9 @@ class App {
         
         this.smartNumber = 144;
         
-        this.data = NaN;
+        this.productData = NaN;
         this.currentUser = NaN;
-        this.fields = NaN;
+        this.fieldsData = NaN;
 
         this.task = new Task(this.bx24);
 
@@ -78,16 +78,16 @@ class App {
 
     async init() {
         this.currentUser = await bx24UserGetCurrent(this.bx24);
-        this.data        = await bx24DealGetData(this.bx24, this.dealId);
-        this.fields      = await bx24DealGetFields(this.bx24);
-        this.taskId      = this.data[FIELD_ID_TASK_ORDER];
+        this.productData = await bx24DealGetData(this.bx24, this.dealId);
+        this.fieldsData  = await bx24DealGetFields(this.bx24);
+        this.taskId      = this.productData[FIELD_ID_TASK_ORDER];
 
-        this.task.init(this.fields);
-        this.interfaceBlockOne.init(this.fields, this.data);
-        this.interfaceBlockTwo.init(this.fields, this.data);
-        this.interfaceBlockThree.init(this.fields, this.data);
-        this.interfaceBlockFour.init(this.fields, this.data);
-        this.interfaceBlockFive.init();
+        this.task.init(this.fieldsData);
+        this.interfaceBlockOne.init(this.fieldsData, this.productData);
+        this.interfaceBlockTwo.init(this.fieldsData, this.productData);
+        this.interfaceBlockThree.init(this.fieldsData, this.productData);
+        this.interfaceBlockFour.init(this.fieldsData, this.productData);
+        this.interfaceBlockFive.init(this.fieldsData, this.productData);
 
         this.initHandler();
     }
@@ -97,11 +97,12 @@ class App {
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            let dataDeal = this.getDataDeal();
-            await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
-            let dataSmartProcess = this.getDataSmartProcess();
-            await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
-            await this.interfaceBlockFive.deleteRemovingFiles();
+            await this.handleSaveDealData();
+            // let dataDeal = this.getDataDeal();
+            // await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
+            // let dataSmartProcess = this.getDataSmartProcess();
+            // await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
+            // await this.interfaceBlockFive.deleteRemovingFiles();
             spinner.classList.add("d-none");
         })
 
@@ -109,16 +110,20 @@ class App {
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            let dataDeal = this.getDataDeal();
-            await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
-            let dataSmartProcess = this.getDataSmartProcess();
-            await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
-            let contactMeasure = await bx24ContactGetData(this.bx24, this.data[FIELD_CONTACT_MESURE]);
-            this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
-            await this.interfaceBlockFive.deleteRemovingFiles();
-            let responsible = this.interfaceBlockThree.getResponsible();
-            let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-            await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+            await this.handleSaveDealData();
+            await this.handleUpdateTask();
+            // let dataDeal = this.getDataDeal();
+            // await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
+            // let dataSmartProcess = this.getDataSmartProcess();
+            // await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
+            // await this.interfaceBlockFive.deleteRemovingFiles();
+
+            // let contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
+            // this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
+            // let responsible = this.interfaceBlockThree.getResponsible();
+            // let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+            // await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+            
             spinner.classList.add("d-none");
         })
 
@@ -126,10 +131,11 @@ class App {
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            this.data = await bx24DealGetData(this.bx24, this.dealId);
-            this.fields = await bx24DealGetFields(this.bx24);
-            this.interfaceBlockFive.init();
-            this.render();
+            await this.handleCancelChanging();
+            // this.productData = await bx24DealGetData(this.bx24, this.dealId);
+            // this.fieldsData = await bx24DealGetFields(this.bx24);
+            // this.interfaceBlockFive.init();
+            // this.render();
             spinner.classList.add("d-none");
         })
 
@@ -148,6 +154,31 @@ class App {
         })
     }
 
+    async handleSaveDealData() {
+        let dataDeal = this.getDataDeal();
+        await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
+
+        let dataSmartProcess = this.getDataSmartProcess();
+        await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
+
+        await this.interfaceBlockFive.deleteRemovingFiles();
+    }
+
+    async handleUpdateTask() {
+        let contactMeasure = await bx24ContactGetData(this.bx24, this.productData[FIELD_CONTACT_MESURE]);
+        this.task.updateTask(this.taskId, dataDeal, dataSmartProcess, contactMeasure || {});
+        let responsible = this.interfaceBlockThree.getResponsible();
+        let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+        await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+    }
+
+    async handleCancelChanging() {
+        this.productData = await bx24DealGetData(this.bx24, this.dealId);
+        this.fieldsData = await bx24DealGetFields(this.bx24);
+        this.interfaceBlockFive.init();
+        this.render();
+    }
+
     render() {
         if (this.currentUser.ID == 1) {
             this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
@@ -156,7 +187,7 @@ class App {
         this.interfaceBlockTwo.render();
         this.interfaceBlockThree.render();
         this.interfaceBlockFour.render();
-        this.interfaceBlockFive.render(this.fields, this.data);
+        this.interfaceBlockFive.render();
     }
 
     getDataDeal() {
@@ -171,7 +202,6 @@ class App {
         let products = this.interfaceBlockFive.getData();
         return products;
     }
-
 }
 
 

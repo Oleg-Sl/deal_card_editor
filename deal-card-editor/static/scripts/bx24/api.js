@@ -47,7 +47,6 @@ export async function bx24UserGetDataByIds(bx24, users_ids) {
 }
 
 
-
 // *******DEAL*******
 export async function bx24DealGetFields(bx24) {
     let data = await bx24.callMethod("crm.deal.fields", {});
