@@ -66,7 +66,7 @@ class DataComparator {
 
         for (let i = 0; i < newProducts.length; i++) {
             const newItem = newProducts[i];
-            const oldItem = newProducts.find(item => item.id === oldItem.id);
+            const oldItem = newProducts.find(item => item.id === newItem.id);
             let changeObj = {};
             if (oldItem) {
                 const changedValues = this.findChangedValues(oldItem, newItem);
