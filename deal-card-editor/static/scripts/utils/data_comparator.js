@@ -16,9 +16,14 @@ class DataComparator {
                     if (oldValues[key].length === 0 && newValues[key].length === 0) {
                         continue;
                     }
+                    let oldValue = this.arrayDifference(oldValues[key], newValues[key]);
+                    let newValue = this.arrayDifference(newValues[key], oldValues[key]);
+                    if (oldValue.length === 0 && newValue.length === 0) {
+                        continue;
+                    }
                     changedValues[key] = {
-                        oldValue: this.arrayDifference(oldValues[key], newValues[key]),
-                        newValue: this.arrayDifference(newValues[key], oldValues[key]),
+                        oldValue: oldValue,
+                        newValue: newValue,
                     };
                 } else 
                 if (oldValues[key] != newValues[key]) {
