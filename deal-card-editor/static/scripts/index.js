@@ -20,6 +20,7 @@ import {
     bx24ContactGetData,
     bx24SmartProcessUpdate,
     bx24SmartProcessGetList,
+    bx24ProductGetFields,
 } from "./bx24/api.js"
 
 import {
@@ -86,7 +87,7 @@ class App {
         this.currentUser       = await bx24UserGetCurrent(this.bx24);
         this.dealData          = await bx24DealGetData(this.bx24, this.dealId);
         this.fieldsDealData    = await bx24DealGetFields(this.bx24);
-        this.fieldsProductData = await bx24ProductGetFields(this.bx24);
+        this.fieldsProductData = await bx24ProductGetFields(this.bx24, thi.smartNumber);
         this.taskId            = this.dealData[FIELD_ID_TASK_ORDER];
 
         this.task.init(this.fieldsDealData);
