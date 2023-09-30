@@ -100,6 +100,7 @@ class DealDataComparator {
             objChangeText.oldValue = objChange.oldValue.join(', ');
             objChangeText.newValue = objChange.newValue.join(', ');
         }
+        return objChangeText;
     }
 
     getTextUsers_(userIds, usersData) {
