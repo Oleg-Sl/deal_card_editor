@@ -81,6 +81,7 @@ class DealDataComparator {
                 }
             }
         }
+        console.log("changedValues = ", changedValues);
 
         return changedValues;
     }
