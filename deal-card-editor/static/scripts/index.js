@@ -190,14 +190,8 @@ class App {
         let responsible = this.interfaceBlockThree.getResponsible();
         
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-        if (dealChanged != ""){
-            msgToUser += "[B]Изменения в заказе[/B]";
-            msgToUser += dealChanged;
-        }
-        if (productsChanged != ""){
-            msgToUser += "[B]Изменения в списке товаров[/B]";
-            msgToUser += productsChanged;
-        }
+        msgToUser += dealChanged;
+        msgToUser += productsChanged;
         await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
     }
 

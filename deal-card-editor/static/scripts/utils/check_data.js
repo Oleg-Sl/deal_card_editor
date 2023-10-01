@@ -35,11 +35,10 @@ export class CheckData {
             return false;
         }
         let taskData = await bx24TaskGet(this.bx24, deal_data[FIELD_ID_TASK_ORDER]);
-        console.log("taskData = ", taskData);
-        if (taskData) {
-            return true;
+        if (Array.isArray(taskData) && taskData.length === 0) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     isTaskProduction(deal_data) {
