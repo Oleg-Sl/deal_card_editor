@@ -4,7 +4,7 @@ import { SMART_FIELDS, } from '../parameters.js';
 
 
 // *******TASK*******
-export default async function bx24TaskGet(bx24, taskId) {
+export async function bx24TaskGet(bx24, taskId) {
     let response = await bx24.callMethod(
         "tasks.task.get",
         {
@@ -15,7 +15,7 @@ export default async function bx24TaskGet(bx24, taskId) {
     return response;
 }
 
-export default async function bx24TaskUpdate(bx24, taskId, dataTask) {
+export async function bx24TaskUpdate(bx24, taskId, dataTask) {
     let response = await bx24.callMethod(
         "tasks.task.update",
         {
