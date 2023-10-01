@@ -426,18 +426,6 @@
   grid-area: A11;
 }
 
-.product-list__item-12 {
-  grid-area: A12;
-}
-
-.product-list__item-13 {
-  grid-area: A13;
-}
-
-.product-list__item-14 {
-  grid-area: A14;
-}
-
 .product-list__item-15 {
   grid-area: A15;
 }
@@ -473,6 +461,7 @@
        column-gap: 3px;
   grid-template-columns: 15px 135px 70px 135px 135px 135px 70px 70px 70px 70px 70px 1fr;
   grid-template-areas: "A1   A2    A3   A4    A5    A6    A7   A8   A9   A10  A11  A15" "A100 A100 A100 A100 A100 A100 A100 A100 A100 A100 A100 A15";
+  grid-template-rows: auto 1fr;
 }
 .product-list__product-row .product-list__product-second-row {
   display: grid;
