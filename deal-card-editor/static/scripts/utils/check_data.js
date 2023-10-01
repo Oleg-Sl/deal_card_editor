@@ -18,6 +18,7 @@ export class CheckData {
     }
 
     isCheckDealData(dealData) {
+        console.log("dealData = ", dealData);
         return this.checkFields_(dealData, LIST_IGNORE_CHECK_FIELDS_DEAL);
     }
 
