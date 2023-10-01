@@ -16,7 +16,7 @@ import {
     FIELD_INSTALL_ON_TERRIT,
 } from '../parameters.js';
 
-import bx24TaskUpdate from '../bx24/api.js'
+import { bx24TaskUpdate } from '../bx24/api.js'
 
 // Список имен полей со свойствами заказа
 const FIELDS_FOR_TABLE_TASK_ = [FIELD_BUSINESS_TRIP, FIELD_METERING, FIELD_DISMANTLING, FIELD_PARKING, FIELD_COLOR_PROOF, FIELD_INSTALL, FIELD_OURDETAILS, FIELD_BOXING_RENTAL, FIELD_INSTALL_ON_TERRIT];
