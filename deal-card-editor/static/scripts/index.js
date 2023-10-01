@@ -129,8 +129,10 @@ class App {
             spinner.classList.remove("d-none");
             // await this.getDataFromBx24();
             await this.handleSaveDealData();
-            await this.handleUpdateTask();
-            await this.getDataFromBx24();
+            let res = await this.handleUpdateTask();
+            if (res) {
+                await this.getDataFromBx24();
+            }
             spinner.classList.add("d-none");
         })
 
@@ -186,19 +188,19 @@ class App {
         const newProductsData = this.getDataSmartProcess();
         if (!isTaskOrder) {
             alert('Задача "ЗАКАЗ" не создана или удалена');
-            return;
+            return false;
         }
         if (!this.checkData.isCheckDealData(newDealData)) {
             alert("Заполните все поля заказа");
-            return;
+            return false;
         }
         if (!this.checkData.isCheckProductsData(newProductsData)) {
             alert("Заполните все поля в товарах заказа");
-            return;
+            return false;
         }
         if (this.checkData.isTaskProduction(this.dealData)) {
             alert('Сделка в производстве, изменять задачу заказ нельзя, создай новую сделку!');
-            return;
+            return false;
         }
         try {
             let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
@@ -210,7 +212,9 @@ class App {
         } catch (error) {
             console.error("Произошла ошибка при обновлении задачи:", error);
             alert("Произошла ошибка при обновлении задачи: " + error);
+            return false;
         }
+        return true;
         
     }
 
