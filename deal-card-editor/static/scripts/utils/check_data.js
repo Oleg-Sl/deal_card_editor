@@ -12,14 +12,16 @@ export class CheckData {
     }
 
     isCheckDealData(dealData) {
+        console.log("dealData = ", dealData);
         return this.checkFields_(LIST_IGNORE_CHECK_FIELDS_DEAL, dealData);
     }
 
-    isCheckProductsData(productsData) {
+    isCheckProductsData(productsData) {        
         for (let productData of productsData) {
+            console.log("productData = ", productData);
             if (!this.checkFields_(LIST_IGNORE_CHECK_FIELDS_PRODUCTS, productData)) {
                 return true;
-            }
+            }   
         }
         return false;
     }
@@ -33,9 +35,11 @@ export class CheckData {
 
     checkFields_(listIgnore, objData) {
         for (let key in objData) {
+
             if (listIgnore.includes(key)) {
                 continue;
             }
+            console.log(key, " = ", objData[key]);
             if (!objData[key]) {
                 return false
             }
