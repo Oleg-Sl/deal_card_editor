@@ -117,6 +117,8 @@ class App {
     initHandler() {
         // Сохранение изменений в сделку и БП
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
+            console.log("Сохранение изменений в сделку и БП");
+
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData();
@@ -126,6 +128,8 @@ class App {
 
         // Сохранение изменений в сделку и БП, также изменение данных в задаче
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
+            console.log("Сохранение изменений в сделку и БП, также изменение данных в задаче");
+
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             // await this.getDataFromBx24();
@@ -141,6 +145,8 @@ class App {
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
+            console.log("Отмена изменений");
+
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.getDataFromBx24();
@@ -152,6 +158,8 @@ class App {
 
         // Создание задачи
         this.elemBtnCreateBottom.addEventListener("click", async (e) => {
+            console.log("Создание задачи");
+
             let spinner = this.elemBtnCreateBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData();
