@@ -501,13 +501,13 @@ export default class InterfaceBlockFive {
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ламинация / номер цвета</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ширина пленки</label></div>
                 
-                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">П.м. за шт.</label></div>
-                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">Кв. м. за шт.</label></div>
-                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">П.м. всего</label></div>
-                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">Кв.м. всего</label></div>
-                <div><label for="" class="form-label fw-medium">Ссылка на исходники клиента</label></div>
-                <div><label for="" class="form-label fw-medium">Файлы клиента</label></div>
-                <div><label for="" class="form-label fw-medium">Черновой препресс</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. за шт.</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв. м. за шт.</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. всего</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. всего</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ссылка на исходники клиента</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Файлы клиента</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Черновой препресс</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Комментарии</label></div>
             </div>
         `;
