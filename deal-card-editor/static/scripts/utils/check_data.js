@@ -7,19 +7,22 @@ import {
 } from "../parameters.js"
 
 
-export class CheckData {
-    constructor() {
+import {
+    bx24TaskGet,
+} from "../bx24/api.js"
 
+
+export class CheckData {
+    constructor(bx24) {
+        this.bx24 = bx24;
     }
 
     isCheckDealData(dealData) {
-        console.log("dealData = ", dealData);
         return this.checkFields_(LIST_IGNORE_CHECK_FIELDS_DEAL, dealData);
     }
 
     isCheckProductsData(productsData) {        
         for (let productData of productsData) {
-            console.log("productData = ", productData);
             if (!this.checkFields_(LIST_IGNORE_CHECK_FIELDS_PRODUCTS, productData)) {
                 return false;
             }   
@@ -27,8 +30,13 @@ export class CheckData {
         return true;
     }
 
-    isTaskOrder(deal_data) {
-        if (deal_data[FIELD_ID_TASK_ORDER]) {
+    async isTaskOrder(deal_data) {
+        if (!deal_data[FIELD_ID_TASK_ORDER]) {
+            return false;
+        }
+        let taskData = await bx24TaskGet(this.bx24, deal_data[FIELD_ID_TASK_ORDER]);
+        console.log("taskData = ", taskData);
+        if (taskData) {
             return true;
         }
         return false;

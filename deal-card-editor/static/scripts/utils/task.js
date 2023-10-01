@@ -38,11 +38,11 @@ class Task {
         try {
             let descTask = this.getDescTask_(dataDeal, dataProducts, contactMeasure);
             let newDataTask = {
+                RESPONSIBLE_ID: dataDeal[FIELD_RESPONSIBLE_MOS],
                 AUDITORS: dataDeal[FIELD_OBSERVERS],           // Наблюдатели
                 DESCRIPTION: descTask,
             }
             bx24TaskUpdate(this.bx24, taskId, newDataTask);
-            // await this.updateTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);
         }

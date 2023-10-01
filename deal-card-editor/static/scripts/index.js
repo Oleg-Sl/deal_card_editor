@@ -51,7 +51,7 @@ class App {
         this.task = new Task(this.bx24);
         this.dataComparator = new DealDataComparator(this.bx24);
         this.productComparator = new ProductsDataComparator(this.bx24);
-        this.checkData = new CheckData();
+        this.checkData = new CheckData(this.bx24);
         
         
         // Первый блок интерфейса
@@ -168,14 +168,19 @@ class App {
             alert('Задача "ЗАКАЗ" не создана или удалена');
             return;
         }
-        if (!this.checkData.isCheckDealData(newDealData) || !this.checkData.isCheckProductsData(newProductsData)) {
+        if (!this.checkData.isCheckDealData(newDealData)) {
             alert("Заполните все поля заказа");
             return;
         }
-        if (this.checkData.isTaskProduction(this.dealData)) {
-            alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
+        if (!this.checkData.isCheckProductsData(newProductsData)) {
+            alert("Заполните все поля в товарах заказа");
             return;
         }
+        if (this.checkData.isTaskProduction(this.dealData)) {
+            alert('Сделка в производстве, изменять задачу заказ нельзя, создай новую сделку!');
+            return;
+        }
+
         let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
         let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
 

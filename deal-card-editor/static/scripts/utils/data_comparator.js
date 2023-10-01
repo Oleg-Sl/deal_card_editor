@@ -22,42 +22,46 @@ class DealDataComparator {
     }
 
     async getChanged(oldValues, newValues) {
-        let resultString = "";
-        let changedValues = this.findChanged_(oldValues, newValues);
-        for (const key in changedValues) {
-            if (!changedValues.hasOwnProperty(key)) {
-                continue;
+        try {
+            let resultString = "";
+            let changedValues = this.findChanged_(oldValues, newValues);
+            for (const key in changedValues) {
+                if (!changedValues.hasOwnProperty(key)) {
+                    continue;
+                }
+                const objChange = changedValues[key];
+                let objChangeText = {};
+                if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
+                    objChangeText = await this.getTextChangeForMultiple_(key, objChange);
+                } else {
+                    objChangeText = await this.getTextChangeForSingle_(key, objChange);
+                }
+                resultString += `
+                    [TR]
+                        [TD]${objChangeText.name}[/TD]
+                        [TD]${objChangeText.oldValue}[/TD]
+                        [TD]${objChangeText.newValue}[/TD]
+                    [/TR]
+                `;
             }
-            const objChange = changedValues[key];
-            let objChangeText = {};
-            if (Array.isArray(objChange.oldValue) && Array.isArray(objChange.newValue)) {
-                objChangeText = await this.getTextChangeForMultiple_(key, objChange);
-            } else {
-                objChangeText = await this.getTextChangeForSingle_(key, objChange);
+    
+            if (resultString == "") {
+                return resultString;
             }
-            resultString += `
-                [TR]
-                    [TD]${objChangeText.name}[/TD]
-                    [TD]${objChangeText.oldValue}[/TD]
-                    [TD]${objChangeText.newValue}[/TD]
-                [/TR]
+    
+            return `
+                [TABLE]
+                    [TR]
+                        [TD][B]Свойство[/B][/TD]
+                        [TD][B]Старое[/B][/TD]
+                        [TD][B]Новое[/B][/TD]
+                    [/TR]
+                    ${resultString}
+                [/TABLE]
             `;
+        } catch(err) {
+            console.error(`${err.name}: ${err.message}`);
         }
-
-        if (resultString == "") {
-            return resultString;
-        }
-
-        return `
-            [TABLE]
-                [TR]
-                    [TD][B]Свойство[/B][/TD]
-                    [TD][B]Старое[/B][/TD]
-                    [TD][B]Новое[/B][/TD]
-                [/TR]
-                ${resultString}
-            [/TABLE]
-        `;
     }
 
     findChanged_(oldValues, newValues) {
@@ -176,37 +180,39 @@ class ProductsDataComparator {
     }
 
     async getChanged(oldProducts, newProducts) {
-        console.log("oldProducts = ", oldProducts);
-        console.log("newProducts = ", newProducts);
-        let content = "";
-        if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
-            return "";
-        }
-
-        for (const oldProduct of oldProducts) {
-            const newProduct = this.findProductById_(oldProduct.id, newProducts);
-            if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
+        try {
+            let content = "";
+            if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
+                return "";
+            }
+    
+            for (const oldProduct of oldProducts) {
+                const newProduct = this.findProductById_(oldProduct.id, newProducts);
+                if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
+                    content += this.createProduct_(newProduct);
+                } else if (newProduct) {
+                    content += this.compreProducts_(oldProduct, newProduct);
+                } else {
+                    content += this.removeProduct_(oldProduct);
+                }
+            }
+    
+            for (const newProduct of newProducts) {
+                const oldProduct = this.findProductById_(newProduct.id, oldProducts);
+                if (oldProduct) {
+                    continue;
+                }
                 content += this.createProduct_(newProduct);
-            } else if (newProduct) {
-                content += this.compreProducts_(oldProduct, newProduct);
-            } else {
-                content += this.removeProduct_(oldProduct);
             }
+    
+            return `
+                [TABLE]
+                    ${content}
+                [/TABLE]
+            `;
+        } catch(err) {
+            console.error(`${err.name}: ${err.message}`);
         }
-
-        for (const newProduct of newProducts) {
-            const oldProduct = this.findProductById_(newProduct.id, oldProducts);
-            if (oldProduct) {
-                continue;
-            }
-            content += this.createProduct_(newProduct);
-        }
-
-        return `
-            [TABLE]
-                ${content}
-            [/TABLE]
-        `;
     }
 
     compreProducts_(oldProduct, newProduct) {
