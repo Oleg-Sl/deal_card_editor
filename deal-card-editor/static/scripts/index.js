@@ -92,6 +92,7 @@ class App {
         await this.initializeData();
         this.initializeUI();
         this.initHandler();
+        console.log("oldProductsData 1 = ", this.productsData);
     }
 
     async initializeData() {
@@ -128,9 +129,13 @@ class App {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             // await this.getDataFromBx24();
+            console.log("oldProductsData 2 = ", this.productsData);
             await this.handleSaveDealData();
+            console.log("oldProductsData 3 = ", this.productsData);
             await this.handleUpdateTask();
+            console.log("oldProductsData 4 = ", this.productsData);
             await this.getDataFromBx24();
+            console.log("oldProductsData 5 = ", this.productsData);
             spinner.classList.add("d-none");
         })
 
