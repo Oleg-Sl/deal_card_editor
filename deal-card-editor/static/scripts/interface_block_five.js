@@ -257,6 +257,7 @@ class ProductRow {
                     </div>
                 </div>
                 <div class="product-list__product-second-row">
+                    <div class="m-0 p-1"></div>
                     <div class="product-list__product-second-row-item-1">
                         <div class="product_list__fontstyle">Ссылка на исходники клиента</div>
                         <div class="m-0 p-0 product-list__item-12">
@@ -506,19 +507,19 @@ export default class InterfaceBlockFive {
         let contentHTML = `
             <div class="product-list__header-table">
                 <div class="m-0 p-1 align-middle"></div>
-                <div><label for="" class="form-label fw-medium">Название</label></div>
-                <div><label for="" class="form-label fw-medium">Кол-во шт.</label></div>
-                <div><label for="" class="form-label fw-medium">Технология изготовления</label></div>
-                <div><label for="" class="form-label fw-medium">Пленка</label></div>
-                <div><label for="" class="form-label fw-medium">Ламинация / номер цвета</label></div>
-                <div><label for="" class="form-label fw-medium">Ширина пленки</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Название</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кол-во шт.</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Технология изготовления</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Пленка</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ламинация / номер цвета</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ширина пленки</label></div>
                 
-                <div><label for="" class="form-label fw-medium">П.м. за шт.</label></div>
-                <div><label for="" class="form-label fw-medium">Кв. м. за шт.</label></div>
-                <div><label for="" class="form-label fw-medium">П.м. всего</label></div>
-                <div><label for="" class="form-label fw-medium">Кв.м. всего</label></div>
+                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">П.м. за шт.</label></div>
+                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">Кв. м. за шт.</label></div>
+                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">П.м. всего</label></div>
+                <div><label for="" class="form-label fw-mediumproduct_list__header-fontstyle">Кв.м. всего</label></div>
 
-                <div><label for="" class="form-label fw-medium">Комментарии</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Комментарии</label></div>
             </div>
         `;
         return contentHTML;

@@ -1,14 +1,13 @@
 $small_width: 1420px
 
+.product_list__header-fontstyle
+    color: #333
+    font: 13px "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
 
 .product_list__fontstyle
     color: #333
     font: 13px "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
     font-weight: 400
-
-// .product-list__select
-
-// .product-list__input
 
 .product-list__header-table
     display: grid
@@ -98,12 +97,17 @@ $small_width: 1420px
     .product-list__product-second-row
         display: grid
         column-gap: 10px
-        grid-template-columns: 1fr 1fr 1fr
+        grid-template-columns: 15px 1fr 1fr 1fr
+        margin-top: 5px
         // grid-template-areas:  "A12 A13 A14"
+
         .product-list__product-second-row-item-1, .product-list__product-second-row-item-2, .product-list__product-second-row-item-3
             display: flex
             white-space: nowrap
             text-overflow: ellipsis
+            
+            div:first-child
+                padding-top: 7px
 
 
     // .product-list__product-second-row-item-2
