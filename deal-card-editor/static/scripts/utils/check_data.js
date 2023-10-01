@@ -38,11 +38,9 @@ export class CheckData {
         console.log("taskData = ", taskData)
         if (Array.isArray(taskData) && taskData.length === 0) {
             console.log("false")
-            
             return false;
         }
         console.log("true")
-
         return true;
     }
 

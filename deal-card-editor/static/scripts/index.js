@@ -164,7 +164,8 @@ class App {
     async handleUpdateTask() {
         const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
-        if (!this.checkData.isTaskOrder(this.dealData)) {
+        const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
+        if (!isTaskOrder) {
             alert('Задача "ЗАКАЗ" не создана или удалена');
             return;
         }
