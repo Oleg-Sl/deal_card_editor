@@ -258,13 +258,13 @@ class ProductRow {
                 </div>
                 <div class="product-list__product-second-row">
                     <div class="product-list__product-second-row-item-1">
-                        <div>Ссылка на исходники клиента</div>
+                        <div class="product_list__fontstyle">Ссылка на исходники клиента</div>
                         <div class="m-0 p-0 product-list__item-12">
                             <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC} product_list__fontstyle" placeholder="Ссылка на исходники клиента" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || ""}">
                         </div>
                     </div>
                     <div class="product-list__product-second-row-item-2">
-                        <div>Файлы клиента</div>
+                        <div class="product_list__fontstyle">Файлы клиента</div>
                         <div class="m-0 p-0 product-list__item-13">
                             <div class="m-0 p-0">
                                 <div class="${CONTAINER_CLIENT_FILES}">
@@ -280,7 +280,7 @@ class ProductRow {
                         </div>
                     </div>
                     <div class="product-list__product-second-row-item-3">
-                        <div>Черновой препресс</div>
+                        <div class="product_list__fontstyle">Черновой препресс</div>
                         <div class="m-0 p-0 product-list__item-14">
                             <div class="m-0 p-0">
                                 <div class="${CONTAINER_PREPRESS_FILES}">
