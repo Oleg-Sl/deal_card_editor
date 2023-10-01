@@ -9,6 +9,7 @@ import YandexDisk from './yandex_disk/requests.js'
 
 // import {update as updateTaskOrder} from "./utils/task_update.js"
 import { Task } from "./utils/task.js"
+import { CheckData } from "./utils/check_data.js"
 import { DealDataComparator, ProductsDataComparator } from "./utils/data_comparator.js"
 
 import {
@@ -50,6 +51,8 @@ class App {
         this.task = new Task(this.bx24);
         this.dataComparator = new DealDataComparator(this.bx24);
         this.productComparator = new ProductsDataComparator(this.bx24);
+        this.checkData = new CheckData();
+        
         
         // Первый блок интерфейса
         let elemInterfaceBlockOne = document.querySelector('#taskeditorBoxInterfaceBlockOne');  
@@ -150,7 +153,6 @@ class App {
         }
         
         let dataDeal = this.getDataDeal();
-        console.log("dataDeal = ", dataDeal);
         await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
 
         let dataSmartProcess = this.getDataSmartProcess();
@@ -162,6 +164,14 @@ class App {
     async handleUpdateTask() {
         const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
+        if (!this.checkData.isCheckDealData(newDealData) || !this.checkData.isCheckProductsData(newProductsData)) {
+            alert("Заполните все поля заказа");
+            return;
+        }
+        if (!this.checkData.isTaskProduction(newDealData)) {
+            alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
+            return;
+        }
         let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
         let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
 

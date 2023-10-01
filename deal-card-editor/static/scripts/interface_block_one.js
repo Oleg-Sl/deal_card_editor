@@ -20,10 +20,10 @@ export default class InterfaceBlockOne {
     }
 
     getData() {
-        return {
-            // FIELD_NUMBER_ORDER: this.numberTaskInput.value,
-            FIELD_LINK_TENDER:  this.tenderInput.value,
-        };
+        let data = {};
+        // data[FIELD_NUMBER_ORDER] = this.numberTaskInput.value;
+        data[FIELD_LINK_TENDER] = this.tenderInput.value;
+        return data;
     }
 
     getChanges() {
