@@ -255,8 +255,7 @@ class ProductRow {
                     <div class="m-0 p-0 product-list__item-15">
                         <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                     </div>
-                </div>
-                <div class="product-list__product-second-row">
+                <div class="product-list__product-second-row product-list__item-100">
                     <div class="m-0 p-1"></div>
                     <div class="product-list__product-second-row-item-1">
                         <div class="product_list__fontstyle">Ссылка на исходники клиента</div>
@@ -297,6 +296,8 @@ class ProductRow {
                         </div>
                     <div>
                 </div>
+                </div>
+                
             </div>
         `;
         

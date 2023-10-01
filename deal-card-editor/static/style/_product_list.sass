@@ -60,11 +60,15 @@ $small_width: 1420px
 // .product-list__item-14
 //     grid-area: A14
 
-// .product-list__item-15
+.product-list__item-15
+    grid-row: 1 / 2
 //     grid-area: A15
 
+.product-list__item-100
+    grid-column: 1 / 11
+
 .product-list__product-row
-    margin-bottom: 5px
+    margin-bottom: 10px
     // display: grid
     // column-gap: 3px
     // grid-template-columns: 1fr
@@ -105,12 +109,16 @@ $small_width: 1420px
             // display: flex
             display: grid
             column-gap: 3px
-            grid-template-columns: 200px 1fr
+            grid-template-columns: auto 1fr
             white-space: nowrap
             text-overflow: ellipsis
             
             div:first-child
                 padding-top: 7px
+
+            .product-list__row-files
+                background: #f4f7f9
+                border: 1px solid #eff0f9
 
 
     // .product-list__product-second-row-item-2
