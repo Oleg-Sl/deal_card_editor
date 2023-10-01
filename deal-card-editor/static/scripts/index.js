@@ -110,7 +110,7 @@ class App {
         this.interfaceBlockTwo.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockThree.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFour.init(this.fieldsDealData, this.dealData);
-        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData, this.productsData);
     }
 
     initHandler() {
@@ -229,7 +229,7 @@ class App {
 
     async handleCancelChanging() {
         await getDataFromBx24(this.bx24, this.dealId);
-        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData, this.productsData);
         this.render();
     }
 
