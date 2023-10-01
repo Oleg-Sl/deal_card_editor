@@ -150,6 +150,7 @@ class App {
         }
         
         let dataDeal = this.getDataDeal();
+        console.log("dataDeal = ", dataDeal);
         await bx24DealUpdate(this.bx24, this.dealId, dataDeal);
 
         let dataSmartProcess = this.getDataSmartProcess();
