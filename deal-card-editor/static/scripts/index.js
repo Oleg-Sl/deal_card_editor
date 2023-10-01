@@ -119,6 +119,7 @@ class App {
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData();
+            await this.getDataFromBx24();
             spinner.classList.add("d-none");
         })
 
@@ -129,6 +130,7 @@ class App {
             await this.getDataFromBx24();
             await this.handleSaveDealData();
             await this.handleUpdateTask();
+            await this.getDataFromBx24();
             spinner.classList.add("d-none");
         })
 
@@ -136,7 +138,10 @@ class App {
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            await this.handleCancelChanging();
+            await this.getDataFromBx24();
+            // await this.handleCancelChanging();
+            this.initializeUI();
+            this.render();
             spinner.classList.add("d-none");
         })
 
@@ -225,12 +230,6 @@ class App {
             alert("Произошла ошибка при создании задачи: " + error);
         }
         
-    }
-
-    async handleCancelChanging() {
-        await this.getDataFromBx24();
-        this.interfaceBlockFive.init(this.fieldsDealData, this.dealData, this.productsData);
-        this.render();
     }
 
     async getDataFromBx24() {
