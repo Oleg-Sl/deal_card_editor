@@ -41,7 +41,8 @@ export const SMART_FIELDS = {
 };
 
 
-export const LIST_IGNORE_CHECK_FIELDS_DEAL = [FIELD_LINK_TENDER,];
+export const LIST_IGNORE_CHECK_FIELDS_DEAL = [];
+// export const LIST_IGNORE_CHECK_FIELDS_DEAL = [FIELD_LINK_TENDER,];
 export const LIST_IGNORE_CHECK_FIELDS_PRODUCTS = [SMART_FIELDS.CLIENT_FILES, SMART_FIELDS.COMMENT,];
 
 // список технологий изготовления
