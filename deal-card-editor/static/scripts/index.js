@@ -127,7 +127,7 @@ class App {
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            await this.getDataFromBx24();
+            // await this.getDataFromBx24();
             await this.handleSaveDealData();
             await this.handleUpdateTask();
             await this.getDataFromBx24();
