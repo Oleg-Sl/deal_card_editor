@@ -210,79 +210,91 @@ class ProductRow {
     // возвращает HTML строки продукта
     getRowHTML() {
         return `
-            <div class="product-list__product-row product-list__header-table">
-                <div class="m-0 p-1 product-list__item-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
-                <div class="m-0 p-0 product-list__item-2">
-                    <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
-                </div>
-                <div class="m-0 p-0 product-list__item-3">
-                    <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} product_list__fontstyle" placeholder="шт." data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES]}">
-                </div>
-                <div class="m-0 p-0 product-list__item-4">
-                    <select class="form-select ${SMART_FIELDS.TECHNOLOGY} product_list__fontstyle" aria-label=".product_list__fontstyleform-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}" required>
-                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY])}
-                    </select>
-                </div>
-                <div class="m-0 p-0 product-list__item-5">
-                    <select class="form-select ${SMART_FIELDS.FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}" required>
-                        ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM])}
-                    </select>
-                </div>
-                <div class="m-0 p-0 product-list__item-6">
-                    <select class="form-select ${SMART_FIELDS.LAMINATION} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}" required>
-                        ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION])}
-                    </select>
-                </div>
-                <div class="m-0 p-0 product-list__item-7">
-                    <select class="form-select ${SMART_FIELDS.WIDTH_FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}" required>
-                        ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM])}
-                    </select>
-                </div>
-                    
-                <div class="m-0 p-0 product-list__item-8">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_PIECES} product_list__fontstyle" placeholder="П.м. за шт." data-field="${SMART_FIELDS.LINEAR_METER_PIECES}" value="${this.data[SMART_FIELDS.LINEAR_METER_PIECES]}">
-                </div>
-                <div class="m-0 p-0 product-list__item-9">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES} product_list__fontstyle" placeholder="Кв. м. за шт" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES]}">
-                </div>
-                <div class="m-0 p-0 product-list__item-10">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL} product_list__fontstyle" placeholder="П.м. всего" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL]}">
-                </div>
-                <div class="m-0 p-0 product-list__item-11">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL} product_list__fontstyle" placeholder="Кв.м. всего" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL]}">
-                </div>
+            <div class="product-list__product-row">
+                <div class="product-list__product-first-row">
+                    <div class="m-0 p-1 product-list__item-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
+                    <div class="m-0 p-0 product-list__item-2">
+                        <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
+                    </div>
+                    <div class="m-0 p-0 product-list__item-3">
+                        <input type="number" step="1" min="0" class="form-control ${SMART_FIELDS.COUNT_PIECES} product_list__fontstyle" placeholder="шт." data-field="${SMART_FIELDS.COUNT_PIECES}" value="${this.data[SMART_FIELDS.COUNT_PIECES]}">
+                    </div>
+                    <div class="m-0 p-0 product-list__item-4">
+                        <select class="form-select ${SMART_FIELDS.TECHNOLOGY} product_list__fontstyle" aria-label=".product_list__fontstyleform-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}" required>
+                            ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY])}
+                        </select>
+                    </div>
+                    <div class="m-0 p-0 product-list__item-5">
+                        <select class="form-select ${SMART_FIELDS.FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.FILM}" required>
+                            ${this.getOptionsForSelectHTML(LIST_FILMS, this.data[SMART_FIELDS.FILM])}
+                        </select>
+                    </div>
+                    <div class="m-0 p-0 product-list__item-6">
+                        <select class="form-select ${SMART_FIELDS.LAMINATION} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.LAMINATION}" required>
+                            ${this.getOptionsFromArrayForSelectHTML(LIST_LAMINATIONS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.LAMINATION])}
+                        </select>
+                    </div>
+                    <div class="m-0 p-0 product-list__item-7">
+                        <select class="form-select ${SMART_FIELDS.WIDTH_FILM} product_list__fontstyle" aria-label=".form-select-lg example" data-field="${SMART_FIELDS.WIDTH_FILM}" required>
+                            ${this.getOptionsForSelectHTML(LIST_WIDTH_FILMS[this.data[SMART_FIELDS.FILM] || 1], this.data[SMART_FIELDS.WIDTH_FILM])}
+                        </select>
+                    </div>
 
-                <div class="m-0 p-0 product-list__item-12">
-                    <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC} product_list__fontstyle" placeholder="Ссылка на исходники клиента" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || ""}">
-                </div>
-                <div class="m-0 p-0 product-list__item-13">
-                    <div class="m-0 p-0">
-                        <div class="${CONTAINER_CLIENT_FILES}">
-                        </div>
+                    <div class="m-0 p-0 product-list__item-8">
+                        <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_PIECES} product_list__fontstyle" placeholder="П.м. за шт." data-field="${SMART_FIELDS.LINEAR_METER_PIECES}" value="${this.data[SMART_FIELDS.LINEAR_METER_PIECES]}">
                     </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
-                        <div class="m-0 p-0 px-4 product_list__fontstyle">
-                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
-                            <input class="d-none ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
-                        </div>
+                    <div class="m-0 p-0 product-list__item-9">
+                        <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES} product_list__fontstyle" placeholder="Кв. м. за шт" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES]}">
                     </div>
-                </div>
-                <div class="m-0 p-0 product-list__item-14">
-                    <div class="m-0 p-0">
-                        <div class="${CONTAINER_PREPRESS_FILES}">
-                        </div>
+                    <div class="m-0 p-0 product-list__item-10">
+                        <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL} product_list__fontstyle" placeholder="П.м. всего" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL]}">
                     </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
-                        <div class="m-0 p-0 px-4 product_list__fontstyle">
-                            <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PREPRESS}" style="cursor: pointer;">Добавить+</p>
-                            <input class="d-none ${ADD_FILE_TO_PREPRESS_INPUT}" type="file" id="" multiple>
-                        </div>
+                    <div class="m-0 p-0 product-list__item-11">
+                        <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL} product_list__fontstyle" placeholder="Кв.м. всего" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL]}">
+                    </div>
+                    <div class="m-0 p-0 product-list__item-15">
+                        <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                     </div>
                 </div>
-                <div class="m-0 p-0 product-list__item-15">
-                    <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
+                <div class="product-list__product-second-row">
+                    <div class="product-list__product-second-row-item-1">
+                        <div>Ссылка на исходники клиента</div>
+                        <div class="m-0 p-0 product-list__item-12">
+                            <input type="url" class="form-control ${SMART_FIELDS.LINK_SRC} product_list__fontstyle" placeholder="Ссылка на исходники клиента" data-field="${SMART_FIELDS.LINK_SRC}" value="${this.data[SMART_FIELDS.LINK_SRC] || ""}">
+                        </div>
+                    </div>
+                    <div class="product-list__product-second-row-item-2">
+                        <div>Файлы клиента</div>
+                        <div class="m-0 p-0 product-list__item-13">
+                            <div class="m-0 p-0">
+                                <div class="${CONTAINER_CLIENT_FILES}">
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0">
+                                <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+                                <div class="m-0 p-0 px-4 product_list__fontstyle">
+                                    <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PRODUCT}" style="cursor: pointer;">Добавить+</p>
+                                    <input class="d-none ${ADD_FILE_TO_PRODUCT_INPUT}" type="file" id="" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-list__product-second-row-item-3">
+                        <div>Черновой препресс</div>
+                        <div class="m-0 p-0 product-list__item-14">
+                            <div class="m-0 p-0">
+                                <div class="${CONTAINER_PREPRESS_FILES}">
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0">
+                                <div class="m-0 p-0"><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></div>
+                                <div class="m-0 p-0 px-4 product_list__fontstyle">
+                                    <p class="text-primary text-decoration-underline m-0 p-0 ${ADD_FILE_TO_PREPRESS}" style="cursor: pointer;">Добавить+</p>
+                                    <input class="d-none ${ADD_FILE_TO_PREPRESS_INPUT}" type="file" id="" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    <div>
                 </div>
             </div>
         `;
