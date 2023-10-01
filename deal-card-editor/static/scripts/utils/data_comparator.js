@@ -204,6 +204,9 @@ class ProductsDataComparator {
                 }
                 content += this.createProduct_(newProduct);
             }
+            if (content == "") {
+                return "";
+            }
     
             return `
                 [TABLE]
