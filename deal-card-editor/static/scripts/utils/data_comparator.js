@@ -173,7 +173,6 @@ class ProductsDataComparator {
 
     init(fields) {
         this.fields = fields;
-        console.log("Products Fields = ", this.fields);
     }
 
     async findChaged_(oldProducts, newProducts) {
@@ -248,9 +247,8 @@ class ProductsDataComparator {
     
     getTextArray_(key, oldValue, newValue) {
         const fieldObj = this.fields[key];
-        // this.getFilesDataFromStr_(oldValue);
-        const oldValueText = getUrlFiles_(oldValue);
-        const newValueText = getUrlFiles_(newValue);
+        const oldValueText = this.getUrlFiles_(oldValue);
+        const newValueText = this.getUrlFiles_(newValue);
         return `
         [TR]
             [TD][B]${fieldObj.title}[/B][/TD]
