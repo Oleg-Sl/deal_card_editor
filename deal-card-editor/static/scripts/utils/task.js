@@ -67,26 +67,17 @@ class Task {
             };
             await bx24BizprocStartFOrDeal(this.bx24, BIZPROC_CREATE_TASK, dealId, paramsBizProc);
             await sleep(2000);
-            // let data = {
-            //     TITLE: `🎯 | {{№ Заказа}} | {{Название}} | Заказ (0)`,
-            //     CREATED_BY: "",
-            //     RESPONSIBLE_ID: "",
-
-            // }
-            // bx24TaskAdd(this.bx24, {
-            // });
-            // await this.createTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);
         }
 
     }
 
-    async addComment(taskId, responsible, dealChanged, productsChanged) {
+    async addComment(taskId, responsible, dealChanged, productsChanged, currentUser) {
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
         msgToUser += dealChanged;
         msgToUser += productsChanged;
-        await bx24TaskAddComment(this.bx24, taskId, msgToUser, this.currentUser.ID);
+        await bx24TaskAddComment(this.bx24, taskId, msgToUser, currentUser.ID);
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
