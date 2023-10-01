@@ -1,4 +1,6 @@
- 
+// Бизнес процессы
+export const BIZPROC_CREATE_TASK = 177;
+
 // Поля в сделке
 export const FIELD_TITLE               = "TITLE";                   // Название сделки
 export const FIELD_RESPONSIBLE_MOP     = "ASSIGNED_BY_ID";          // Ответственный МОП

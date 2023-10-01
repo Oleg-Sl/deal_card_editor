@@ -1,4 +1,5 @@
 import {
+    BIZPROC_CREATE_TASK,
     SMART_FIELDS,
     LIST_TECHNOLOGY,
     LIST_FILMS,
@@ -17,7 +18,16 @@ import {
     FIELD_INSTALL_ON_TERRIT,
 } from '../parameters.js';
 
-import { bx24TaskUpdate } from '../bx24/api.js'
+import {
+    bx24TaskUpdate,
+    bx24TaskAdd,
+    bx24BizprocStartFOrDeal,
+    bx24TaskAddComment,
+} from '../bx24/api.js'
+
+import {
+    sleep,
+} from './funcs.js'
 
 // Список имен полей со свойствами заказа
 const FIELDS_FOR_TABLE_TASK_ = [FIELD_BUSINESS_TRIP, FIELD_METERING, FIELD_DISMANTLING, FIELD_PARKING, FIELD_COLOR_PROOF, FIELD_INSTALL, FIELD_OURDETAILS, FIELD_BOXING_RENTAL, FIELD_INSTALL_ON_TERRIT];
@@ -49,14 +59,34 @@ class Task {
         }
     }
 
-    createTask(dataDeal, dataProducts, contactMeasure) {
+    async createTask(dealId, dataDeal, dataProducts, contactMeasure) {
         try {
             let descTask = this.getDescTask_(dataDeal, dataProducts, contactMeasure);
+            let paramsBizProc = {
+                description: descTask,
+            };
+            await bx24BizprocStartFOrDeal(this.bx24, BIZPROC_CREATE_TASK, dealId, paramsBizProc);
+            await sleep(2000);
+            // let data = {
+            //     TITLE: `🎯 | {{№ Заказа}} | {{Название}} | Заказ (0)`,
+            //     CREATED_BY: "",
+            //     RESPONSIBLE_ID: "",
+
+            // }
+            // bx24TaskAdd(this.bx24, {
+            // });
             // await this.createTaskIntoBX24_(taskId, newDataTask);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);
         }
 
+    }
+
+    async addComment(taskId, responsible, dealChanged, productsChanged) {
+        let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+        msgToUser += dealChanged;
+        msgToUser += productsChanged;
+        await bx24TaskAddComment(this.bx24, taskId, msgToUser, this.currentUser.ID);
     }
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {

@@ -84,6 +84,8 @@ class App {
         this.elemBtnSaveBottom      = this.containerButtonsBottom.querySelector('#saveButtonBottom');
         this.elemBtnRewriteBottom   = this.containerButtonsBottom.querySelector('#rewriteButtonBottom');
         this.elemBtnCancelBottom    = this.containerButtonsBottom.querySelector('#cancelButtonBottom');
+        this.elemBtnCreateBottom    = this.containerButtonsBottom.querySelector('#createTaskButtonBottom');
+
     }
 
     async init() {
@@ -131,6 +133,15 @@ class App {
             spinner.classList.add("d-none");
         })
 
+        // Создание задачи
+        this.elemBtnCreateBottom.addEventListener("click", async (e) => {
+            let spinner = this.elemBtnCreateBottom.querySelector("span");
+            spinner.classList.remove("d-none");
+            await this.handleSaveDealData(true);
+            await this.handleCreateTask();
+            spinner.classList.add("d-none");
+        })
+
         // Открыть модальное окно с настройками
         if (this.currentUser.ID == 1) {
             this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
@@ -162,9 +173,9 @@ class App {
     }
 
     async handleUpdateTask() {
+        const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
         const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
-        const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
         if (!isTaskOrder) {
             alert('Задача "ЗАКАЗ" не создана или удалена');
             return;
@@ -186,14 +197,26 @@ class App {
         let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
 
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
-        this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
-
         let responsible = this.interfaceBlockThree.getResponsible();
+        this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
+        this.task.addComment(this.taskId, responsible, dealChanged, productsChanged)
         
-        let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-        msgToUser += dealChanged;
-        msgToUser += productsChanged;
-        await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+        // let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+        // msgToUser += dealChanged;
+        // msgToUser += productsChanged;
+        // await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+    }
+
+    async handleCreateTask() {
+        const newDealData = this.getDataDeal();
+        const newProductsData = this.getDataSmartProcess();
+        const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
+        if (isTaskOrder) {
+            alert('Задача "ЗАКАЗ" уже была создана');
+            return;
+        }
+        const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
+        this.task.createTask(this.dealId, newDealData, newProductsData, contactMeasure || {});
     }
 
     async handleCancelChanging() {
@@ -226,7 +249,17 @@ class App {
         let products = this.interfaceBlockFive.getData();
         return products;
     }
+
+    // async addCommentAfterTaskUpdate(dealChanged, productsChanged) {
+    //     const responsible = this.interfaceBlockThree.getResponsible();
+    //     let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
+    //     msgToUser += dealChanged;
+    //     msgToUser += productsChanged;
+    //     await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
+    // }
+    
 }
+
 
 
 async function main() {

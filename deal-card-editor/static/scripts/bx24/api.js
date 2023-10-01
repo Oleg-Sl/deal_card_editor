@@ -15,6 +15,16 @@ export async function bx24TaskGet(bx24, taskId) {
     return response;
 }
 
+export async function bx24TaskAdd(bx24, data) {
+    let response = await bx24.callMethod(
+        "tasks.task.add",
+        {
+            fields: data
+        }
+    );
+    return response;
+}
+
 export async function bx24TaskUpdate(bx24, taskId, dataTask) {
     let response = await bx24.callMethod(
         "tasks.task.update",
@@ -160,4 +170,18 @@ export async function bx24SmartProcessGetList(bx24, smartNumber, dealId) {
         }
     );
     return data.items;
+}
+
+
+// *******BIZ_PROCESS*******
+export async function bx24BizprocStartFOrDeal(bx24, bizprocId, dealId, params) {
+    let data = await bx24.callMethod(
+        "bizproc.workflow.start",
+        {
+            TEMPLATE_ID: bizprocId,
+            DOCUMENT_ID: ['crm', 'CCrmDocumentDeal', `DEAL_${dealId}`],
+            PARAMETERS: params
+        }
+    );
+    return data;
 }
