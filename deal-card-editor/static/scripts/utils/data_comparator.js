@@ -175,7 +175,7 @@ class ProductsDataComparator {
         this.fields = fields;
     }
 
-    async findChaged_(oldProducts, newProducts) {
+    async getChanged(oldProducts, newProducts) {
         console.log("oldProducts = ", oldProducts);
         console.log("newProducts = ", newProducts);
         let content = "";

@@ -159,12 +159,10 @@ class App {
     }
 
     async handleUpdateTask() {
-        const newDealData = this.getDataDeal();
-        let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
-
+        const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
-        let productsChanged = await this.productComparator.findChaged_(this.productsData, newProductsData);
-        console.log("productsChanged = ", productsChanged);
+        let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
+        let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
 
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
         this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
@@ -172,10 +170,15 @@ class App {
         let responsible = this.interfaceBlockThree.getResponsible();
         
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-        msgToUser += dealChanged;
-        msgToUser += productsChanged;
+        if (dealChanged != ""){
+            msgToUser += "[B]Изменения в заказе[/B]";
+            msgToUser += dealChanged;
+        }
+        if (productsChanged != ""){
+            msgToUser += "[B]Изменения в списке товаров[/B]";
+            msgToUser += productsChanged;
+        }
         await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
-        
     }
 
     async handleCancelChanging() {
