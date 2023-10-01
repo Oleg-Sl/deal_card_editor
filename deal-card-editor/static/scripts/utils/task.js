@@ -74,6 +74,9 @@ class Task {
     }
 
     async addComment(taskId, responsible, dealChanged, productsChanged, currentUser) {
+        if (dealChanged == "" || productsChanged == "") {
+            return;
+        }
         let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
         msgToUser += dealChanged;
         msgToUser += productsChanged;
