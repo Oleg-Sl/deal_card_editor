@@ -168,7 +168,7 @@ class App {
             alert("Заполните все поля заказа");
             return;
         }
-        if (!this.checkData.isTaskProduction(newDealData)) {
+        if (this.checkData.isTaskProduction(newDealData)) {
             alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
             return;
         }

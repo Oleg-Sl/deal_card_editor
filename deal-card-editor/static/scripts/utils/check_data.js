@@ -35,16 +35,19 @@ export class CheckData {
 
     checkFields_(listIgnore, objData) {
         for (let key in objData) {
-
             if (listIgnore.includes(key)) {
                 continue;
             }
             console.log(key, " = ", objData[key]);
-            if (!objData[key]) {
-                return false
+            if (Number.isInteger(objData[key])) {
+                continue;
+            }
+            if (!objData[key] || Array.isArray(objData[key]) && objData[key].length === 0) {
+                console.log(false);
+                return false;
             }
         }
-        return true;
-    
+
+        return true;    
     }
 }
