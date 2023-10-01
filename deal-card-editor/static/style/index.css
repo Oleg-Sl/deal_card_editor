@@ -386,7 +386,7 @@
 }
 
 .product-list__item-3 {
-  grid-area: A;
+  grid-area: A3;
 }
 
 .product-list__item-4 {
@@ -402,7 +402,7 @@
 }
 
 .product-list__item-7 {
-  grid-area: A;
+  grid-area: A7;
 }
 
 .product-list__item-8 {
@@ -437,12 +437,6 @@
   grid-area: A15;
 }
 
-.product-list__product-row {
-  display: grid;
-  -moz-column-gap: 3px;
-       column-gap: 3px;
-  grid-template-columns: 1fr;
-}
 .product-list__product-row select {
   border-radius: 0;
   padding-left: 2px;
@@ -480,6 +474,7 @@
        column-gap: 3px;
   grid-template-columns: 1fr 1fr;
 }
+
 .product-list__row-files > div, .product-list__row-prepress > div {
   display: grid;
   grid-template-columns: 15px 1fr 60px 20px;
