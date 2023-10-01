@@ -89,21 +89,30 @@ class App {
     }
 
     async init() {
-        this.currentUser       = await bx24UserGetCurrent(this.bx24);
-        this.fieldsDealData    = await bx24DealGetFields(this.bx24);
+        await this.initializeData();
+        this.initializeUI();
+        this.initHandler();
+    }
+
+    async initializeData() {
+        this.currentUser = await bx24UserGetCurrent(this.bx24);
+        this.fieldsDealData = await bx24DealGetFields(this.bx24);
         this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
         await this.getDataFromBx24();
+    }
 
+    initializeUI() {
         this.task.init(this.fieldsDealData);
         this.dataComparator.init(this.fieldsDealData);
         this.productComparator.init(this.fieldsProductData);
+
         this.interfaceBlockOne.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockTwo.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockThree.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFour.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFive.init(this.fieldsDealData, this.dealData);
 
-        this.initHandler();
+        this.render();
     }
 
     initHandler() {
@@ -170,7 +179,7 @@ class App {
 
     async handleUpdateTask() {
         const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
-        const newDealData     = this.getDataDeal();
+        const newDealData = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
         if (!isTaskOrder) {
             alert('Задача "ЗАКАЗ" не создана или удалена');
@@ -188,15 +197,18 @@ class App {
             alert('Сделка в производстве, изменять задачу заказ нельзя, создай новую сделку!');
             return;
         }
-
-        let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
-        let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
-        console.log("dealChanged = ", dealChanged);
-        console.log("productsChanged = ", productsChanged);
-        const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
-        let responsible = this.interfaceBlockThree.getResponsible();
-        await this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
-        await this.task.addComment(this.taskId, responsible, dealChanged, productsChanged, this.currentUser)
+        try {
+            let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
+            let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
+            const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
+            let responsible = this.interfaceBlockThree.getResponsible();
+            await this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
+            await this.task.addComment(this.taskId, responsible, dealChanged, productsChanged, this.currentUser);
+        } catch (error) {
+            console.error("Произошла ошибка при обновлении задачи:", error);
+            alert("Произошла ошибка при обновлении задачи: " + error);
+        }
+        
     }
 
     async handleCreateTask() {
@@ -207,8 +219,14 @@ class App {
             alert('Задача "ЗАКАЗ" уже была создана');
             return;
         }
-        const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
-        this.task.createTask(this.dealId, newDealData, newProductsData, contactMeasure || {});
+        try {
+            const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
+            this.task.createTask(this.dealId, newDealData, newProductsData, contactMeasure || {});
+        } catch (error) {
+            console.error("Произошла ошибка при создании задачи:", error);
+            alert("Произошла ошибка при создании задачи: " + error);
+        }
+        
     }
 
     async handleCancelChanging() {
@@ -219,9 +237,13 @@ class App {
     }
 
     async getDataFromBx24() {
-        this.dealData = await bx24DealGetData(this.bx24, this.dealId);
-        this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
-        this.taskId = this.dealData[FIELD_ID_TASK_ORDER];
+        try {
+            this.dealData = await bx24DealGetData(this.bx24, this.dealId);
+            this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+            this.taskId = this.dealData[FIELD_ID_TASK_ORDER];
+        } catch (error) {
+            console.error("Произошла ошибка при получении данных из BX24:", error);
+        }
     }
 
     render() {
@@ -247,15 +269,6 @@ class App {
         let products = this.interfaceBlockFive.getData();
         return products;
     }
-
-    // async addCommentAfterTaskUpdate(dealChanged, productsChanged) {
-    //     const responsible = this.interfaceBlockThree.getResponsible();
-    //     let msgToUser = `[USER=${responsible.ID}]${responsible.LAST_NAME || ""} ${responsible.NAME || ""}[/USER], ВНИМАНИЕ! Задача изменена.`;
-    //     msgToUser += dealChanged;
-    //     msgToUser += productsChanged;
-    //     await bx24TaskAddComment(this.bx24, this.taskId, msgToUser, this.currentUser.ID);
-    // }
-    
 }
 
 
