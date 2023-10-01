@@ -417,7 +417,7 @@ class ProductRow {
 }
 
 
-export default class InterfaceBlockfour {
+export default class InterfaceBlockFive {
     constructor(container, bx24, yaDisk, dealId) {
         this.container = container;
         this.bx24 = bx24;
@@ -427,14 +427,16 @@ export default class InterfaceBlockfour {
 
         this.fieldsData = NaN;
         this.dealData = NaN;
+        this.productsData = NaN;
 
         this.productsObj = [];
 
     }
 
-    init(fields, data) {
+    init(fields, data, productsData) {
         this.fields = fields;
         this.dealData = data;
+        this.productsData = productsData;
 
         this.renderInit();
         this.containerProductList = this.container.querySelector("#productsListBody");
@@ -474,8 +476,8 @@ export default class InterfaceBlockfour {
 
     async render() {
         this.productsObj = [];
-        let productsList = await this.getProductsList(this.smartNumber, this.dealId);
-        for (let product of productsList) {
+        // let productsList = await this.getProductsList(this.smartNumber, this.dealId);
+        for (let product of this.productsData) {
             let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.dealId, this.productsObj.length + 1);
             productObj.addRow(product);
             this.productsObj.push(productObj);
