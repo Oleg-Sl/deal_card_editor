@@ -201,6 +201,8 @@ class App {
             return;
         }
         try {
+            console.log("oldProductsData = ", this.productsData);
+            console.log("newProductsData = ", newProductsData);
             let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
             let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
             const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
