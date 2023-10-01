@@ -65,6 +65,10 @@ $small_width: 1420px
     grid-area: A15
 
 .product-list__product-row
+    display: grid
+    column-gap: 3px
+    grid-template-columns: 1fr
+
     select
         border-radius: 0
         padding-left: 2px
@@ -83,25 +87,25 @@ $small_width: 1420px
         padding-left: 2px
         padding-right: 2px
 
-    .product-list__product-first-row
+.product-list__product-first-row
+    display: grid
+    column-gap: 3px
+    grid-template-columns: 15px 135px 70px 135px 135px 135px 70px 70px 70px 70px 70px 1fr
+    // grid-template-areas:  "A1   A2    A3   A4    A5    A6    A7   A8   A9   A10  A11  A15" "A12 A12 A12 A12 A13 A13 A13 A13 A14 A14 A14 A14"
+
+.product-list__product-second-row
+    display: grid
+    // column-gap: 3px
+    grid-template-columns: 1fr 1fr 1fr
+    .product-list__product-second-row-item-1, .product-list__product-second-row-item-2, .product-list__product-second-row-item-3
         display: grid
         column-gap: 3px
-        grid-template-columns: 15px 135px 70px 135px 135px 135px 70px 70px 70px 70px 70px 1fr
-        // grid-template-areas:  "A1   A2    A3   A4    A5    A6    A7   A8   A9   A10  A11  A15" "A12 A12 A12 A12 A13 A13 A13 A13 A14 A14 A14 A14"
-
-    .product-list__product-second-row
-        display: grid
-        // column-gap: 3px
-        grid-template-columns: 1fr 1fr 1fr
-        .product-list__product-second-row-item-1, .product-list__product-second-row-item-2, .product-list__product-second-row-item-3
-            display: grid
-            column-gap: 3px
-            grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr
 
 
-        .product-list__product-second-row-item-2
-        
-        .product-list__product-second-row-item-3
+    .product-list__product-second-row-item-2
+    
+    .product-list__product-second-row-item-3
 
 
 

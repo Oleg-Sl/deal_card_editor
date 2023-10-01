@@ -137,7 +137,7 @@ class ProductRow {
                 BX24.fitWindow();
             }
         })
-        this.element.addEventListener("contextmenu", async (e) => {не
+        this.element.addEventListener("contextmenu", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COMMENT) || e.target.classList.contains(SMART_FIELDS.TITLE)) {
                 BX24.fitWindow();
             }
