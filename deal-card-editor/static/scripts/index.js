@@ -164,7 +164,7 @@ class App {
     async handleUpdateTask() {
         const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
-        if (!this.checkData.isTaskOrder(newDealData)) {
+        if (!this.checkData.isTaskOrder(this.dealData)) {
             alert('Задача "ЗАКАЗ" не создана или удалена');
             return;
         }
@@ -172,7 +172,7 @@ class App {
             alert("Заполните все поля заказа");
             return;
         }
-        if (this.checkData.isTaskProduction(newDealData)) {
+        if (this.checkData.isTaskProduction(this.dealData)) {
             alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
             return;
         }
