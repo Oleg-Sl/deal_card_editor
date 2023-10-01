@@ -1,5 +1,6 @@
 import {
     FIELD_ID_TASK_PRODUCTION,
+    FIELD_ID_TASK_ORDER,
 
     LIST_IGNORE_CHECK_FIELDS_DEAL,
     LIST_IGNORE_CHECK_FIELDS_PRODUCTS,
@@ -22,6 +23,13 @@ export class CheckData {
             if (!this.checkFields_(LIST_IGNORE_CHECK_FIELDS_PRODUCTS, productData)) {
                 return true;
             }   
+        }
+        return false;
+    }
+
+    isTaskOrder(deal_data) {
+        if (deal_data[FIELD_ID_TASK_ORDER]) {
+            return true;
         }
         return false;
     }

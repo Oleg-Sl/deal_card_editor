@@ -164,14 +164,18 @@ class App {
     async handleUpdateTask() {
         const newDealData     = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
-        // if (!this.checkData.isCheckDealData(newDealData) || !this.checkData.isCheckProductsData(newProductsData)) {
-        //     alert("Заполните все поля заказа");
-        //     return;
-        // }
-        // if (this.checkData.isTaskProduction(newDealData)) {
-        //     alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
-        //     return;
-        // }
+        if (!this.checkData.isTaskOrder(newDealData)) {
+            alert('Задача "ЗАКАЗ" не создана или удалена');
+            return;
+        }
+        if (!this.checkData.isCheckDealData(newDealData) || !this.checkData.isCheckProductsData(newProductsData)) {
+            alert("Заполните все поля заказа");
+            return;
+        }
+        if (this.checkData.isTaskProduction(newDealData)) {
+            alert('Изменение задачи "ЗАКАЗ" запрещено, т.к. уже создана задача на "производство"!');
+            return;
+        }
         let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
         let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
 
