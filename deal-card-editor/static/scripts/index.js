@@ -111,8 +111,6 @@ class App {
         this.interfaceBlockThree.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFour.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFive.init(this.fieldsDealData, this.dealData);
-
-        this.render();
     }
 
     initHandler() {
