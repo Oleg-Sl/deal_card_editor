@@ -186,11 +186,13 @@ class ProductsDataComparator {
 
         for (const oldProduct of oldProducts) {
             const newProduct = this.findProductById_(oldProduct.id, newProducts);
-            if (newProduct) {
+            if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
+                content += this.createProduct_(newProduct);
+            } else if (newProduct) {
                 content += this.compreProducts_(oldProduct, newProduct);
-                continue;
+            } else {
+                content += this.removeProduct_(oldProduct);
             }
-            content += this.removeProduct_(oldProduct);
         }
 
         for (const newProduct of newProducts) {
@@ -219,12 +221,11 @@ class ProductsDataComparator {
             const oldFilm = oldProduct[SMART_FIELDS.FILM];
             const newFilm = newProduct[SMART_FIELDS.FILM];
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
-                content += "";
+                if (!this.isEqualArray_(oldValue, newValue)) {
+                    content += this.getTextArray_(key, oldValue, newValue);
+                }
             } else {
                 if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
-                    console.log("*************************");
-                    console.log("oldValue = ", oldValue);
-                    console.log("newValue = ", newValue);
                     content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm);
                 }
             }
@@ -245,6 +246,20 @@ class ProductsDataComparator {
 
     }
     
+    getTextArray_(key, oldValue, newValue) {
+        const fieldObj = this.fields[key];
+        // this.getFilesDataFromStr_(oldValue);
+        const oldValueText = getUrlFiles_(oldValue);
+        const newValueText = getUrlFiles_(newValue);
+        return `
+        [TR]
+            [TD][B]${fieldObj.title}[/B][/TD]
+            [TD]${oldValueText}[/TD]
+            [TD]${newValueText}[/TD]
+        [/TR]
+    `;
+    }
+
     getTextValue_(key, oldValue, newValue, oldFilm, newFilm) {
         const fieldObj = this.fields[key];
         let oldValueText = "";
@@ -275,7 +290,9 @@ class ProductsDataComparator {
     createProduct_(product) {
         return `
             [TR]
-                [TD][B]Добавлен товар: [COLOR=#32CD32]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD][B]Добавлен товар:[/B][/TD]
+                [TD][B][COLOR=#32CD32]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD][/TD]
             [/TR]
         `;
     }
@@ -300,6 +317,48 @@ class ProductsDataComparator {
     findValueById_(itemId, items) {
         const foundItem = items.find(item => item.ID === itemId);
         return foundItem ? foundItem.VALUE : "";
+    }
+
+    isEqualArray_(arr1, arr2) {    
+        for (const item of arr1) {
+            if (!arr2.includes(item)) {
+                return false;
+            }
+        }
+        for (const item of arr2) {
+            if (!arr1.includes(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    getUrlFiles_(filesDataStrings) {
+        let data = [];
+        for (let fileDataString of filesDataStrings) {
+            try {
+                let fileData = this.parseFileDataString_(fileDataString, ";");
+                data.push(`[URL=${fileData.url}]${fileData.name}[/URL]`);
+            } catch {
+                console.error("Не удалось получить данные файла из строки");
+            }
+        }
+        return data.join('\n');
+    }
+
+    parseFileDataString_(dataString, delimiter) {
+        let parts = dataString.split(delimiter);
+        if (parts.length !== 3) {
+            throw new Error('Некорректный формат строки данных файла.');
+        }
+
+        let fileData = {
+            name: parts[0].trim(),
+            size: parts[1].trim(),
+            url:  parts[2].trim()
+        };
+
+        return fileData;
     }
 
     // findChagedInProducts(oldProducts, newProducts) {
