@@ -191,11 +191,12 @@ class App {
 
         let dealChanged     = await this.dataComparator.getChanged(this.dealData, newDealData);
         let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
-
+        console.log("dealChanged = ", dealChanged);
+        console.log("productsChanged = ", productsChanged);
         const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
         let responsible = this.interfaceBlockThree.getResponsible();
-        this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
-        this.task.addComment(this.taskId, responsible, dealChanged, productsChanged, this.currentUser)
+        await this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
+        await this.task.addComment(this.taskId, responsible, dealChanged, productsChanged, this.currentUser)
     }
 
     async handleCreateTask() {
