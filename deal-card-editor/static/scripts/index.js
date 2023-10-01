@@ -228,8 +228,7 @@ class App {
     }
 
     async handleCancelChanging() {
-        this.dealData = await bx24DealGetData(this.bx24, this.dealId);
-        this.fieldsDealData = await bx24DealGetFields(this.bx24);
+        await getDataFromBx24(this.bx24, this.dealId);
         this.interfaceBlockFive.init();
         this.render();
     }
