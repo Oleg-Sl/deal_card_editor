@@ -88,7 +88,6 @@ export async function bx24DealGetData(bx24, dealId) {
 }
 
 export async function bx24DealUpdate(bx24, dealId, data) {
-    console.log("saveDealToBx24 = ", data);
     let response = await bx24.callMethod(
         "crm.deal.update",
         {

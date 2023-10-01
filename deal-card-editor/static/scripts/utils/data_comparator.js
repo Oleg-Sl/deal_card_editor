@@ -272,18 +272,12 @@ class ProductsDataComparator {
         let oldValueText = "";
         let newValueText = "";
         if (key == SMART_FIELDS.TECHNOLOGY) {
-            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
-            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_TECHNOLOGY);
             newValueText = this.findValueById_(newValue, LIST_TECHNOLOGY);
         } else if (key == SMART_FIELDS.FILM) {
-            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
-            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_FILMS);
             newValueText = this.findValueById_(newValue, LIST_FILMS);
         } else if (key == SMART_FIELDS.WIDTH_FILM) {
-            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
-            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_WIDTH_FILMS[oldFilm] || []);
             newValueText = this.findValueById_(newValue, LIST_WIDTH_FILMS[newFilm] || []);
         } else {

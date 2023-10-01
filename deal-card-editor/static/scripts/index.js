@@ -92,7 +92,6 @@ class App {
         await this.initializeData();
         this.initializeUI();
         this.initHandler();
-        console.log("oldProductsData 1 = ", this.productsData);
     }
 
     async initializeData() {
@@ -117,8 +116,6 @@ class App {
     initHandler() {
         // Сохранение изменений в сделку и БП
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
-            console.log("Сохранение изменений в сделку и БП");
-
             let spinner = this.elemBtnSaveBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData();
@@ -128,25 +125,17 @@ class App {
 
         // Сохранение изменений в сделку и БП, также изменение данных в задаче
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
-            console.log("Сохранение изменений в сделку и БП, также изменение данных в задаче");
-
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
             // await this.getDataFromBx24();
-            console.log("oldProductsData 2 = ", this.productsData);
             await this.handleSaveDealData();
-            console.log("oldProductsData 3 = ", this.productsData);
             await this.handleUpdateTask();
-            console.log("oldProductsData 4 = ", this.productsData);
             await this.getDataFromBx24();
-            console.log("oldProductsData 5 = ", this.productsData);
             spinner.classList.add("d-none");
         })
 
         // Отмена изменений
         this.elemBtnCancelBottom.addEventListener("click", async (e) => {
-            console.log("Отмена изменений");
-
             let spinner = this.elemBtnCancelBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.getDataFromBx24();
@@ -158,8 +147,6 @@ class App {
 
         // Создание задачи
         this.elemBtnCreateBottom.addEventListener("click", async (e) => {
-            console.log("Создание задачи");
-
             let spinner = this.elemBtnCreateBottom.querySelector("span");
             spinner.classList.remove("d-none");
             await this.handleSaveDealData();
@@ -214,8 +201,6 @@ class App {
             return;
         }
         try {
-            console.log("oldProductsData = ", this.productsData);
-            console.log("newProductsData = ", newProductsData);
             let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
             let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
             const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
@@ -248,7 +233,6 @@ class App {
     }
 
     async getDataFromBx24() {
-        console.log("bx24SmartProcessGetList");
         try {
             this.dealData = await bx24DealGetData(this.bx24, this.dealId);
             this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
