@@ -248,6 +248,7 @@ class App {
     }
 
     async getDataFromBx24() {
+        console.log("bx24SmartProcessGetList");
         try {
             this.dealData = await bx24DealGetData(this.bx24, this.dealId);
             this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
