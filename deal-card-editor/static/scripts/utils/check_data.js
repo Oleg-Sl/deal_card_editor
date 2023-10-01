@@ -55,8 +55,8 @@ export class CheckData {
             if (ignoreFields.includes(key)) {
                 continue;
             }
-            if (typeof objData[key] === 'number' && !Number.isInteger(objData[key])) {
-                return false;
+            if (Number.isInteger(objData[key])) {
+                continue;
             }
             if (!objData[key] || (Array.isArray(objData[key]) && objData[key].length === 0)) {
                 return false;
