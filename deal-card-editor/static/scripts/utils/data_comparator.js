@@ -148,7 +148,7 @@ class DealDataComparator {
     }
 
     findValueById_(item_id, items) {
-        const foundItem = items.find(item => item.ID === item_id);
+        const foundItem = items.find(item => item.ID == item_id);
         return foundItem ? foundItem.VALUE : "";
     }
 
@@ -263,12 +263,18 @@ class ProductsDataComparator {
         let oldValueText = "";
         let newValueText = "";
         if (key == SMART_FIELDS.TECHNOLOGY) {
+            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
+            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_TECHNOLOGY);
             newValueText = this.findValueById_(newValue, LIST_TECHNOLOGY);
         } else if (key == SMART_FIELDS.FILM) {
+            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
+            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_FILMS);
             newValueText = this.findValueById_(newValue, LIST_FILMS);
         } else if (key == SMART_FIELDS.WIDTH_FILM) {
+            console.log("SMART_FIELDS.TECHNOLOGY OLD = ", oldValue);
+            console.log("SMART_FIELDS.TECHNOLOGY NEW = ", newValue);
             oldValueText = this.findValueById_(oldValue, LIST_WIDTH_FILMS[oldFilm] || []);
             newValueText = this.findValueById_(newValue, LIST_WIDTH_FILMS[newFilm] || []);
         } else {
@@ -308,12 +314,12 @@ class ProductsDataComparator {
     }
 
     findProductById_(productId, prouducts) {
-        const foundItem = prouducts.find(item => item.id === productId);
+        const foundItem = prouducts.find(item => item.id == productId);
         return foundItem;
     }
 
     findValueById_(itemId, items) {
-        const foundItem = items.find(item => item.ID === itemId);
+        const foundItem = items.find(item => item.ID == itemId);
         return foundItem ? foundItem.VALUE : "";
     }
 
@@ -358,34 +364,6 @@ class ProductsDataComparator {
 
         return fileData;
     }
-
-    // findChagedInProducts(oldProducts, newProducts) {
-    //     // console.log("oldProducts = ", oldProducts);
-    //     // console.log("newProducts = ", newProducts);
-    //     if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
-    //         return "";
-    //     }
-    //     const changedProductsArray = [];
-    //     for (let i = 0; i < newProducts.length; i++) {
-    //         const newItem = newProducts[i];
-    //         const oldItem = oldProducts.find(item => item.id === newItem.id);
-    //         let changeObj = {};
-    //         // console.log("newItem = ", newItem);
-    //         // console.log("oldItem = ", oldItem);
-    //         if (oldItem) {
-    //             const changedValues = this.findChangedValues(oldItem, newItem);
-    //             if (Object.keys(changedValues).length > 0) {
-    //                 changeObj[newItem.id] = changedValues;
-    //                 changedProductsArray.push(changeObj);
-    //             }
-    //         } else {
-    //             changeObj[newItem.id] = {};
-    //             changedProductsArray.push(changeObj);
-    //         }
-    //     }
-    //     return changedProductsArray;
-    // }
-
 }
 
 export {DealDataComparator, ProductsDataComparator};
