@@ -158,7 +158,7 @@ class App {
         })
 
         // Открыть модальное окно с настройками
-        if (this.currentUser.ID == 1) {
+        if (this.currentUser.ID == 255000) {
             this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
                 this.modalSettings.show();
             })
