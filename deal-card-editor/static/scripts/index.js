@@ -158,11 +158,11 @@ class App {
         })
 
         // Открыть модальное окно с настройками
-        if (this.currentUser.ID == 255000) {
-            this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
-                this.modalSettings.show();
-            })
-        }
+        // if (this.currentUser.ID == 255000) {
+        //     this.elemBtnSettingsBottom.addEventListener("click", async (e) => {
+        //         this.modalSettings.show();
+        //     })
+        // }
 
         // Сохранить настройки
         this.elemBtnSaveSettingsButton.addEventListener("click", async (e) => {
@@ -248,9 +248,9 @@ class App {
     }
 
     render() {
-        if (this.currentUser.ID == 1) {
-            this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
-        }
+        // if (this.currentUser.ID == 255000) {
+        //     this.elemBtnSettingsBottom.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-secondary question-settings-data-btn-cancel" id="settingsButtonBottom">Настройки</button>');
+        // }
         this.interfaceBlockOne.render();
         this.interfaceBlockTwo.render();
         this.interfaceBlockThree.render();
