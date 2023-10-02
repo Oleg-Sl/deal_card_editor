@@ -18,7 +18,8 @@ export const FIELD_INSTALL             = "UF_CRM_1637861029";       // Монт�
 export const FIELD_OURDETAILS          = "UF_CRM_1637326777";       // Наши реквизиты
 export const FIELD_BOXING_RENTAL       = "UF_CRM_1694710116";       // Аренда бокса
 export const FIELD_INSTALL_ON_TERRIT   = "UF_CRM_1694710578";       // Монтаж на территории
-export const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";       // Контакт для Замера
+// export const FIELD_CONTACT_MESURE      = "UF_CRM_1621943311";       // Контакт для Замера
+export const FIELD_CONTACT_MESURE      = "CONTACT_IDS";             // Контакты
 export const FIELD_NUMBER_ORDER        = "UF_CRM_1633523035";       // № заказа (автоматически)
 export const FIELD_LINK_TENDER         = "UF_CRM_1620918041";       // Ссылка  рабочую таблицу / тендер / CRM Клиента
 
