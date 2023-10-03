@@ -220,6 +220,7 @@ class App {
             console.log("oldProductsData = ", this.productsData);
             console.log("newProductsData = ", newProductsData);
             let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
+            console.log("productsChanged = ", productsChanged);
             // const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
             let responsible = this.interfaceBlockThree.getResponsible();
             await this.task.updateTask(this.taskId, newDealData, newProductsData, this.dealContacts || {});

@@ -191,6 +191,8 @@ class ProductsDataComparator {
                 if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
                     content += this.createProduct_(newProduct);
                 } else if (newProduct) {
+                    console.log("oldProduct = ", oldProduct);
+                    console.log("newProduct = ", newProduct);
                     content += this.compreProducts_(oldProduct, newProduct);
                 } else {
                     content += this.removeProduct_(oldProduct);
