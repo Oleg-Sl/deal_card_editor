@@ -97,6 +97,8 @@ class App {
         await this.initializeData();
         this.initializeUI();
         this.initHandler();
+        console.log("oldProductsData = ", this.productsData);
+        
     }
 
     async initializeData() {
@@ -215,6 +217,8 @@ class App {
         }
         try {
             let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
+            console.log("oldProductsData = ", this.productsData);
+            console.log("newProductsData = ", newProductsData);
             let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
             // const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
             let responsible = this.interfaceBlockThree.getResponsible();
@@ -253,7 +257,6 @@ class App {
             const result = await bx24BatchGetDealAndProducts(this.bx24, this.smartNumber, this.dealId);
             this.dealData = result?.deal[0];
             this.productsData = result?.products?.items;
-            console.log("result = ", result);
             // this.dealData = await bx24DealGetData(this.bx24, this.dealId);
             // this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
             this.taskId = this.dealData[FIELD_ID_TASK_ORDER];
