@@ -45,6 +45,8 @@ class App {
 
         this.smartNumber = 144;
 
+        this.savingProcess = false;
+
         this.dealData = NaN;
         this.productsData = NaN;
         this.currentUser = NaN;
@@ -160,12 +162,20 @@ class App {
 
         // Создание задачи
         this.elemBtnCreateBottom.addEventListener("click", async (e) => {
-            let spinner = this.elemBtnCreateBottom.querySelector("span");
-            spinner.classList.remove("d-none");
-            await this.handleSaveDealData();
-            await this.handleCreateTask();
-            await this.getDataFromBx24();
-            spinner.classList.add("d-none");
+            if (!this.savingProcess) {
+                this.savingProcess = true;
+                let spinner = this.elemBtnCreateBottom.querySelector("span");
+                spinner.classList.remove("d-none");
+                try {
+                    await this.handleSaveDealData();
+                    await this.handleCreateTask();
+                    await this.getDataFromBx24();
+                } catch (error) {
+                    console.error("Произошла ошибка при создании задачи: ", error);
+                }
+                spinner.classList.add("d-none");
+                this.savingProcess = false;
+            }
         })
 
         // Открыть модальное окно с настройками
