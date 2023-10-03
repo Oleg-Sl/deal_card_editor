@@ -191,8 +191,6 @@ class ProductsDataComparator {
                 if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
                     content += this.createProduct_(newProduct);
                 } else if (newProduct) {
-                    console.log("oldProduct = ", oldProduct);
-                    console.log("newProduct = ", newProduct);
                     content += this.compreProducts_(oldProduct, newProduct);
                 } else {
                     content += this.removeProduct_(oldProduct);
@@ -230,12 +228,17 @@ class ProductsDataComparator {
             const newValue = newProduct[key];
             const oldFilm = oldProduct[SMART_FIELDS.FILM];
             const newFilm = newProduct[SMART_FIELDS.FILM];
+            console.log("key = ", key);
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 if (!this.isEqualArray_(oldValue, newValue)) {
                     content += this.getTextArray_(key, oldValue, newValue);
                 }
             } else {
+                console.log("oldValue = ", oldValue);
+                console.log("newValue = ", newValue);
+
                 if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
+                    
                     content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm);
                 }
             }
