@@ -249,9 +249,11 @@ class App {
         console.log("bx24SmartProcessGetList");
         try {
             const result = await bx24BatchGetDealAndProducts(this.bx24, this.smartNumber, this.dealId);
+            this.dealData = result?.deal[0];
+            this.productsData = result?.products?.items;
             console.log("result = ", result);
-            this.dealData = await bx24DealGetData(this.bx24, this.dealId);
-            this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
+            // this.dealData = await bx24DealGetData(this.bx24, this.dealId);
+            // this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
             this.taskId = this.dealData[FIELD_ID_TASK_ORDER];
         } catch (error) {
             console.error("Произошла ошибка при получении данных из BX24:", error);
