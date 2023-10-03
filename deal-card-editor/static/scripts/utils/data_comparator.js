@@ -225,14 +225,16 @@ class ProductsDataComparator {
         console.log("newProduct = ", newProduct);
 
         for (const key in oldProduct) {
+            console.log("key1 = ", key);
             if (!this.fields.hasOwnProperty(key)) {
                 continue;
             }
+            console.log("key2 = ", key);
             const oldValue = oldProduct[key];
             const newValue = newProduct[key];
             const oldFilm = oldProduct[SMART_FIELDS.FILM];
             const newFilm = newProduct[SMART_FIELDS.FILM];
-            console.log("key = ", key);
+            
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 if (!this.isEqualArray_(oldValue, newValue)) {
                     content += this.getTextArray_(key, oldValue, newValue);
