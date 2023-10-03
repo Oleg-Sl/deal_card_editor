@@ -81,7 +81,8 @@ export async function bx24DealGetData(bx24, dealId) {
         "crm.deal.list",
         {
             "filter": { "ID": dealId },
-            "select": ["*", "UF_*",]
+            "select": ["*", "UF_*",],
+            start: -1,
         }
     );
     return data[0];
@@ -108,7 +109,8 @@ export async function bx24ContactGetData(bx24, contactId) {
         "crm.contact.list",
         {
             "filter": { "ID": contactId },
-            "select": ["NAME", "LAST_NAME","SECOND_NAME", "PHONE"]
+            "select": ["NAME", "LAST_NAME","SECOND_NAME", "PHONE"],
+            start: -1,
         }
     );
     return data[0];
@@ -122,7 +124,8 @@ export async function bx24GetContactsData(bx24, contactIds) {
     for (const contactId of contactIds) {
         reqPackage[contactId] = ["crm.contact.list", {
             filter: { ID: contactId },
-            select: ["NAME", "LAST_NAME","SECOND_NAME", "PHONE", "POST"]
+            select: ["NAME", "LAST_NAME","SECOND_NAME", "PHONE", "POST"],
+            start: -1,
         }];
     }
     let response = await bx24.batchMethod(reqPackage);
@@ -180,7 +183,8 @@ export async function bx24SmartProcessGetList(bx24, smartNumber, dealId) {
                 SMART_FIELDS.CLIENT_FILES,
                 SMART_FIELDS.PREPRESS,
                 SMART_FIELDS.COMMENT,
-            ]
+            ],
+            start: -1,
         }
     );
     return data.items;
@@ -228,7 +232,8 @@ export async function bx24BatchGetDealAndProducts(bx24, smartNumber, dealId) {
     let reqPackage = {
         deal: ["crm.deal.list", {
             filter: { "ID": dealId }, 
-            select: ["*", "UF_*"]
+            select: ["*", "UF_*"],
+            start: -1,
         }],
         products: ["crm.item.list", {
             "entityTypeId": smartNumber,
@@ -249,7 +254,8 @@ export async function bx24BatchGetDealAndProducts(bx24, smartNumber, dealId) {
                 SMART_FIELDS.CLIENT_FILES,
                 SMART_FIELDS.PREPRESS,
                 SMART_FIELDS.COMMENT,
-            ]
+            ],
+            start: -1,
         }],
 
     };
