@@ -118,9 +118,7 @@ class Task {
         content+= `
             [TR]    
                 [TD][B]Написать в Whats App[/B][/TD]
-                [TD]
-                    ${this.getWhatsupContactsHTML(contacts)}
-                [/TD]
+                [TD]${this.getWhatsupContactsHTML(contacts)}[/TD]
             [/TR]
         `;
         return `[TABLE]${content}[/TABLE]`;
@@ -154,11 +152,7 @@ class Task {
             let phone = this.getPhoneNumber_(contact.PHONE);
             content += `[*][URL=https://wa.me/${phone}/][/URL]`;
         }
-        return `
-            [LIST]
-                ${content}
-            [/LIST]
-        `;
+        return `[LIST]${content}[/LIST]`;
     }
 
     getDataProductsTable_(productsData) {
