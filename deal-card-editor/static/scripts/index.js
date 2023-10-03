@@ -49,6 +49,7 @@ class App {
         this.currentUser = NaN;
         this.fieldsDealData = NaN;
         this.fieldsProductData = NaN;
+        this.dealContacts = NaN;
 
         this.task = new Task(this.bx24);
         this.dataComparator = new DealDataComparator(this.bx24);
@@ -101,14 +102,14 @@ class App {
         // this.fieldsDealData = await bx24DealGetFields(this.bx24);
         // this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
         const result = await bx24GetStartData(this.bx24, this.smartNumber, this.dealId);
-        console.log("result = ", result);
+        // console.log("result = ", result);
         this.currentUser = result?.currentUser;
         this.fieldsDealData = result?.fieldsDealData;
         this.fieldsProductData = result?.fieldsProductData;
         let dealContacts = result?.dealContacts;
-        const contactIds = dealContacts.map(item => item.CONTACT_ID);
-        const resultContactsDeal = await bx24GetContactsData(this.bx24, contactIds);
-        console.log("resultContactsDeal = ", resultContactsDeal);
+        
+        this.dealContacts = await bx24GetContactsData(this.bx24, dealContacts.map(item => item.CONTACT_ID));
+        console.log("this.dealContacts = ", this.dealContacts);
 
         await this.getDataFromBx24();
     }
@@ -217,9 +218,9 @@ class App {
         try {
             let dealChanged = await this.dataComparator.getChanged(this.dealData, newDealData);
             let productsChanged = await this.productComparator.getChanged(this.productsData, newProductsData);
-            const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
+            // const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
             let responsible = this.interfaceBlockThree.getResponsible();
-            await this.task.updateTask(this.taskId, newDealData, newProductsData, contactMeasure || {});
+            await this.task.updateTask(this.taskId, newDealData, newProductsData, this.dealContacts || {});
             await this.task.addComment(this.taskId, responsible, dealChanged, productsChanged, this.currentUser);
         } catch (error) {
             console.error("Произошла ошибка при обновлении задачи:", error);
@@ -239,8 +240,8 @@ class App {
             return;
         }
         try {
-            const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
-            this.task.createTask(this.dealId, newDealData, newProductsData, contactMeasure || {});
+            // const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
+            this.task.createTask(this.dealId, newDealData, newProductsData, this.dealContacts || {});
         } catch (error) {
             console.error("Произошла ошибка при создании задачи:", error);
             alert("Произошла ошибка при создании задачи: " + error);

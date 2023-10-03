@@ -95,9 +95,9 @@ class Task {
         return descTask;
     }
 
-    getDataTask_(fields, data, contactMeasure) {
-        let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
-        let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure}`;
+    getDataTask_(fields, data, contacts) {
+        // let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
+        // let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure}`;
         let content = "";
         for (let field of fields) {
             content+= `
@@ -110,16 +110,55 @@ class Task {
         content+= `
             [TR]    
                 [TD][B]Контакт:[/B][/TD]
-                [TD][URL=https://007.bitrix24.ru/crm/contact/details/${contactMeasure.ID || ""}/]${titleContactMeasure}[/URL][/TD]
+                [TD]
+                    ${this.getPhonesContactsHTML(contacts)}
+                [/TD]
             [/TR]
         `;
         content+= `
             [TR]    
                 [TD][B]Написать в Whats App[/B][/TD]
-                [TD][URL=https://wa.me/${phoneMeasure}/][/URL][/TD]
+                [TD]
+                    ${this.getWhatsupContactsHTML(contacts)}
+                [/TD]
             [/TR]
         `;
         return `[TABLE]${content}[/TABLE]`;
+    }
+
+    getPhonesContactsHTML(contacts) {
+        let content = "";
+        for (const contactId in contacts) {
+            if (Array.isArray(contacts[contactId]) && contacts[contactId].length === 0) {
+                continue;
+            }
+            const contact = contacts[contactId][0];
+            let phone = this.getPhoneNumber_(contact.PHONE);
+            let titleContact = `${contacts.NAME || ""} ${contacts.LAST_NAME || ""} ${contacts.SECOND_NAME || ""} ${phone}`;
+            content += `[*][URL=https://007.bitrix24.ru/crm/contact/details/${contact.ID || ""}/]${titleContact}[/URL]`;
+        }
+        return `
+            [LIST]
+                ${content}
+            [/LIST]
+        `;
+    }
+
+    getWhatsupContactsHTML(contacts) {
+        let content = "";
+        for (const contactId in contacts) {
+            if (Array.isArray(contacts[contactId]) && contacts[contactId].length === 0) {
+                continue;
+            }
+            const contact = contacts[contactId][0];
+            let phone = this.getPhoneNumber_(contact.PHONE);
+            content += `[*][URL=https://wa.me/${phone}/][/URL]`;
+        }
+        return `
+            [LIST]
+                ${content}
+            [/LIST]
+        `;
     }
 
     getDataProductsTable_(productsData) {
