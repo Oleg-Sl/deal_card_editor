@@ -110,9 +110,7 @@ class Task {
         content+= `
             [TR]    
                 [TD][B]Контакт:[/B][/TD]
-                [TD]
-                    ${this.getPhonesContactsHTML(contacts)}
-                [/TD]
+                [TD]${this.getPhonesContactsHTML(contacts)}[/TD]
             [/TR]
         `;
         content+= `
@@ -132,14 +130,11 @@ class Task {
             }
             const contact = contacts[contactId][0];
             let phone = this.getPhoneNumber_(contact.PHONE);
-            let titleContact = `${contacts.NAME || ""} ${contacts.LAST_NAME || ""} ${contacts.SECOND_NAME || ""} ${phone}`;
+            let titleContact = `${contact.NAME || ""} ${contact.LAST_NAME || ""} ${contact.SECOND_NAME || ""} ${phone}`;
             content += `[*][URL=https://007.bitrix24.ru/crm/contact/details/${contact.ID || ""}/]${titleContact}[/URL]`;
         }
         return `
-            [LIST]
-                ${content}
-            [/LIST]
-        `;
+            [LIST]${content}[/LIST]`;
     }
 
     getWhatsupContactsHTML(contacts) {
