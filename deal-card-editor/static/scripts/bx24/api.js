@@ -206,6 +206,7 @@ export async function bx24GetStartData(bx24, smartNumber, dealId) {
     let cmd = {
         currentUser: 'user.current',
         fieldsDealData: 'crm.deal.fields',
+        departments: 'department.get',
         fieldsProductData: `crm.item.fields?entityTypeId=${smartNumber}`,
         dealContacts: `crm.deal.contact.items.get?id=${dealId}`,
     }

@@ -51,6 +51,7 @@ class App {
         this.fieldsDealData = NaN;
         this.fieldsProductData = NaN;
         this.dealContacts = NaN;
+        this.departments = NaN;
 
         this.task = new Task(this.bx24);
         this.dataComparator = new DealDataComparator(this.bx24);
@@ -103,6 +104,7 @@ class App {
         this.currentUser = result?.currentUser;
         this.fieldsDealData = result?.fieldsDealData;
         this.fieldsProductData = result?.fieldsProductData;
+        this.departments = result?.departments
         let dealContacts = result?.dealContacts;
         
         this.dealContacts = await bx24GetContactsData(this.bx24, dealContacts.map(item => item.CONTACT_ID));
@@ -117,7 +119,7 @@ class App {
 
         this.interfaceBlockOne.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockTwo.init(this.fieldsDealData, this.dealData);
-        this.interfaceBlockThree.init(this.fieldsDealData, this.dealData);
+        this.interfaceBlockThree.init(this.fieldsDealData, this.dealData, this.departments);
         this.interfaceBlockFour.init(this.fieldsDealData, this.dealData);
         this.interfaceBlockFive.init(this.fieldsDealData, this.dealData, this.productsData.map(obj => ({ ...obj })));
     }

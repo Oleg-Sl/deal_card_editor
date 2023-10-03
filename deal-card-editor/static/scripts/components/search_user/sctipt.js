@@ -27,10 +27,13 @@ export default class WindowSearchUser {
         this.departments = null;
     }
 
-    async init() {
+    async init(departments) {
         this.render();
         // получение списка подразделений компаниии
-        await this.getDepartments();
+        // await this.getDepartments();
+        this.departments = departments;                         // получение списка подразделений из Битрикс
+        this.companyStructure = this.getTreeDepartments();      // структура компании
+
         // вывод списка подразделений
         this.renderDepartment();
         // инициализация обработчиков

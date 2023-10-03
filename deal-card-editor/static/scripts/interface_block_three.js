@@ -31,9 +31,9 @@ class UserSingle {
         this.userImgLink = null;
     }
 
-    async init() {
+    async init(departments) {
         this.renderInit();
-        await this.windowSearchUser.init();
+        await this.windowSearchUser.init(departments);
 
         // Смена сотрудника
         this.container.addEventListener("click", async (e) => {
@@ -127,7 +127,7 @@ class UserMultiple {
         this.selectedUser = {};
     }
 
-    async init() {
+    async init(departments) {
         this.containerCard = document.createElement('div');
         this.containerAddUser = document.createElement('div');
         this.containerAddUser.innerHTML = `<i class="bi bi-plus-circle-fill m-0 p-2 text-success add-observer" style="cursor: pointer; "></i>`;
@@ -143,7 +143,7 @@ class UserMultiple {
         this.container.append(this.containerSearchUser);
 
         this.windowSearchUser = new WindowSearchUser(this.containerSearchUser, this.bx24, this.addedUser.bind(this), this.container);
-        await this.windowSearchUser.init();
+        await this.windowSearchUser.init(departments);
         this.initHandler();
 
     }
@@ -263,11 +263,13 @@ export default class InterfaceBlockThree {
 
         this.fields = NaN;
         this.data = NaN;
+        this.departments = NaN;
     }
 
-    async init(fields, data) {
+    async init(fields, data, departments) {
         this.fields = fields;
         this.data = data;
+        this.departments = departments;
     }
 
     async initUsers() {
@@ -285,9 +287,9 @@ export default class InterfaceBlockThree {
         this.userMOS       = new UserSingle(containerMOS, this.bx24);
         this.usersObserver = new UserMultiple(containerObserver, this.bx24);
 
-        await this.userMOP.init();
-        await this.userMOS.init();
-        await this.usersObserver.init();
+        await this.userMOP.init(this.departments);
+        await this.userMOS.init(this.departments);
+        await this.usersObserver.init(this.departments);
 
         let dataUserMOP       = usersData[idResponsibleMOP]  ? usersData[idResponsibleMOP][0]  || {}: {};
         let dataUserMOS       = usersData[idResponsibleMOS]  ? usersData[idResponsibleMOS][0]  || {}: {};
