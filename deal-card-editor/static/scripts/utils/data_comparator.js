@@ -220,6 +220,10 @@ class ProductsDataComparator {
 
     compreProducts_(oldProduct, newProduct) {
         let content = "";
+        console.log("compreProducts_ = ");
+        console.log("oldProduct = ", oldProduct);
+        console.log("newProduct = ", newProduct);
+
         for (const key in oldProduct) {
             if (!this.fields.hasOwnProperty(key)) {
                 continue;
