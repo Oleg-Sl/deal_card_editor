@@ -96,8 +96,6 @@ class Task {
     }
 
     getDataTask_(fields, data, contacts) {
-        // let phoneMeasure = this.getPhoneNumber_(contactMeasure.PHONE);
-        // let titleContactMeasure = `${contactMeasure.NAME || ""} ${contactMeasure.LAST_NAME || ""} ${contactMeasure.SECOND_NAME || ""} ${phoneMeasure}`;
         let content = "";
         for (let field of fields) {
             content+= `
@@ -133,8 +131,7 @@ class Task {
             let titleContact = `${contact.NAME || ""} ${contact.LAST_NAME || ""} ${contact.SECOND_NAME || ""} ${phone}`;
             content += `[*][URL=https://007.bitrix24.ru/crm/contact/details/${contact.ID || ""}/]${titleContact}[/URL]`;
         }
-        return `
-            [LIST]${content}[/LIST]`;
+        return `[LIST]${content}[/LIST]`;
     }
 
     getWhatsupContactsHTML(contacts) {
