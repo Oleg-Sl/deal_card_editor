@@ -204,10 +204,10 @@ export async function bx24BizprocStartFOrDeal(bx24, bizprocId, dealId, params) {
 // *******BATCH*******
 export async function bx24GetStartData(bx24, smartNumber, dealId) {
     let cmd = {
-        'currentUser': 'user.current',
-        'fieldsDealData': 'crm.deal.fields',
-        'fieldsProductData': `crm.item.fields?entityTypeId=${smartNumber}`,
-        'dealContacts': `crm.deal.contact.items.get?id=${dealId}`,
+        currentUser: 'user.current',
+        fieldsDealData: 'crm.deal.fields',
+        fieldsProductData: `crm.item.fields?entityTypeId=${smartNumber}`,
+        dealContacts: `crm.deal.contact.items.get?id=${dealId}`,
     }
 
     let data = await bx24.callMethod(
@@ -218,4 +218,40 @@ export async function bx24GetStartData(bx24, smartNumber, dealId) {
         },
     );
     return data?.result;
+}
+
+export async function bx24BatchGetDealAndProducts(bx24, smartNumber, dealId) {
+    // if (!contactIds || (Array.isArray(contactIds) && contactIds.length === 0)) {
+    //     return;
+    // }
+    let reqPackage = {
+        deal: ["crm.deal.list", {
+            filter: { "ID": dealId }, 
+            select: ["*", "UF_*"]
+        }],
+        products: ["crm.item.list", {
+            "entityTypeId": smartNumber,
+            "filter": { "parentId2": dealId },
+            "select": [
+                "id",
+                SMART_FIELDS.TITLE,
+                SMART_FIELDS.COUNT_PIECES,
+                SMART_FIELDS.TECHNOLOGY,
+                SMART_FIELDS.FILM,
+                SMART_FIELDS.LAMINATION,
+                SMART_FIELDS.WIDTH_FILM,
+                SMART_FIELDS.LINEAR_METER_PIECES,
+                SMART_FIELDS.SQUARE_METER_PIECES,
+                SMART_FIELDS.LINEAR_METER_TOTAL,
+                SMART_FIELDS.SQUARE_METER_TOTAL,
+                SMART_FIELDS.LINK_SRC,
+                SMART_FIELDS.CLIENT_FILES,
+                SMART_FIELDS.PREPRESS,
+                SMART_FIELDS.COMMENT,
+            ]
+        }],
+
+    };
+    let response = await bx24.batchMethod(reqPackage);
+    return response;
 }

@@ -24,6 +24,7 @@ import {
     bx24ProductGetFields,
     bx24GetStartData,
     bx24GetContactsData,
+    bx24BatchGetDealAndProducts,
 } from "./bx24/api.js"
 
 import {
@@ -98,18 +99,13 @@ class App {
     }
 
     async initializeData() {
-        // this.currentUser = await bx24UserGetCurrent(this.bx24);
-        // this.fieldsDealData = await bx24DealGetFields(this.bx24);
-        // this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
         const result = await bx24GetStartData(this.bx24, this.smartNumber, this.dealId);
-        // console.log("result = ", result);
         this.currentUser = result?.currentUser;
         this.fieldsDealData = result?.fieldsDealData;
         this.fieldsProductData = result?.fieldsProductData;
         let dealContacts = result?.dealContacts;
         
         this.dealContacts = await bx24GetContactsData(this.bx24, dealContacts.map(item => item.CONTACT_ID));
-        console.log("this.dealContacts = ", this.dealContacts);
 
         await this.getDataFromBx24();
     }
@@ -252,6 +248,8 @@ class App {
     async getDataFromBx24() {
         console.log("bx24SmartProcessGetList");
         try {
+            const result = await bx24BatchGetDealAndProducts(this.bx24, this.smartNumber, this.dealId);
+            console.log("result = ", result);
             this.dealData = await bx24DealGetData(this.bx24, this.dealId);
             this.productsData = await bx24SmartProcessGetList(this.bx24, this.smartNumber, this.dealId);
             this.taskId = this.dealData[FIELD_ID_TASK_ORDER];
