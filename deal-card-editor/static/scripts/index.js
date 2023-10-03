@@ -249,7 +249,7 @@ class App {
         }
         try {
             // const contactMeasure = await bx24ContactGetData(this.bx24, this.dealData[FIELD_CONTACT_MESURE]);
-            this.task.createTask(this.dealId, newDealData, newProductsData, this.dealContacts || {});
+            await this.task.createTask(this.dealId, newDealData, newProductsData, this.dealContacts || {});
         } catch (error) {
             console.error("Произошла ошибка при создании задачи:", error);
             alert("Произошла ошибка при создании задачи: " + error);
