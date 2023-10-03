@@ -184,3 +184,23 @@ export async function bx24BizprocStartFOrDeal(bx24, bizprocId, dealId, params) {
     );
     return data;
 }
+
+
+// *******BIZ_PROCESS*******
+export async function bx24GetStartData(bx24, smartNumber, dealId) {
+    let cmd = {
+        'currentUser': 'user.current',
+        'fieldsDealData': 'crm.deal.fields',
+        'fieldsProductData': `crm.item.fields?entityTypeId=${smartNumber}`,
+        'contactsDeal': `crm.deal.contact.items.get?id=${dealId}`,
+    }
+
+    let data = await bx24.callMethod(
+        "batch",
+        {
+            halt: 0,
+            cmd: cmd
+        },
+    );
+    return data;
+}
