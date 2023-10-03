@@ -220,16 +220,10 @@ class ProductsDataComparator {
 
     compreProducts_(oldProduct, newProduct) {
         let content = "";
-        console.log("compreProducts_ = ");
-        console.log("oldProduct = ", oldProduct);
-        console.log("newProduct = ", newProduct);
-
         for (const key in oldProduct) {
-            console.log("key1 = ", key);
             if (!this.fields.hasOwnProperty(key)) {
                 continue;
             }
-            console.log("key2 = ", key);
             const oldValue = oldProduct[key];
             const newValue = newProduct[key];
             const oldFilm = oldProduct[SMART_FIELDS.FILM];
@@ -240,11 +234,7 @@ class ProductsDataComparator {
                     content += this.getTextArray_(key, oldValue, newValue);
                 }
             } else {
-                console.log("oldValue = ", oldValue);
-                console.log("newValue = ", newValue);
-
                 if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
-                    
                     content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm);
                 }
             }
