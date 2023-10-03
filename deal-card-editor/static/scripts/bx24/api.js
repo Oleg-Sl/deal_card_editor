@@ -114,6 +114,21 @@ export async function bx24ContactGetData(bx24, contactId) {
     return data[0];
 }
 
+export async function bx24GetContactsData(bx24, contactIds) {
+    if (!contactIds || (Array.isArray(contactIds) && contactIds.length === 0)) {
+        return;
+    }
+    let reqPackage = {};
+    for (const contactId of contactIds) {
+        reqPackage[contactId] = ["crm.contact.list", {
+            filter: { ID: contactId },
+            select: ["NAME", "LAST_NAME","SECOND_NAME", "PHONE", "POST"]
+        }];
+    }
+    let response = await bx24.batchMethod(reqPackage);
+    return response;
+}
+
 
 // *******SMART_PROCESS*******
 export async function bx24SmartProcessUpdate(bx24, smartNumber, data) {
@@ -186,13 +201,13 @@ export async function bx24BizprocStartFOrDeal(bx24, bizprocId, dealId, params) {
 }
 
 
-// *******BIZ_PROCESS*******
+// *******BATCH*******
 export async function bx24GetStartData(bx24, smartNumber, dealId) {
     let cmd = {
         'currentUser': 'user.current',
         'fieldsDealData': 'crm.deal.fields',
         'fieldsProductData': `crm.item.fields?entityTypeId=${smartNumber}`,
-        'contactsDeal': `crm.deal.contact.items.get?id=${dealId}`,
+        'dealContacts': `crm.deal.contact.items.get?id=${dealId}`,
     }
 
     let data = await bx24.callMethod(
@@ -202,5 +217,5 @@ export async function bx24GetStartData(bx24, smartNumber, dealId) {
             cmd: cmd
         },
     );
-    return data;
+    return data?.result;
 }

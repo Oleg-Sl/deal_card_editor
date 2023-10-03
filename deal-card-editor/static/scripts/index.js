@@ -23,6 +23,7 @@ import {
     bx24SmartProcessGetList,
     bx24ProductGetFields,
     bx24GetStartData,
+    bx24GetContactsData,
 } from "./bx24/api.js"
 
 import {
@@ -96,12 +97,18 @@ class App {
     }
 
     async initializeData() {
-        this.currentUser = await bx24UserGetCurrent(this.bx24);
-        this.fieldsDealData = await bx24DealGetFields(this.bx24);
-        this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
+        // this.currentUser = await bx24UserGetCurrent(this.bx24);
+        // this.fieldsDealData = await bx24DealGetFields(this.bx24);
+        // this.fieldsProductData = await bx24ProductGetFields(this.bx24, this.smartNumber);
         const result = await bx24GetStartData(this.bx24, this.smartNumber, this.dealId);
         console.log("result = ", result);
-
+        this.currentUser = result?.currentUser;
+        this.fieldsDealData = result?.fieldsDealData;
+        this.fieldsProductData = result?.fieldsProductData;
+        let dealContacts = result?.dealContacts;
+        const contactIds = dealContacts.map(item => item.CONTACT_ID);
+        const resultContactsDeal = await bx24GetContactsData(this.bx24, contactIds);
+        console.log("resultContactsDeal = ", resultContactsDeal);
 
         await this.getDataFromBx24();
     }
