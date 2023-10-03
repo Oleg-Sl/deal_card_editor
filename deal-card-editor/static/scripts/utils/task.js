@@ -66,7 +66,7 @@ class Task {
                 description: descTask,
             };
             await bx24BizprocStartFOrDeal(this.bx24, BIZPROC_CREATE_TASK, dealId, paramsBizProc);
-            await sleep(2000);
+            await sleep(1000);
         } catch(err) {
             console.error(`${err.name}: ${err.message}`);
         }
