@@ -105,7 +105,7 @@ class App {
         const result = await bx24GetStartData(this.bx24, this.smartNumber, this.dealId);
         this.currentUser = result?.currentUser;
         this.fieldsDealData = result?.fieldsDealData;
-        this.fieldsProductData = result?.fieldsProductData;
+        this.fieldsProductData = result?.fieldsProductData?.fields;
         this.departments = result?.departments
         let dealContacts = result?.dealContacts;
         
