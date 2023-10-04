@@ -232,7 +232,7 @@ class ProductRow {
     // возвращает HTML строки продукта
     getRowHTML(smartProcessId = 0) {
         return `
-            <div class="product-list__product-row product-list__header-table" data-smart-process-id="${smartProcessId}>
+            <div class="product-list__product-row product-list__header-table" data-smart-process-id="${smartProcessId}">
                 <div class="m-0 p-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
                     <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
