@@ -536,7 +536,7 @@ export default class InterfaceBlockFive {
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ширина пленки</label></div>
                 
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. за шт.</label></div>
-                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. монтажа, за шт</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. монтажа, за шт.</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ссылка на исходники клиента</label></div>
