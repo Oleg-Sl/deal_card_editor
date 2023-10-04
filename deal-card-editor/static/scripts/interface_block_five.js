@@ -189,7 +189,7 @@ class ProductRow {
         this.data = data;
 
         this.smartProcessId = data.id;
-        this.element.innerHTML = this.getRowHTML();
+        this.element.innerHTML = this.getRowHTML(this.smartProcessId);
         // вставка HTML-кода продукта на страницу
         this.container.append(this.element);
         // вывод файлов
@@ -221,7 +221,7 @@ class ProductRow {
     }
 
     // возвращает HTML строки продукта
-    getRowHTML() {
+    getRowHTML(smartProcessId = 0) {
         return `
             <div class="product-list__product-row product-list__header-table">
                 <div class="m-0 p-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
@@ -298,7 +298,7 @@ class ProductRow {
                     <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
-                    <i class="bi bi-x-circle product_list__fontstyle"></i>
+                    <i class="bi bi-x-circle product_list__fontstyle text-decoration-none"></i>
                 </div> 
             </div>
         `;
