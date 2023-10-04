@@ -481,11 +481,9 @@ export default class InterfaceBlockFive {
         this.container.addEventListener("click", async (e) => {
             if (e.target.classList.contains("product_list__remove-item")) {
                 let row = e.target.closest(".product-list__product-row ");
-                console.log(row.dataset.smartProcessId);
                 const indexToRemove = this.productsObj.findIndex(product => product.smartProcessId == row.dataset.smartProcessId);
                 if (indexToRemove !== -1) {
                     const resDelete = await bx24SmartProcessDelete(this.bx24, this.smartNumber, row.dataset.smartProcessId);
-                    console.log("resDelete = ", resDelete);
                     this.productsObj[indexToRemove].element.remove();
                     this.productsObj.splice(indexToRemove, 1);
                 }
