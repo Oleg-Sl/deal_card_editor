@@ -551,8 +551,8 @@ export default class InterfaceBlockFive {
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ссылка на исходники клиента</label></div>
-                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Исходники/ФП</label></div>
-                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Черновой препресс</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Исходники/ ФП</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Черновый препресс/ скрин калькулятора</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Комментарии</label></div>
                 <div></div>
             </div>
