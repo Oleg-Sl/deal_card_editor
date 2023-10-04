@@ -98,6 +98,19 @@ class ProductRow {
                 BX24.fitWindow();
             }
         })
+
+        this.element.addEventListener("change", async (e) => {
+            if (e.target.tagName === 'INPUT' && e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
+                const inputValue = e.target.value;
+                const matches = inputValue.match(/\d+/);
+                if (matches) {
+                    e.target.value = matches[0];
+                } else {
+                    e.target.value = '';
+                }
+            }
+        })
+          
         // Событие изменения полей с размерами
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
@@ -246,10 +259,10 @@ class ProductRow {
                     <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_PIECES} product_list__fontstyle" placeholder="Кв. м. за шт" data-field="${SMART_FIELDS.SQUARE_METER_PIECES}" value="${this.data[SMART_FIELDS.SQUARE_METER_PIECES]}">
                 </div>
                 <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL} product_list__fontstyle" placeholder="П.м. всего" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL]}">
+                    <input type="number" step="0.01" min="0" readonly class="form-control ${SMART_FIELDS.LINEAR_METER_TOTAL} product_list__fontstyle" placeholder="П.м. всего" data-field="${SMART_FIELDS.LINEAR_METER_TOTAL}" value="${this.data[SMART_FIELDS.LINEAR_METER_TOTAL]}">
                 </div>
                 <div class="m-0 p-0">
-                    <input type="number" step="0.01" min="0" class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL} product_list__fontstyle" placeholder="Кв.м. всего" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL]}">
+                    <input type="number" step="0.01" min="0" readonly class="form-control ${SMART_FIELDS.SQUARE_METER_TOTAL} product_list__fontstyle" placeholder="Кв.м. всего" data-field="${SMART_FIELDS.SQUARE_METER_TOTAL}" value="${this.data[SMART_FIELDS.SQUARE_METER_TOTAL]}">
                 </div>
     
                 <div class="m-0 p-0">
@@ -284,6 +297,9 @@ class ProductRow {
                 <div class="m-0 p-0">
                     <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
+                <div class="m-0 p-0">
+                    <i class="bi bi-x-circle product_list__fontstyle"></i>
+                </div> 
             </div>
         `;
         
@@ -502,13 +518,14 @@ export default class InterfaceBlockFive {
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ширина пленки</label></div>
                 
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. за шт.</label></div>
-                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв. м. за шт.</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. монтажа, за шт</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">П.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Кв.м. всего</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Ссылка на исходники клиента</label></div>
-                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Файлы клиента</label></div>
+                <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Исходники/ФП</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Черновой препресс</label></div>
                 <div><label for="" class="form-label fw-medium product_list__header-fontstyle">Комментарии</label></div>
+                <div></div>
             </div>
         `;
         return contentHTML;
