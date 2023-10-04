@@ -242,6 +242,16 @@ class App {
     async handleCreateTask() {
         const newDealData = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
+
+        if (!this.checkData.isCheckDealData(newDealData)) {
+            alert("Заполните все поля заказа");
+            return false;
+        }
+        if (!this.checkData.isCheckProductsData(newProductsData)) {
+            alert("Заполните все поля в товарах заказа");
+            return false;
+        }
+
         const isTaskOrder = await this.checkData.isTaskOrder(this.dealData);
         if (isTaskOrder) {
             alert('Задача "ЗАКАЗ" уже была создана');
