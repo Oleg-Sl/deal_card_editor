@@ -190,6 +190,18 @@ export async function bx24SmartProcessGetList(bx24, smartNumber, dealId) {
     return data.items;
 }
 
+export async function bx24SmartProcessDelete(bx24, smartNumber, smartId) {
+    let data = await bx24.callMethod(
+        "crm.item.delete",
+        {
+            entityTypeId: smartNumber,
+            id: smartId
+        }
+    );
+
+    return data;
+}
+
 
 // *******BIZ_PROCESS*******
 export async function bx24BizprocStartFOrDeal(bx24, bizprocId, dealId, params) {

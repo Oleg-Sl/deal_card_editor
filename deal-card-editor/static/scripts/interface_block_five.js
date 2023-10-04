@@ -1,6 +1,10 @@
 import { SMART_FIELDS, LIST_TECHNOLOGY, LIST_FILMS,
     LIST_LAMINATIONS, LIST_WIDTH_FILMS} from './parameters.js';
-
+    
+import {
+    bx24SmartProcessDelete,
+} from '../bx24/api.js'
+    
 
 const SMART_PROCESS_NUMBER = 144;
 
@@ -41,16 +45,17 @@ class ProductRow {
     }
 
     initHandler() {
-        // Событие удаления продукта
-        this.element.addEventListener("click", async (e) => {
-            if (e.target.classList.contains("product_list__remove-item")) {
-                let row = e.target.closest(".product-list__product-row ");
-                console.log(row.dataset.smartProcessId);
-                // if (e.target.hasAttribute('data-smartProcessId')) {
-                //     this.updateDate();
-                // }
-            }
-        })
+        // // Событие удаления продукта
+        // this.element.addEventListener("click", async (e) => {
+        //     if (e.target.classList.contains("product_list__remove-item")) {
+        //         let row = e.target.closest(".product-list__product-row ");
+        //         console.log(row.dataset.smartProcessId);
+        //         await bx24SmartProcessDelete(this.bx24, SMART_PROCESS_NUMBER, this.smartProcessId);
+        //         // if (e.target.hasAttribute('data-smartProcessId')) {
+        //         //     this.updateDate();
+        //         // }
+        //     }
+        // })
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
@@ -218,7 +223,10 @@ class ProductRow {
         BX24.fitWindow();
         if (!this.smartProcessId) {
             this.updateDate();
-            await this.addSmartProcessToBx24();
+            const smartData = await this.addSmartProcessToBx24();
+            this.smartProcessId = smartData.id;
+            const elementRow = this.element.querySelector("[data-smart-process-id]");
+            elementRow.dataset.smartProcessId = this.smartProcessId;
         }
     }
 
@@ -467,6 +475,19 @@ export default class InterfaceBlockFive {
                 let productObj = new ProductRow(this, this.containerProductList, this.bx24, this.yaDisk, this.dealId, this.productsObj.length + 1);
                 productObj.addRow();
                 this.productsObj.push(productObj);
+            }
+        })
+        // Событие удаления продукта
+        this.container.addEventListener("click", async (e) => {
+            if (e.target.classList.contains("product_list__remove-item")) {
+                let row = e.target.closest(".product-list__product-row ");
+                console.log(row.dataset.smartProcessId);
+                const indexToRemove = this.productsObj.findIndex(product => product.smartProcessId == row.dataset.smartProcessId);
+                if (indexToRemove !== -1) {
+                    this.productsObj[indexToRemove].element.remove();
+                    this.productsObj.splice(indexToRemove, 1);
+                    // await bx24SmartProcessDelete(this.bx24, this.smartNumber, this.smartProcessId);
+                }
             }
         })
     }
