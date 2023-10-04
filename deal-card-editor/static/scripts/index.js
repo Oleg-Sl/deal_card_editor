@@ -212,6 +212,8 @@ class App {
             return false;
         }
         if (!this.checkData.isCheckDealData(newDealData)) {
+
+            console.log("newDealData = ", newDealData);
             alert("Заполните все поля заказа");
             return false;
         }
