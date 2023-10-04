@@ -212,8 +212,6 @@ class App {
             return false;
         }
         if (!this.checkData.isCheckDealData(newDealData)) {
-
-            console.log("newDealData = ", newDealData);
             alert("Заполните все поля заказа");
             return false;
         }
@@ -244,6 +242,8 @@ class App {
     async handleCreateTask() {
         const newDealData = this.getDataDeal();
         const newProductsData = this.getDataSmartProcess();
+
+        console.log("newDealData = ", newDealData);
 
         if (!this.checkData.isCheckDealData(newDealData)) {
             alert("Заполните все поля заказа");
