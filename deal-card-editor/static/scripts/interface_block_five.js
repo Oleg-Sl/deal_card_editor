@@ -41,6 +41,16 @@ class ProductRow {
     }
 
     initHandler() {
+        // Событие удаления продукта
+        this.element.addEventListener("click", async (e) => {
+            if (e.target.classList.contains("product_list__remove-item")) {
+                let row = e.target.closest(".product-list__product-row ");
+                console.log(row.dataset.smartProcessId);
+                // if (e.target.hasAttribute('data-smartProcessId')) {
+                //     this.updateDate();
+                // }
+            }
+        })
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
@@ -98,7 +108,7 @@ class ProductRow {
                 BX24.fitWindow();
             }
         })
-
+        // Событие изменения кол-ва продуктов
         this.element.addEventListener("change", async (e) => {
             if (e.target.tagName === 'INPUT' && e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
                 const inputValue = e.target.value;
@@ -110,7 +120,6 @@ class ProductRow {
                 }
             }
         })
-          
         // Событие изменения полей с размерами
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
@@ -223,7 +232,7 @@ class ProductRow {
     // возвращает HTML строки продукта
     getRowHTML(smartProcessId = 0) {
         return `
-            <div class="product-list__product-row product-list__header-table">
+            <div class="product-list__product-row product-list__header-table" data-smart-process-id="${smartProcessId}>
                 <div class="m-0 p-1 align-middle product_list__fontstyle">${this.currentNumb}</div>
                 <div class="m-0 p-0">
                     <textarea class="form-control ${SMART_FIELDS.TITLE} product_list__fontstyle" rows="1" placeholder="Название" data-field="${SMART_FIELDS.TITLE}">${this.data[SMART_FIELDS.TITLE] || ""}</textarea>
@@ -298,7 +307,7 @@ class ProductRow {
                     <textarea class="form-control ${SMART_FIELDS.COMMENT} product_list__fontstyle" rows="1" placeholder="Комментарий" data-field="${SMART_FIELDS.COMMENT}">${this.data[SMART_FIELDS.COMMENT] || ""}</textarea>
                 </div>
                 <div class="m-0 p-0">
-                    <i class="bi bi-x-circle product_list__fontstyle text-decoration-none"></i>
+                    <i class="bi bi-x-circle product_list__fontstyle product_list__remove-item"></i>
                 </div> 
             </div>
         `;
