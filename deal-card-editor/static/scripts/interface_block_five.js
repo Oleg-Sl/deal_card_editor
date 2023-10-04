@@ -45,17 +45,6 @@ class ProductRow {
     }
 
     initHandler() {
-        // // Событие удаления продукта
-        // this.element.addEventListener("click", async (e) => {
-        //     if (e.target.classList.contains("product_list__remove-item")) {
-        //         let row = e.target.closest(".product-list__product-row ");
-        //         console.log(row.dataset.smartProcessId);
-        //         await bx24SmartProcessDelete(this.bx24, SMART_PROCESS_NUMBER, this.smartProcessId);
-        //         // if (e.target.hasAttribute('data-smartProcessId')) {
-        //         //     this.updateDate();
-        //         // }
-        //     }
-        // })
         // Событие изменения типа пленки
         this.element.addEventListener("change", async (e) => {
             if (e.target.classList.contains(SMART_FIELDS.FILM)) {
@@ -114,7 +103,7 @@ class ProductRow {
             }
         })
         // Событие изменения кол-ва продуктов
-        this.element.addEventListener("change", async (e) => {
+        this.element.addEventListener("input", async (e) => {
             if (e.target.tagName === 'INPUT' && e.target.classList.contains(SMART_FIELDS.COUNT_PIECES)) {
                 const inputValue = e.target.value;
                 const matches = inputValue.match(/\d+/);
