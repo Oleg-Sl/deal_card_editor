@@ -3,7 +3,7 @@ import { SMART_FIELDS, LIST_TECHNOLOGY, LIST_FILMS,
     
 import {
     bx24SmartProcessDelete,
-} from '../bx24/api.js'
+} from './bx24/api.js'
     
 
 const SMART_PROCESS_NUMBER = 144;
