@@ -91,12 +91,12 @@ function getDataTable(products, itemsdManufactTechn, itemsFilmWidth) {
         [TD][B]Ламинация[/B][/TD]
         [TD][B]Ширина пленки[/B][/TD]
         [TD][B]П.м. за шт.[/B][/TD]
-        [TD][B]Кв. м. за шт.[/B][/TD]
+        [TD][B]Кв.м. монтажа, за шт[/B][/TD]
         [TD][B]П.м. всего[/B][/TD]
         [TD][B]Кв.м. всего[/B][/TD]
         [TD][B]Ссылка на исходники клиента[/B][/TD]
-        [TD][B]Файлы клиента[/B][/TD]
-        [TD][B]Черновой препресс[/B][/TD]
+        [TD][B]Исходники/ ФП[/B][/TD]
+        [TD][B]Черновый препресс/ скрин калькулятора[/B][/TD]
         [TD][B]Комментарии[/B][/TD]
     `;
     for (let product of products) {
