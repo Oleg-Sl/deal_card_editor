@@ -153,7 +153,8 @@ class App {
                     await this.getDataFromBx24();
                 }
             } catch (error) {
-                console.error("Произошла ошибка при создании задачи: ", error);
+                
+                console.error("Произошла ошибка при создании задачи: ", error.ex.error_description);
             }
             spinner.classList.add("d-none");
         })
