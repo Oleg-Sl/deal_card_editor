@@ -7,7 +7,7 @@ export default class Bitrix24 {
             let callback = result => {
                 if (result.status != 200 || result.error()) {
                     console.log(`${result.error()} (callMethod ${method}: ${JSON.stringify(params)})`);
-                    return reject("result.error()");
+                    return reject(result.error());
                     // return result.error();
                 }
                 return resolve(result.data());

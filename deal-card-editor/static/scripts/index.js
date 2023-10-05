@@ -130,9 +130,13 @@ class App {
         // Сохранение изменений в сделку и БП
         this.elemBtnSaveBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnSaveBottom.querySelector("span");
-            spinner.classList.remove("d-none");
-            await this.handleSaveDealData();
-            await this.getDataFromBx24();
+            try {
+                spinner.classList.remove("d-none");
+                await this.handleSaveDealData();
+                await this.getDataFromBx24();
+            } catch (error) {
+                console.error("Произошла ошибка при создании задачи: ", error);
+            }
             spinner.classList.add("d-none");
         })
 
@@ -140,11 +144,15 @@ class App {
         this.elemBtnRewriteBottom.addEventListener("click", async (e) => {
             let spinner = this.elemBtnRewriteBottom.querySelector("span");
             spinner.classList.remove("d-none");
-            // await this.getDataFromBx24();
-            await this.handleSaveDealData();
-            let res = await this.handleUpdateTask();
-            if (res) {
-                await this.getDataFromBx24();
+            try {
+                // await this.getDataFromBx24();
+                await this.handleSaveDealData();
+                let res = await this.handleUpdateTask();
+                if (res) {
+                    await this.getDataFromBx24();
+                }
+            } catch (error) {
+                console.error("Произошла ошибка при создании задачи: ", error);
             }
             spinner.classList.add("d-none");
         })
@@ -171,7 +179,6 @@ class App {
                     await this.handleCreateTask();
                     await this.getDataFromBx24();
                 } catch (error) {
-                    // let err = await error;
                     console.error("Произошла ошибка при создании задачи: ", error);
                 }
                 spinner.classList.add("d-none");
