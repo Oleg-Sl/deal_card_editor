@@ -135,8 +135,9 @@ class App {
                 await this.handleSaveDealData();
                 await this.getDataFromBx24();
             } catch (error) {
-                console.error("Произошла ошибка при создании задачи: ", error.error_description);
-                console.error("Произошла ошибка при создании задачи: ", error);
+                alert(error.ex.error_description);
+                // console.error("Произошла ошибка при создании задачи: ", error.error_description);
+                // console.error("Произошла ошибка при создании задачи: ", error);
             }
             spinner.classList.add("d-none");
         })
@@ -153,8 +154,8 @@ class App {
                     await this.getDataFromBx24();
                 }
             } catch (error) {
-                
-                console.error("Произошла ошибка при создании задачи: ", error.ex.error_description);
+                alert(error.ex.error_description);
+                // console.error("Произошла ошибка при создании задачи: ", error.ex.error_description);
             }
             spinner.classList.add("d-none");
         })
@@ -181,7 +182,8 @@ class App {
                     await this.handleCreateTask();
                     await this.getDataFromBx24();
                 } catch (error) {
-                    console.error("Произошла ошибка при создании задачи: ", error);
+                    alert(error.ex.error_description);
+                    // console.error("Произошла ошибка при создании задачи: ", error);
                 }
                 spinner.classList.add("d-none");
                 this.savingProcess = false;
