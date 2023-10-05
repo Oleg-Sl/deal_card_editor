@@ -135,6 +135,7 @@ class App {
                 await this.handleSaveDealData();
                 await this.getDataFromBx24();
             } catch (error) {
+                console.error("Произошла ошибка при создании задачи: ", error.error_description);
                 console.error("Произошла ошибка при создании задачи: ", error);
             }
             spinner.classList.add("d-none");
