@@ -171,8 +171,8 @@ class App {
                     await this.handleCreateTask();
                     await this.getDataFromBx24();
                 } catch (error) {
-                    let err = await error;
-                    console.error("Произошла ошибка при создании задачи: ", err);
+                    // let err = await error;
+                    console.error("Произошла ошибка при создании задачи: ", error);
                 }
                 spinner.classList.add("d-none");
                 this.savingProcess = false;
