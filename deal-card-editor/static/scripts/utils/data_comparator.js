@@ -231,7 +231,7 @@ class ProductsDataComparator {
             
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 if (!this.isEqualArray_(oldValue, newValue)) {
-                    content += this.getTextArray_(key, oldValue, newValue);
+                    content += this.getTextArray_(key, oldValue, newValue), newProduct[SMART_FIELDS.TITLE];
                 }
             } else {
                 if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
@@ -244,23 +244,24 @@ class ProductsDataComparator {
             return content;
         }
 
-        return `
-            [TR]
-                [TD][B][CENTER][COLOR=#ff0000]${oldProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
-                [TD][B][CENTER][COLOR=#ff0000]==>[/COLOR][/CENTER][/B][/TD]
-                [TD][B][CENTER][COLOR=#32CD32]${newProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
-            [/TR]
-            ${content}
-        `;
-
+        return content;
+        // `
+        //     [TR]
+        //         [TD][B][CENTER][COLOR=#ff0000]${oldProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
+        //         [TD][B][CENTER][COLOR=#ff0000]==>[/COLOR][/CENTER][/B][/TD]
+        //         [TD][B][CENTER][COLOR=#32CD32]${newProduct[SMART_FIELDS.TITLE]}[/COLOR][/CENTER][/B][/TD]
+        //     [/TR]
+        //     ${content}
+        // `;
     }
     
-    getTextArray_(key, oldValue, newValue) {
+    getTextArray_(key, oldValue, newValue, titleProduct) {
         const fieldObj = this.fields[key];
         const oldValueText = this.getUrlFiles_(oldValue);
         const newValueText = this.getUrlFiles_(newValue);
         return `
         [TR]
+            [TD][B]${titleProduct}[/B][/TD]
             [TD][B]${fieldObj.title}[/B][/TD]
             [TD]${oldValueText}[/TD]
             [TD]${newValueText}[/TD]
