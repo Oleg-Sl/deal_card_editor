@@ -210,6 +210,12 @@ class ProductsDataComparator {
     
             return `
                 [TABLE]
+                    [TR]
+                        [TD][B]Название товара[/B][/TD]
+                        [TD][B]Свойство[/B][/TD]
+                        [TD][B]Старое[/B][/TD]
+                        [TD][B]Новое[/B][/TD]
+                    [/TR]
                     ${content}
                 [/TABLE]
             `;
