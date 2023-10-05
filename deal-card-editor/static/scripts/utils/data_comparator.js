@@ -237,11 +237,11 @@ class ProductsDataComparator {
             
             if (Array.isArray(oldValue) && Array.isArray(newValue)) {
                 if (!this.isEqualArray_(oldValue, newValue)) {
-                    content += this.getTextArray_(key, oldValue, newValue), newProduct[SMART_FIELDS.TITLE];
+                    content += this.getTextArray_(key, oldValue, newValue, newProduct[SMART_FIELDS.TITLE]);
                 }
             } else {
                 if ((oldValue && newValue || oldValue && !newValue || !oldValue && newValue) && oldValue != newValue) {
-                    content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm);
+                    content += this.getTextValue_(key, oldValue, newValue, oldFilm, newFilm, newProduct[SMART_FIELDS.TITLE]);
                 }
             }
         }
@@ -275,7 +275,7 @@ class ProductsDataComparator {
     `;
     }
 
-    getTextValue_(key, oldValue, newValue, oldFilm, newFilm) {
+    getTextValue_(key, oldValue, newValue, oldFilm, newFilm, titleProduct) {
         const fieldObj = this.fields[key];
         let oldValueText = "";
         let newValueText = "";
@@ -295,6 +295,7 @@ class ProductsDataComparator {
 
         return `
             [TR]
+                [TD][B]${titleProduct}[/B][/TD]
                 [TD][B]${fieldObj.title}[/B][/TD]
                 [TD]${oldValueText}[/TD]
                 [TD]${newValueText}[/TD]
@@ -305,8 +306,8 @@ class ProductsDataComparator {
     createProduct_(product) {
         return `
             [TR]
-                [TD][B]Добавлен товар:[/B][/TD]
                 [TD][B][COLOR=#32CD32]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD][B]СОЗДАН[/B][/TD]
                 [TD][/TD]
             [/TR]
         `;
@@ -315,7 +316,9 @@ class ProductsDataComparator {
     removeProduct_(product) {
         return `
             [TR]
-                [TD][B]Удален товар:[COLOR=#ff0000]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD][B][COLOR=#ff0000]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
+                [TD][B]УДАЛЕН[/B][/TD]
+                [TD][/TD]
             [/TR]
         `;
     }
