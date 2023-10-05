@@ -309,6 +309,7 @@ class ProductsDataComparator {
                 [TD][B][COLOR=#32CD32]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
                 [TD][B]СОЗДАН[/B][/TD]
                 [TD][/TD]
+                [TD][/TD]
             [/TR]
         `;
     }
@@ -318,6 +319,7 @@ class ProductsDataComparator {
             [TR]
                 [TD][B][COLOR=#ff0000]${product[SMART_FIELDS.TITLE]}[/COLOR][/B][/TD]
                 [TD][B]УДАЛЕН[/B][/TD]
+                [TD][/TD]
                 [TD][/TD]
             [/TR]
         `;
