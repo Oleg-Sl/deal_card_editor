@@ -56,9 +56,9 @@ export class InterfaceBlockTwo {
 
     getSelectHTML(itemsSelects, itemKey, titleEng, titleRus, widthCols) {
         let contentSelectHTML = "";
-        if (titleEng == FIELD_METERING) {
-            contentSelectHTML += `<option value=""></option>`;
-        }
+        // if (titleEng == FIELD_METERING) {
+        contentSelectHTML += `<option value=""></option>`;
+        // }
         for (let item of itemsSelects) {
             if (item.ID == itemKey) {
                 contentSelectHTML += `<option value="${item.ID}" selected>${item.VALUE}</option>`;
