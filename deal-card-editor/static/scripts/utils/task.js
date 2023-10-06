@@ -85,7 +85,7 @@ class Task {
 
     getDescTask_(dataDeal, dataProducts, contactMeasure) {
         let descTask = "";
-        descTask += "[B]Что делаем по заказу в целом:[/B]";
+        descTask += "[B]Описание Заказа (Что делаем, сколько, требования, особенности): [/B]";
         descTask += `\n`;
         descTask += dataDeal[FIELD_DESC_ORDER];
         descTask += `\n`;

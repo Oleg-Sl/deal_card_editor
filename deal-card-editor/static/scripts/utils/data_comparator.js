@@ -185,7 +185,7 @@ class ProductsDataComparator {
             if (!Array.isArray(oldProducts) && !Array.isArray(newProducts)) {
                 return "";
             }
-    
+
             for (const oldProduct of oldProducts) {
                 const newProduct = this.findProductById_(oldProduct.id, newProducts);
                 if (newProduct && !oldProduct[SMART_FIELDS.TITLE]) {
@@ -196,7 +196,7 @@ class ProductsDataComparator {
                     content += this.removeProduct_(oldProduct);
                 }
             }
-    
+
             for (const newProduct of newProducts) {
                 const oldProduct = this.findProductById_(newProduct.id, oldProducts);
                 if (oldProduct) {
@@ -207,7 +207,7 @@ class ProductsDataComparator {
             if (content == "") {
                 return "";
             }
-    
+
             return `
                 [TABLE]
                     [TR]

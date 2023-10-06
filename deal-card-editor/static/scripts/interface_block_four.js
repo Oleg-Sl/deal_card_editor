@@ -35,6 +35,7 @@ export default class InterfaceBlockFour {
 
     async render() {
         let descOrder = this.data[FIELD_DESC_ORDER];
+        // let descOrder = "Описание Заказа (Что делаем, сколько, требования, особенности)";
         this.elementEditor.innerHTML = `
             <textarea class="form-control" id="" rows="5">${descOrder}</textarea>
         `;
