@@ -88,7 +88,7 @@ export default class YandexDisk {
         for (let dir of dirPath) {
             dirResult += dir;
             console.log("dirResult = ", dirResult);
-            const response = await fetch(`${this.url}?path=app:/${dirPath}`, {
+            const response = await fetch(`${this.url}?path=app:/${dirResult}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `OAuth ${this.secretKey}`,
