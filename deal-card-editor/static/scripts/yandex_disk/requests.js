@@ -46,11 +46,25 @@ export default class YandexDisk {
             },
         });
         if (response.ok) {
-            // let result = await response.json();
             return response;
         } else {
             let result = await response.json();
-            console.error("Ошибка получения ссылки для загрузки файла на YandexDisk: ", result);
+            console.error("Ошибка удаления файла на YandexDisk: ", result);
+        }
+    }
+
+    async removeDir(dirPath) {
+        const response = await fetch(`${this.url}?path=app:/${dirPath}&permanently=false`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `OAuth ${this.secretKey}`,
+            },
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            let result = await response.json();
+            console.error("Ошибка удаоения файла на YandexDisk: ", result);
         }
     }
 

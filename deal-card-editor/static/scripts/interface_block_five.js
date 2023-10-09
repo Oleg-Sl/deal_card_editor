@@ -475,6 +475,9 @@ export default class InterfaceBlockFive {
                 if (indexToRemove !== -1) {
                     const resDelete = await bx24SmartProcessDelete(this.bx24, this.smartNumber, row.dataset.smartProcessId);
                     this.productsObj[indexToRemove].element.remove();
+                    let dirPath = `${this.dealId}/${this.productsObj[indexToRemove].smartProcessId}`;
+                    console.log("removeDirPath", dirPath);
+                    let response = await this.yaDisk.removeFile(dirPath);
                     this.productsObj.splice(indexToRemove, 1);
                 }
             }
