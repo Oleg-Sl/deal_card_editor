@@ -208,7 +208,7 @@ class App {
         let dataSmartProcess = this.getDataSmartProcess();
         await bx24SmartProcessUpdate(this.bx24, this.smartNumber, dataSmartProcess);
 
-        // await this.interfaceBlockFive.deleteRemovingFiles();
+        await this.interfaceBlockFive.deleteRemovingFiles();
     }
 
     async handleUpdateTask() {

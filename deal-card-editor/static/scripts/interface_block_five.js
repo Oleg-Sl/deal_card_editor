@@ -477,7 +477,7 @@ export default class InterfaceBlockFive {
                     this.productsObj[indexToRemove].element.remove();
                     let dirPath = `${this.dealId}/${this.productsObj[indexToRemove].smartProcessId}`;
                     console.log("removeDirPath", dirPath);
-                    let response = await this.yaDisk.removeFile(dirPath);
+                    let response = await this.yaDisk.removeDir(dirPath);
                     this.productsObj.splice(indexToRemove, 1);
                 }
             }
