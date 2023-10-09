@@ -16,7 +16,7 @@ export default class YandexDisk {
 
     async uploadFile(dirPath, fileName, file) {
         let href = null;
-        let res = await this.createDir(dirPath);
+        let res = await this.createDir(dirPath.split("/"));
         if (res) {
             href = await this.getUploadURL(dirPath, fileName, file);
         }
@@ -84,22 +84,29 @@ export default class YandexDisk {
     }
 
     async createDir(dirPath) {
-        const response = await fetch(`${this.url}?path=app:/${dirPath}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `OAuth ${this.secretKey}`,
-                'Content-Type': 'application/json'
+        let dirResult = "";
+        for (let dir of dirPath) {
+            dirResult += dir;
+            console.log("dirResult = ", dirResult);
+            const response = await fetch(`${this.url}?path=app:/${dirPath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `OAuth ${this.secretKey}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            let result = await response.json();
+            if (response.ok || ("error" in result && result.error === "DiskPathPointsToExistentDirectoryError")) {
+                dirResult += "/";
+                continue;
+                // 
             }
-        });
-
-        let result = await response.json();
-        if (response.ok || ("error" in result && result.error === "DiskPathPointsToExistentDirectoryError")) {
-            return true;
+    
+            console.log(`Ошибка создания директории ${dirPath} в YandexDisk: `, result);
+            return false;    
         }
-
-        console.log(`Ошибка создания директории ${dirPath} в YandexDisk: `, result);
-        
-        return false;
+        return true;
     }
 
     async publishFile(pathFile) {
