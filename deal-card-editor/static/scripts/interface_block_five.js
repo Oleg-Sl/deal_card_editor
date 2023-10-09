@@ -73,9 +73,9 @@ class ProductRow {
                 elemSpinner.classList.remove("d-none");
                 for (let file of e.target.files) {
                     if (e.target.classList.contains(ADD_FILE_TO_PRODUCT_INPUT)) {
-                        await this.addFile(this.clientFiles, this.dealId, file.name, file, file.size);
+                        await this.addFile(this.clientFiles, this.dealId, file.name, file, file.size, "clients");
                     } else if (e.target.classList.contains(ADD_FILE_TO_PREPRESS_INPUT)) {
-                        await this.addFile(this.prepressFiles, this.dealId, file.name, file, file.size);
+                        await this.addFile(this.prepressFiles, this.dealId, file.name, file, file.size, "prepress");
                     }
                 }
                 elemSpinner.classList.add("d-none");
@@ -90,12 +90,12 @@ class ProductRow {
                 
                 if (e.target.closest(`.${CONTAINER_CLIENT_FILES}`)) {
                     let fileData = this.clientFiles[childIndex] || {};
-                    this.removingFiles.push(fileData);
+                    this.removingFiles.push({file: fileData, typeFile: "clients"});
                     this.clientFiles.splice(childIndex, 1);
                     this.renderFiles(CONTAINER_CLIENT_FILES, this.clientFiles)
                 } else if (e.target.closest(`.${CONTAINER_PREPRESS_FILES}`)) {
                     let fileData = this.prepressFiles[childIndex] || {};
-                    this.removingFiles.push(fileData);
+                    this.removingFiles.push({file: fileData, typeFile: "prepress"});
                     this.prepressFiles.splice(childIndex, 1);
                     this.renderFiles(CONTAINER_PREPRESS_FILES, this.prepressFiles)
                 }
@@ -414,8 +414,9 @@ class ProductRow {
         return files;
     }
     
-    async addFile(files, dealId, fileName, fileData, fileSize) {
-        let link = await this.yaDisk.uploadFile(dealId, fileName, fileData);
+    async addFile(files, dealId, fileName, fileData, fileSize, typeFile) {
+        let dirPath = `${dealId}/${this.smartProcessId}/${typeFile}`;
+        let link = await this.yaDisk.uploadFile(dirPath, fileName, fileData);
         files.push({
             "url": link,
             "name": fileName,
@@ -491,8 +492,9 @@ export default class InterfaceBlockFive {
     async deleteRemovingFiles() {
         let data = [];
         for (let product of this.productsObj) {
-            for (let file of product.removingFiles) {
-                let response = await this.yaDisk.removeFile(this.dealId, file.name);
+            for (let {file, typeFile} of product.removingFiles) {
+                let dirPath = `${this.dealId}/${product.smartProcessId}/${typeFile}`;
+                let response = await this.yaDisk.removeFile(dirPath, file.name);
             }
             product.removingFiles = [];
         }
