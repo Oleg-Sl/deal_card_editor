@@ -50,11 +50,12 @@ export const LIST_IGNORE_CHECK_FIELDS_PRODUCTS = [SMART_FIELDS.LINK_SRC , SMART_
 
 // список технологий изготовления
 export const LIST_TECHNOLOGY = [
-    {ID: 1, VALUE: "печать"},
-    {ID: 2, VALUE: "плоттерная резка"},
-    {ID: 3, VALUE: "печать+контурная резка"},
-    {ID: 4, VALUE: "без производства"},
-    {ID: 5, VALUE: "другое"},
+    {ID: 1, SORT: 1, VALUE: "печать"},
+    {ID: 2, SORT: 2, VALUE: "плоттерная резка"},
+    {ID: 3, SORT: 3, VALUE: "печать+контурная резка"},
+    {ID: 4, SORT: 4, VALUE: "без производства"},
+    {ID: 6, SORT: 5, VALUE: "печать+контурная резка + монтажка"},
+    {ID: 5, SORT: 6, VALUE: "Другое (указать в комментариях)"},
 ];
 
 // список пленок

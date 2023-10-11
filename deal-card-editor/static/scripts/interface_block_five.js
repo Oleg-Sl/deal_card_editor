@@ -239,7 +239,7 @@ class ProductRow {
                 </div>
                 <div class="m-0 p-0">
                     <select class="form-select ${SMART_FIELDS.TECHNOLOGY} product_list__fontstyle" aria-label=".product_list__fontstyleform-select-lg example" data-field="${SMART_FIELDS.TECHNOLOGY}" required>
-                        ${this.getOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY])}
+                        ${this.getSortOptionsForSelectHTML(LIST_TECHNOLOGY, this.data[SMART_FIELDS.TECHNOLOGY])}
                     </select>
                 </div>
                 <div class="m-0 p-0">
@@ -337,6 +337,18 @@ class ProductRow {
                 <div class="m-0 p-0" style=""><button type="button" class="btn-close btn-sm m-0 p-0 product-list__remove-files" aria-label="Close"></button></div>
             </div>
         `;
+        return contentHTML;
+    }
+
+    getSortOptionsForSelectHTML(items, actualyId=0) {
+        let contentHTML = '';
+        for (let item of items) {
+            if (item.ID == actualyId) {
+                contentHTML += `<option class="product_list__fontstyle" value="${item.ID}" selected>${item.VALUE}</option>`;
+            } else {
+                contentHTML += `<option class="product_list__fontstyle" value="${item.ID}">${item.VALUE}</option>`;
+            }
+        }
         return contentHTML;
     }
     
