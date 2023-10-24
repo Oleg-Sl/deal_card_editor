@@ -216,6 +216,8 @@ class ProductRow {
             this.smartProcessId = smartData.id;
             const elementRow = this.element.querySelector("[data-smart-process-id]");
             elementRow.dataset.smartProcessId = this.smartProcessId;
+            this.createDir(`${dealId}/${this.smartProcessId}/clients`);
+            this.createDir(`${dealId}/${this.smartProcessId}/prepress`);
         }
     }
 
@@ -459,7 +461,7 @@ export default class InterfaceBlockFive {
 
     }
 
-    init(fields, data, productsData) {
+    async init(fields, data, productsData) {
         this.fields = fields;
         this.dealData = data;
         this.productsData = productsData;
@@ -468,6 +470,8 @@ export default class InterfaceBlockFive {
         this.containerProductList = this.container.querySelector("#productsListBody");
         this.elemAddProduct = this.container.querySelector("#createProduct");
         this.initHandler();
+        let res = await this.createDir(`${dealId}`);
+        
     }
 
     initHandler() {
