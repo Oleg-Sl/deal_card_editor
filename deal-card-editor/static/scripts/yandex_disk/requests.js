@@ -158,7 +158,7 @@ export default class YandexDisk {
     //     return false;
     // }
 
-    async getPublishLinkFile(url, maxRetries = 3, retryDelay = 1000) {
+    async getPublishLinkFile(url, maxRetries = 3, retryDelay = 500) {
         let retries = 0;
     
         const makeRequest = async () => {
