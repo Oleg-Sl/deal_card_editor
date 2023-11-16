@@ -142,24 +142,60 @@ export default class YandexDisk {
         return false;
     }
 
-    async getPublishLinkFile(url) {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': `OAuth ${this.secretKey}`,
-                'Content-Type': 'application/json'
+    // async getPublishLinkFile(url) {
+    //     const response = await fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `OAuth ${this.secretKey}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //     });
+    //     let result = await response.json();
+    //     if (response.ok) {
+    //         return result.public_url;
+    //     }
+    //     console.log(`Ошибка получения публичной ссылки на файл в YandexDisk: `, result);
+    //     return false;
+    // }
+
+    async getPublishLinkFile(url, maxRetries = 3, retryDelay = 1000) {
+        let retries = 0;
+    
+        const makeRequest = async () => {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `OAuth ${this.secretKey}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            let result = await response.json();
+            
+            if (response.ok) {
+                return result.public_url;
             }
-        });
-
-        let result = await response.json();
-        if (response.ok) {
-            return result.public_url;
-        }
-
-        console.log(`Ошибка получения публичной ссылки на файл в YandexDisk: `, result);
-
-        return false;
+    
+            console.log(`Ошибка получения публичной ссылки на файл в YandexDisk: `, result);
+    
+            return false;
+        };
+    
+        const retry = async () => {
+            retries++;
+            if (retries <= maxRetries) {
+                console.log(`Повторная попытка (${retries}/${maxRetries}) через ${retryDelay} мс`);
+                await new Promise(resolve => setTimeout(resolve, retryDelay));
+                return await makeRequest();
+            } else {
+                console.log(`Достигнуто максимальное количество попыток (${maxRetries})`);
+                return false;
+            }
+        };
+    
+        return await makeRequest() || await retry();
     }
+    
 
     replaceHttpWithHttps(url) {
         if (url.startsWith("http://")) {
