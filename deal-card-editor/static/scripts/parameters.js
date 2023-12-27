@@ -124,7 +124,8 @@ export const LIST_WIDTH_FILMS = {
         {ID: 2, VALUE: "1,37"},
     ],
     "3": [
-        {ID: 1, VALUE: "-"},
+        {ID: 1, VALUE: "1,26"},
+        {ID: 2, VALUE: "1,37"},
     ],
     "4": [
         {ID: 1, VALUE: "1,07"},
